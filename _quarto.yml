@@ -26,7 +26,7 @@ website:
 # --- Formato de Salida HTML ---
 format:
   html:
-    theme: sandstone # ¡Prueba a cambiar "sandstone" por "darkly" o "flatly"!
+    theme: litera # ¡Prueba a cambiar "sandstone" por "darkly" o "flatly"!
     css: styles.css
     toc: true # Muestra una tabla de contenidos en las páginas
 
