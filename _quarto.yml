@@ -1,19 +1,33 @@
+# --- Configuración del Proyecto ---
 project:
   type: website
+  output-dir: _site # Es buena práctica mantener esta línea
 
+# --- Configuración del Sitio Web ---
 website:
-  title: "yuberley20.github.io"
+  title: "Yuberley | Portafolio" # Título que aparece en la barra de navegación
+  favicon: favicon.png # Referencia a tu icono de pestaña
+
+  # --- Barra de Navegación Superior ---
   navbar:
     left:
       - href: index.qmd
-        text: Home
-      - about.qmd
+        text: Inicio
+      - href: about.qmd
+        text: Sobre Mí
+      - href: proyectos.qmd # Dejamos esto listo para cuando creemos la página
+        text: Proyectos
 
+  # --- Pie de Página ---
+  page-footer:
+    right: "Construido con [Quarto](https://quarto.org/)"
+    left: "&copy; 2025, Yuberley"
+
+# --- Formato de Salida HTML ---
 format:
   html:
-    theme: cosmo
+    theme: sandstone # ¡Prueba a cambiar "sandstone" por "darkly" o "flatly"!
     css: styles.css
-    toc: true
-
+    toc: true # Muestra una tabla de contenidos en las páginas
 
 
