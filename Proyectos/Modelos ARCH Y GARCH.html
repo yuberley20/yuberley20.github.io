@@ -1,0 +1,1534 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.57">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Yuberley Cruz Caycedo">
+<meta name="dcterms.date" content="2025-08-14">
+
+<title>Modelos ARCH y GARCH – Yuberley | Portafolio</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../favicon.png" rel="icon" type="image/png">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="floating nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">Yuberley | Portafolio</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../index.html"> 
+<span class="menu-text">Inicio</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../about.html"> 
+<span class="menu-text">Sobre Mí</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../proyectos.html"> 
+<span class="menu-text">Proyectos</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#modelo-heterocedástico-condicional-autorregresivo-arch" id="toc-modelo-heterocedástico-condicional-autorregresivo-arch" class="nav-link active" data-scroll-target="#modelo-heterocedástico-condicional-autorregresivo-arch"><span class="header-section-number">1</span> Modelo Heterocedástico Condicional Autorregresivo (ARCH)</a>
+  <ul class="collapse">
+  <li><a href="#conceptos-clave-del-modelo-arch" id="toc-conceptos-clave-del-modelo-arch" class="nav-link" data-scroll-target="#conceptos-clave-del-modelo-arch"><span class="header-section-number">1.1</span> Conceptos Clave del Modelo ARCH</a></li>
+  <li><a href="#especificación-del-modelo-archp" id="toc-especificación-del-modelo-archp" class="nav-link" data-scroll-target="#especificación-del-modelo-archp"><span class="header-section-number">1.2</span> Especificación del Modelo ARCH(p)</a></li>
+  <li><a href="#estimación-del-modelo-arch" id="toc-estimación-del-modelo-arch" class="nav-link" data-scroll-target="#estimación-del-modelo-arch"><span class="header-section-number">1.3</span> Estimación del Modelo ARCH</a></li>
+  <li><a href="#ejemplo-de-aplicación" id="toc-ejemplo-de-aplicación" class="nav-link" data-scroll-target="#ejemplo-de-aplicación"><span class="header-section-number">1.4</span> Ejemplo de Aplicación</a></li>
+  <li><a href="#limitaciones-del-modelo-arch" id="toc-limitaciones-del-modelo-arch" class="nav-link" data-scroll-target="#limitaciones-del-modelo-arch"><span class="header-section-number">1.5</span> Limitaciones del Modelo ARCH</a></li>
+  <li><a href="#extensiones" id="toc-extensiones" class="nav-link" data-scroll-target="#extensiones"><span class="header-section-number">1.6</span> Extensiones</a></li>
+  <li><a href="#resumen" id="toc-resumen" class="nav-link" data-scroll-target="#resumen"><span class="header-section-number">1.7</span> Resumen</a></li>
+  </ul></li>
+  <li><a href="#modelo-heterocedástico-condicional-autorregresivo-generalizado-garch" id="toc-modelo-heterocedástico-condicional-autorregresivo-generalizado-garch" class="nav-link" data-scroll-target="#modelo-heterocedástico-condicional-autorregresivo-generalizado-garch"><span class="header-section-number">2</span> Modelo Heterocedástico Condicional Autorregresivo Generalizado (GARCH)</a>
+  <ul class="collapse">
+  <li><a href="#conceptos-clave-del-modelo-garch" id="toc-conceptos-clave-del-modelo-garch" class="nav-link" data-scroll-target="#conceptos-clave-del-modelo-garch"><span class="header-section-number">2.1</span> Conceptos Clave del Modelo GARCH</a></li>
+  <li><a href="#especificación-del-modelo-garchp-q" id="toc-especificación-del-modelo-garchp-q" class="nav-link" data-scroll-target="#especificación-del-modelo-garchp-q"><span class="header-section-number">2.2</span> Especificación del Modelo GARCH(p, q)</a></li>
+  <li><a href="#estimación-del-modelo-garch" id="toc-estimación-del-modelo-garch" class="nav-link" data-scroll-target="#estimación-del-modelo-garch"><span class="header-section-number">2.3</span> Estimación del Modelo GARCH</a></li>
+  <li><a href="#ejemplo-de-aplicación-1" id="toc-ejemplo-de-aplicación-1" class="nav-link" data-scroll-target="#ejemplo-de-aplicación-1"><span class="header-section-number">2.4</span> Ejemplo de Aplicación</a></li>
+  <li><a href="#ventajas-del-modelo-garch" id="toc-ventajas-del-modelo-garch" class="nav-link" data-scroll-target="#ventajas-del-modelo-garch"><span class="header-section-number">2.5</span> Ventajas del Modelo GARCH</a></li>
+  <li><a href="#limitaciones-del-modelo-garch" id="toc-limitaciones-del-modelo-garch" class="nav-link" data-scroll-target="#limitaciones-del-modelo-garch"><span class="header-section-number">2.6</span> Limitaciones del Modelo GARCH</a></li>
+  <li><a href="#resumen-1" id="toc-resumen-1" class="nav-link" data-scroll-target="#resumen-1"><span class="header-section-number">2.7</span> Resumen</a></li>
+  <li><a href="#pruebas-estimaciones-y-pronósticos" id="toc-pruebas-estimaciones-y-pronósticos" class="nav-link" data-scroll-target="#pruebas-estimaciones-y-pronósticos"><span class="header-section-number">2.8</span> Pruebas, Estimaciones y Pronósticos</a></li>
+  <li><a href="#procedimiento-de-la-prueba-lm-para-efectos-arch" id="toc-procedimiento-de-la-prueba-lm-para-efectos-arch" class="nav-link" data-scroll-target="#procedimiento-de-la-prueba-lm-para-efectos-arch"><span class="header-section-number">2.9</span> Procedimiento de la Prueba LM para Efectos ARCH</a></li>
+  <li><a href="#resumen-2" id="toc-resumen-2" class="nav-link" data-scroll-target="#resumen-2"><span class="header-section-number">2.10</span> Resumen</a></li>
+  </ul></li>
+  <li><a href="#que-son-los-errores-estandarizados" id="toc-que-son-los-errores-estandarizados" class="nav-link" data-scroll-target="#que-son-los-errores-estandarizados"><span class="header-section-number">3</span> ¿Que son los Errores Estandarizados?</a>
+  <ul class="collapse">
+  <li><a href="#definición-de-errores-estandarizados" id="toc-definición-de-errores-estandarizados" class="nav-link" data-scroll-target="#definición-de-errores-estandarizados"><span class="header-section-number">3.1</span> Definición de Errores Estandarizados</a></li>
+  <li><a href="#interpretación-y-uso" id="toc-interpretación-y-uso" class="nav-link" data-scroll-target="#interpretación-y-uso"><span class="header-section-number">3.2</span> Interpretación y Uso</a></li>
+  <li><a href="#evaluación-del-modelo-con-errores-estandarizados" id="toc-evaluación-del-modelo-con-errores-estandarizados" class="nav-link" data-scroll-target="#evaluación-del-modelo-con-errores-estandarizados"><span class="header-section-number">3.3</span> Evaluación del Modelo con Errores Estandarizados</a></li>
+  <li><a href="#ejemplo-práctico" id="toc-ejemplo-práctico" class="nav-link" data-scroll-target="#ejemplo-práctico"><span class="header-section-number">3.4</span> Ejemplo Práctico</a></li>
+  <li><a href="#resumen-3" id="toc-resumen-3" class="nav-link" data-scroll-target="#resumen-3"><span class="header-section-number">3.5</span> Resumen</a></li>
+  </ul></li>
+  <li><a href="#identificación" id="toc-identificación" class="nav-link" data-scroll-target="#identificación"><span class="header-section-number">4</span> Identificación</a></li>
+  <li><a href="#ejemplo-analizar-el-índice-sp-500-desde-2014-05-03-a-2021-04-22-y-estimar-un-modelo-para-su-volatilidad" id="toc-ejemplo-analizar-el-índice-sp-500-desde-2014-05-03-a-2021-04-22-y-estimar-un-modelo-para-su-volatilidad" class="nav-link" data-scroll-target="#ejemplo-analizar-el-índice-sp-500-desde-2014-05-03-a-2021-04-22-y-estimar-un-modelo-para-su-volatilidad"><span class="header-section-number">5</span> Ejemplo: Analizar el índice S&amp;P 500 desde 2014-05-03 a 2021-04-22 y estimar un modelo para su volatilidad</a>
+  <ul class="collapse">
+  <li><a href="#paso-1-cargar-y-preparar-los-datos" id="toc-paso-1-cargar-y-preparar-los-datos" class="nav-link" data-scroll-target="#paso-1-cargar-y-preparar-los-datos"><span class="header-section-number">5.1</span> Paso 1: Cargar y Preparar los Datos</a></li>
+  <li><a href="#paso-2-calcular-retornos-mensuales" id="toc-paso-2-calcular-retornos-mensuales" class="nav-link" data-scroll-target="#paso-2-calcular-retornos-mensuales"><span class="header-section-number">5.2</span> Paso 2: Calcular Retornos Mensuales</a></li>
+  <li><a href="#paso-3-visualizar-los-retornos" id="toc-paso-3-visualizar-los-retornos" class="nav-link" data-scroll-target="#paso-3-visualizar-los-retornos"><span class="header-section-number">5.3</span> Paso 3: Visualizar los Retornos</a></li>
+  <li><a href="#paso-4-ajustar-el-modelo-garch" id="toc-paso-4-ajustar-el-modelo-garch" class="nav-link" data-scroll-target="#paso-4-ajustar-el-modelo-garch"><span class="header-section-number">5.4</span> Paso 4: Ajustar el Modelo GARCH</a></li>
+  <li><a href="#paso-4-evaluar-el-modelo" id="toc-paso-4-evaluar-el-modelo" class="nav-link" data-scroll-target="#paso-4-evaluar-el-modelo"><span class="header-section-number">5.5</span> Paso 4: Evaluar el Modelo</a></li>
+  <li><a href="#función-de-autocorrelación-de-los-residuos" id="toc-función-de-autocorrelación-de-los-residuos" class="nav-link" data-scroll-target="#función-de-autocorrelación-de-los-residuos"><span class="header-section-number">5.6</span> Función de Autocorrelación de los Residuos</a></li>
+  </ul></li>
+  <li><a href="#preguntas" id="toc-preguntas" class="nav-link" data-scroll-target="#preguntas"><span class="header-section-number">6</span> Preguntas</a>
+  <ul class="collapse">
+  <li><a href="#pregunta-1" id="toc-pregunta-1" class="nav-link" data-scroll-target="#pregunta-1"><span class="header-section-number">6.1</span> Pregunta 1</a></li>
+  <li><a href="#pregunta-2" id="toc-pregunta-2" class="nav-link" data-scroll-target="#pregunta-2"><span class="header-section-number">6.2</span> Pregunta 2</a></li>
+  <li><a href="#pregunta-3" id="toc-pregunta-3" class="nav-link" data-scroll-target="#pregunta-3"><span class="header-section-number">6.3</span> Pregunta 3</a></li>
+  <li><a href="#pregunta-4" id="toc-pregunta-4" class="nav-link" data-scroll-target="#pregunta-4"><span class="header-section-number">6.4</span> Pregunta 4</a></li>
+  <li><a href="#pregunta-5" id="toc-pregunta-5" class="nav-link" data-scroll-target="#pregunta-5"><span class="header-section-number">6.5</span> Pregunta 5</a></li>
+  <li><a href="#pregunta-6" id="toc-pregunta-6" class="nav-link" data-scroll-target="#pregunta-6"><span class="header-section-number">6.6</span> Pregunta 6</a></li>
+  <li><a href="#pregunta-7" id="toc-pregunta-7" class="nav-link" data-scroll-target="#pregunta-7"><span class="header-section-number">6.7</span> Pregunta 7</a></li>
+  <li><a href="#pregunta-8" id="toc-pregunta-8" class="nav-link" data-scroll-target="#pregunta-8"><span class="header-section-number">6.8</span> Pregunta 8</a></li>
+  <li><a href="#pregunta-9" id="toc-pregunta-9" class="nav-link" data-scroll-target="#pregunta-9"><span class="header-section-number">6.9</span> Pregunta 9</a></li>
+  <li><a href="#pregunta-10" id="toc-pregunta-10" class="nav-link" data-scroll-target="#pregunta-10"><span class="header-section-number">6.10</span> Pregunta 10</a></li>
+  <li><a href="#pregunta-11" id="toc-pregunta-11" class="nav-link" data-scroll-target="#pregunta-11"><span class="header-section-number">6.11</span> Pregunta 11</a></li>
+  <li><a href="#pregunta-2-1" id="toc-pregunta-2-1" class="nav-link" data-scroll-target="#pregunta-2-1"><span class="header-section-number">6.12</span> Pregunta 2</a></li>
+  <li><a href="#pregunta-3-1" id="toc-pregunta-3-1" class="nav-link" data-scroll-target="#pregunta-3-1"><span class="header-section-number">6.13</span> Pregunta 3</a></li>
+  <li><a href="#pregunta-4-1" id="toc-pregunta-4-1" class="nav-link" data-scroll-target="#pregunta-4-1"><span class="header-section-number">6.14</span> Pregunta 4</a></li>
+  <li><a href="#pregunta-5-1" id="toc-pregunta-5-1" class="nav-link" data-scroll-target="#pregunta-5-1"><span class="header-section-number">6.15</span> Pregunta 5</a></li>
+  <li><a href="#pregunta-6-1" id="toc-pregunta-6-1" class="nav-link" data-scroll-target="#pregunta-6-1"><span class="header-section-number">6.16</span> Pregunta 6</a></li>
+  <li><a href="#pregunta-7-1" id="toc-pregunta-7-1" class="nav-link" data-scroll-target="#pregunta-7-1"><span class="header-section-number">6.17</span> Pregunta 7</a></li>
+  <li><a href="#pregunta-8-1" id="toc-pregunta-8-1" class="nav-link" data-scroll-target="#pregunta-8-1"><span class="header-section-number">6.18</span> Pregunta 8</a></li>
+  <li><a href="#pregunta-9-1" id="toc-pregunta-9-1" class="nav-link" data-scroll-target="#pregunta-9-1"><span class="header-section-number">6.19</span> Pregunta 9</a></li>
+  <li><a href="#pregunta-10-1" id="toc-pregunta-10-1" class="nav-link" data-scroll-target="#pregunta-10-1"><span class="header-section-number">6.20</span> Pregunta 10</a></li>
+  </ul></li>
+  </ul>
+</nav>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Modelos ARCH y GARCH</h1>
+<p class="subtitle lead">Análisis Series de Tiempo con volatilidad predominante</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Yuberley Cruz Caycedo </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">August 14, 2025</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="modelo-heterocedástico-condicional-autorregresivo-arch" class="level2" data-number="1">
+<h2 data-number="1" class="anchored" data-anchor-id="modelo-heterocedástico-condicional-autorregresivo-arch"><span class="header-section-number">1</span> Modelo Heterocedástico Condicional Autorregresivo (ARCH)</h2>
+<p>El Modelo Heterocedástico Condicional Autorregresivo (ARCH) es un modelo utilizado en econometría y finanzas para modelar la volatilidad de series temporales. Fue introducido por Robert F. Engle en 1982 y es particularmente útil para capturar la heterocedasticidad condicional en los datos financieros, donde la variabilidad puede cambiar con el tiempo.</p>
+<section id="conceptos-clave-del-modelo-arch" class="level3" data-number="1.1">
+<h3 data-number="1.1" class="anchored" data-anchor-id="conceptos-clave-del-modelo-arch"><span class="header-section-number">1.1</span> Conceptos Clave del Modelo ARCH</h3>
+<ol type="1">
+<li><p>Heterocedasticidad Condicional: La varianza de los errores no es constante a lo largo del tiempo, sino que depende de los errores pasados. En un contexto financiero, esto significa que los periodos de alta volatilidad tienden a ser seguidos por periodos de alta volatilidad, y lo mismo ocurre para los periodos de baja volatilidad.</p></li>
+<li><p>Autorregresividad de la Varianza: La varianza condicional de los errores en un momento dado se modela como una función lineal de los errores pasados.</p></li>
+</ol>
+</section>
+<section id="especificación-del-modelo-archp" class="level3" data-number="1.2">
+<h3 data-number="1.2" class="anchored" data-anchor-id="especificación-del-modelo-archp"><span class="header-section-number">1.2</span> Especificación del Modelo ARCH(p)</h3>
+<p>El modelo ARCH(p) (donde <span class="math inline">\(p\)</span> denota el número de retardos incluidos) se especifica de la siguiente manera:</p>
+<ol type="1">
+<li><p>Modelo de Media: Primero, se especifica el modelo para la serie temporal <span class="math inline">\(y_t\)</span>​. Esto puede ser un modelo simple de media o un modelo ARMA, por ejemplo:</p>
+<p><span class="math inline">\(y_{t} = \mu + \epsilon_{t}\)</span></p>
+<p>donde <span class="math inline">\(\epsilon_{t}\)</span> son los errores (residuos) del modelo de media, y <span class="math inline">\(\mu\)</span> es la media del proceso.</p></li>
+<li><p>Modelo de Varianza Condicional: La varianza condicional de los errores <span class="math inline">\(\epsilon_{t}\)</span> se modela como una función de los errores pasados:</p></li>
+</ol>
+<p><span class="math display">\[\sigma_{t}^{2} = \alpha_{0} + \alpha_{1}\epsilon_{t-1}^{2} + \alpha_{2}\epsilon_{t-2}^{2} + ... + \alpha_{p}\epsilon_{t-p}^{2}\]</span></p>
+<p>donde:</p>
+<ul>
+<li><p><span class="math inline">\(\sigma_{t}^{2}\)</span> es la varianza condicional en el tiempo <span class="math inline">\(t\)</span>.</p></li>
+<li><p><span class="math inline">\(\alpha_{0} &gt; 0\)</span> es una constante.</p></li>
+<li><p><span class="math inline">\(\alpha_{i} ≥ 0\)</span> son los coeficientes que miden el impacto de los errores pasados en la varianza condicional.</p></li>
+</ul>
+<ol start="3" type="1">
+<li>Errores: Los errores <span class="math inline">\(\epsilon_{t}\)</span> se suponen que son ruido blanco con media cero y varianza condicional <span class="math inline">\(\sigma_{t}^{2}\)</span> :</li>
+</ol>
+<p><span class="math display">\[\epsilon_{t} \sim \textbf{N}(0, \sigma_{t}^{2})\]</span></p>
+</section>
+<section id="estimación-del-modelo-arch" class="level3" data-number="1.3">
+<h3 data-number="1.3" class="anchored" data-anchor-id="estimación-del-modelo-arch"><span class="header-section-number">1.3</span> Estimación del Modelo ARCH</h3>
+<p>La estimación del modelo ARCH generalmente implica los siguientes pasos:</p>
+<ol type="1">
+<li><p>Estimar el Modelo de Media: Ajustar el modelo de media (por ejemplo, un modelo ARMA) y obtener los residuos <span class="math inline">\(\epsilon_{t}\)</span>.</p></li>
+<li><p>Estimación de la Varianza Condicional: Ajustar el modelo de varianza condicional ARCH(p) a los residuos al cuadrado <span class="math inline">\(\epsilon_{t}^{2}\)</span> utilizando técnicas de máxima verosimilitud.</p></li>
+<li><p>Evaluación del Modelo: Verificar si los residuos del modelo ARCH muestran las características esperadas (por ejemplo, verificar que los residuos estandarizados son ruido blanco).</p></li>
+</ol>
+</section>
+<section id="ejemplo-de-aplicación" class="level3" data-number="1.4">
+<h3 data-number="1.4" class="anchored" data-anchor-id="ejemplo-de-aplicación"><span class="header-section-number">1.4</span> Ejemplo de Aplicación</h3>
+<p>Supongamos que queremos modelar la volatilidad de los retornos diarios de una acción. Podríamos especificar un modelo ARCH(1) de la siguiente manera:</p>
+<ol type="1">
+<li><p>Modelo de Media: <span class="math display">\[y_{t} = \mu + \epsilon_{t}\]</span></p></li>
+<li><p>Modelo ARCH(1): <span class="math display">\[\sigma_{t}^{2} = \alpha_{0} + \alpha_{1}\epsilon_{t-1}^{2}\]</span></p></li>
+</ol>
+<p>Aquí, la varianza condicional <span class="math inline">\(\sigma_{t}^{2}\)</span> en el tiempo <span class="math inline">\(t\)</span> depende linealmente del cuadrado del error en el tiempo <span class="math inline">\(t-1\)</span>. Si <span class="math inline">\(\alpha_{1}\)</span> es significativo, indica que hay dependencia en la volatilidad de los retornos.</p>
+</section>
+<section id="limitaciones-del-modelo-arch" class="level3" data-number="1.5">
+<h3 data-number="1.5" class="anchored" data-anchor-id="limitaciones-del-modelo-arch"><span class="header-section-number">1.5</span> Limitaciones del Modelo ARCH</h3>
+<ul>
+<li><p>Simplicidad: Los modelos ARCH pueden ser demasiado simples para capturar todas las características de la volatilidad en series temporales financieras.</p></li>
+<li><p>Número de Parámetros: A medida que <span class="math inline">\(p\)</span> aumenta, el número de parámetros a estimar también aumenta, lo que puede complicar la estimación y la interpretación.</p></li>
+</ul>
+</section>
+<section id="extensiones" class="level3" data-number="1.6">
+<h3 data-number="1.6" class="anchored" data-anchor-id="extensiones"><span class="header-section-number">1.6</span> Extensiones</h3>
+<p>Para superar algunas de las limitaciones del modelo ARCH, se han desarrollado extensiones como el modelo GARCH (Generalización ARCH), que incluye tanto retardos de los errores como retardos de las varianzas pasadas.</p>
+</section>
+<section id="resumen" class="level3" data-number="1.7">
+<h3 data-number="1.7" class="anchored" data-anchor-id="resumen"><span class="header-section-number">1.7</span> Resumen</h3>
+<p>El modelo ARCH es una herramienta poderosa para modelar la heterocedasticidad condicional en series temporales, permitiendo capturar la naturaleza cambiante de la volatilidad en los datos financieros. Específicamente, la varianza de los errores se modela como una función de los errores pasados, proporcionando una forma de capturar la agrupación de volatilidad observada en muchas series temporales financieras.</p>
+</section>
+</section>
+<section id="modelo-heterocedástico-condicional-autorregresivo-generalizado-garch" class="level2" data-number="2">
+<h2 data-number="2" class="anchored" data-anchor-id="modelo-heterocedástico-condicional-autorregresivo-generalizado-garch"><span class="header-section-number">2</span> Modelo Heterocedástico Condicional Autorregresivo Generalizado (GARCH)</h2>
+<p>El Modelo Heterocedástico Condicional Autorregresivo Generalizado (GARCH) es una extensión del modelo ARCH que captura la variabilidad temporal en la volatilidad de una serie temporal. Fue introducido por Tim Bollerslev en 1986. El modelo GARCH es ampliamente utilizado en finanzas y econometría para modelar series temporales financieras, donde la volatilidad puede cambiar con el tiempo.</p>
+<section id="conceptos-clave-del-modelo-garch" class="level3" data-number="2.1">
+<h3 data-number="2.1" class="anchored" data-anchor-id="conceptos-clave-del-modelo-garch"><span class="header-section-number">2.1</span> Conceptos Clave del Modelo GARCH</h3>
+<ol type="1">
+<li><p>Heterocedasticidad Condicional: La varianza de los errores en una serie temporal no es constante a lo largo del tiempo, sino que depende de los errores y varianzas pasadas.</p></li>
+<li><p>Autorregresividad en la Varianza: La varianza condicional de los errores depende de los errores pasados y de las varianzas condicionales pasadas, proporcionando una estructura más completa y flexible que el modelo ARCH.</p></li>
+</ol>
+</section>
+<section id="especificación-del-modelo-garchp-q" class="level3" data-number="2.2">
+<h3 data-number="2.2" class="anchored" data-anchor-id="especificación-del-modelo-garchp-q"><span class="header-section-number">2.2</span> Especificación del Modelo GARCH(p, q)</h3>
+<p>El modelo GARCH(p, q) se especifica de la siguiente manera:</p>
+<ol type="1">
+<li>Modelo de Media: Primero, se especifica el modelo para la serie temporal <span class="math inline">\(y_{t}\)</span>:</li>
+</ol>
+<p><span class="math display">\[y_{t} = \mu + \epsilon_{t}\]</span></p>
+<pre><code>donde:</code></pre>
+<p><span class="math inline">\(\epsilon_{t}\)</span> son los errores (residuos) del modelo de media, y <span class="math inline">\(\mu\)</span> es la media del proceso.</p>
+<ol start="2" type="1">
+<li>Modelo de Varianza Condicional: La varianza condicional <span class="math inline">\(\sigma_{t}^{2}\)</span> se modela como una función lineal de los errores pasados y de las varianzas condicionales pasadas:</li>
+</ol>
+<p><span class="math display">\[\sigma_{t}^{2} = \alpha_{0} + \sum_{i=1}^{q} \alpha_{i}\epsilon_{t-i}^{2} + \sum_{j=1}^{p} \beta_{j}\sigma_{t-j}^{2}\]</span></p>
+<p>donde:</p>
+<ul>
+<li><p><span class="math inline">\(\sigma_{t}^{2}\)</span> es la varianza condicional en el tiempo <span class="math inline">\(t\)</span>.</p></li>
+<li><p><span class="math inline">\(\alpha_{0} &gt; 0\)</span> es una constante.</p></li>
+<li><p><span class="math inline">\(\alpha_{i} ≥ 0\)</span> son los coeficientes que miden el impacto de los errores pasados al cuadrado.</p></li>
+<li><p><span class="math inline">\(\beta_{j} ≥ 0\)</span> son los coeficientes que miden el impacto de las varianzas condicionales pasadas.</p></li>
+</ul>
+</section>
+<section id="estimación-del-modelo-garch" class="level3" data-number="2.3">
+<h3 data-number="2.3" class="anchored" data-anchor-id="estimación-del-modelo-garch"><span class="header-section-number">2.3</span> Estimación del Modelo GARCH</h3>
+<p>La estimación del modelo GARCH generalmente implica los siguientes pasos:</p>
+<ol type="1">
+<li><p>Estimar el Modelo de Media: Ajustar el modelo de media (por ejemplo, un modelo ARMA) y obtener los residuos <span class="math inline">\(\epsilon_{t}\)</span>.</p></li>
+<li><p>Estimación de la Varianza Condicional: Ajustar el modelo de varianza condicional GARCH(p, q) a los residuos al cuadrado <span class="math inline">\(\epsilon_{t}^{2}\)</span> utilizando técnicas de máxima verosimilitud.</p></li>
+<li><p>Evaluación del Modelo: Verificar si los residuos del modelo GARCH muestran las características esperadas (por ejemplo, verificar que los residuos estandarizados son ruido blanco).</p></li>
+</ol>
+</section>
+<section id="ejemplo-de-aplicación-1" class="level3" data-number="2.4">
+<h3 data-number="2.4" class="anchored" data-anchor-id="ejemplo-de-aplicación-1"><span class="header-section-number">2.4</span> Ejemplo de Aplicación</h3>
+<p>Supongamos que queremos modelar la volatilidad de los retornos diarios de una acción. Podríamos especificar un modelo GARCH(1, 1) de la siguiente manera:</p>
+<ol type="1">
+<li><p>Modelo de Media: <span class="math inline">\(y_{t} = \mu + \epsilon_{t}\)</span></p></li>
+<li><p>Modelo GARCH(1, 1): <span class="math display">\[\sigma_{t}^{2} = \alpha_{0} + \alpha_{1}\epsilon_{t-1}^{2} + \beta_{1}\sigma_{t-1}^{2}\]</span></p></li>
+</ol>
+<p>Aquí, la varianza condicional <span class="math inline">\(\sigma_{t}^{2}\)</span> en el tiempo <span class="math inline">\(t\)</span> depende linealmente del cuadrado del error en el tiempo <span class="math inline">\(t−1\)</span> y de la varianza condicional en el tiempo <span class="math inline">\(t−1\)</span>. Este modelo captura tanto la memoria corta (a través de <span class="math inline">\(\epsilon_{t-1}^{2}\)</span> ) como la memoria larga (a través de <span class="math inline">\(\sigma_{t-1}^{2}\)</span>) de la volatilidad.</p>
+</section>
+<section id="ventajas-del-modelo-garch" class="level3" data-number="2.5">
+<h3 data-number="2.5" class="anchored" data-anchor-id="ventajas-del-modelo-garch"><span class="header-section-number">2.5</span> Ventajas del Modelo GARCH</h3>
+<ul>
+<li><p>Flexibilidad: Al incluir tanto errores pasados como varianzas pasadas, el modelo GARCH puede capturar de manera más efectiva la dinámica de la volatilidad en los datos financieros.</p></li>
+<li><p>Aplicabilidad: Los modelos GARCH son aplicables a una amplia variedad de series temporales financieras, incluyendo precios de acciones, tasas de cambio y tasas de interés.</p></li>
+</ul>
+</section>
+<section id="limitaciones-del-modelo-garch" class="level3" data-number="2.6">
+<h3 data-number="2.6" class="anchored" data-anchor-id="limitaciones-del-modelo-garch"><span class="header-section-number">2.6</span> Limitaciones del Modelo GARCH</h3>
+<ul>
+<li><p>Complejidad: La estimación de modelos GARCH puede ser compleja y computacionalmente intensiva, especialmente para valores altos de <span class="math inline">\(p\)</span> y <span class="math inline">\(q\)</span>.</p></li>
+<li><p>Suposición de Normalidad: La suposición de que los errores estandarizados son normales puede no ser realista en todos los casos. Existen extensiones como GARCH-T que permiten distribuciones alternativas para los errores.</p></li>
+</ul>
+</section>
+<section id="resumen-1" class="level3" data-number="2.7">
+<h3 data-number="2.7" class="anchored" data-anchor-id="resumen-1"><span class="header-section-number">2.7</span> Resumen</h3>
+<p>El modelo GARCH es una herramienta poderosa para modelar la volatilidad condicional en series temporales financieras. Extiende el modelo ARCH al incluir tanto errores pasados como varianzas pasadas, lo que permite capturar la naturaleza persistente de la volatilidad en los datos. Es ampliamente utilizado en econometría y finanzas para prever la volatilidad y gestionar el riesgo.</p>
+</section>
+<section id="pruebas-estimaciones-y-pronósticos" class="level3" data-number="2.8">
+<h3 data-number="2.8" class="anchored" data-anchor-id="pruebas-estimaciones-y-pronósticos"><span class="header-section-number">2.8</span> Pruebas, Estimaciones y Pronósticos</h3>
+<p>La prueba del multiplicador de Lagrange (LM) es una herramienta estadística utilizada para detectar la presencia de efectos ARCH en una serie temporal. Los efectos ARCH se refieren a la situación en la que la varianza de los errores no es constante a lo largo del tiempo, sino que depende de los errores pasados.</p>
+<p>A continuación, se describe el procedimiento para llevar a cabo una prueba LM para efectos ARCH:</p>
+</section>
+<section id="procedimiento-de-la-prueba-lm-para-efectos-arch" class="level3" data-number="2.9">
+<h3 data-number="2.9" class="anchored" data-anchor-id="procedimiento-de-la-prueba-lm-para-efectos-arch"><span class="header-section-number">2.9</span> Procedimiento de la Prueba LM para Efectos ARCH</h3>
+<ol type="1">
+<li>Estimar un Modelo de Regresión Básico: Primero, estima el modelo de regresión básico, que podría ser un modelo ARIMA o cualquier otro modelo de serie temporal adecuado. Obtén los residuos de este modelo.</li>
+</ol>
+<p><span class="math display">\[y_{t}= \beta X_{t} + \epsilon_{t}\]</span></p>
+<p>Aquí, <span class="math inline">\(y_{t}\)</span> es la variable dependiente, <span class="math inline">\(X_{t}\)</span> son las variables independientes, <span class="math inline">\(\beta\)</span> son los coeficientes del modelo, y <span class="math inline">\(\epsilon_{t}\)</span> son los residuos.</p>
+<ol start="2" type="1">
+<li><p>Cuadrar los Residuos: Calcula los residuos al cuadrado <span class="math inline">\((e_{t}^{2})\)</span> . Estos valores se usarán para detectar la heterocedasticidad.</p></li>
+<li><p>Regresión Auxiliar: Realiza una regresión auxiliar donde los residuos cuadrados se regresan sobre <span class="math inline">\(q\)</span> retardos de los mismos residuos cuadrados.</p></li>
+</ol>
+<p><span class="math display">\[e_{t}^{2}=\alpha_{0} + \alpha_{1}e_{t-1}^{2}+\alpha_{2}e_{t-2}^{2} + ... + \alpha_{q}e_{t-q}^{2} + v_{t}\]</span></p>
+<p>Aquí, <span class="math inline">\(\alpha_{0}\)</span> es el intercepto, <span class="math inline">\(\alpha_{i}\)</span> son los coeficientes de los residuos retardados, y <span class="math inline">\(v_{t}\)</span> es el término de error de esta regresión auxiliar.</p>
+<ol start="4" type="1">
+<li>Calcular el Estadístico de Prueba: El estadístico de prueba LM se calcula como <span class="math inline">\(\textbf{T*R}^{2}\)</span>, donde <span class="math inline">\(\textbf{T}\)</span>es el número de observaciones y <span class="math inline">\(\textbf{R}^{2}\)</span> es el coeficiente de determinación de la regresión auxiliar.</li>
+</ol>
+<p><span class="math display">\[\textbf{LM}=\textbf{T*R}^{2}\]</span></p>
+<ol start="5" type="1">
+<li><p>Distribución Asintótica: Bajo la hipótesis nula de que no hay efectos ARCH (es decir, todos los <span class="math inline">\(\alpha_{i}=0\)</span>, el estadístico LM sigue una distribución chi-cuadrado <span class="math inline">\(\textbf{X}^{2}\)</span> con <span class="math inline">\(q\)</span> grados de libertad.</p></li>
+<li><p>Decisión: Compara el estadístico LM con el valor crítico de la distribución <span class="math inline">\(\textbf{X}^{2}\)</span> con <span class="math inline">\(q\)</span> grados de libertad. Si el estadístico LM es mayor que el valor crítico, se rechaza la hipótesis nula, indicando la presencia de efectos ARCH. De lo contrario, no se rechaza la hipótesis nula.</p></li>
+</ol>
+</section>
+<section id="resumen-2" class="level3" data-number="2.10">
+<h3 data-number="2.10" class="anchored" data-anchor-id="resumen-2"><span class="header-section-number">2.10</span> Resumen</h3>
+<p>La prueba del multiplicador de Lagrange (LM) para efectos ARCH sigue estos pasos principales:</p>
+<ol type="1">
+<li><p>Estimar el modelo básico y obtener los residuos.</p></li>
+<li><p>Calcular los residuos al cuadrado.</p></li>
+<li><p>Realizar una regresión auxiliar de los residuos cuadrados sobre <span class="math inline">\(q\)</span> retardos de los mismos.</p></li>
+<li><p>Calcular el estadístico <span class="math inline">\(\textbf{T*R}^{2}\)</span>.</p></li>
+<li><p>Comparar el estadístico con la distribución chi-cuadrado para tomar la decisión.</p></li>
+</ol>
+<p>Esta prueba es una herramienta efectiva para detectar heterocedasticidad condicional en las series temporales, y es ampliamente utilizada en econometría y finanzas para modelar y prever la volatilidad.</p>
+</section>
+</section>
+<section id="que-son-los-errores-estandarizados" class="level2" data-number="3">
+<h2 data-number="3" class="anchored" data-anchor-id="que-son-los-errores-estandarizados"><span class="header-section-number">3</span> ¿Que son los Errores Estandarizados?</h2>
+<p>Los errores estandarizados son una forma de normalizar los residuos de un modelo para hacerlos comparables a lo largo del tiempo y evaluar su comportamiento de una manera más uniforme. En el contexto de modelos de heterocedasticidad condicional como GARCH, los errores estandarizados son particularmente útiles para verificar la adecuación del modelo y la presencia de heterocedasticidad residual.</p>
+<section id="definición-de-errores-estandarizados" class="level3" data-number="3.1">
+<h3 data-number="3.1" class="anchored" data-anchor-id="definición-de-errores-estandarizados"><span class="header-section-number">3.1</span> Definición de Errores Estandarizados</h3>
+<p>Para una serie temporal <span class="math inline">\(y_{t}\)</span> modelada con un modelo de media y un modelo de varianza condicional (como un GARCH), los errores estandarizados se calculan de la siguiente manera:</p>
+<ol type="1">
+<li><p>Errores del Modelo <span class="math inline">\((\epsilon_{t})\)</span>: Estos son los residuos del modelo, que se obtienen como la diferencia entre los valores observados y los valores ajustados por el modelo de media: <span class="math inline">\(\epsilon_{t} = y_{t} -  \hat y_{t}\)</span> donde <span class="math inline">\(\hat y_{t}\)</span> es el valor ajustado.</p></li>
+<li><p>Varianza Condicional <span class="math inline">\((\sigma_{t}^{2})\)</span>: Esta es la varianza condicional estimada en cada punto en el tiempo, que se obtiene del modelo de varianza condicional (por ejemplo, GARCH): <span class="math inline">\((\sigma_{t}^{2})\)</span></p></li>
+<li><p>Errores Estandarizados <span class="math inline">\((e_{t})\)</span> : Los errores estandarizados se obtienen dividiendo los errores del modelo por la raíz cuadrada de la varianza condicional: <span class="math inline">\(e_{t} = \frac{\epsilon_{t}} {\sigma_{t}}\)</span> donde <span class="math inline">\(\sigma_{t} = \sqrt{\sigma_{t}^{2}}\)</span> es la desviación estándar condicional.</p></li>
+</ol>
+</section>
+<section id="interpretación-y-uso" class="level3" data-number="3.2">
+<h3 data-number="3.2" class="anchored" data-anchor-id="interpretación-y-uso"><span class="header-section-number">3.2</span> Interpretación y Uso</h3>
+<p>Los errores estandarizados <span class="math inline">\(e_{t}\)</span> tienen una media esperada de cero y una varianza esperada de uno, siempre y cuando el modelo esté correctamente especificado. Esto permite comparar los errores a lo largo del tiempo y verificar si hay patrones que indiquen una mala especificación del modelo.</p>
+</section>
+<section id="evaluación-del-modelo-con-errores-estandarizados" class="level3" data-number="3.3">
+<h3 data-number="3.3" class="anchored" data-anchor-id="evaluación-del-modelo-con-errores-estandarizados"><span class="header-section-number">3.3</span> Evaluación del Modelo con Errores Estandarizados</h3>
+<ol type="1">
+<li><p>Análisis de Ruido Blanco: Los errores estandarizados deben comportarse como ruido blanco, es decir, deben ser independientes e idénticamente distribuidos con media cero y varianza uno. Si no se comportan de esta manera, podría indicar que el modelo no ha capturado adecuadamente la dinámica de la serie temporal.</p></li>
+<li><p>Gráficos de Errores Estandarizados: Los gráficos de los errores estandarizados pueden ayudar a identificar patrones o anomalías en los residuos que no fueron capturados por el modelo. Por ejemplo, si los errores estandarizados muestran agrupaciones de valores altos o bajos, puede ser un signo de que hay heterocedasticidad residual no modelada.</p></li>
+<li><p>Pruebas Estadísticas: Pruebas estadísticas, como la prueba de Ljung-Box, pueden ser aplicadas a los errores estandarizados para verificar la presencia de autocorrelación. También se pueden usar pruebas para la normalidad de los errores estandarizados, como la prueba de Jarque-Bera.</p></li>
+</ol>
+</section>
+<section id="ejemplo-práctico" class="level3" data-number="3.4">
+<h3 data-number="3.4" class="anchored" data-anchor-id="ejemplo-práctico"><span class="header-section-number">3.4</span> Ejemplo Práctico</h3>
+<p>Supongamos que hemos ajustado un modelo GARCH(1,1) a una serie temporal de retornos financieros:</p>
+<ol type="1">
+<li><p>Estimación del Modelo: Ajustamos el modelo y obtenemos los residuos <span class="math inline">\(\epsilon_{t}\)</span>.</p></li>
+<li><p>Cálculo de la Varianza Condicional: Estimamos la varianza condicional <span class="math inline">\(\sigma_{t}^{2}\)</span> utilizando los parámetros del modelo GARCH.</p></li>
+<li><p>Cálculo de los Errores Estandarizados: Dividimos cada residuo <span class="math inline">\(\epsilon_{t}\)</span> por la desviación estándar condicional <span class="math inline">\(\sigma_{t}\)</span>: <span class="math inline">\(e_{t} = \frac{\epsilon_{t}} {\sigma_{t}}\)</span></p></li>
+<li><p>Evaluación: Analizamos los errores estandarizados <span class="math inline">\(e_{t}\)</span> para verificar si son ruido blanco y si siguen una distribución normal.</p></li>
+</ol>
+</section>
+<section id="resumen-3" class="level3" data-number="3.5">
+<h3 data-number="3.5" class="anchored" data-anchor-id="resumen-3"><span class="header-section-number">3.5</span> Resumen</h3>
+<p>Los errores estandarizados son una herramienta clave para evaluar la adecuación de los modelos de series temporales con heterocedasticidad condicional. Al normalizar los errores, permiten una evaluación uniforme de los residuos a lo largo del tiempo y ayudan a identificar posibles problemas de especificación del modelo.</p>
+</section>
+</section>
+<section id="identificación" class="level2" data-number="4">
+<h2 data-number="4" class="anchored" data-anchor-id="identificación"><span class="header-section-number">4</span> Identificación</h2>
+<p>La mejor herramienta de identificación puede ser un gráfico de la serie de tiempo. Por lo general, es fácil detectar periodos de mayor variación esparcidos a lo largo de la serie.</p>
+<p>Puede resultar útil examinar el ACF y el PACF de <span class="math inline">\(\epsilon_{t}\)</span> y <span class="math inline">\(\epsilon_{t}^{2}\)</span>. Por ejemplo,</p>
+<ul>
+<li><p>si <span class="math inline">\(\epsilon_{t}\)</span> parece ser ruido blanco y parece ser <span class="math inline">\(𝐴𝑅(1)\)</span>, se sugiere un modelo <span class="math inline">\(ARCH(1)\)</span> para la varianza.</p></li>
+<li><p>Si el PACF de sugiere <span class="math inline">\(AR(p)\)</span>, entonces <span class="math inline">\(ARCH(m)\)</span> puede funcionar.</p></li>
+</ul>
+<p>Los modelos <span class="math inline">\(GARCH\)</span> pueden ser sugeridos por una estructura de tipo ARMA en el ACF y PACF de <span class="math inline">\(\epsilon_{t}^{2}\)</span>.</p>
+<p>En la práctica, es posible que tengas que experimentar con varias estructuras ARCH y GARCH después de detectar que es necesario aborar el problema con este tipo de modelos.</p>
+</section>
+<section id="ejemplo-analizar-el-índice-sp-500-desde-2014-05-03-a-2021-04-22-y-estimar-un-modelo-para-su-volatilidad" class="level2" data-number="5">
+<h2 data-number="5" class="anchored" data-anchor-id="ejemplo-analizar-el-índice-sp-500-desde-2014-05-03-a-2021-04-22-y-estimar-un-modelo-para-su-volatilidad"><span class="header-section-number">5</span> Ejemplo: Analizar el índice <a href="#0">S&amp;P 500</a> desde 2014-05-03 a 2021-04-22 y estimar un modelo para su volatilidad</h2>
+<section id="paso-1-cargar-y-preparar-los-datos" class="level3" data-number="5.1">
+<h3 data-number="5.1" class="anchored" data-anchor-id="paso-1-cargar-y-preparar-los-datos"><span class="header-section-number">5.1</span> Paso 1: Cargar y Preparar los Datos</h3>
+<p>Primero, cargaremos los datos y los convertiremos en una serie temporal.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>SIP <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"PerformanceGraphExport.xlsx"</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">View</span>(SIP)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Crear un vector de fechas desde el 30 de mayo de 2014 hasta el 3 de junio de 2024</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>fechas <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="fu">as.Date</span>(<span class="st">"2014-05-30"</span>), <span class="fu">as.Date</span>(<span class="st">"2024-06-03"</span>), <span class="at">by =</span> <span class="st">"day"</span>)</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Verificar y ajustar longitud de fechas si es necesario</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="fu">length</span>(fechas) <span class="sc">&gt;</span> <span class="fu">nrow</span>(SIP)) {</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>  fechas <span class="ot">&lt;-</span> fechas[<span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(SIP)]</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> <span class="cf">if</span> (<span class="fu">length</span>(fechas) <span class="sc">&lt;</span> <span class="fu">nrow</span>(SIP)) {</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stop</span>(<span class="st">"Número de filas en datos es mayor que el número de fechas generadas"</span>)</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Crear una serie temporal diaria con los datos de SIP$'S&amp;P 500' y las fechas definidas</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>SIP500 <span class="ot">&lt;-</span> <span class="fu">xts</span>(SIP<span class="sc">$</span><span class="st">`</span><span class="at">S&amp;P 500</span><span class="st">`</span>, <span class="at">order.by =</span> fechas)</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Puedes ajustar la frecuencia de acuerdo a tus necesidades, en este caso se utilizó 365 para representar una frecuencia diaria.</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(SIP500)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Modelos-ARCH-Y-GARCH_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="paso-2-calcular-retornos-mensuales" class="level3" data-number="5.2">
+<h3 data-number="5.2" class="anchored" data-anchor-id="paso-2-calcular-retornos-mensuales"><span class="header-section-number">5.2</span> Paso 2: Calcular Retornos Mensuales</h3>
+<p>Calcularemos los retornos mensuales a partir de los precios.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Convertir la serie diaria a una serie mensual calculando el último valor de cada mes</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>monthly_prices <span class="ot">&lt;-</span> <span class="fu">apply.monthly</span>(SIP500, last)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Calcular los retornos mensuales</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>rets <span class="ot">&lt;-</span> <span class="fu">monthlyReturn</span>(monthly_prices)</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Verificar los datos de retornos mensuales</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(rets)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>           monthly.returns
+2014-05-31    0.0000000000
+2014-06-30    0.0250964950
+2014-07-31    0.0136017190
+2014-08-31   -0.0469921805
+2014-09-30    0.0825599513
+2014-10-31   -0.0006590744</code></pre>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(rets)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>     Index            monthly.returns    
+ Min.   :2014-05-31   Min.   :-0.308805  
+ 1st Qu.:2016-02-21   1st Qu.:-0.006655  
+ Median :2017-11-15   Median : 0.020211  
+ Mean   :2017-11-14   Mean   : 0.014256  
+ 3rd Qu.:2019-08-07   3rd Qu.: 0.047243  
+ Max.   :2021-04-22   Max.   : 0.233336  </code></pre>
+</div>
+</div>
+</section>
+<section id="paso-3-visualizar-los-retornos" class="level3" data-number="5.3">
+<h3 data-number="5.3" class="anchored" data-anchor-id="paso-3-visualizar-los-retornos"><span class="header-section-number">5.3</span> Paso 3: Visualizar los Retornos</h3>
+<p>Para entender mejor los datos, visualizaremos los retornos mensuales.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Convertir los retornos a un marco de datos adecuado para ggplot</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>rets_df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">Date =</span> <span class="fu">index</span>(rets), <span class="at">Returns =</span> <span class="fu">coredata</span>(rets))</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Verificar el marco de datos</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(rets_df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>        Date monthly.returns
+1 2014-05-31    0.0000000000
+2 2014-06-30    0.0250964950
+3 2014-07-31    0.0136017190
+4 2014-08-31   -0.0469921805
+5 2014-09-30    0.0825599513
+6 2014-10-31   -0.0006590744</code></pre>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Convertir la columna Date a formato de fecha si no está en ese formato</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>rets_df<span class="sc">$</span>Date <span class="ot">&lt;-</span> <span class="fu">as.Date</span>(rets_df<span class="sc">$</span>Date)</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Crear el gráfico de retornos mensuales</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(rets_df, <span class="fu">aes</span>(<span class="at">x =</span> Date, <span class="at">y =</span> monthly.returns)) <span class="sc">+</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">color =</span> <span class="st">"blue"</span>) <span class="sc">+</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Retornos Mensuales"</span>,</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Fecha"</span>,</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Retornos Mensuales"</span>) <span class="sc">+</span></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Modelos-ARCH-Y-GARCH_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="paso-4-ajustar-el-modelo-garch" class="level3" data-number="5.4">
+<h3 data-number="5.4" class="anchored" data-anchor-id="paso-4-ajustar-el-modelo-garch"><span class="header-section-number">5.4</span> Paso 4: Ajustar el Modelo GARCH</h3>
+<p>Procedemos con el ajuste del modelo GARCH y las visualizaciones como antes:</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> rets_df<span class="sc">$</span>monthly.returns</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Ajustar un modelo GARCH(1,1)</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>fit_1 <span class="ot">&lt;-</span> <span class="fu">ugarchfit</span>(<span class="at">data =</span> y, <span class="at">spec =</span> <span class="fu">ugarchspec</span>(<span class="at">mean.model =</span> <span class="fu">list</span>(<span class="at">armaOrder =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>)), </span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>                                               <span class="at">variance.model =</span> <span class="fu">list</span>(<span class="at">model =</span> <span class="st">"sGARCH"</span>)), </span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>                 <span class="at">solver =</span> <span class="st">"hybrid"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in .sgarchfit(spec = spec, data = data, out.sample = out.sample, : 
+ugarchfit--&gt;waring: using less than 100 data
+ points for estimation</code></pre>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Mostrar el resumen del modelo ajustado</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(fit_1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+*---------------------------------*
+*          GARCH Model Fit        *
+*---------------------------------*
+
+Conditional Variance Dynamics   
+-----------------------------------
+GARCH Model : sGARCH(1,1)
+Mean Model  : ARFIMA(0,0,0)
+Distribution    : norm 
+
+Optimal Parameters
+------------------------------------
+        Estimate  Std. Error  t value Pr(&gt;|t|)
+mu      0.014125    0.006919   2.0414 0.041215
+omega   0.000079    0.000017   4.6196 0.000004
+alpha1  0.000000    0.003955   0.0000 1.000000
+beta1   0.983853    0.023985  41.0188 0.000000
+
+Robust Standard Errors:
+        Estimate  Std. Error  t value Pr(&gt;|t|)
+mu      0.014125    0.004375  3.22861 0.001244
+omega   0.000079    0.000163  0.48643 0.626661
+alpha1  0.000000    0.001294  0.00000 1.000000
+beta1   0.983853    0.031689 31.04670 0.000000
+
+LogLikelihood : 112.2659 
+
+Information Criteria
+------------------------------------
+                    
+Akaike       -2.5778
+Bayes        -2.4620
+Shibata      -2.5820
+Hannan-Quinn -2.5312
+
+Weighted Ljung-Box Test on Standardized Residuals
+------------------------------------
+                        statistic  p-value
+Lag[1]                      10.14 0.001454
+Lag[2*(p+q)+(p+q)-1][2]     10.21 0.001685
+Lag[4*(p+q)+(p+q)-1][5]     12.14 0.002555
+d.o.f=0
+H0 : No serial correlation
+
+Weighted Ljung-Box Test on Standardized Squared Residuals
+------------------------------------
+                        statistic  p-value
+Lag[1]                      10.18 0.001421
+Lag[2*(p+q)+(p+q)-1][5]     10.39 0.007297
+Lag[4*(p+q)+(p+q)-1][9]     10.80 0.033575
+d.o.f=2
+
+Weighted ARCH LM Tests
+------------------------------------
+            Statistic Shape Scale P-Value
+ARCH Lag[3]    0.0917 0.500 2.000  0.7620
+ARCH Lag[5]    0.3969 1.440 1.667  0.9135
+ARCH Lag[7]    0.6134 2.315 1.543  0.9670
+
+Nyblom stability test
+------------------------------------
+Joint Statistic:  2.6282
+Individual Statistics:              
+mu     0.04212
+omega  0.10825
+alpha1 0.08573
+beta1  0.10882
+
+Asymptotic Critical Values (10% 5% 1%)
+Joint Statistic:         1.07 1.24 1.6
+Individual Statistic:    0.35 0.47 0.75
+
+Sign Bias Test
+------------------------------------
+                   t-value     prob sig
+Sign Bias           1.4936 0.139268    
+Negative Sign Bias  3.0756 0.002885 ***
+Positive Sign Bias  0.2836 0.777488    
+Joint Effect        9.5402 0.022907  **
+
+
+Adjusted Pearson Goodness-of-Fit Test:
+------------------------------------
+  group statistic p-value(g-1)
+1    20     27.90      0.08528
+2    30     41.00      0.06887
+3    40     53.14      0.06499
+4    50     62.43      0.09421
+
+
+Elapsed time : 0.1998219 </code></pre>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Especificar el modelo GARCH(1,1)</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>spec <span class="ot">&lt;-</span> <span class="fu">ugarchspec</span>(</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">variance.model =</span> <span class="fu">list</span>(<span class="at">model =</span> <span class="st">"sGARCH"</span>, <span class="at">garchOrder =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>)),</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">mean.model =</span> <span class="fu">list</span>(<span class="at">armaOrder =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>))</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(spec)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>    Length      Class       Mode 
+         1 uGARCHspec         S4 </code></pre>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Ajustar el modelo GARCH a los datos de retornos</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">ugarchfit</span>(<span class="at">spec =</span> spec, <span class="at">data =</span> rets)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in .sgarchfit(spec = spec, data = data, out.sample = out.sample, : 
+ugarchfit--&gt;waring: using less than 100 data
+ points for estimation</code></pre>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Resumen del modelo ajustado</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>   Length     Class      Mode 
+        1 uGARCHfit        S4 </code></pre>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(fit)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+*---------------------------------*
+*          GARCH Model Fit        *
+*---------------------------------*
+
+Conditional Variance Dynamics   
+-----------------------------------
+GARCH Model : sGARCH(1,1)
+Mean Model  : ARFIMA(0,0,0)
+Distribution    : norm 
+
+Optimal Parameters
+------------------------------------
+        Estimate  Std. Error  t value Pr(&gt;|t|)
+mu      0.014125    0.006919   2.0414 0.041215
+omega   0.000079    0.000017   4.6196 0.000004
+alpha1  0.000000    0.003955   0.0000 1.000000
+beta1   0.983853    0.023985  41.0188 0.000000
+
+Robust Standard Errors:
+        Estimate  Std. Error  t value Pr(&gt;|t|)
+mu      0.014125    0.004375  3.22861 0.001244
+omega   0.000079    0.000163  0.48643 0.626661
+alpha1  0.000000    0.001294  0.00000 1.000000
+beta1   0.983853    0.031689 31.04670 0.000000
+
+LogLikelihood : 112.2659 
+
+Information Criteria
+------------------------------------
+                    
+Akaike       -2.5778
+Bayes        -2.4620
+Shibata      -2.5820
+Hannan-Quinn -2.5312
+
+Weighted Ljung-Box Test on Standardized Residuals
+------------------------------------
+                        statistic  p-value
+Lag[1]                      10.14 0.001454
+Lag[2*(p+q)+(p+q)-1][2]     10.21 0.001685
+Lag[4*(p+q)+(p+q)-1][5]     12.14 0.002555
+d.o.f=0
+H0 : No serial correlation
+
+Weighted Ljung-Box Test on Standardized Squared Residuals
+------------------------------------
+                        statistic  p-value
+Lag[1]                      10.18 0.001421
+Lag[2*(p+q)+(p+q)-1][5]     10.39 0.007297
+Lag[4*(p+q)+(p+q)-1][9]     10.80 0.033575
+d.o.f=2
+
+Weighted ARCH LM Tests
+------------------------------------
+            Statistic Shape Scale P-Value
+ARCH Lag[3]    0.0917 0.500 2.000  0.7620
+ARCH Lag[5]    0.3969 1.440 1.667  0.9135
+ARCH Lag[7]    0.6134 2.315 1.543  0.9670
+
+Nyblom stability test
+------------------------------------
+Joint Statistic:  2.6282
+Individual Statistics:              
+mu     0.04212
+omega  0.10825
+alpha1 0.08573
+beta1  0.10882
+
+Asymptotic Critical Values (10% 5% 1%)
+Joint Statistic:         1.07 1.24 1.6
+Individual Statistic:    0.35 0.47 0.75
+
+Sign Bias Test
+------------------------------------
+                   t-value     prob sig
+Sign Bias           1.4936 0.139268    
+Negative Sign Bias  3.0756 0.002885 ***
+Positive Sign Bias  0.2836 0.777488    
+Joint Effect        9.5402 0.022907  **
+
+
+Adjusted Pearson Goodness-of-Fit Test:
+------------------------------------
+  group statistic p-value(g-1)
+1    20     27.90      0.08528
+2    30     41.00      0.06887
+3    40     53.14      0.06499
+4    50     62.43      0.09421
+
+
+Elapsed time : 0.1542821 </code></pre>
+</div>
+</div>
+</section>
+<section id="paso-4-evaluar-el-modelo" class="level3" data-number="5.5">
+<h3 data-number="5.5" class="anchored" data-anchor-id="paso-4-evaluar-el-modelo"><span class="header-section-number">5.5</span> Paso 4: Evaluar el Modelo</h3>
+<p>Revisamos el ajuste del modelo y realizamos algunas pruebas diagnósticas.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Obtener los residuos estandarizados</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>residuals_standardized <span class="ot">&lt;-</span> <span class="fu">residuals</span>(fit, <span class="at">standardize =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Graficar los residuos estandarizados</span></span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">data.frame</span>(<span class="at">Date =</span> <span class="fu">index</span>(rets), <span class="at">Residuals =</span> residuals_standardized), <span class="fu">aes</span>(<span class="at">x =</span> Date, <span class="at">y =</span> Residuals)) <span class="sc">+</span></span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Residuos Estandarizados del Modelo GARCH"</span>,</span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Fecha"</span>,</span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Residuos Estandarizados"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Modelos-ARCH-Y-GARCH_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="función-de-autocorrelación-de-los-residuos" class="level3" data-number="5.6">
+<h3 data-number="5.6" class="anchored" data-anchor-id="función-de-autocorrelación-de-los-residuos"><span class="header-section-number">5.6</span> Función de Autocorrelación de los Residuos</h3>
+<p>Revisar la autocorrelación de los residuos y de los residuos al cuadrado es importante para asegurarse de que no haya autocorrelación residual:</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Función de autocorrelación de los residuos estandarizados</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="fu">acf</span>(residuals_standardized, <span class="at">main =</span> <span class="st">"ACF de los Residuos Estandarizados"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Modelos-ARCH-Y-GARCH_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Función de autocorrelación de los residuos al cuadrado</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="fu">acf</span>(residuals_standardized<span class="sc">^</span><span class="dv">2</span>, <span class="at">main =</span> <span class="st">"ACF de los Residuos al Cuadrado"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Modelos-ARCH-Y-GARCH_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="preguntas" class="level2" data-number="6">
+<h2 data-number="6" class="anchored" data-anchor-id="preguntas"><span class="header-section-number">6</span> Preguntas</h2>
+<section id="pregunta-1" class="level3" data-number="6.1">
+<h3 data-number="6.1" class="anchored" data-anchor-id="pregunta-1"><span class="header-section-number">6.1</span> Pregunta 1</h3>
+<p>¿Cuál de las siguientes afirmaciones describe mejor la característica principal de un modelo ARCH(p)?</p>
+<p>A) La media de los errores es constante a lo largo del tiempo.</p>
+<p>B) La varianza condicional de los errores depende de las varianzas condicionales pasadas.</p>
+<p>C) La varianza condicional de los errores depende de los errores pasados.</p>
+<p>D) La media condicional de los errores depende de los errores pasados.</p>
+<p>Respuesta Correcta: C</p>
+</section>
+<section id="pregunta-2" class="level3" data-number="6.2">
+<h3 data-number="6.2" class="anchored" data-anchor-id="pregunta-2"><span class="header-section-number">6.2</span> Pregunta 2</h3>
+<p>En un modelo GARCH(1,1), la varianza condicional <span class="math inline">\(\sigma_t^2\)</span> se especifica como:</p>
+<p>A) <span class="math inline">\(\sigma_t^2 = \alpha_0 + \alpha_1 \epsilon_{t-1}^2\)</span></p>
+<p>B) <span class="math inline">\(\sigma_t^2 = \alpha_0 + \alpha_1 \sigma_{t-1}^2 + \beta_1 \epsilon_t^2+ ϵt^{2}\)</span></p>
+<p>C) <span class="math inline">\(\sigma_t^2 = \alpha_0 + \alpha_1 \epsilon_{t-1}^2 + \beta_1 \sigma_{t-1}^2\)</span></p>
+<p>D) <span class="math inline">\(\sigma_t^2 = \alpha_0 + \beta_1 \epsilon_t^2 + \alpha_1 \sigma_{t-1}^2\)</span></p>
+<p>Respuesta Correcta: C</p>
+</section>
+<section id="pregunta-3" class="level3" data-number="6.3">
+<h3 data-number="6.3" class="anchored" data-anchor-id="pregunta-3"><span class="header-section-number">6.3</span> Pregunta 3</h3>
+<p>¿Cuál es el propósito principal de la prueba del multiplicador de Lagrange (LM) en el contexto de un modelo ARCH?</p>
+<p>A) Detectar autocorrelación en los residuos.</p>
+<p>B) Verificar la presencia de heterocedasticidad condicional.</p>
+<p>C) Estimar los coeficientes del modelo.</p>
+<p>D) Evaluar la normalidad de los errores estandarizados.</p>
+<p>Respuesta Correcta: B</p>
+</section>
+<section id="pregunta-4" class="level3" data-number="6.4">
+<h3 data-number="6.4" class="anchored" data-anchor-id="pregunta-4"><span class="header-section-number">6.4</span> Pregunta 4</h3>
+<p>En un modelo ARCH(p), si los coeficientes <span class="math inline">\(\alpha_1, \alpha_2, \ldots, \alpha_p\)</span> son todos positivos y su suma es mayor que 1, ¿qué implica esto sobre el comportamiento de la varianza condicional?</p>
+<p>A) La varianza condicional será constante.</p>
+<p>B) La varianza condicional tenderá a cero.</p>
+<p>C) La varianza condicional será explosiva y no se estabilizará.</p>
+<p>D) La varianza condicional seguirá una tendencia lineal.</p>
+<p>Respuesta Correcta: C</p>
+</section>
+<section id="pregunta-5" class="level3" data-number="6.5">
+<h3 data-number="6.5" class="anchored" data-anchor-id="pregunta-5"><span class="header-section-number">6.5</span> Pregunta 5</h3>
+<p>Supongamos que estás utilizando un modelo GARCH(1,1) para modelar la volatilidad de los retornos diarios de una acción. ¿Cuál de las siguientes opciones describe mejor cómo se calcula la varianza condicional en este modelo?</p>
+<p>A) Utilizando únicamente los errores al cuadrado de los períodos anteriores.</p>
+<p>B) Utilizando tanto los errores al cuadrado de los períodos anteriores como las varianzas condicionales de los períodos anteriores.</p>
+<p>C) Utilizando únicamente las varianzas condicionales de los períodos anteriores.</p>
+<p>D) Utilizando una media constante más los errores de los períodos anteriores.</p>
+<p>Respuesta Correcta: B</p>
+</section>
+<section id="pregunta-6" class="level3" data-number="6.6">
+<h3 data-number="6.6" class="anchored" data-anchor-id="pregunta-6"><span class="header-section-number">6.6</span> Pregunta 6</h3>
+<p>¿Cuál de las siguientes afirmaciones es verdadera acerca de los residuos estandarizados en un modelo GARCH?</p>
+<p>A) Los residuos estandarizados deben tener una media diferente de cero.</p>
+<p>B) Los residuos estandarizados deben tener una varianza diferente de uno.</p>
+<p>C) Los residuos estandarizados deben comportarse como ruido blanco.</p>
+<p>D) Los residuos estandarizados deben mostrar heterocedasticidad condicional.</p>
+<p>Respuesta Correcta: C</p>
+</section>
+<section id="pregunta-7" class="level3" data-number="6.7">
+<h3 data-number="6.7" class="anchored" data-anchor-id="pregunta-7"><span class="header-section-number">6.7</span> Pregunta 7</h3>
+<p>En un modelo GARCH(1,1), si se observa que el coeficiente <span class="math inline">\(\alpha_1\)</span> es significativamente mayor que el coeficiente <span class="math inline">\(\beta_1\)</span>, ¿qué implicación tiene esto sobre la naturaleza de la volatilidad?</p>
+<p>A) La volatilidad actual depende más de la volatilidad pasada que de los choques recientes.</p>
+<p>B) Los choques recientes tienen un mayor impacto en la volatilidad actual que la volatilidad pasada.</p>
+<p>C) La varianza condicional es constante a lo largo del tiempo.</p>
+<p>D) No hay impacto de los errores pasados en la volatilidad actual.</p>
+<p>Respuesta Correcta: B</p>
+</section>
+<section id="pregunta-8" class="level3" data-number="6.8">
+<h3 data-number="6.8" class="anchored" data-anchor-id="pregunta-8"><span class="header-section-number">6.8</span> Pregunta 8</h3>
+<p>¿Qué indica un estadístico de prueba LM alto en una prueba para detectar efectos ARCH?</p>
+<p>A) No hay efectos ARCH presentes en los datos.</p>
+<p>B) Los residuos son ruido blanco.</p>
+<p>C) Hay evidencia significativa de heterocedasticidad condicional.</p>
+<p>D) Los residuos siguen una distribución normal.</p>
+<p>Respuesta Correcta: C</p>
+</section>
+<section id="pregunta-9" class="level3" data-number="6.9">
+<h3 data-number="6.9" class="anchored" data-anchor-id="pregunta-9"><span class="header-section-number">6.9</span> Pregunta 9</h3>
+<p>¿Cuál de los siguientes modelos es una extensión del modelo ARCH que incluye tanto errores pasados como varianzas condicionales pasadas en la especificación de la varianza condicional?</p>
+<p>A) ARIMA</p>
+<p>B) ARCH-M</p>
+<p>C) GARCH</p>
+<p>D) EGARCH</p>
+<p>Respuesta Correcta: C</p>
+</section>
+<section id="pregunta-10" class="level3" data-number="6.10">
+<h3 data-number="6.10" class="anchored" data-anchor-id="pregunta-10"><span class="header-section-number">6.10</span> Pregunta 10</h3>
+<p>En un modelo ARCH, ¿qué representa el término <span class="math inline">\(\epsilon_{t-1}^2\)</span> en la especificación de la varianza condicional?</p>
+<p>A) La media de los errores pasados.</p>
+<p>B) La varianza condicional de los errores pasados.</p>
+<p>C) El cuadrado del error en el período anterior.</p>
+<p>D) La desviación estándar condicional de los errores pasados.</p>
+<p>Respuesta Correcta: C</p>
+</section>
+<section id="pregunta-11" class="level3" data-number="6.11">
+<h3 data-number="6.11" class="anchored" data-anchor-id="pregunta-11"><span class="header-section-number">6.11</span> Pregunta 11</h3>
+<p><strong>¿Cuál de las siguientes afirmaciones describe mejor la característica principal de un modelo ARCH(p)?</strong></p>
+<p><strong>Respuesta Correcta: C) La varianza condicional de los errores depende de los errores pasados.</strong></p>
+<p>Justificación: La característica principal del modelo ARCH (AutoRegressive Conditional Heteroskedasticity) es que la varianza condicional de los errores en el tiempo ttt depende de los errores pasados al cuadrado. Esto captura la heterocedasticidad condicional, donde la volatilidad puede cambiar con el tiempo en función de los errores pasados.</p>
+</section>
+<section id="pregunta-2-1" class="level3" data-number="6.12">
+<h3 data-number="6.12" class="anchored" data-anchor-id="pregunta-2-1"><span class="header-section-number">6.12</span> Pregunta 2</h3>
+<p><strong>En un modelo GARCH(1,1), la varianza condicional</strong> <span class="math inline">\(\sigma_t^2\)</span> se especifica como:</p>
+<p><strong>Respuesta Correcta: C)</strong> <span class="math inline">\(\sigma_t^2 = \alpha_0 + \alpha_1 \epsilon_{t-1}^2 + \beta_1 \sigma_{t-1}^2\)</span></p>
+<p>Justificación: En el modelo GARCH(1,1), la varianza condicional actual <span class="math inline">\(\sigma_t^2\)</span> es una función lineal tanto del error pasado al cuadrado <span class="math inline">\(\epsilon_{t-1}^2\)</span> como de la varianza condicional pasada <span class="math inline">\(\sigma_{t-1}^2\)</span>. Esta especificación permite que la varianza dependa tanto de los choques recientes como de la persistencia de la volatilidad pasada.</p>
+</section>
+<section id="pregunta-3-1" class="level3" data-number="6.13">
+<h3 data-number="6.13" class="anchored" data-anchor-id="pregunta-3-1"><span class="header-section-number">6.13</span> Pregunta 3</h3>
+<p><strong>¿Cuál es el propósito principal de la prueba del multiplicador de Lagrange (LM) en el contexto de un modelo ARCH?</strong></p>
+<p><strong>Respuesta Correcta: B) Verificar la presencia de heterocedasticidad condicional.</strong></p>
+<p>Justificación: La prueba LM se utiliza para detectar la presencia de efectos ARCH en una serie temporal. Específicamente, se prueba si la varianza de los errores depende de los errores pasados, lo que indicaría heterocedasticidad condicional.</p>
+</section>
+<section id="pregunta-4-1" class="level3" data-number="6.14">
+<h3 data-number="6.14" class="anchored" data-anchor-id="pregunta-4-1"><span class="header-section-number">6.14</span> Pregunta 4</h3>
+<p><strong>En un modelo ARCH(p), si los coeficientes</strong> <span class="math inline">\(\alpha_1, \alpha_2, \ldots, \alpha_p\)</span> son todos positivos y su suma es mayor que 1, ¿qué implica esto sobre el comportamiento de la varianza condicional?</p>
+<p><strong>Respuesta Correcta: C) La varianza condicional será explosiva y no se estabilizará.</strong></p>
+<p>Justificación: Si la suma de los coeficientes <span class="math inline">\(\alpha_i\)</span> en un modelo ARCH(p) es mayor que 1, la varianza condicional crecerá sin límite a lo largo del tiempo, indicando que el proceso es inestable y la varianza no se estabiliza.</p>
+</section>
+<section id="pregunta-5-1" class="level3" data-number="6.15">
+<h3 data-number="6.15" class="anchored" data-anchor-id="pregunta-5-1"><span class="header-section-number">6.15</span> Pregunta 5</h3>
+<p><strong>Supongamos que estás utilizando un modelo GARCH(1,1) para modelar la volatilidad de los retornos diarios de una acción. ¿Cuál de las siguientes opciones describe mejor cómo se calcula la varianza condicional en este modelo?</strong></p>
+<p><strong>Respuesta Correcta: B) Utilizando tanto los errores al cuadrado de los períodos anteriores como las varianzas condicionales de los períodos anteriores.</strong></p>
+<p>Justificación: En un modelo GARCH(1,1), la varianza condicional se calcula utilizando tanto el error al cuadrado del período anterior como la varianza condicional del período anterior. Esta especificación incluye la memoria de los choques recientes y la persistencia de la volatilidad.</p>
+</section>
+<section id="pregunta-6-1" class="level3" data-number="6.16">
+<h3 data-number="6.16" class="anchored" data-anchor-id="pregunta-6-1"><span class="header-section-number">6.16</span> Pregunta 6</h3>
+<p><strong>¿Cuál de las siguientes afirmaciones es verdadera acerca de los residuos estandarizados en un modelo GARCH?</strong></p>
+<p><strong>Respuesta Correcta: C) Los residuos estandarizados deben comportarse como ruido blanco.</strong></p>
+<p>Justificación: Los residuos estandarizados en un modelo GARCH deben tener una media esperada de cero y una varianza de uno, comportándose como ruido blanco. Esto implica que, una vez modelada la varianza condicional, no debería haber autocorrelación en los residuos estandarizados.</p>
+</section>
+<section id="pregunta-7-1" class="level3" data-number="6.17">
+<h3 data-number="6.17" class="anchored" data-anchor-id="pregunta-7-1"><span class="header-section-number">6.17</span> Pregunta 7</h3>
+<p><strong>En un modelo GARCH(1,1), si se observa que el coeficiente</strong> <span class="math inline">\(\alpha_1\)</span> es significativamente mayor que el coeficiente <span class="math inline">\(\beta_1\)</span>, ¿qué implicación tiene esto sobre la naturaleza de la volatilidad?</p>
+<p>Respuesta Correcta: B) Los choques recientes tienen un mayor impacto en la volatilidad actual que la volatilidad pasada.</p>
+<p>Justificación: Un coeficiente <span class="math inline">\(\alpha_1\)</span> mayor que <span class="math inline">\(\beta_1\)</span> indica que los errores pasados (choques recientes) tienen un mayor impacto en la varianza condicional actual que la persistencia de la varianza condicional pasada.</p>
+</section>
+<section id="pregunta-8-1" class="level3" data-number="6.18">
+<h3 data-number="6.18" class="anchored" data-anchor-id="pregunta-8-1"><span class="header-section-number">6.18</span> Pregunta 8</h3>
+<p><strong>¿Qué indica un estadístico de prueba LM alto en una prueba para detectar efectos ARCH?</strong></p>
+<p><strong>Respuesta Correcta: C) Hay evidencia significativa de heterocedasticidad condicional.</strong></p>
+<p><strong>Justificación:</strong> Un estadístico LM alto en una prueba para efectos ARCH sugiere que hay una fuerte evidencia de que la varianza de los errores no es constante y depende de los errores pasados, indicando heterocedasticidad condicional.</p>
+</section>
+<section id="pregunta-9-1" class="level3" data-number="6.19">
+<h3 data-number="6.19" class="anchored" data-anchor-id="pregunta-9-1"><span class="header-section-number">6.19</span> Pregunta 9</h3>
+<p><strong>¿Cuál de los siguientes modelos es una extensión del modelo ARCH que incluye tanto errores pasados como varianzas condicionales pasadas en la especificación de la varianza condicional?</strong></p>
+<p><strong>Respuesta Correcta: C) GARCH</strong></p>
+<p><strong>Justificación:</strong> El modelo GARCH (Generalized ARCH) extiende el modelo ARCH al incluir no solo los errores pasados, sino también las varianzas condicionales pasadas en la especificación de la varianza condicional, proporcionando una estructura más flexible y completa.</p>
+</section>
+<section id="pregunta-10-1" class="level3" data-number="6.20">
+<h3 data-number="6.20" class="anchored" data-anchor-id="pregunta-10-1"><span class="header-section-number">6.20</span> Pregunta 10</h3>
+<p><strong>En un modelo ARCH, ¿qué representa el término</strong> <span class="math inline">\(\epsilon_{t-1}^2\)</span> en la especificación de la varianza condicional?</p>
+<p><strong>Respuesta Correcta: C) El cuadrado del error en el período anterior.</strong></p>
+<p><strong>Justificación:</strong> En la especificación de un modelo ARCH, <span class="math inline">\(\epsilon_{t-1}^2\)</span> representa el error al cuadrado del período anterior. Este término captura el impacto de los choques pasados en la varianza condicional actual.</p>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>© 2025, Yuberley</p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+<p>Construido con <a href="https://quarto.org/">Quarto</a></p>
+</div>
+  </div>
+</footer>
+
+
+
+
+</body></html>

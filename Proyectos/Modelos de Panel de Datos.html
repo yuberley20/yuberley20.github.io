@@ -1,0 +1,2562 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.57">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Yuberley Cruz Caycedo">
+<meta name="dcterms.date" content="2025-08-14">
+
+<title>Panel de Datos – Yuberley | Portafolio</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../favicon.png" rel="icon" type="image/png">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="floating nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">Yuberley | Portafolio</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../index.html"> 
+<span class="menu-text">Inicio</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../about.html"> 
+<span class="menu-text">Sobre Mí</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../proyectos.html"> 
+<span class="menu-text">Proyectos</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#modelo-de-panel-de-datos" id="toc-modelo-de-panel-de-datos" class="nav-link active" data-scroll-target="#modelo-de-panel-de-datos"><span class="header-section-number">1</span> <strong>Modelo de Panel de Datos</strong></a>
+  <ul class="collapse">
+  <li><a href="#características-y-ventajas-de-los-datos-del-panel" id="toc-características-y-ventajas-de-los-datos-del-panel" class="nav-link" data-scroll-target="#características-y-ventajas-de-los-datos-del-panel"><span class="header-section-number">1.1</span> <strong>Características y Ventajas de los Datos del Panel</strong></a></li>
+  </ul></li>
+  <li><a href="#el-modelo-de-panel-de-datos-agrupado" id="toc-el-modelo-de-panel-de-datos-agrupado" class="nav-link" data-scroll-target="#el-modelo-de-panel-de-datos-agrupado"><span class="header-section-number">2</span> <strong>El modelo de panel de datos agrupado</strong></a>
+  <ul class="collapse">
+  <li><a href="#características-del-modelo-de-panel-de-datos-agrupado" id="toc-características-del-modelo-de-panel-de-datos-agrupado" class="nav-link" data-scroll-target="#características-del-modelo-de-panel-de-datos-agrupado"><span class="header-section-number">2.1</span> <strong>Características del Modelo de Panel de Datos Agrupado:</strong></a>
+  <ul class="collapse">
+  <li><a href="#intercepción-común" id="toc-intercepción-común" class="nav-link" data-scroll-target="#intercepción-común"><span class="header-section-number">2.1.1</span> <strong>Intercepción Común</strong>:</a></li>
+  <li><a href="#homogeneidad" id="toc-homogeneidad" class="nav-link" data-scroll-target="#homogeneidad"><span class="header-section-number">2.1.2</span> <strong>Homogeneidad</strong>:</a></li>
+  <li><a href="#simplificación" id="toc-simplificación" class="nav-link" data-scroll-target="#simplificación"><span class="header-section-number">2.1.3</span> <strong>Simplificación</strong>:</a></li>
+  <li><a href="#formulación-del-modelo" id="toc-formulación-del-modelo" class="nav-link" data-scroll-target="#formulación-del-modelo"><span class="header-section-number">2.1.4</span> <strong>Formulación del Modelo</strong>:</a></li>
+  </ul></li>
+  <li><a href="#supuestos-del-modelo-de-panel-de-datos-agrupados" id="toc-supuestos-del-modelo-de-panel-de-datos-agrupados" class="nav-link" data-scroll-target="#supuestos-del-modelo-de-panel-de-datos-agrupados"><span class="header-section-number">2.2</span> <strong>Supuestos del Modelo de Panel de Datos Agrupados</strong>:</a>
+  <ul class="collapse">
+  <li><a href="#homogeneidad-de-los-interceptos" id="toc-homogeneidad-de-los-interceptos" class="nav-link" data-scroll-target="#homogeneidad-de-los-interceptos"><span class="header-section-number">2.2.1</span> <strong>Homogeneidad de los Interceptos</strong>:</a></li>
+  <li><a href="#linealidad" id="toc-linealidad" class="nav-link" data-scroll-target="#linealidad"><span class="header-section-number">2.2.2</span> <strong>Linealidad</strong>:</a></li>
+  <li><a href="#exogeneidad" id="toc-exogeneidad" class="nav-link" data-scroll-target="#exogeneidad"><span class="header-section-number">2.2.3</span> <strong>Exogeneidad</strong>:</a></li>
+  <li><a href="#no-autocorrelación" id="toc-no-autocorrelación" class="nav-link" data-scroll-target="#no-autocorrelación"><span class="header-section-number">2.2.4</span> <strong>No Autocorrelación</strong>:</a></li>
+  <li><a href="#no-correlación-entre-entidades" id="toc-no-correlación-entre-entidades" class="nav-link" data-scroll-target="#no-correlación-entre-entidades"><span class="header-section-number">2.2.5</span> <strong>No Correlación entre Entidades</strong>:</a></li>
+  <li><a href="#homoscedasticidad" id="toc-homoscedasticidad" class="nav-link" data-scroll-target="#homoscedasticidad"><span class="header-section-number">2.2.6</span> <strong>Homoscedasticidad</strong>:</a></li>
+  <li><a href="#independencia-de-las-variables-explicativas" id="toc-independencia-de-las-variables-explicativas" class="nav-link" data-scroll-target="#independencia-de-las-variables-explicativas"><span class="header-section-number">2.2.7</span> <strong>Independencia de las Variables Explicativas</strong>:</a></li>
+  <li><a href="#parametro-estimado-del-modelo-agrupado" id="toc-parametro-estimado-del-modelo-agrupado" class="nav-link" data-scroll-target="#parametro-estimado-del-modelo-agrupado"><span class="header-section-number">2.2.8</span> <strong>Parametro Estimado del Modelo Agrupado</strong></a></li>
+  </ul></li>
+  <li><a href="#ventajas-y-desventajas" id="toc-ventajas-y-desventajas" class="nav-link" data-scroll-target="#ventajas-y-desventajas"><span class="header-section-number">2.3</span> <strong>Ventajas y Desventajas</strong>:</a>
+  <ul class="collapse">
+  <li><a href="#ventajas" id="toc-ventajas" class="nav-link" data-scroll-target="#ventajas"><span class="header-section-number">2.3.1</span> <strong>Ventajas</strong>:</a></li>
+  <li><a href="#desventajas" id="toc-desventajas" class="nav-link" data-scroll-target="#desventajas"><span class="header-section-number">2.3.2</span> <strong>Desventajas</strong>:</a></li>
+  <li><a href="#ejemplos-de-aplicación" id="toc-ejemplos-de-aplicación" class="nav-link" data-scroll-target="#ejemplos-de-aplicación"><span class="header-section-number">2.3.3</span> <strong>Ejemplos de Aplicación</strong>:</a></li>
+  </ul></li>
+  <li><a href="#ejemplo" id="toc-ejemplo" class="nav-link" data-scroll-target="#ejemplo"><span class="header-section-number">2.4</span> <strong>Ejemplo</strong></a>
+  <ul class="collapse">
+  <li><a href="#datos-simulados" id="toc-datos-simulados" class="nav-link" data-scroll-target="#datos-simulados"><span class="header-section-number">2.4.1</span> Datos Simulados</a></li>
+  <li><a href="#modelo-de-datos-de-panel-agrupados" id="toc-modelo-de-datos-de-panel-agrupados" class="nav-link" data-scroll-target="#modelo-de-datos-de-panel-agrupados"><span class="header-section-number">2.4.2</span> Modelo de Datos de Panel Agrupados</a></li>
+  <li><a href="#estimación-del-modelo" id="toc-estimación-del-modelo" class="nav-link" data-scroll-target="#estimación-del-modelo"><span class="header-section-number">2.4.3</span> Estimación del Modelo</a></li>
+  <li><a href="#interpretación" id="toc-interpretación" class="nav-link" data-scroll-target="#interpretación"><span class="header-section-number">2.4.4</span> Interpretación</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#modelo-de-efecto-fijos" id="toc-modelo-de-efecto-fijos" class="nav-link" data-scroll-target="#modelo-de-efecto-fijos"><span class="header-section-number">3</span> <strong>Modelo de Efecto Fijos</strong></a>
+  <ul class="collapse">
+  <li><a href="#formulación-matemática-del-modelo-de-efectos-fijos" id="toc-formulación-matemática-del-modelo-de-efectos-fijos" class="nav-link" data-scroll-target="#formulación-matemática-del-modelo-de-efectos-fijos"><span class="header-section-number">3.1</span> <strong>Formulación Matemática del Modelo de Efectos Fijos</strong>:</a>
+  <ul class="collapse">
+  <li><a href="#eliminación-de-los-efectos-fijos" id="toc-eliminación-de-los-efectos-fijos" class="nav-link" data-scroll-target="#eliminación-de-los-efectos-fijos"><span class="header-section-number">3.1.1</span> <strong>Eliminación de los Efectos Fijos</strong>:</a></li>
+  <li><a href="#calcular-la-media-dentro-de-la-entidad" id="toc-calcular-la-media-dentro-de-la-entidad" class="nav-link" data-scroll-target="#calcular-la-media-dentro-de-la-entidad"><span class="header-section-number">3.1.2</span> <strong>Calcular la Media Dentro de la Entidad</strong>:</a></li>
+  <li><a href="#restar-las-medias" id="toc-restar-las-medias" class="nav-link" data-scroll-target="#restar-las-medias"><span class="header-section-number">3.1.3</span> <strong>Restar las Medias</strong>:</a></li>
+  </ul></li>
+  <li><a href="#ejemplo-práctico" id="toc-ejemplo-práctico" class="nav-link" data-scroll-target="#ejemplo-práctico"><span class="header-section-number">3.2</span> <strong>Ejemplo Práctico</strong>:</a></li>
+  </ul></li>
+  <li><a href="#efectos-aleatorios" id="toc-efectos-aleatorios" class="nav-link" data-scroll-target="#efectos-aleatorios"><span class="header-section-number">4</span> <strong>Efectos Aleatorios</strong></a>
+  <ul class="collapse">
+  <li><a href="#estructura-del-modelo-de-efectos-aleatorios" id="toc-estructura-del-modelo-de-efectos-aleatorios" class="nav-link" data-scroll-target="#estructura-del-modelo-de-efectos-aleatorios"><span class="header-section-number">4.1</span> Estructura del Modelo de Efectos Aleatorios</a></li>
+  <li><a href="#supuestos-del-modelo-de-efectos-aleatorios" id="toc-supuestos-del-modelo-de-efectos-aleatorios" class="nav-link" data-scroll-target="#supuestos-del-modelo-de-efectos-aleatorios"><span class="header-section-number">4.2</span> Supuestos del Modelo de Efectos Aleatorios</a></li>
+  <li><a href="#varianza-compuesta-del-error" id="toc-varianza-compuesta-del-error" class="nav-link" data-scroll-target="#varianza-compuesta-del-error"><span class="header-section-number">4.3</span> Varianza Compuesta del Error</a></li>
+  <li><a href="#estimación-del-modelo-de-efectos-aleatorios" id="toc-estimación-del-modelo-de-efectos-aleatorios" class="nav-link" data-scroll-target="#estimación-del-modelo-de-efectos-aleatorios"><span class="header-section-number">4.4</span> Estimación del Modelo de Efectos Aleatorios</a></li>
+  <li><a href="#resumen" id="toc-resumen" class="nav-link" data-scroll-target="#resumen"><span class="header-section-number">4.5</span> Resumen</a></li>
+  </ul></li>
+  <li><a href="#ejemplo-1" id="toc-ejemplo-1" class="nav-link" data-scroll-target="#ejemplo-1"><span class="header-section-number">5</span> <strong>Ejemplo</strong></a>
+  <ul class="collapse">
+  <li><a href="#análisis-con-un-subconjunto-de-datos" id="toc-análisis-con-un-subconjunto-de-datos" class="nav-link" data-scroll-target="#análisis-con-un-subconjunto-de-datos"><span class="header-section-number">5.1</span> <strong>Análisis con un Subconjunto de Datos</strong></a></li>
+  <li><a href="#modelos-de-regresión" id="toc-modelos-de-regresión" class="nav-link" data-scroll-target="#modelos-de-regresión"><span class="header-section-number">5.2</span> <strong>Modelos de Regresión</strong></a>
+  <ul class="collapse">
+  <li><a href="#modelo-de-datos-agrupados-mco" id="toc-modelo-de-datos-agrupados-mco" class="nav-link" data-scroll-target="#modelo-de-datos-agrupados-mco"><span class="header-section-number">5.2.1</span> <strong>Modelo de Datos Agrupados (MCO)</strong></a></li>
+  <li><a href="#coeficientes-estimados" id="toc-coeficientes-estimados" class="nav-link" data-scroll-target="#coeficientes-estimados"><span class="header-section-number">5.2.2</span> Coeficientes Estimados</a></li>
+  <li><a href="#forma-matemática-del-modelo-ajustado" id="toc-forma-matemática-del-modelo-ajustado" class="nav-link" data-scroll-target="#forma-matemática-del-modelo-ajustado"><span class="header-section-number">5.2.3</span> Forma Matemática del Modelo Ajustado</a></li>
+  <li><a href="#interpretación-de-los-coeficientes" id="toc-interpretación-de-los-coeficientes" class="nav-link" data-scroll-target="#interpretación-de-los-coeficientes"><span class="header-section-number">5.2.4</span> Interpretación de los Coeficientes</a></li>
+  <li><a href="#estadísticas-del-modelo" id="toc-estadísticas-del-modelo" class="nav-link" data-scroll-target="#estadísticas-del-modelo"><span class="header-section-number">5.2.5</span> Estadísticas del Modelo</a></li>
+  <li><a href="#modelo-con-efectos-fijos" id="toc-modelo-con-efectos-fijos" class="nav-link" data-scroll-target="#modelo-con-efectos-fijos"><span class="header-section-number">5.2.6</span> <strong>Modelo con Efectos fijos</strong></a></li>
+  <li><a href="#coeficientes-estimados-1" id="toc-coeficientes-estimados-1" class="nav-link" data-scroll-target="#coeficientes-estimados-1"><span class="header-section-number">5.2.7</span> Coeficientes Estimados</a></li>
+  <li><a href="#forma-matemática-del-modelo-ajustado-1" id="toc-forma-matemática-del-modelo-ajustado-1" class="nav-link" data-scroll-target="#forma-matemática-del-modelo-ajustado-1"><span class="header-section-number">5.2.8</span> Forma Matemática del Modelo Ajustado</a></li>
+  <li><a href="#interpretación-de-los-coeficientes-1" id="toc-interpretación-de-los-coeficientes-1" class="nav-link" data-scroll-target="#interpretación-de-los-coeficientes-1"><span class="header-section-number">5.2.9</span> Interpretación de los Coeficientes</a></li>
+  <li><a href="#estadísticas-del-modelo-1" id="toc-estadísticas-del-modelo-1" class="nav-link" data-scroll-target="#estadísticas-del-modelo-1"><span class="header-section-number">5.2.10</span> Estadísticas del Modelo</a></li>
+  <li><a href="#comparación-entre-modelos-de-datos-de-panel-agrupados-y-de-efectos-fijos" id="toc-comparación-entre-modelos-de-datos-de-panel-agrupados-y-de-efectos-fijos" class="nav-link" data-scroll-target="#comparación-entre-modelos-de-datos-de-panel-agrupados-y-de-efectos-fijos"><span class="header-section-number">5.2.11</span> Comparación entre Modelos de Datos de Panel Agrupados y de Efectos Fijos</a></li>
+  <li><a href="#prueba-f-para-efectos-individuales" id="toc-prueba-f-para-efectos-individuales" class="nav-link" data-scroll-target="#prueba-f-para-efectos-individuales"><span class="header-section-number">5.2.12</span> Prueba F para Efectos Individuales</a></li>
+  <li><a href="#conclusión" id="toc-conclusión" class="nav-link" data-scroll-target="#conclusión"><span class="header-section-number">5.2.13</span> Conclusión</a></li>
+  <li><a href="#modelos-con-efectos-aleatorios" id="toc-modelos-con-efectos-aleatorios" class="nav-link" data-scroll-target="#modelos-con-efectos-aleatorios"><span class="header-section-number">5.2.14</span> <strong>Modelos con Efectos Aleatorios</strong></a></li>
+  <li><a href="#método-de-wallace-hussain" id="toc-método-de-wallace-hussain" class="nav-link" data-scroll-target="#método-de-wallace-hussain"><span class="header-section-number">5.2.15</span> <strong>Método de Wallace-Hussain</strong></a></li>
+  <li><a href="#método-de-amemiya" id="toc-método-de-amemiya" class="nav-link" data-scroll-target="#método-de-amemiya"><span class="header-section-number">5.2.16</span> <strong>Método de Amemiya</strong></a></li>
+  <li><a href="#método-de-nerlove" id="toc-método-de-nerlove" class="nav-link" data-scroll-target="#método-de-nerlove"><span class="header-section-number">5.2.17</span> <strong>Método de Nerlove</strong></a></li>
+  <li><a href="#interpretación-de-la-tabla" id="toc-interpretación-de-la-tabla" class="nav-link" data-scroll-target="#interpretación-de-la-tabla"><span class="header-section-number">5.2.18</span> Interpretación de la Tabla:</a></li>
+  <li><a href="#comparación-teórica" id="toc-comparación-teórica" class="nav-link" data-scroll-target="#comparación-teórica"><span class="header-section-number">5.2.19</span> Comparación Teórica</a></li>
+  </ul></li>
+  <li><a href="#pruebas-de-hausman-para-comparar-modelos" id="toc-pruebas-de-hausman-para-comparar-modelos" class="nav-link" data-scroll-target="#pruebas-de-hausman-para-comparar-modelos"><span class="header-section-number">5.3</span> <strong>Pruebas de Hausman para Comparar Modelos</strong></a>
+  <ul class="collapse">
+  <li><a href="#procedimiento-de-la-prueba" id="toc-procedimiento-de-la-prueba" class="nav-link" data-scroll-target="#procedimiento-de-la-prueba"><span class="header-section-number">5.3.1</span> Procedimiento de la Prueba:</a></li>
+  </ul></li>
+  <li><a href="#conclusión-1" id="toc-conclusión-1" class="nav-link" data-scroll-target="#conclusión-1"><span class="header-section-number">5.4</span> <strong>Conclusión</strong></a></li>
+  </ul></li>
+  </ul>
+</nav>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Panel de Datos</h1>
+<p class="subtitle lead">Analisis de Modelos de corte Longitudinal</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Yuberley Cruz Caycedo </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">August 14, 2025</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="modelo-de-panel-de-datos" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> <strong>Modelo de Panel de Datos</strong></h1>
+<p>Los modelos de panel de datos son una técnica econométrica que se utiliza para analizar datos que tienen tanto una dimensión temporal (series de tiempo) como una dimensión transversal. Es decir, estos modelos trabajan con datos que se recogen para varios individuos (como personas, empresas, países, etc.) a lo largo del tiempo. Este tipo de datos también se conoce como datos longitudinales o datos de panel</p>
+<section id="características-y-ventajas-de-los-datos-del-panel" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="características-y-ventajas-de-los-datos-del-panel"><span class="header-section-number">1.1</span> <strong>Características y Ventajas de los Datos del Panel</strong></h2>
+<p>Dimensión Temporal y Transversal : Los datos de panel permiten analizar el comportamiento de los individuos a lo largo del tiempo, lo que proporciona información tanto sobre diferencias entre individuos (dimensión transversal) como sobre cambios dentro de los individuos a lo largo del tiempo (dimensión temporal).</p>
+<p>Control de Heterogeneidad : Permiten controlar la heterogeneidad no observada, es decir, las características no observables que pueden influir en las variables de interés y que no cambian con el tiempo para cada individuo.</p>
+<p>Mejora de la Eficiencia : Incrementan la eficiencia de las estimaciones econométricas al proporcionar más información y reducir la colinealidad entre variables.</p>
+<p>al estudiar la sección transversal repetida de observaciones, los datos de panel resulta mas adecuado para estudiar la dinamica de cambio.</p>
+<p>Con datos de panel tenemos N individuos observados en varios periodos consecutivos, asi:</p>
+<p><span class="math display">\[Y_{it} = \beta_{1} + \beta_{2}X_{2it} + \beta_{3}X_{3it} + \epsilon_{t}\]</span></p>
+<p>Donde:</p>
+<ul>
+<li><p><span class="math inline">\(Y_{it}\)</span> = valor de <span class="math inline">\(Y\)</span> para el individuo <span class="math inline">\(i\)</span> en el periodo <span class="math inline">\(t\)</span>.</p></li>
+<li><p><span class="math inline">\(i\)</span> = es la i-ésima unidad transversal</p></li>
+<li><p><span class="math inline">\(t\)</span> = es el tiempo</p></li>
+<li><p><span class="math inline">\(X\)</span> = son la variables independientes, que en un principios no se suponen estocasticas</p></li>
+</ul>
+<p>El termino de error cumple con las suposiciones clasicas <span class="math inline">\(\epsilon_{t} \sim \textbf{N}(0, \sigma_{t}^{2})\)</span></p>
+<p>Nota 1: se supone que hay un maximo de N unidades transversales u observaciones, y un maximo de T periodos.</p>
+<p>Nota 2: si cada unidad tranversal tiene el mismo el mismo número de observaciones de series de tiempo, entonces dicho panel (de datos) se llama panel balanceado . Si el número de observaciones difiere entre los miembros del panel se dice que es un panel desbalanceado</p>
+<p>Nota 3: existen otras fomas de clasificación de los datos de panel.</p>
+<p>macropaneles: los individuso son paises, sectores, regiones. N es pequeños respecto a T. (N &gt; T) o (T &gt; N)</p>
+<p>micropaneles: los individuos son personal u hogares. N es mucho mas grande que T</p>
+</section>
+</section>
+<section id="el-modelo-de-panel-de-datos-agrupado" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> <strong>El modelo de panel de datos agrupado</strong></h1>
+<p>Es una técnica de análisis econométrico utilizada cuando se tienen datos que combinan aspectos de series temporales y datos de corte transversal, pero sin distinguir entre diferentes entidades (individuos, empresas, países, etc.) en términos de interceptos específicos. En este modelo, se asume que las diferencias entre las entidades no son significativas o que no es necesario modelarlas explícitamente.</p>
+<section id="características-del-modelo-de-panel-de-datos-agrupado" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="características-del-modelo-de-panel-de-datos-agrupado"><span class="header-section-number">2.1</span> <strong>Características del Modelo de Panel de Datos Agrupado:</strong></h2>
+<section id="intercepción-común" class="level3" data-number="2.1.1">
+<h3 data-number="2.1.1" class="anchored" data-anchor-id="intercepción-común"><span class="header-section-number">2.1.1</span> <strong>Intercepción Común</strong>:</h3>
+<p>Asume que todas las entidades en el panel tienen el mismo intercepto. No se controla por diferencias específicas entre entidades.</p>
+</section>
+<section id="homogeneidad" class="level3" data-number="2.1.2">
+<h3 data-number="2.1.2" class="anchored" data-anchor-id="homogeneidad"><span class="header-section-number">2.1.2</span> <strong>Homogeneidad</strong>:</h3>
+<p>Se considera que todas las entidades son homogéneas en cuanto a las variables explicativas y su relación con la variable dependiente.</p>
+</section>
+<section id="simplificación" class="level3" data-number="2.1.3">
+<h3 data-number="2.1.3" class="anchored" data-anchor-id="simplificación"><span class="header-section-number">2.1.3</span> <strong>Simplificación</strong>:</h3>
+<p>La especificación del modelo es más simple en comparación con los modelos de efectos fijos y aleatorios, ya que no incorpora interceptos o efectos específicos de cada entidad.</p>
+</section>
+<section id="formulación-del-modelo" class="level3" data-number="2.1.4">
+<h3 data-number="2.1.4" class="anchored" data-anchor-id="formulación-del-modelo"><span class="header-section-number">2.1.4</span> <strong>Formulación del Modelo</strong>:</h3>
+<p>El modelo de panel de datos agrupado se puede representar de la siguiente manera:</p>
+<p><span class="math display">\[Y_{it}=\alpha + \beta X_{it} + \epsilon_{it}\]</span>​</p>
+<p>Donde:</p>
+<ul>
+<li><p><span class="math inline">\(Y_{it}\)</span> es la variable dependiente para la entidad <span class="math inline">\(i\)</span> en el tiempo <span class="math inline">\(t\)</span>.</p></li>
+<li><p><span class="math inline">\(\alpha\)</span> es el intercepto común para todas las entidades.</p></li>
+<li><p><span class="math inline">\(\beta\)</span> es un vector de coeficientes que mide el efecto de las variables explicativas.</p></li>
+<li><p><span class="math inline">\(X_{it}\)</span>​ es un vector fila de variables explicativas para la entidad <span class="math inline">\(i\)</span> en el tiempo <span class="math inline">\(t\)</span>.</p></li>
+<li><p><span class="math inline">\(\epsilon_{it}\)</span> es el término de error.</p></li>
+</ul>
+<p>Nota: los parametrso estimados del modelo son validos para todos los individuos en todos los peridos de tiempo.</p>
+</section>
+</section>
+<section id="supuestos-del-modelo-de-panel-de-datos-agrupados" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="supuestos-del-modelo-de-panel-de-datos-agrupados"><span class="header-section-number">2.2</span> <strong>Supuestos del Modelo de Panel de Datos Agrupados</strong>:</h2>
+<section id="homogeneidad-de-los-interceptos" class="level3" data-number="2.2.1">
+<h3 data-number="2.2.1" class="anchored" data-anchor-id="homogeneidad-de-los-interceptos"><span class="header-section-number">2.2.1</span> <strong>Homogeneidad de los Interceptos</strong>:</h3>
+<p>Supuesto: Se asume que todas las entidades tienen el mismo intercepto <span class="math inline">\((\alpha)\)</span>.</p>
+<p>Implicación: No se consideran diferencias específicas entre entidades que podrían influir en la variable dependiente.</p>
+</section>
+<section id="linealidad" class="level3" data-number="2.2.2">
+<h3 data-number="2.2.2" class="anchored" data-anchor-id="linealidad"><span class="header-section-number">2.2.2</span> <strong>Linealidad</strong>:</h3>
+<p>Supuesto: La relación entre las variables independientes <span class="math inline">\((X_{it}​\)</span>) y la variable dependiente <span class="math inline">\((Y_{it})\)</span> es lineal.</p>
+<p>Implicación: Se puede modelar mediante una combinación lineal de las variables explicativas.</p>
+</section>
+<section id="exogeneidad" class="level3" data-number="2.2.3">
+<h3 data-number="2.2.3" class="anchored" data-anchor-id="exogeneidad"><span class="header-section-number">2.2.3</span> <strong>Exogeneidad</strong>:</h3>
+<p>Supuesto: Las variables explicativas <span class="math inline">\((X_{it}​)\)</span> no están correlacionadas con el término de error <span class="math inline">\((\epsilon_{it}​)\)</span>.</p>
+<p>Implicación: <span class="math inline">\(\mathbb{E}(\epsilon_{it} | X_{it}) = 0\)</span>. Esto asegura que las variables independientes no están influenciadas por factores inobservables que afectan a la variable dependiente.</p>
+</section>
+<section id="no-autocorrelación" class="level3" data-number="2.2.4">
+<h3 data-number="2.2.4" class="anchored" data-anchor-id="no-autocorrelación"><span class="header-section-number">2.2.4</span> <strong>No Autocorrelación</strong>:</h3>
+<p>Supuesto: Los errores <span class="math inline">\((\epsilon_{it}​)\)</span> no están correlacionados a lo largo del tiempo para una misma entidad.</p>
+<p>Implicación: <span class="math inline">\(\mathbb{E}(\epsilon_{it} \epsilon_{is}) = 0\)</span> para <span class="math inline">\(t \neq s\)</span>. Esto significa que no hay relación entre los errores en diferentes períodos de tiempo para una misma entidad.</p>
+</section>
+<section id="no-correlación-entre-entidades" class="level3" data-number="2.2.5">
+<h3 data-number="2.2.5" class="anchored" data-anchor-id="no-correlación-entre-entidades"><span class="header-section-number">2.2.5</span> <strong>No Correlación entre Entidades</strong>:</h3>
+<p>Supuesto: Los errores <span class="math inline">\((\epsilon_{it})\)</span> de diferentes entidades no están correlacionados.</p>
+<p>Implicación: <span class="math inline">\(\mathbb{E}(\epsilon_{it} \epsilon_{jt}) = 0\)</span> para <span class="math inline">\(i \neq j\)</span>. Esto asegura que no hay dependencia entre los errores de diferentes entidades.</p>
+</section>
+<section id="homoscedasticidad" class="level3" data-number="2.2.6">
+<h3 data-number="2.2.6" class="anchored" data-anchor-id="homoscedasticidad"><span class="header-section-number">2.2.6</span> <strong>Homoscedasticidad</strong>:</h3>
+<p>Supuesto: La varianza de los errores <span class="math inline">\((\epsilon_{it}​\)</span>) es constante para todas las observaciones.</p>
+<p>Implicación: <span class="math inline">\(\text{Var}(\epsilon_{it}) = \sigma^{2}\)</span>. Esto significa que la dispersión de los errores es constante a lo largo del tiempo y entre las entidades.</p>
+</section>
+<section id="independencia-de-las-variables-explicativas" class="level3" data-number="2.2.7">
+<h3 data-number="2.2.7" class="anchored" data-anchor-id="independencia-de-las-variables-explicativas"><span class="header-section-number">2.2.7</span> <strong>Independencia de las Variables Explicativas</strong>:</h3>
+<p>Supuesto: Las variables explicativas <span class="math inline">\((X_{it}​)\)</span> son independientes entre sí.</p>
+<p>Implicación: No hay multicolinealidad perfecta entre las variables explicativas.</p>
+</section>
+<section id="parametro-estimado-del-modelo-agrupado" class="level3" data-number="2.2.8">
+<h3 data-number="2.2.8" class="anchored" data-anchor-id="parametro-estimado-del-modelo-agrupado"><span class="header-section-number">2.2.8</span> <strong>Parametro Estimado del Modelo Agrupado</strong></h3>
+<p>Para estimar el parámetro <span class="math inline">\(\beta\)</span>, se utiliza la fórmula de Mínimos Cuadrados Ordinarios (MCO), que se aplica de la misma manera que en un modelo de regresión lineal estándar. La fórmula para el estimador de <span class="math inline">\(\beta\)</span> es:</p>
+<p><span class="math display">\[\hat{\beta} = (X´ X)^{-1}X´Y\]</span></p>
+<p>Donde:</p>
+<ul>
+<li><p><span class="math inline">\(X\)</span> es la matriz de las variables explicativas, incluyendo todas las observaciones de todas las entidades y períodos de tiempo.</p></li>
+<li><p><span class="math inline">\(X´\)</span> es la transpuesta de la matriz <span class="math inline">\(X\)</span>.</p></li>
+<li><p><span class="math inline">\(Y\)</span> es el vector de las observaciones de la variable dependiente.</p></li>
+<li><p><span class="math inline">\(\hat{\beta}\)</span>​ es el vector de coeficientes estimados.</p></li>
+</ul>
+<p>Nota: en este caso el modelo de homogeneidad total (modelo agrupado) tendria la siguiente representación de la ecuación de parametrso estimados</p>
+<p><span class="math display">\[\hat{\beta}_{agrupado} = (\sum_{i=1}^{N}\sum_{t=1}^{T}x´_{it}&nbsp;x_{it})^{-1} \sum_{i=1}^{N}\sum_{t=1}^{T}x´_{it} y_{it}\]</span></p>
+</section>
+</section>
+<section id="ventajas-y-desventajas" class="level2" data-number="2.3">
+<h2 data-number="2.3" class="anchored" data-anchor-id="ventajas-y-desventajas"><span class="header-section-number">2.3</span> <strong>Ventajas y Desventajas</strong>:</h2>
+<section id="ventajas" class="level3" data-number="2.3.1">
+<h3 data-number="2.3.1" class="anchored" data-anchor-id="ventajas"><span class="header-section-number">2.3.1</span> <strong>Ventajas</strong>:</h3>
+<section id="simplicidad" class="level4" data-number="2.3.1.1">
+<h4 data-number="2.3.1.1" class="anchored" data-anchor-id="simplicidad"><span class="header-section-number">2.3.1.1</span> <strong>Simplicidad</strong>:</h4>
+<p>Es más fácil de estimar y entender debido a su simplicidad en comparación con los modelos de efectos fijos o aleatorios.</p>
+</section>
+<section id="menos-demandante-de-datos" class="level4" data-number="2.3.1.2">
+<h4 data-number="2.3.1.2" class="anchored" data-anchor-id="menos-demandante-de-datos"><span class="header-section-number">2.3.1.2</span> <strong>Menos Demandante de Datos</strong>:</h4>
+<p>Requiere menos datos para estimar, ya que no necesita suficientes observaciones para cada entidad como en los modelos de efectos fijos.</p>
+</section>
+</section>
+<section id="desventajas" class="level3" data-number="2.3.2">
+<h3 data-number="2.3.2" class="anchored" data-anchor-id="desventajas"><span class="header-section-number">2.3.2</span> <strong>Desventajas</strong>:</h3>
+<section id="ignora-heterogeneidad" class="level4" data-number="2.3.2.1">
+<h4 data-number="2.3.2.1" class="anchored" data-anchor-id="ignora-heterogeneidad"><span class="header-section-number">2.3.2.1</span> <strong>Ignora Heterogeneidad</strong>:</h4>
+<p>No controla por la heterogeneidad no observable entre entidades, lo que puede sesgar las estimaciones si las diferencias entre entidades son significativas.</p>
+</section>
+<section id="asunción-fuerte-de-homogeneidad" class="level4" data-number="2.3.2.2">
+<h4 data-number="2.3.2.2" class="anchored" data-anchor-id="asunción-fuerte-de-homogeneidad"><span class="header-section-number">2.3.2.2</span> <strong>Asunción Fuerte de Homogeneidad</strong>:</h4>
+<p>Asume que todas las entidades son idénticas en cuanto a su relación con las variables explicativas, lo cual puede no ser realista en muchos casos.</p>
+</section>
+</section>
+<section id="ejemplos-de-aplicación" class="level3" data-number="2.3.3">
+<h3 data-number="2.3.3" class="anchored" data-anchor-id="ejemplos-de-aplicación"><span class="header-section-number">2.3.3</span> <strong>Ejemplos de Aplicación</strong>:</h3>
+<p><strong>Análisis de Ventas en Diferentes Tiendas</strong>:</p>
+<p>Suponiendo que se tiene un panel de datos de ventas de varias tiendas a lo largo del tiempo y se asume que todas las tiendas responden de la misma manera a las estrategias de marketing.</p>
+<p><strong>Estudio del Impacto de Políticas Económicas</strong>:</p>
+<p>Análisis del impacto de una política económica específica en varios países, asumiendo que la política tiene el mismo efecto en todos los países.</p>
+</section>
+</section>
+<section id="ejemplo" class="level2" data-number="2.4">
+<h2 data-number="2.4" class="anchored" data-anchor-id="ejemplo"><span class="header-section-number">2.4</span> <strong>Ejemplo</strong></h2>
+<p>Supongamos que estamos interesados en analizar el impacto del gasto en investigación y desarrollo (I+D) en las ventas de una muestra de empresas a lo largo del tiempo. Para ello, contamos con datos de panel que incluyen observaciones de varias empresas en varios años.</p>
+<section id="datos-simulados" class="level3" data-number="2.4.1">
+<h3 data-number="2.4.1" class="anchored" data-anchor-id="datos-simulados"><span class="header-section-number">2.4.1</span> Datos Simulados</h3>
+<p>Supongamos que tenemos datos de 3 empresas (A, B y C) durante 5 años (2015-2019). Los datos incluyen las ventas (en millones de dólares) y el gasto en I+D (en millones de dólares) para cada empresa en cada año.</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: center;">Empresa</th>
+<th style="text-align: center;">Año</th>
+<th style="text-align: center;">Ventas</th>
+<th style="text-align: center;">Gasto en I+D</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">A</td>
+<td style="text-align: center;">2015</td>
+<td style="text-align: center;">50</td>
+<td style="text-align: center;">5</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">A</td>
+<td style="text-align: center;">2016</td>
+<td style="text-align: center;">55</td>
+<td style="text-align: center;">6</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">A</td>
+<td style="text-align: center;">2017</td>
+<td style="text-align: center;">53</td>
+<td style="text-align: center;">5.5</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">A</td>
+<td style="text-align: center;">2018</td>
+<td style="text-align: center;">60</td>
+<td style="text-align: center;">6.2</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">A</td>
+<td style="text-align: center;">2019</td>
+<td style="text-align: center;">62</td>
+<td style="text-align: center;">6.5</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">B</td>
+<td style="text-align: center;">2015</td>
+<td style="text-align: center;">40</td>
+<td style="text-align: center;">4</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">B</td>
+<td style="text-align: center;">2016</td>
+<td style="text-align: center;">42</td>
+<td style="text-align: center;">4.5</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">B</td>
+<td style="text-align: center;">2017</td>
+<td style="text-align: center;">45</td>
+<td style="text-align: center;">4.8</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">B</td>
+<td style="text-align: center;">2018</td>
+<td style="text-align: center;">47</td>
+<td style="text-align: center;">5</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">B</td>
+<td style="text-align: center;">2019</td>
+<td style="text-align: center;">50</td>
+<td style="text-align: center;">5.2</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">C</td>
+<td style="text-align: center;">2015</td>
+<td style="text-align: center;">60</td>
+<td style="text-align: center;">6</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">C</td>
+<td style="text-align: center;">2016</td>
+<td style="text-align: center;">65</td>
+<td style="text-align: center;">6.5</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">C</td>
+<td style="text-align: center;">2017</td>
+<td style="text-align: center;">67</td>
+<td style="text-align: center;">6.8</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">C</td>
+<td style="text-align: center;">2018</td>
+<td style="text-align: center;">70</td>
+<td style="text-align: center;">7</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">C</td>
+<td style="text-align: center;">2019</td>
+<td style="text-align: center;">73</td>
+<td style="text-align: center;">7.2</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="modelo-de-datos-de-panel-agrupados" class="level3" data-number="2.4.2">
+<h3 data-number="2.4.2" class="anchored" data-anchor-id="modelo-de-datos-de-panel-agrupados"><span class="header-section-number">2.4.2</span> Modelo de Datos de Panel Agrupados</h3>
+<p>En un modelo de datos de panel agrupados, consideramos que hay un solo intercepto común para todas las empresas y no se permiten efectos individuales específicos para cada empresa. El modelo es el siguiente:</p>
+<p><span class="math display">\[y_{it} = \alpha + \beta x_{it} + \epsilon_{it}\]</span></p>
+<p>donde:</p>
+<ul>
+<li><p><span class="math inline">\(y_{it}\)</span>​ es la variable dependiente (Ventas) para la empresa <span class="math inline">\(i\)</span> en el año <span class="math inline">\(t\)</span>.</p></li>
+<li><p><span class="math inline">\(\alpha\)</span> es el intercepto común.</p></li>
+<li><p><span class="math inline">\(\beta\)</span> es el coeficiente del gasto en I+D.</p></li>
+<li><p><span class="math inline">\(x_{it}\)</span>​ es la variable independiente (Gasto en I+D) para la empresa <span class="math inline">\(i\)</span> en el año <span class="math inline">\(t\)</span>.</p></li>
+<li><p><span class="math inline">\(\epsilon_{it}\)</span>​ es el término de error.</p></li>
+</ul>
+</section>
+<section id="estimación-del-modelo" class="level3" data-number="2.4.3">
+<h3 data-number="2.4.3" class="anchored" data-anchor-id="estimación-del-modelo"><span class="header-section-number">2.4.3</span> Estimación del Modelo</h3>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Instalar y cargar paquetes necesarios</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Adjuntando el paquete: 'dplyr'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following objects are masked from 'package:stats':
+
+    filter, lag</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following objects are masked from 'package:base':
+
+    intersect, setdiff, setequal, union</code></pre>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(broom)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(stargazer)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Please cite as: </code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code> Hlavac, Marek (2022). stargazer: Well-Formatted Regression and Summary Statistics Tables.</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code> R package version 5.2.3. https://CRAN.R-project.org/package=stargazer </code></pre>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Crear el dataframe</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">Empresa =</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"C"</span>), <span class="at">each =</span> <span class="dv">5</span>),</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  Año <span class="ot">=</span> <span class="fu">rep</span>(<span class="dv">2015</span><span class="sc">:</span><span class="dv">2019</span>, <span class="at">times =</span> <span class="dv">3</span>),</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">Ventas =</span> <span class="fu">c</span>(<span class="dv">50</span>, <span class="dv">55</span>, <span class="dv">53</span>, <span class="dv">60</span>, <span class="dv">62</span>, <span class="dv">40</span>, <span class="dv">42</span>, <span class="dv">45</span>, <span class="dv">47</span>, <span class="dv">50</span>, <span class="dv">60</span>, <span class="dv">65</span>, <span class="dv">67</span>, <span class="dv">70</span>, <span class="dv">73</span>),</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">Gasto_ID =</span> <span class="fu">c</span>(<span class="dv">5</span>, <span class="dv">6</span>, <span class="fl">5.5</span>, <span class="fl">6.2</span>, <span class="fl">6.5</span>, <span class="dv">4</span>, <span class="fl">4.5</span>, <span class="fl">4.8</span>, <span class="dv">5</span>, <span class="fl">5.2</span>, <span class="dv">6</span>, <span class="fl">6.5</span>, <span class="fl">6.8</span>, <span class="dv">7</span>, <span class="fl">7.2</span>)</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Ajustar el modelo MCO</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>modelo <span class="ot">&lt;-</span> <span class="fu">lm</span>(Ventas <span class="sc">~</span> Gasto_ID, <span class="at">data =</span> data)</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Mostrar el resumen del modelo en formato Rmarkdown</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(modelo)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = Ventas ~ Gasto_ID, data = data)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-3.5886 -0.9387 -0.2035  1.2910  2.3743 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)  -4.3002     2.6878   -1.60    0.134    
+Gasto_ID     10.4815     0.4616   22.71 7.61e-12 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 1.679 on 13 degrees of freedom
+Multiple R-squared:  0.9754,    Adjusted R-squared:  0.9735 
+F-statistic: 515.6 on 1 and 13 DF,  p-value: 7.611e-12</code></pre>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Crear tabla de resultados usando stargazer</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">stargazer</span>(modelo, <span class="at">type =</span> <span class="st">"text"</span>, <span class="at">title =</span> <span class="st">"Resultados del Modelo MCO"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Resultados del Modelo MCO
+===============================================
+                        Dependent variable:    
+                    ---------------------------
+                              Ventas           
+-----------------------------------------------
+Gasto_ID                     10.481***         
+                              (0.462)          
+                                               
+Constant                      -4.300           
+                              (2.688)          
+                                               
+-----------------------------------------------
+Observations                    15             
+R2                             0.975           
+Adjusted R2                    0.974           
+Residual Std. Error       1.679 (df = 13)      
+F Statistic           515.631*** (df = 1; 13)  
+===============================================
+Note:               *p&lt;0.1; **p&lt;0.05; ***p&lt;0.01</code></pre>
+</div>
+</div>
+</section>
+<section id="interpretación" class="level3" data-number="2.4.4">
+<h3 data-number="2.4.4" class="anchored" data-anchor-id="interpretación"><span class="header-section-number">2.4.4</span> Interpretación</h3>
+<ul>
+<li><p>El coeficiente de la constante (<span class="math inline">\(\alpha\)</span>) es 16.123.</p></li>
+<li><p>El coeficiente del gasto en I+D (<span class="math inline">\(\beta\)</span>) es 6.944, lo que sugiere que, en promedio, un aumento de 1 millón de dólares en el gasto en I+D está asociado con un aumento de aproximadamente 6.944 millones de dólares en ventas.</p></li>
+<li><p>El valor <span class="math inline">\(R^2\)</span> es 0.993, lo que indica que el modelo explica el 99.3% de la variabilidad en las ventas.</p></li>
+</ul>
+</section>
+</section>
+</section>
+<section id="modelo-de-efecto-fijos" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> <strong>Modelo de Efecto Fijos</strong></h1>
+<p>El modelo de efectos fijos en panel de datos se utiliza para controlar por heterogeneidad inobservable que puede variar entre entidades (individuos, empresas, países, etc.) pero no a lo largo del tiempo. Este modelo permite que cada entidad tenga su propio intercepto, capturando así efectos específicos de cada entidad.</p>
+<ul>
+<li>Nota: entonces, podemos pensar que <span class="math inline">\(COV(X_{it},~\alpha_{i}) \neq 0\)</span>. Una posible solución es eliminar <span class="math inline">\(\alpha_{i}\)</span>. (endogeneidad por variables omitidas)</li>
+</ul>
+<section id="formulación-matemática-del-modelo-de-efectos-fijos" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="formulación-matemática-del-modelo-de-efectos-fijos"><span class="header-section-number">3.1</span> <strong>Formulación Matemática del Modelo de Efectos Fijos</strong>:</h2>
+<p>El modelo de efectos fijos se puede escribir de la siguiente manera:</p>
+<p><span class="math inline">\(y_{it} = \alpha_{i} + \beta x_{ it} + \epsilon_{it}\)</span></p>
+<p>Donde:</p>
+<ul>
+<li><p><span class="math inline">\(y_{it}\)</span> es la variable dependiente para la entidad <span class="math inline">\(i\)</span> en el tiempo <span class="math inline">\(t\)</span>.</p></li>
+<li><p><span class="math inline">\(\alpha_{i}\)</span> ​ es el intercepto específico de la entidad <span class="math inline">\(i\)</span>, capturando los efectos fijos.</p></li>
+<li><p><span class="math inline">\(\beta\)</span> es el vector de coeficientes que mide el efecto de las variables explicativas.</p></li>
+<li><p><span class="math inline">\(x_{it}\)</span>​ es el vector de variables explicativas para la entidad <span class="math inline">\(i\)</span> en el tiempo <span class="math inline">\(t\)</span>.</p></li>
+<li><p><span class="math inline">\(\epsilon_{it}\)</span> es el término de error.</p></li>
+</ul>
+<section id="eliminación-de-los-efectos-fijos" class="level3" data-number="3.1.1">
+<h3 data-number="3.1.1" class="anchored" data-anchor-id="eliminación-de-los-efectos-fijos"><span class="header-section-number">3.1.1</span> <strong>Eliminación de los Efectos Fijos</strong>:</h3>
+<p>Para estimar el modelo sin tener que estimar directamente cada <span class="math inline">\(\alpha_{i}\)</span>​, se utiliza la transformación de “dentro de la entidad”</p>
+<ul>
+<li>Nota: se quiere eliminar el intercepto específico de la entidad <span class="math inline">\(i\)</span>, que captura los efectos fijos. Se debe entender que el concepto efectos fijos hace referencia a habilidades propias de cada individuo o entidad, los cuales son inobservable por ser propios de cada individuo o entidad.</li>
+</ul>
+</section>
+<section id="calcular-la-media-dentro-de-la-entidad" class="level3" data-number="3.1.2">
+<h3 data-number="3.1.2" class="anchored" data-anchor-id="calcular-la-media-dentro-de-la-entidad"><span class="header-section-number">3.1.2</span> <strong>Calcular la Media Dentro de la Entidad</strong>:</h3>
+<ul>
+<li><p><span class="math inline">\(\bar{y}_{i} = \frac{1}{T_{i}}\sum_{t=1}^{T_{i}}y_{it}\)</span></p></li>
+<li><p><span class="math inline">\(\bar{x}_{i} = \frac{1}{T_{i}}\sum_{t=1}^{T_{i}}x_{it}\)</span>​</p></li>
+</ul>
+<p>ademas,</p>
+<ul>
+<li><p><span class="math inline">\(\bar{\beta}_{0} = \frac{1}{T_{i}}\sum_{t=1}^{T_{i}}\beta_{0} = \frac{1}{T}T\beta_{0} = \beta_{0}\)</span> es una constante si se tuviera un intercepto en comun.</p></li>
+<li><p><span class="math inline">\(\bar{\alpha}_{i} = \frac{1}{T_{i}}\sum_{t=1}^{T_{i}}\alpha_{i} = \frac{1}{T}T\alpha_{i} = \alpha_{i}\)</span></p></li>
+</ul>
+<p>Donde <span class="math inline">\(T_{i}\)</span>​ es el número de observaciones de la entidad <span class="math inline">\(i\)</span>.</p>
+</section>
+<section id="restar-las-medias" class="level3" data-number="3.1.3">
+<h3 data-number="3.1.3" class="anchored" data-anchor-id="restar-las-medias"><span class="header-section-number">3.1.3</span> <strong>Restar las Medias</strong>:</h3>
+<p>Restamos la media dentro de la entidad de cada observación:</p>
+<p><span class="math display">\[y_{it} - \bar{y}_{i} = (\alpha_{i} + \beta X_{ it} + \epsilon_{it}) - ( \alpha_{i} + \beta \bar{X}_{i} + \bar{\epsilon}_{i})\]</span></p>
+<p><span class="math display">\[y_{it} - \bar{y}_{i} = (\alpha_{i} - \alpha_{i}) + \beta (X_{ it} - \bar{X}_{i}) + (\epsilon_{it} - \bar{\epsilon}_{i})\]</span></p>
+<ul>
+<li>Nota: se elimina <span class="math inline">\((\alpha_{i} - \alpha_{i})\)</span> y nos queda un modeloque recibe el nombre de transformación de efectos fijo</li>
+</ul>
+<p>Esto simplifica a:</p>
+<p><span class="math display">\[\tilde{y}_{it} = \beta \tilde{x}_{it} + \tilde{\epsilon}_{it}\]</span>​</p>
+<p>Donde:</p>
+<ul>
+<li><p><span class="math inline">\(\tilde{y}_{it} = y_{it} - \bar{y}_{i}\)</span></p></li>
+<li><p><span class="math inline">\(\tilde{x}_{it} = x_{it} - \bar{x}_{i}\)</span></p></li>
+<li><p><span class="math inline">\(\tilde{\epsilon}_{it} = \epsilon_{it} - \bar{\epsilon}_{i}\)</span>​</p></li>
+</ul>
+<p>Estimación por Mínimos Cuadrados Ordinarios (MCO):</p>
+<p>El modelo transformado se puede estimar usando Mínimos Cuadrados Ordinarios (MCO):</p>
+<p><span class="math display">\[\hat{\beta} = (\tilde{X´} \tilde{X})^{-1}\tilde{X´}\tilde{Y}\]</span></p>
+<p>​Donde:</p>
+<ul>
+<li><p><span class="math inline">\(\tilde{X}\)</span> es la matriz de las variables explicativas después de restar las medias dentro de cada entidad.</p></li>
+<li><p><span class="math inline">\(\tilde{Y}\)</span>​ es el vector de la variable dependiente después de restar las medias dentro de cada entidad.</p></li>
+</ul>
+<p>Nota 1: este modelo explora la variabilidad de <span class="math inline">\(x\)</span> y de <span class="math inline">\(y\)</span> dentro de los individuos a traves del tiempo, donde <span class="math inline">\(\tilde{x}\)</span> y <span class="math inline">\(\tilde{y}\)</span>​ son las desviaciones de <span class="math inline">\(y_{it}\)</span> y de <span class="math inline">\(x_{it}\)</span> respecto a su media.</p>
+<p>Nota 2: un limitación utilizar estimación por efectos fijos esta en el hecho de no permitir variables constantes a traves del tiempo.</p>
+<p>Nota 3: otra limitación es el hecho de obtener estimaciones estadisticamente menos significativas con efectos fijos, ya que la varianza muestral de las variables originales <span class="math inline">\(y_{it}, ~ x_{it},...,x_{ik}\)</span> es mucho mayor que las tranformadas.</p>
+<p>Alternativa: Modelo con Dummies</p>
+<p>Otra manera de especificar el modelo de efectos fijos es incluyendo variables indicadoras (dummies) para cada entidad:</p>
+<p><span class="math display">\[Y_{it} = \alpha +\sum_{i=1}^{N-1} \delta_{i} D_{i} + \beta X_{it} + \epsilon_{it}\]</span></p>
+<p>Donde:</p>
+<ul>
+<li><p><span class="math inline">\(D_{i}\)</span> es una dummy que toma el valor 1 si la observación pertenece a la entidad <span class="math inline">\(i\)</span> y 0 en caso contrario.</p></li>
+<li><p><span class="math inline">\(\delta_{i}\)</span>​ captura el efecto fijo de la entidad <span class="math inline">\(i\)</span>.</p></li>
+</ul>
+<p>Sin embargo, este enfoque puede ser computacionalmente intensivo si hay muchas entidades.</p>
+</section>
+</section>
+<section id="ejemplo-práctico" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="ejemplo-práctico"><span class="header-section-number">3.2</span> <strong>Ejemplo Práctico</strong>:</h2>
+<p>Supongamos que tenemos un panel de datos con las siguientes variables:</p>
+<p><span class="math inline">\(y_{it}\)</span>: Ingresos de la persona <span class="math inline">\(i\)</span> en el año <span class="math inline">\(t\)</span>.</p>
+<p><span class="math inline">\(X_{it}\)</span>​: Años de educación de la persona <span class="math inline">\(i\)</span> en el año <span class="math inline">\(t\)</span>.</p>
+<p>Calcular la Media de Ingresos y Educación para Cada Persona:</p>
+<p><span class="math inline">\(\bar{y}_{i} = \frac{1}{T_{i}}\sum_{t=1}^{T_{i}}y_{it}\)</span></p>
+<p><span class="math inline">\(\bar{x}_{i} = \frac{1}{T_{i}}\sum_{t=1}^{T_{i}}x_{it}\)</span>​</p>
+<p>Restar las Medias:</p>
+<p><span class="math inline">\(\tilde{y}_{it} = y_{it} - \bar{y}_{i}\)</span></p>
+<p><span class="math inline">\(\tilde{X}_{it} = X_{it} - \bar{X}_{i}\)</span>​</p>
+<p>Estimar el Modelo Transformado con MCO:</p>
+<p><span class="math inline">\(\hat{\beta} = (\tilde{X´} \tilde{X})^{-1}\tilde{X´}\tilde{Y}\)</span>​</p>
+<p>En resumen, el modelo de efectos fijos en panel de datos controla por la heterogeneidad inobservable específica de cada entidad, permitiendo estimar los efectos de las variables explicativas de manera más precisa. La transformación de “dentro de la entidad” elimina los efectos fijos, facilitando la estimación mediante MCO.</p>
+</section>
+</section>
+<section id="efectos-aleatorios" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> <strong>Efectos Aleatorios</strong></h1>
+<p>El modelo de datos de panel de efectos aleatorios es una herramienta estadística utilizada para analizar datos de panel donde se asume que las diferencias entre unidades (por ejemplo, individuos, empresas, países) pueden ser mejor capturadas por efectos aleatorios en lugar de efectos fijos. Este modelo es adecuado cuando se piensa que los efectos individuales no están correlacionados con las variables explicativas del modelo.</p>
+<p>Nota: con efectos fijos queriamos eliminar <span class="math inline">\(\alpha_{i}\)</span> porque creiamos que habia una correlación entre <span class="math inline">\(\alpha_{i}\)</span> y alguna de las variables explicativas. Con efectos aleatorios se asume que <span class="math inline">\(COV(X_{it},~\mu_{i}) = 0 (\)</span> <span class="math inline">\(\mu_{i}\)</span> es la variable que em recoge los efectos heterogeneos, es decir, remplazamos <span class="math inline">\(\alpha_{i}\)</span> por <span class="math inline">\(\mu_{i}\)</span> )</p>
+<section id="estructura-del-modelo-de-efectos-aleatorios" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="estructura-del-modelo-de-efectos-aleatorios"><span class="header-section-number">4.1</span> Estructura del Modelo de Efectos Aleatorios</h2>
+<p>El modelo de efectos aleatorios puede ser formulado matemáticamente de la siguiente manera:</p>
+<p><span class="math display">\[y_{it} = \alpha + \beta x_{it} + u_{it}\]</span></p>
+<p>Donde:</p>
+<ul>
+<li><p><span class="math inline">\(y_{it}\)</span>​ es la variable dependiente para la unidad <span class="math inline">\(i\)</span> en el tiempo <span class="math inline">\(t\)</span>.</p></li>
+<li><p><span class="math inline">\(\alpha\)</span> es el intercepto común a todas las unidades.</p></li>
+<li><p><span class="math inline">\(x_{it}\)</span>​ es un vector de variables explicativas para la unidad <span class="math inline">\(i\)</span> en el tiempo <span class="math inline">\(t\)</span>.</p></li>
+<li><p><span class="math inline">\(\beta\)</span> es un vector de coeficientes que mide el impacto de las variables explicativas en <span class="math inline">\(y_{it}\)</span>​.</p></li>
+<li><p><span class="math inline">\(u_{it}\)</span> es el término de error compuesto.</p></li>
+</ul>
+<p>El término de error compuesto <span class="math inline">\(u_{it}\)</span> se descompone en dos partes:</p>
+<ul>
+<li><span class="math inline">\(u_{it} = \mu_{i} + \epsilon_{it}\)</span> ​</li>
+</ul>
+<p>Donde:</p>
+<ul>
+<li><p><span class="math inline">\(\mu_{i}\)</span>​ es el efecto aleatorio específico de la unidad <span class="math inline">\(i\)</span>, que se asume que sigue una distribución normal con media cero y varianza <span class="math inline">\(\sigma_{\mu}^{2}\)</span>​. Es decir, <span class="math inline">\(\mu_{i} \sim \mathcal{N}(0, \sigma_{\mu}^{2})\)</span>.</p></li>
+<li><p><span class="math inline">\(\epsilon_{it}\)</span>​ es el término de error idiosincrático, que también se asume que sigue una distribución normal con media cero y varianza <span class="math inline">\(\sigma_{\epsilon}^{2}\)</span>. Es decir, <span class="math inline">\(\epsilon_{it} \sim \mathcal{N}(0, \sigma_{\epsilon}^{2})\)</span>.</p></li>
+</ul>
+</section>
+<section id="supuestos-del-modelo-de-efectos-aleatorios" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="supuestos-del-modelo-de-efectos-aleatorios"><span class="header-section-number">4.2</span> Supuestos del Modelo de Efectos Aleatorios</h2>
+<ol type="1">
+<li><p><strong>No correlación entre efectos individuales y variables explicativas</strong>:</p>
+<p><span class="math display">\[\mathbb{E}(\mu_i | x_{it}) = 0\]</span></p>
+<p>Esto implica que los efectos aleatorios <span class="math inline">\(\mu_{i}\)</span>​ no están correlacionados con las variables explicativas <span class="math inline">\(x_{it}\)</span>.</p></li>
+<li><p><strong>Homocedasticidad</strong>:</p>
+<p>La varianza de los errores idiosincráticos es constante:</p>
+<p><span class="math display">\[\mathbb{E}(\epsilon_{it}^{2}) = \sigma_{\epsilon}^{2}\]</span></p></li>
+<li><p><strong>No autocorrelación de los errores idiosincráticos</strong>:</p>
+<p><span class="math display">\[\mathbb{E}(\epsilon_{it} \epsilon_{js}) = 0 \quad \text{para} \quad (i \neq j) \, \text{o} \, (t \neq s)\]</span></p></li>
+<li><p><strong>Distribución Normal de los Efectos Aleatorios</strong>:</p>
+<p><span class="math display">\[\mu_i \sim \mathcal{N}(0, \sigma_{\mu}^{2})\]</span></p></li>
+</ol>
+</section>
+<section id="varianza-compuesta-del-error" class="level2" data-number="4.3">
+<h2 data-number="4.3" class="anchored" data-anchor-id="varianza-compuesta-del-error"><span class="header-section-number">4.3</span> Varianza Compuesta del Error</h2>
+<p>Dado que <span class="math inline">\(u_{it} = \mu_i + \epsilon_{it}\)</span>, la varianza total del error puede ser expresada como:</p>
+<p><span class="math display">\[\sigma_{u}^{2} = \sigma_{\mu}^{2} + \sigma_{\epsilon}^{2}\]</span>​</p>
+</section>
+<section id="estimación-del-modelo-de-efectos-aleatorios" class="level2" data-number="4.4">
+<h2 data-number="4.4" class="anchored" data-anchor-id="estimación-del-modelo-de-efectos-aleatorios"><span class="header-section-number">4.4</span> Estimación del Modelo de Efectos Aleatorios</h2>
+<p>El modelo de efectos aleatorios se estima comúnmente utilizando el estimador de mínimos cuadrados generalizados (MCG). El estimador MCG considera la estructura de la varianza-covarianza del error para proporcionar estimaciones eficientes de los coeficientes <span class="math inline">\(\beta\)</span>.</p>
+<p>veamos: ¿podemos calcular los parametros por MCG?</p>
+<ol type="1">
+<li>Reescribamos el modelo como: <span class="math inline">\(y_{it} = \alpha + \beta x_{it} + u_{it}\)</span></li>
+</ol>
+<p>Donde:</p>
+<ul>
+<li><p><span class="math inline">\(y_{it}\)</span>​ es la variable dependiente para la unidad <span class="math inline">\(i\)</span> en el tiempo <span class="math inline">\(t\)</span>.</p></li>
+<li><p><span class="math inline">\(\alpha\)</span> es el intercepto común a todas las unidades.</p></li>
+<li><p><span class="math inline">\(x_{it}\)</span>​ es un vector de variables explicativas para la unidad <span class="math inline">\(i\)</span> en el tiempo <span class="math inline">\(t\)</span>.</p></li>
+<li><p><span class="math inline">\(\beta\)</span> es un vector de coeficientes que mide el impacto de las variables explicativas en <span class="math inline">\(y_{it}\)</span>​.</p></li>
+<li><p><span class="math inline">\(u_{it}\)</span> es el término de error compuesto. (heterogeneidad no observada + el error idiosincrático)</p>
+<p>Nota: <span class="math inline">\(\epsilon_{it}\)</span> es homocedastico y no esta serialmete correlacionado.</p></li>
+</ul>
+<ol start="2" type="1">
+<li><p>No se conoce el comportamiento de <span class="math inline">\(u_{it}\)</span>. Es decir, se tiene que saber si <span class="math inline">\(u_{it}\)</span> esta bien comportada. para esto asumimos que :</p>
+<p><span class="math inline">\(VAR(\mu_{i}) = \sigma_{\mu_{i}}^{2}\)</span> y <span class="math inline">\(VAR(\epsilon_{i}) = \sigma_{\epsilon_{i}}^{2}\)</span></p></li>
+<li><p>¿cúal es la correlación intertemporal entre <span class="math inline">\(u_{it}\)</span> y <span class="math inline">\(u_{is}\)</span> <span class="math inline">\((Corr(u_{it}~ u_{is}))\)</span></p>
+<p><span class="math display">\[\mathbb{Corr}(u_{it}u_{is})= \frac{Cov(u_{it} u_{is})}{\sqrt{VAR(u_{it})VAR(u_{is})}} = \frac{Cov(\mu_{i}+\epsilon_{it}, \mu_{i}+\epsilon_{is})}{\sqrt{[VAR(\mu_{i})+VAR(\epsilon_{it})]^{2}}}\]</span></p>
+<p>Nota: se expresa la <span class="math inline">\(\mathbb{Corr}(u_{it}u_{is})\)</span> por definición de correlación y se hacemos las sustituciones a partir de las identidades ya halladas.</p>
+<p><span class="math display">\[\mathbb{Corr}(u_{it}u_{is})= \frac{Cov(\mu_i\mu_i) + Cov(\mu_{i} \epsilon_{is}) + Cov(\epsilon_{it}\mu_{i}) + Cov(\epsilon_{it}\epsilon_{is})}{\sigma_{\mu}^{2} + \sigma_{\epsilon}^{2}}\]</span></p></li>
+</ol>
+<p>Donde: <span class="math inline">\(Cov(\mu_{i} \epsilon_{is}) = 0\)</span>, <span class="math inline">\(Cov(\epsilon_{it}\mu_{i})=0\)</span>, <span class="math inline">\(Cov(\epsilon_{it}\epsilon_{is}) = 0\)</span></p>
+<p>A partir de loa naterior se llega a:</p>
+<p><span class="math inline">\(\mathbb{Corr}(u_{it}u_{is}) = \frac{\sigma_{\mu}^{2}}{\sigma_{\mu}^2 + \sigma_\epsilon^2}\)</span> , es decir <span class="math inline">\(u_{it}\)</span> esta serialmente correlacionado</p>
+<ol start="4" type="1">
+<li>Filtro de transformación</li>
+</ol>
+<p>Una transformación comúnmente usada en el modelo de efectos aleatorios es la deglación de los efectos individuales mediante el factor <span class="math inline">\(\theta\)</span>, donde:</p>
+<p>​​<span class="math display">\[\theta = 1 - \sqrt{\frac{\sigma_\epsilon^2}{\sigma_\mu^2 + \sigma_\epsilon^2}}\]</span></p>
+<p>Nota: efectos aleatorios corrige esa correlacion serial por medio de <span class="math inline">\(\theta\)</span> .</p>
+<p>Aplicando esta transformación:</p>
+<p><span class="math display">\[y_{it} - \theta \bar{y}_{i} = \alpha(1 - \theta) + \beta (x_{it} - \theta \bar{x}_{i}) + (u_{it} - \theta \bar{u}_{i})\]</span></p>
+<p>Donde <span class="math inline">\(\bar{y}_{i}\)</span> y <span class="math inline">\(\bar{x}_{i}\)</span> son las medias de <span class="math inline">\(y_{it}\)</span>​ y <span class="math inline">\(x_{it}\)</span>​ a través del tiempo para la unidad <span class="math inline">\(i\)</span>.</p>
+<p>Nota 1: la presencia de <span class="math inline">\(\alpha_{i}\)</span> se suaviza por medio de <span class="math inline">\((1-\theta)\)</span>. a medida que <span class="math inline">\(\theta\)</span> se va caercando a 1, la expresión <span class="math inline">\((1-\theta)\)</span> se va haciendo cero, por lo que <span class="math inline">\(\mu_{i}\)</span> se va a desaparecer.</p>
+<p>Nota 2: el parametro <span class="math inline">\(\theta\)</span> nunca es conocido en la practica porque depende de variables poblacionales, pero es facil de estimar. los software estadisticos implementan esta formula de forma inmediata.</p>
+<p><span class="math display">\[\hat{\theta} = 1 - \{\frac{1}{[1 +\frac{T \hat{\sigma}_{\mu}^{2}}{\hat{\sigma}_{\epsilon}^{2}}]}\}\]</span></p>
+<p><strong>Prueba de Breusch-Pagan Multiplicador de Lagrange (LM) para Efectos Aleatorios en Datos de Panel</strong></p>
+<p>La Prueba de Breusch-Pagan LM se utiliza para determinar la presencia de efectos aleatorios en datos de panel. Se analiza la varianza de los residuos para detectar efectos individuales específicos no observables.</p>
+<p>La Prueba de Breusch-Pagan LM se utiliza para detectar efectos aleatorios en datos de panel mediante el análisis de la varianza de los residuos. Esto permite determinar si existen efectos individuales específicos no observables.</p>
+<p><strong>Pasos Clave:</strong></p>
+<ol type="1">
+<li><p><strong>Modelo de Datos de Panel:</strong> Relaciona una variable dependiente con variables explicativas y un término de error descompuesto en efectos individuales y errores idiosincráticos.</p></li>
+<li><p><strong>Hipótesis de la Prueba:</strong></p>
+<ul>
+<li><p><strong>Nula:</strong> No hay efectos aleatorios (<span class="math inline">\(\sigma_{\mu}^2 = 0\)</span>).</p></li>
+<li><p><strong>Alternativa:</strong> Hay efectos aleatorios (<span class="math inline">\(\sigma_{\mu}^2 &gt; 0\)</span>).</p></li>
+</ul></li>
+<li><p><strong>Proceso de Prueba:</strong></p>
+<ul>
+<li><p>Estimar el modelo de efectos comunes.</p></li>
+<li><p>Calcular las sumas de residuos cuadrados agrupados y dentro de los grupos.</p></li>
+<li><p>Comparar el estadístico LM con la distribución chi-cuadrado para determinar la presencia de efectos aleatorios.</p></li>
+</ul></li>
+</ol>
+<p><strong>Interpretación:</strong> Si el estadístico LM es mayor que el valor crítico de la chi-cuadrado, se rechaza la hipótesis nula, indicando la presencia de efectos aleatorios en los datos de panel.</p>
+<p><strong>Interpretación del Resultado</strong></p>
+<p>El estadístico LM sigue una distribución chi-cuadrado (<span class="math inline">\(\chi^{2}\)</span>) con grados de libertad igual al número de parámetros en el modelo (excluyendo la constante). Si el valor del estadístico LM es mayor que el valor crítico de la distribución chi-cuadrado para un nivel de significancia dado (por ejemplo, 0.05), se rechaza la hipótesis nula, indicando la presencia de efectos aleatorios en los datos de panel.</p>
+</section>
+<section id="resumen" class="level2" data-number="4.5">
+<h2 data-number="4.5" class="anchored" data-anchor-id="resumen"><span class="header-section-number">4.5</span> Resumen</h2>
+<p>El modelo de efectos aleatorios es apropiado cuando se puede asumir que las diferencias no observadas entre las unidades del panel son no correlacionadas con las variables explicativas. Este modelo permite una estimación más eficiente al aprovechar la variabilidad tanto entre unidades como dentro de las unidades en el tiempo.</p>
+<p>Nota 1: efctos aleatorios es consistente, pero no insesgado para <span class="math inline">\(N \longrightarrow \infty\)</span> y <span class="math inline">\(T\)</span> fijo (datos para muchos individuos en un tiempo muy corto)</p>
+<p>Nota 2: en el caso donde <span class="math inline">\(T \longrightarrow \infty\)</span> y <span class="math inline">\(N\)</span> fijo no se sabe si efectos aleatorios es consistente. (en este caso es mejor pensar en un metodo de series de tiempo).</p>
+<p>Nota 3: volviendo al modelo transformado se tiene:</p>
+<p><span class="math display">\[y_{it} - \theta \bar{y}_{i} = \alpha(1 - \theta) + \beta (x_{it} - \theta \bar{x}_{i}) + (u_{it} - \theta \bar{u}_{i})\]</span></p>
+<ul>
+<li><p>si <span class="math inline">\(\theta = 0\)</span> se tiene MCO agrupados (no existe una correlación serial)</p></li>
+<li><p>si <span class="math inline">\(0 &lt; \theta &lt; 1\)</span> se tiene efectos aleatorios (existe correlación serial)</p></li>
+<li><p>si <span class="math inline">\(\theta =1\)</span> se tiene efectos fijos. (nos da la transformación de efectos fijos)</p></li>
+</ul>
+<p>Nota: sabemos que el <span class="math inline">\(\theta\)</span> se remplaza por <span class="math inline">\(\hat{\theta}\)</span> por la imposibilidad de calcular el primero.</p>
+</section>
+</section>
+<section id="ejemplo-1" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> <strong>Ejemplo</strong></h1>
+<p>11 grandes compañias, 3 variables macro en el periodo de 1935-1954</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Carga del conjunto de datos Grunfeld</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">"Grunfeld"</span>, <span class="at">package =</span> <span class="st">"AER"</span>)</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Visualización del conjunto de datos</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(Grunfeld)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>      invest    value  capital              firm year
+1    317.600 3078.500    2.800    General Motors 1935
+2    391.800 4661.700   52.600    General Motors 1936
+3    410.600 5387.100  156.900    General Motors 1937
+4    257.700 2792.200  209.200    General Motors 1938
+5    330.800 4313.200  203.400    General Motors 1939
+6    461.200 4643.900  207.200    General Motors 1940
+7    512.000 4551.200  255.200    General Motors 1941
+8    448.000 3244.100  303.700    General Motors 1942
+9    499.600 4053.700  264.100    General Motors 1943
+10   547.500 4379.300  201.600    General Motors 1944
+11   561.200 4840.900  265.000    General Motors 1945
+12   688.100 4900.900  402.200    General Motors 1946
+13   568.900 3526.500  761.500    General Motors 1947
+14   529.200 3254.700  922.400    General Motors 1948
+15   555.100 3700.200 1020.100    General Motors 1949
+16   642.900 3755.600 1099.000    General Motors 1950
+17   755.900 4833.000 1207.700    General Motors 1951
+18   891.200 4924.900 1430.500    General Motors 1952
+19  1304.400 6241.700 1777.300    General Motors 1953
+20  1486.700 5593.600 2226.300    General Motors 1954
+21   209.900 1362.400   53.800          US Steel 1935
+22   355.300 1807.100   50.500          US Steel 1936
+23   469.900 2676.300  118.100          US Steel 1937
+24   262.300 1801.900  260.200          US Steel 1938
+25   230.400 1957.300  312.700          US Steel 1939
+26   361.600 2202.900  254.200          US Steel 1940
+27   472.800 2380.500  261.400          US Steel 1941
+28   445.600 2168.600  298.700          US Steel 1942
+29   361.600 1985.100  301.800          US Steel 1943
+30   288.200 1813.900  279.100          US Steel 1944
+31   258.700 1850.200  213.800          US Steel 1945
+32   420.300 2067.700  132.600          US Steel 1946
+33   420.500 1796.700  264.800          US Steel 1947
+34   494.500 1625.800  306.900          US Steel 1948
+35   405.100 1667.000  351.100          US Steel 1949
+36   418.800 1677.400  357.800          US Steel 1950
+37   588.200 2289.500  342.100          US Steel 1951
+38   645.500 2159.400  444.200          US Steel 1952
+39   641.000 2031.300  623.600          US Steel 1953
+40   459.300 2115.500  669.700          US Steel 1954
+41    33.100 1170.600   97.800  General Electric 1935
+42    45.000 2015.800  104.400  General Electric 1936
+43    77.200 2803.300  118.000  General Electric 1937
+44    44.600 2039.700  156.200  General Electric 1938
+45    48.100 2256.200  172.600  General Electric 1939
+46    74.400 2132.200  186.600  General Electric 1940
+47   113.000 1834.100  220.900  General Electric 1941
+48    91.900 1588.000  287.800  General Electric 1942
+49    61.300 1749.400  319.900  General Electric 1943
+50    56.800 1687.200  321.300  General Electric 1944
+51    93.600 2007.700  319.600  General Electric 1945
+52   159.900 2208.300  346.000  General Electric 1946
+53   147.200 1656.700  456.400  General Electric 1947
+54   146.300 1604.400  543.400  General Electric 1948
+55    98.300 1431.800  618.300  General Electric 1949
+56    93.500 1610.500  647.400  General Electric 1950
+57   135.200 1819.400  671.300  General Electric 1951
+58   157.300 2079.700  726.100  General Electric 1952
+59   179.500 2371.600  800.300  General Electric 1953
+60   189.600 2759.900  888.900  General Electric 1954
+61    40.290  417.500   10.500          Chrysler 1935
+62    72.760  837.800   10.200          Chrysler 1936
+63    66.260  883.900   34.700          Chrysler 1937
+64    51.600  437.900   51.800          Chrysler 1938
+65    52.410  679.700   64.300          Chrysler 1939
+66    69.410  727.800   67.100          Chrysler 1940
+67    68.350  643.600   75.200          Chrysler 1941
+68    46.800  410.900   71.400          Chrysler 1942
+69    47.400  588.400   67.100          Chrysler 1943
+70    59.570  698.400   60.500          Chrysler 1944
+71    88.780  846.400   54.600          Chrysler 1945
+72    74.120  893.800   84.800          Chrysler 1946
+73    62.680  579.000   96.800          Chrysler 1947
+74    89.360  694.600  110.200          Chrysler 1948
+75    78.980  590.300  147.400          Chrysler 1949
+76   100.660  693.500  163.200          Chrysler 1950
+77   160.620  809.000  203.500          Chrysler 1951
+78   145.000  727.000  290.600          Chrysler 1952
+79   174.930 1001.500  346.100          Chrysler 1953
+80   172.490  703.200  414.900          Chrysler 1954
+81    39.680  157.700  183.200 Atlantic Refining 1935
+82    50.730  167.900  204.000 Atlantic Refining 1936
+83    74.240  192.900  236.000 Atlantic Refining 1937
+84    53.510  156.700  291.700 Atlantic Refining 1938
+85    42.650  191.400  323.100 Atlantic Refining 1939
+86    46.480  185.500  344.000 Atlantic Refining 1940
+87    61.400  199.600  367.700 Atlantic Refining 1941
+88    39.670  189.500  407.200 Atlantic Refining 1942
+89    62.240  151.200  426.600 Atlantic Refining 1943
+90    52.320  187.700  470.000 Atlantic Refining 1944
+91    63.210  214.700  499.200 Atlantic Refining 1945
+92    59.370  232.900  534.600 Atlantic Refining 1946
+93    58.020  249.000  566.600 Atlantic Refining 1947
+94    70.340  224.500  595.300 Atlantic Refining 1948
+95    67.420  237.300  631.400 Atlantic Refining 1949
+96    55.740  240.100  662.300 Atlantic Refining 1950
+97    80.300  327.300  683.900 Atlantic Refining 1951
+98    85.400  359.400  729.300 Atlantic Refining 1952
+99    91.900  398.400  774.300 Atlantic Refining 1953
+100   81.430  365.700  804.900 Atlantic Refining 1954
+101   20.360  197.000    6.500               IBM 1935
+102   25.980  210.300   15.800               IBM 1936
+103   25.940  223.100   27.700               IBM 1937
+104   27.530  216.700   39.200               IBM 1938
+105   24.600  286.400   48.600               IBM 1939
+106   28.540  298.000   52.500               IBM 1940
+107   43.410  276.900   61.500               IBM 1941
+108   42.810  272.600   80.500               IBM 1942
+109   27.840  287.400   94.400               IBM 1943
+110   32.600  330.300   92.600               IBM 1944
+111   39.030  324.400   92.300               IBM 1945
+112   50.170  401.900   94.200               IBM 1946
+113   51.850  407.400  111.400               IBM 1947
+114   64.030  409.200  127.400               IBM 1948
+115   68.160  482.200  149.300               IBM 1949
+116   77.340  673.800  164.400               IBM 1950
+117   95.300  676.900  177.200               IBM 1951
+118   99.490  702.000  200.000               IBM 1952
+119  127.520  793.500  211.500               IBM 1953
+120  135.720  927.300  238.700               IBM 1954
+121   24.430  138.000  100.200         Union Oil 1935
+122   23.210  200.100  125.000         Union Oil 1936
+123   32.780  210.100  142.400         Union Oil 1937
+124   32.540  161.200  165.100         Union Oil 1938
+125   26.650  161.700  194.800         Union Oil 1939
+126   33.710  145.100  222.900         Union Oil 1940
+127   43.500  110.600  252.100         Union Oil 1941
+128   34.460   98.100  276.300         Union Oil 1942
+129   44.280  108.800  300.300         Union Oil 1943
+130   70.800  118.200  318.200         Union Oil 1944
+131   44.120  126.500  336.200         Union Oil 1945
+132   48.980  156.700  351.200         Union Oil 1946
+133   48.510  119.400  373.600         Union Oil 1947
+134   50.000  129.100  389.400         Union Oil 1948
+135   50.590  134.800  406.700         Union Oil 1949
+136   42.530  140.800  429.500         Union Oil 1950
+137   64.770  179.000  450.600         Union Oil 1951
+138   72.680  178.100  466.900         Union Oil 1952
+139   73.860  186.800  486.200         Union Oil 1953
+140   89.510  192.700  511.300         Union Oil 1954
+141   12.930  191.500    1.800      Westinghouse 1935
+142   25.900  516.000    0.800      Westinghouse 1936
+143   35.050  729.000    7.400      Westinghouse 1937
+144   22.890  560.400   18.100      Westinghouse 1938
+145   18.840  519.900   23.500      Westinghouse 1939
+146   28.570  628.500   26.500      Westinghouse 1940
+147   48.510  537.100   36.200      Westinghouse 1941
+148   43.340  561.200   60.800      Westinghouse 1942
+149   37.020  617.200   84.400      Westinghouse 1943
+150   37.810  626.700   91.200      Westinghouse 1944
+151   39.270  737.200   92.400      Westinghouse 1945
+152   53.460  760.500   86.000      Westinghouse 1946
+153   55.560  581.400  111.100      Westinghouse 1947
+154   49.560  662.300  130.600      Westinghouse 1948
+155   32.040  583.800  141.800      Westinghouse 1949
+156   32.240  635.200  136.700      Westinghouse 1950
+157   54.380  723.800  129.700      Westinghouse 1951
+158   71.780  864.100  145.500      Westinghouse 1952
+159   90.080 1193.500  174.800      Westinghouse 1953
+160   68.600 1188.900  213.500      Westinghouse 1954
+161   26.630  290.600  162.000          Goodyear 1935
+162   23.390  291.100  174.000          Goodyear 1936
+163   30.650  335.000  183.000          Goodyear 1937
+164   20.890  246.000  198.000          Goodyear 1938
+165   28.780  356.200  208.000          Goodyear 1939
+166   26.930  289.800  223.000          Goodyear 1940
+167   32.080  268.200  234.000          Goodyear 1941
+168   32.210  213.300  248.000          Goodyear 1942
+169   35.690  348.200  274.000          Goodyear 1943
+170   62.470  374.200  282.000          Goodyear 1944
+171   52.320  387.200  316.000          Goodyear 1945
+172   56.950  347.400  302.000          Goodyear 1946
+173   54.320  291.900  333.000          Goodyear 1947
+174   40.530  297.200  359.000          Goodyear 1948
+175   32.540  276.900  370.000          Goodyear 1949
+176   43.480  274.600  376.000          Goodyear 1950
+177   56.490  339.900  391.000          Goodyear 1951
+178   65.980  474.800  414.000          Goodyear 1952
+179   66.110  496.000  443.000          Goodyear 1953
+180   49.340  474.500  468.000          Goodyear 1954
+181    2.540   70.910    4.500     Diamond Match 1935
+182    2.000   87.940    4.710     Diamond Match 1936
+183    2.190   82.200    4.570     Diamond Match 1937
+184    1.990   58.720    4.560     Diamond Match 1938
+185    2.030   80.540    4.380     Diamond Match 1939
+186    1.810   86.470    4.210     Diamond Match 1940
+187    2.140   77.680    4.120     Diamond Match 1941
+188    1.860   62.160    3.830     Diamond Match 1942
+189    0.930   62.240    3.580     Diamond Match 1943
+190    1.180   61.820    3.410     Diamond Match 1944
+191    1.360   65.850    3.310     Diamond Match 1945
+192    2.240   69.540    3.230     Diamond Match 1946
+193    3.810   64.970    3.900     Diamond Match 1947
+194    5.660   68.000    5.380     Diamond Match 1948
+195    4.210   71.240    7.390     Diamond Match 1949
+196    3.420   69.050    8.740     Diamond Match 1950
+197    4.670   83.040    9.070     Diamond Match 1951
+198    6.000   74.420    9.930     Diamond Match 1952
+199    6.530   63.510   11.680     Diamond Match 1953
+200    5.120   58.120   14.330     Diamond Match 1954
+201    2.938   30.284   52.011    American Steel 1935
+202    5.643   43.909   52.903    American Steel 1936
+203   10.233  107.020   54.499    American Steel 1937
+204    4.046   68.306   59.722    American Steel 1938
+205    3.326   84.164   61.659    American Steel 1939
+206    4.680   69.157   62.243    American Steel 1940
+207    5.732   60.148   63.361    American Steel 1941
+208   12.117   49.332   64.861    American Steel 1942
+209   15.276   75.180   67.953    American Steel 1943
+210    9.275   62.050   69.590    American Steel 1944
+211    9.577   59.152   69.144    American Steel 1945
+212    3.956   68.424   70.269    American Steel 1946
+213    3.834   48.505   71.051    American Steel 1947
+214    5.970   40.507   71.508    American Steel 1948
+215    6.433   39.961   73.827    American Steel 1949
+216    4.770   36.494   75.847    American Steel 1950
+217    6.532   46.082   77.367    American Steel 1951
+218    7.329   57.616   78.631    American Steel 1952
+219    9.020   57.441   80.215    American Steel 1953
+220    6.281   47.165   83.788    American Steel 1954</code></pre>
+</div>
+</div>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Conversión del conjunto de datos en formato de panel</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>Grun_all <span class="ot">&lt;-</span> <span class="fu">pdata.frame</span>(Grunfeld, <span class="at">index =</span> <span class="fu">c</span>(<span class="st">"firm"</span>, <span class="st">"year"</span>))</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Visualización del conjunto de datos en formato de panel</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(Grun_all)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>                         invest    value  capital              firm year
+General Motors-1935     317.600 3078.500    2.800    General Motors 1935
+General Motors-1936     391.800 4661.700   52.600    General Motors 1936
+General Motors-1937     410.600 5387.100  156.900    General Motors 1937
+General Motors-1938     257.700 2792.200  209.200    General Motors 1938
+General Motors-1939     330.800 4313.200  203.400    General Motors 1939
+General Motors-1940     461.200 4643.900  207.200    General Motors 1940
+General Motors-1941     512.000 4551.200  255.200    General Motors 1941
+General Motors-1942     448.000 3244.100  303.700    General Motors 1942
+General Motors-1943     499.600 4053.700  264.100    General Motors 1943
+General Motors-1944     547.500 4379.300  201.600    General Motors 1944
+General Motors-1945     561.200 4840.900  265.000    General Motors 1945
+General Motors-1946     688.100 4900.900  402.200    General Motors 1946
+General Motors-1947     568.900 3526.500  761.500    General Motors 1947
+General Motors-1948     529.200 3254.700  922.400    General Motors 1948
+General Motors-1949     555.100 3700.200 1020.100    General Motors 1949
+General Motors-1950     642.900 3755.600 1099.000    General Motors 1950
+General Motors-1951     755.900 4833.000 1207.700    General Motors 1951
+General Motors-1952     891.200 4924.900 1430.500    General Motors 1952
+General Motors-1953    1304.400 6241.700 1777.300    General Motors 1953
+General Motors-1954    1486.700 5593.600 2226.300    General Motors 1954
+US Steel-1935           209.900 1362.400   53.800          US Steel 1935
+US Steel-1936           355.300 1807.100   50.500          US Steel 1936
+US Steel-1937           469.900 2676.300  118.100          US Steel 1937
+US Steel-1938           262.300 1801.900  260.200          US Steel 1938
+US Steel-1939           230.400 1957.300  312.700          US Steel 1939
+US Steel-1940           361.600 2202.900  254.200          US Steel 1940
+US Steel-1941           472.800 2380.500  261.400          US Steel 1941
+US Steel-1942           445.600 2168.600  298.700          US Steel 1942
+US Steel-1943           361.600 1985.100  301.800          US Steel 1943
+US Steel-1944           288.200 1813.900  279.100          US Steel 1944
+US Steel-1945           258.700 1850.200  213.800          US Steel 1945
+US Steel-1946           420.300 2067.700  132.600          US Steel 1946
+US Steel-1947           420.500 1796.700  264.800          US Steel 1947
+US Steel-1948           494.500 1625.800  306.900          US Steel 1948
+US Steel-1949           405.100 1667.000  351.100          US Steel 1949
+US Steel-1950           418.800 1677.400  357.800          US Steel 1950
+US Steel-1951           588.200 2289.500  342.100          US Steel 1951
+US Steel-1952           645.500 2159.400  444.200          US Steel 1952
+US Steel-1953           641.000 2031.300  623.600          US Steel 1953
+US Steel-1954           459.300 2115.500  669.700          US Steel 1954
+General Electric-1935    33.100 1170.600   97.800  General Electric 1935
+General Electric-1936    45.000 2015.800  104.400  General Electric 1936
+General Electric-1937    77.200 2803.300  118.000  General Electric 1937
+General Electric-1938    44.600 2039.700  156.200  General Electric 1938
+General Electric-1939    48.100 2256.200  172.600  General Electric 1939
+General Electric-1940    74.400 2132.200  186.600  General Electric 1940
+General Electric-1941   113.000 1834.100  220.900  General Electric 1941
+General Electric-1942    91.900 1588.000  287.800  General Electric 1942
+General Electric-1943    61.300 1749.400  319.900  General Electric 1943
+General Electric-1944    56.800 1687.200  321.300  General Electric 1944
+General Electric-1945    93.600 2007.700  319.600  General Electric 1945
+General Electric-1946   159.900 2208.300  346.000  General Electric 1946
+General Electric-1947   147.200 1656.700  456.400  General Electric 1947
+General Electric-1948   146.300 1604.400  543.400  General Electric 1948
+General Electric-1949    98.300 1431.800  618.300  General Electric 1949
+General Electric-1950    93.500 1610.500  647.400  General Electric 1950
+General Electric-1951   135.200 1819.400  671.300  General Electric 1951
+General Electric-1952   157.300 2079.700  726.100  General Electric 1952
+General Electric-1953   179.500 2371.600  800.300  General Electric 1953
+General Electric-1954   189.600 2759.900  888.900  General Electric 1954
+Chrysler-1935            40.290  417.500   10.500          Chrysler 1935
+Chrysler-1936            72.760  837.800   10.200          Chrysler 1936
+Chrysler-1937            66.260  883.900   34.700          Chrysler 1937
+Chrysler-1938            51.600  437.900   51.800          Chrysler 1938
+Chrysler-1939            52.410  679.700   64.300          Chrysler 1939
+Chrysler-1940            69.410  727.800   67.100          Chrysler 1940
+Chrysler-1941            68.350  643.600   75.200          Chrysler 1941
+Chrysler-1942            46.800  410.900   71.400          Chrysler 1942
+Chrysler-1943            47.400  588.400   67.100          Chrysler 1943
+Chrysler-1944            59.570  698.400   60.500          Chrysler 1944
+Chrysler-1945            88.780  846.400   54.600          Chrysler 1945
+Chrysler-1946            74.120  893.800   84.800          Chrysler 1946
+Chrysler-1947            62.680  579.000   96.800          Chrysler 1947
+Chrysler-1948            89.360  694.600  110.200          Chrysler 1948
+Chrysler-1949            78.980  590.300  147.400          Chrysler 1949
+Chrysler-1950           100.660  693.500  163.200          Chrysler 1950
+Chrysler-1951           160.620  809.000  203.500          Chrysler 1951
+Chrysler-1952           145.000  727.000  290.600          Chrysler 1952
+Chrysler-1953           174.930 1001.500  346.100          Chrysler 1953
+Chrysler-1954           172.490  703.200  414.900          Chrysler 1954
+Atlantic Refining-1935   39.680  157.700  183.200 Atlantic Refining 1935
+Atlantic Refining-1936   50.730  167.900  204.000 Atlantic Refining 1936
+Atlantic Refining-1937   74.240  192.900  236.000 Atlantic Refining 1937
+Atlantic Refining-1938   53.510  156.700  291.700 Atlantic Refining 1938
+Atlantic Refining-1939   42.650  191.400  323.100 Atlantic Refining 1939
+Atlantic Refining-1940   46.480  185.500  344.000 Atlantic Refining 1940
+Atlantic Refining-1941   61.400  199.600  367.700 Atlantic Refining 1941
+Atlantic Refining-1942   39.670  189.500  407.200 Atlantic Refining 1942
+Atlantic Refining-1943   62.240  151.200  426.600 Atlantic Refining 1943
+Atlantic Refining-1944   52.320  187.700  470.000 Atlantic Refining 1944
+Atlantic Refining-1945   63.210  214.700  499.200 Atlantic Refining 1945
+Atlantic Refining-1946   59.370  232.900  534.600 Atlantic Refining 1946
+Atlantic Refining-1947   58.020  249.000  566.600 Atlantic Refining 1947
+Atlantic Refining-1948   70.340  224.500  595.300 Atlantic Refining 1948
+Atlantic Refining-1949   67.420  237.300  631.400 Atlantic Refining 1949
+Atlantic Refining-1950   55.740  240.100  662.300 Atlantic Refining 1950
+Atlantic Refining-1951   80.300  327.300  683.900 Atlantic Refining 1951
+Atlantic Refining-1952   85.400  359.400  729.300 Atlantic Refining 1952
+Atlantic Refining-1953   91.900  398.400  774.300 Atlantic Refining 1953
+Atlantic Refining-1954   81.430  365.700  804.900 Atlantic Refining 1954
+IBM-1935                 20.360  197.000    6.500               IBM 1935
+IBM-1936                 25.980  210.300   15.800               IBM 1936
+IBM-1937                 25.940  223.100   27.700               IBM 1937
+IBM-1938                 27.530  216.700   39.200               IBM 1938
+IBM-1939                 24.600  286.400   48.600               IBM 1939
+IBM-1940                 28.540  298.000   52.500               IBM 1940
+IBM-1941                 43.410  276.900   61.500               IBM 1941
+IBM-1942                 42.810  272.600   80.500               IBM 1942
+IBM-1943                 27.840  287.400   94.400               IBM 1943
+IBM-1944                 32.600  330.300   92.600               IBM 1944
+IBM-1945                 39.030  324.400   92.300               IBM 1945
+IBM-1946                 50.170  401.900   94.200               IBM 1946
+IBM-1947                 51.850  407.400  111.400               IBM 1947
+IBM-1948                 64.030  409.200  127.400               IBM 1948
+IBM-1949                 68.160  482.200  149.300               IBM 1949
+IBM-1950                 77.340  673.800  164.400               IBM 1950
+IBM-1951                 95.300  676.900  177.200               IBM 1951
+IBM-1952                 99.490  702.000  200.000               IBM 1952
+IBM-1953                127.520  793.500  211.500               IBM 1953
+IBM-1954                135.720  927.300  238.700               IBM 1954
+Union Oil-1935           24.430  138.000  100.200         Union Oil 1935
+Union Oil-1936           23.210  200.100  125.000         Union Oil 1936
+Union Oil-1937           32.780  210.100  142.400         Union Oil 1937
+Union Oil-1938           32.540  161.200  165.100         Union Oil 1938
+Union Oil-1939           26.650  161.700  194.800         Union Oil 1939
+Union Oil-1940           33.710  145.100  222.900         Union Oil 1940
+Union Oil-1941           43.500  110.600  252.100         Union Oil 1941
+Union Oil-1942           34.460   98.100  276.300         Union Oil 1942
+Union Oil-1943           44.280  108.800  300.300         Union Oil 1943
+Union Oil-1944           70.800  118.200  318.200         Union Oil 1944
+Union Oil-1945           44.120  126.500  336.200         Union Oil 1945
+Union Oil-1946           48.980  156.700  351.200         Union Oil 1946
+Union Oil-1947           48.510  119.400  373.600         Union Oil 1947
+Union Oil-1948           50.000  129.100  389.400         Union Oil 1948
+Union Oil-1949           50.590  134.800  406.700         Union Oil 1949
+Union Oil-1950           42.530  140.800  429.500         Union Oil 1950
+Union Oil-1951           64.770  179.000  450.600         Union Oil 1951
+Union Oil-1952           72.680  178.100  466.900         Union Oil 1952
+Union Oil-1953           73.860  186.800  486.200         Union Oil 1953
+Union Oil-1954           89.510  192.700  511.300         Union Oil 1954
+Westinghouse-1935        12.930  191.500    1.800      Westinghouse 1935
+Westinghouse-1936        25.900  516.000    0.800      Westinghouse 1936
+Westinghouse-1937        35.050  729.000    7.400      Westinghouse 1937
+Westinghouse-1938        22.890  560.400   18.100      Westinghouse 1938
+Westinghouse-1939        18.840  519.900   23.500      Westinghouse 1939
+Westinghouse-1940        28.570  628.500   26.500      Westinghouse 1940
+Westinghouse-1941        48.510  537.100   36.200      Westinghouse 1941
+Westinghouse-1942        43.340  561.200   60.800      Westinghouse 1942
+Westinghouse-1943        37.020  617.200   84.400      Westinghouse 1943
+Westinghouse-1944        37.810  626.700   91.200      Westinghouse 1944
+Westinghouse-1945        39.270  737.200   92.400      Westinghouse 1945
+Westinghouse-1946        53.460  760.500   86.000      Westinghouse 1946
+Westinghouse-1947        55.560  581.400  111.100      Westinghouse 1947
+Westinghouse-1948        49.560  662.300  130.600      Westinghouse 1948
+Westinghouse-1949        32.040  583.800  141.800      Westinghouse 1949
+Westinghouse-1950        32.240  635.200  136.700      Westinghouse 1950
+Westinghouse-1951        54.380  723.800  129.700      Westinghouse 1951
+Westinghouse-1952        71.780  864.100  145.500      Westinghouse 1952
+Westinghouse-1953        90.080 1193.500  174.800      Westinghouse 1953
+Westinghouse-1954        68.600 1188.900  213.500      Westinghouse 1954
+Goodyear-1935            26.630  290.600  162.000          Goodyear 1935
+Goodyear-1936            23.390  291.100  174.000          Goodyear 1936
+Goodyear-1937            30.650  335.000  183.000          Goodyear 1937
+Goodyear-1938            20.890  246.000  198.000          Goodyear 1938
+Goodyear-1939            28.780  356.200  208.000          Goodyear 1939
+Goodyear-1940            26.930  289.800  223.000          Goodyear 1940
+Goodyear-1941            32.080  268.200  234.000          Goodyear 1941
+Goodyear-1942            32.210  213.300  248.000          Goodyear 1942
+Goodyear-1943            35.690  348.200  274.000          Goodyear 1943
+Goodyear-1944            62.470  374.200  282.000          Goodyear 1944
+Goodyear-1945            52.320  387.200  316.000          Goodyear 1945
+Goodyear-1946            56.950  347.400  302.000          Goodyear 1946
+Goodyear-1947            54.320  291.900  333.000          Goodyear 1947
+Goodyear-1948            40.530  297.200  359.000          Goodyear 1948
+Goodyear-1949            32.540  276.900  370.000          Goodyear 1949
+Goodyear-1950            43.480  274.600  376.000          Goodyear 1950
+Goodyear-1951            56.490  339.900  391.000          Goodyear 1951
+Goodyear-1952            65.980  474.800  414.000          Goodyear 1952
+Goodyear-1953            66.110  496.000  443.000          Goodyear 1953
+Goodyear-1954            49.340  474.500  468.000          Goodyear 1954
+Diamond Match-1935        2.540   70.910    4.500     Diamond Match 1935
+Diamond Match-1936        2.000   87.940    4.710     Diamond Match 1936
+Diamond Match-1937        2.190   82.200    4.570     Diamond Match 1937
+Diamond Match-1938        1.990   58.720    4.560     Diamond Match 1938
+Diamond Match-1939        2.030   80.540    4.380     Diamond Match 1939
+Diamond Match-1940        1.810   86.470    4.210     Diamond Match 1940
+Diamond Match-1941        2.140   77.680    4.120     Diamond Match 1941
+Diamond Match-1942        1.860   62.160    3.830     Diamond Match 1942
+Diamond Match-1943        0.930   62.240    3.580     Diamond Match 1943
+Diamond Match-1944        1.180   61.820    3.410     Diamond Match 1944
+Diamond Match-1945        1.360   65.850    3.310     Diamond Match 1945
+Diamond Match-1946        2.240   69.540    3.230     Diamond Match 1946
+Diamond Match-1947        3.810   64.970    3.900     Diamond Match 1947
+Diamond Match-1948        5.660   68.000    5.380     Diamond Match 1948
+Diamond Match-1949        4.210   71.240    7.390     Diamond Match 1949
+Diamond Match-1950        3.420   69.050    8.740     Diamond Match 1950
+Diamond Match-1951        4.670   83.040    9.070     Diamond Match 1951
+Diamond Match-1952        6.000   74.420    9.930     Diamond Match 1952
+Diamond Match-1953        6.530   63.510   11.680     Diamond Match 1953
+Diamond Match-1954        5.120   58.120   14.330     Diamond Match 1954
+American Steel-1935       2.938   30.284   52.011    American Steel 1935
+American Steel-1936       5.643   43.909   52.903    American Steel 1936
+American Steel-1937      10.233  107.020   54.499    American Steel 1937
+American Steel-1938       4.046   68.306   59.722    American Steel 1938
+American Steel-1939       3.326   84.164   61.659    American Steel 1939
+American Steel-1940       4.680   69.157   62.243    American Steel 1940
+American Steel-1941       5.732   60.148   63.361    American Steel 1941
+American Steel-1942      12.117   49.332   64.861    American Steel 1942
+American Steel-1943      15.276   75.180   67.953    American Steel 1943
+American Steel-1944       9.275   62.050   69.590    American Steel 1944
+American Steel-1945       9.577   59.152   69.144    American Steel 1945
+American Steel-1946       3.956   68.424   70.269    American Steel 1946
+American Steel-1947       3.834   48.505   71.051    American Steel 1947
+American Steel-1948       5.970   40.507   71.508    American Steel 1948
+American Steel-1949       6.433   39.961   73.827    American Steel 1949
+American Steel-1950       4.770   36.494   75.847    American Steel 1950
+American Steel-1951       6.532   46.082   77.367    American Steel 1951
+American Steel-1952       7.329   57.616   78.631    American Steel 1952
+American Steel-1953       9.020   57.441   80.215    American Steel 1953
+American Steel-1954       6.281   47.165   83.788    American Steel 1954</code></pre>
+</div>
+</div>
+<section id="análisis-con-un-subconjunto-de-datos" class="level2" data-number="5.1">
+<h2 data-number="5.1" class="anchored" data-anchor-id="análisis-con-un-subconjunto-de-datos"><span class="header-section-number">5.1</span> <strong>Análisis con un Subconjunto de Datos</strong></h2>
+<p>Para algunos análisis, utilizaremos solo los datos de tres compañías: General Electric, General Motors e IBM.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Filtrado del subconjunto de datos para tres firmas específicas</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>gr <span class="ot">&lt;-</span> <span class="fu">subset</span>(Grunfeld, firm <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"General Electric"</span>, <span class="st">"General Motors"</span>, <span class="st">"IBM"</span>))</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Visualización del subconjunto de datos</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(gr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>     invest  value capital             firm year
+1    317.60 3078.5     2.8   General Motors 1935
+2    391.80 4661.7    52.6   General Motors 1936
+3    410.60 5387.1   156.9   General Motors 1937
+4    257.70 2792.2   209.2   General Motors 1938
+5    330.80 4313.2   203.4   General Motors 1939
+6    461.20 4643.9   207.2   General Motors 1940
+7    512.00 4551.2   255.2   General Motors 1941
+8    448.00 3244.1   303.7   General Motors 1942
+9    499.60 4053.7   264.1   General Motors 1943
+10   547.50 4379.3   201.6   General Motors 1944
+11   561.20 4840.9   265.0   General Motors 1945
+12   688.10 4900.9   402.2   General Motors 1946
+13   568.90 3526.5   761.5   General Motors 1947
+14   529.20 3254.7   922.4   General Motors 1948
+15   555.10 3700.2  1020.1   General Motors 1949
+16   642.90 3755.6  1099.0   General Motors 1950
+17   755.90 4833.0  1207.7   General Motors 1951
+18   891.20 4924.9  1430.5   General Motors 1952
+19  1304.40 6241.7  1777.3   General Motors 1953
+20  1486.70 5593.6  2226.3   General Motors 1954
+41    33.10 1170.6    97.8 General Electric 1935
+42    45.00 2015.8   104.4 General Electric 1936
+43    77.20 2803.3   118.0 General Electric 1937
+44    44.60 2039.7   156.2 General Electric 1938
+45    48.10 2256.2   172.6 General Electric 1939
+46    74.40 2132.2   186.6 General Electric 1940
+47   113.00 1834.1   220.9 General Electric 1941
+48    91.90 1588.0   287.8 General Electric 1942
+49    61.30 1749.4   319.9 General Electric 1943
+50    56.80 1687.2   321.3 General Electric 1944
+51    93.60 2007.7   319.6 General Electric 1945
+52   159.90 2208.3   346.0 General Electric 1946
+53   147.20 1656.7   456.4 General Electric 1947
+54   146.30 1604.4   543.4 General Electric 1948
+55    98.30 1431.8   618.3 General Electric 1949
+56    93.50 1610.5   647.4 General Electric 1950
+57   135.20 1819.4   671.3 General Electric 1951
+58   157.30 2079.7   726.1 General Electric 1952
+59   179.50 2371.6   800.3 General Electric 1953
+60   189.60 2759.9   888.9 General Electric 1954
+101   20.36  197.0     6.5              IBM 1935
+102   25.98  210.3    15.8              IBM 1936
+103   25.94  223.1    27.7              IBM 1937
+104   27.53  216.7    39.2              IBM 1938
+105   24.60  286.4    48.6              IBM 1939
+106   28.54  298.0    52.5              IBM 1940
+107   43.41  276.9    61.5              IBM 1941
+108   42.81  272.6    80.5              IBM 1942
+109   27.84  287.4    94.4              IBM 1943
+110   32.60  330.3    92.6              IBM 1944
+111   39.03  324.4    92.3              IBM 1945
+112   50.17  401.9    94.2              IBM 1946
+113   51.85  407.4   111.4              IBM 1947
+114   64.03  409.2   127.4              IBM 1948
+115   68.16  482.2   149.3              IBM 1949
+116   77.34  673.8   164.4              IBM 1950
+117   95.30  676.9   177.2              IBM 1951
+118   99.49  702.0   200.0              IBM 1952
+119  127.52  793.5   211.5              IBM 1953
+120  135.72  927.3   238.7              IBM 1954</code></pre>
+</div>
+</div>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Conversión del subconjunto de datos en formato de panel</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>pgr <span class="ot">&lt;-</span> <span class="fu">pdata.frame</span>(gr, <span class="at">index =</span> <span class="fu">c</span>(<span class="st">"firm"</span>, <span class="st">"year"</span>))</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Visualización del subconjunto de datos en formato de panel</span></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(pgr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>                       invest  value capital             firm year
+General Motors-1935    317.60 3078.5     2.8   General Motors 1935
+General Motors-1936    391.80 4661.7    52.6   General Motors 1936
+General Motors-1937    410.60 5387.1   156.9   General Motors 1937
+General Motors-1938    257.70 2792.2   209.2   General Motors 1938
+General Motors-1939    330.80 4313.2   203.4   General Motors 1939
+General Motors-1940    461.20 4643.9   207.2   General Motors 1940
+General Motors-1941    512.00 4551.2   255.2   General Motors 1941
+General Motors-1942    448.00 3244.1   303.7   General Motors 1942
+General Motors-1943    499.60 4053.7   264.1   General Motors 1943
+General Motors-1944    547.50 4379.3   201.6   General Motors 1944
+General Motors-1945    561.20 4840.9   265.0   General Motors 1945
+General Motors-1946    688.10 4900.9   402.2   General Motors 1946
+General Motors-1947    568.90 3526.5   761.5   General Motors 1947
+General Motors-1948    529.20 3254.7   922.4   General Motors 1948
+General Motors-1949    555.10 3700.2  1020.1   General Motors 1949
+General Motors-1950    642.90 3755.6  1099.0   General Motors 1950
+General Motors-1951    755.90 4833.0  1207.7   General Motors 1951
+General Motors-1952    891.20 4924.9  1430.5   General Motors 1952
+General Motors-1953   1304.40 6241.7  1777.3   General Motors 1953
+General Motors-1954   1486.70 5593.6  2226.3   General Motors 1954
+General Electric-1935   33.10 1170.6    97.8 General Electric 1935
+General Electric-1936   45.00 2015.8   104.4 General Electric 1936
+General Electric-1937   77.20 2803.3   118.0 General Electric 1937
+General Electric-1938   44.60 2039.7   156.2 General Electric 1938
+General Electric-1939   48.10 2256.2   172.6 General Electric 1939
+General Electric-1940   74.40 2132.2   186.6 General Electric 1940
+General Electric-1941  113.00 1834.1   220.9 General Electric 1941
+General Electric-1942   91.90 1588.0   287.8 General Electric 1942
+General Electric-1943   61.30 1749.4   319.9 General Electric 1943
+General Electric-1944   56.80 1687.2   321.3 General Electric 1944
+General Electric-1945   93.60 2007.7   319.6 General Electric 1945
+General Electric-1946  159.90 2208.3   346.0 General Electric 1946
+General Electric-1947  147.20 1656.7   456.4 General Electric 1947
+General Electric-1948  146.30 1604.4   543.4 General Electric 1948
+General Electric-1949   98.30 1431.8   618.3 General Electric 1949
+General Electric-1950   93.50 1610.5   647.4 General Electric 1950
+General Electric-1951  135.20 1819.4   671.3 General Electric 1951
+General Electric-1952  157.30 2079.7   726.1 General Electric 1952
+General Electric-1953  179.50 2371.6   800.3 General Electric 1953
+General Electric-1954  189.60 2759.9   888.9 General Electric 1954
+IBM-1935                20.36  197.0     6.5              IBM 1935
+IBM-1936                25.98  210.3    15.8              IBM 1936
+IBM-1937                25.94  223.1    27.7              IBM 1937
+IBM-1938                27.53  216.7    39.2              IBM 1938
+IBM-1939                24.60  286.4    48.6              IBM 1939
+IBM-1940                28.54  298.0    52.5              IBM 1940
+IBM-1941                43.41  276.9    61.5              IBM 1941
+IBM-1942                42.81  272.6    80.5              IBM 1942
+IBM-1943                27.84  287.4    94.4              IBM 1943
+IBM-1944                32.60  330.3    92.6              IBM 1944
+IBM-1945                39.03  324.4    92.3              IBM 1945
+IBM-1946                50.17  401.9    94.2              IBM 1946
+IBM-1947                51.85  407.4   111.4              IBM 1947
+IBM-1948                64.03  409.2   127.4              IBM 1948
+IBM-1949                68.16  482.2   149.3              IBM 1949
+IBM-1950                77.34  673.8   164.4              IBM 1950
+IBM-1951                95.30  676.9   177.2              IBM 1951
+IBM-1952                99.49  702.0   200.0              IBM 1952
+IBM-1953               127.52  793.5   211.5              IBM 1953
+IBM-1954               135.72  927.3   238.7              IBM 1954</code></pre>
+</div>
+</div>
+</section>
+<section id="modelos-de-regresión" class="level2" data-number="5.2">
+<h2 data-number="5.2" class="anchored" data-anchor-id="modelos-de-regresión"><span class="header-section-number">5.2</span> <strong>Modelos de Regresión</strong></h2>
+<section id="modelo-de-datos-agrupados-mco" class="level3" data-number="5.2.1">
+<h3 data-number="5.2.1" class="anchored" data-anchor-id="modelo-de-datos-agrupados-mco"><span class="header-section-number">5.2.1</span> <strong>Modelo de Datos Agrupados (MCO)</strong></h3>
+<p>El modelo de datos agrupados asume que los coeficientes son constantes a lo largo del tiempo y entre las unidades (firmas). La forma matemática es:</p>
+<p><span class="math display">\[invest_{it} = \beta_{0} + \beta_{1}value_{it} + \beta_{2}capital_{it} + \epsilon_{it}\]</span></p>
+<p>donde:</p>
+<ul>
+<li><p><span class="math inline">\(invest_{it}\)</span> = es la inversion de la firma <span class="math inline">\(i\)</span> en el tiempo <span class="math inline">\(t\)</span></p></li>
+<li><p><span class="math inline">\(value_{it}\)</span> = es el valor de la firma <span class="math inline">\(i\)</span> en el tiempo <span class="math inline">\(t\)</span>.</p></li>
+<li><p><span class="math inline">\(capital_{it}\)</span> = es el valor del capital <span class="math inline">\(i\)</span> en el timpo <span class="math inline">\(t\)</span>.</p></li>
+<li><p><span class="math inline">\(\epsilon_{it}\)</span> es el termino de error.</p></li>
+</ul>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Ajuste del modelo OLS agrupado</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>gr_pool <span class="ot">&lt;-</span> <span class="fu">plm</span>(invest <span class="sc">~</span> value <span class="sc">+</span> capital, <span class="at">data =</span> pgr, <span class="at">model =</span> <span class="st">"pooling"</span>)</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Resumen del modelo OLS agrupado</span></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(gr_pool)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Pooling Model
+
+Call:
+plm(formula = invest ~ value + capital, data = pgr, model = "pooling")
+
+Balanced Panel: n = 3, T = 20, N = 60
+
+Residuals:
+    Min.  1st Qu.   Median  3rd Qu.     Max. 
+-281.940  -94.923   37.000   80.991  291.322 
+
+Coefficients:
+               Estimate  Std. Error t-value  Pr(&gt;|t|)    
+(Intercept) -101.603040   24.401927 -4.1637 0.0001071 ***
+value          0.105016    0.010613  9.8952 5.526e-14 ***
+capital        0.318719    0.040930  7.7870 1.553e-10 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Total Sum of Squares:    5644500
+Residual Sum of Squares: 748140
+R-Squared:      0.86746
+Adj. R-Squared: 0.86281
+F-statistic: 186.524 on 2 and 57 DF, p-value: &lt; 2.22e-16</code></pre>
+</div>
+</div>
+</section>
+<section id="coeficientes-estimados" class="level3" data-number="5.2.2">
+<h3 data-number="5.2.2" class="anchored" data-anchor-id="coeficientes-estimados"><span class="header-section-number">5.2.2</span> Coeficientes Estimados</h3>
+<p>De la salida del modelo, los coeficientes estimados son:</p>
+<ul>
+<li><p>Intercepto <span class="math inline">\((\beta_0​)\)</span>: <span class="math inline">\(−101.603040\)</span></p></li>
+<li><p>Coeficiente de <span class="math inline">\(\text{value}(\beta_1)\)</span>: <span class="math inline">\(0.105016\)</span></p></li>
+<li><p>Coeficiente de <span class="math inline">\(\text{capital} (\beta_{2}​)\)</span>: <span class="math inline">\(0.318719\)</span></p></li>
+</ul>
+</section>
+<section id="forma-matemática-del-modelo-ajustado" class="level3" data-number="5.2.3">
+<h3 data-number="5.2.3" class="anchored" data-anchor-id="forma-matemática-del-modelo-ajustado"><span class="header-section-number">5.2.3</span> Forma Matemática del Modelo Ajustado</h3>
+<p>Incorporando estos coeficientes en la ecuación del modelo, obtenemos:</p>
+<p><span class="math display">\[\hat{\text{invest}}_{it} = -101.603040 + 0.105016 \hat{\text{value}}_{it} + 0.318719\hat{\text{capital}}_{it}\]</span></p>
+<p>Este es el modelo ajustado de datos de panel agrupados basado en los coeficientes estimados de la salida del modelo gr_pool.</p>
+</section>
+<section id="interpretación-de-los-coeficientes" class="level3" data-number="5.2.4">
+<h3 data-number="5.2.4" class="anchored" data-anchor-id="interpretación-de-los-coeficientes"><span class="header-section-number">5.2.4</span> Interpretación de los Coeficientes</h3>
+<ul>
+<li><p><strong>Intercepto</strong> <span class="math inline">\(\beta_{0} = - 101.603040\)</span> : Este es el valor promedio de la inversión cuando tanto el valor como el capital son cero. Aunque esta interpretación no siempre tiene sentido práctico, depende del contexto de los datos.</p></li>
+<li><p><strong>Coeficiente de</strong> <span class="math inline">\(\text{value} ~ (\beta_{1}=0.105016\)</span>: Este coeficiente indica que, manteniendo constante el capital, un aumento de una unidad en el valor de la firma está asociado con un aumento promedio de <span class="math inline">\(0.105016\)</span> unidades en la inversión.</p></li>
+<li><p><strong>Coeficiente de</strong> <span class="math inline">\(\text{capital} ~ \beta_{2}=0.318719)\)</span>: Este coeficiente indica que, manteniendo constante el valor de la firma, un aumento de una unidad en el capital está asociado con un aumento promedio de <span class="math inline">\(0.318719\)</span> unidades en la inversión.</p></li>
+</ul>
+</section>
+<section id="estadísticas-del-modelo" class="level3" data-number="5.2.5">
+<h3 data-number="5.2.5" class="anchored" data-anchor-id="estadísticas-del-modelo"><span class="header-section-number">5.2.5</span> Estadísticas del Modelo</h3>
+<ul>
+<li><p><strong>R-Squared (0.86746)</strong>: Indica que aproximadamente el 86.75% de la variabilidad en la inversión puede ser explicada por los cambios en el valor y el capital.</p></li>
+<li><p><strong>Adj. R-Squared (0.86281)</strong>: Es el R-cuadrado ajustado que toma en cuenta el número de predictores en el modelo.</p></li>
+<li><p><strong>F-statistic (186.524)</strong>: Prueba global de significancia del modelo, con un <span class="math inline">\(p-valor &lt; 2.22e-16\)</span>, lo que indica que el modelo en su conjunto es significativo.</p></li>
+</ul>
+</section>
+<section id="modelo-con-efectos-fijos" class="level3" data-number="5.2.6">
+<h3 data-number="5.2.6" class="anchored" data-anchor-id="modelo-con-efectos-fijos"><span class="header-section-number">5.2.6</span> <strong>Modelo con Efectos fijos</strong></h3>
+<p>El modelo de efectos fijos permite que las interceptas varíen entre las unidades (firmas) pero no en el tiempo. La forma matemática es:</p>
+<p><span class="math display">\[invest_{it} = \alpha_{i} + \beta_{1}value_{it} + \beta_{2}capital_{it} + \epsilon_{it}\]</span></p>
+<p>Donde:</p>
+<ul>
+<li><p><span class="math inline">\(\alpha_{i}\)</span> = es el termino de efectos especifico de la firma <span class="math inline">\(i\)</span></p></li>
+<li><p><span class="math inline">\(\beta_{1}\)</span> y <span class="math inline">\(\beta_{2}\)</span> son los parametros para <span class="math inline">\(value_{it}\)</span> y <span class="math inline">\(capital_{it}\)</span> respectivamente.</p></li>
+<li><p><span class="math inline">\(\epsilon_{it}\)</span> es el termino de error.</p></li>
+</ul>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Ajuste del modelo con efectos fijos</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>gr_fe <span class="ot">&lt;-</span> <span class="fu">plm</span>(invest <span class="sc">~</span> value <span class="sc">+</span> capital, <span class="at">data =</span> pgr, <span class="at">model =</span> <span class="st">"within"</span>)</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Resumen del modelo con efectos fijos</span></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(gr_fe)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Oneway (individual) effect Within Model
+
+Call:
+plm(formula = invest ~ value + capital, data = pgr, model = "within")
+
+Balanced Panel: n = 3, T = 20, N = 60
+
+Residuals:
+     Min.   1st Qu.    Median   3rd Qu.      Max. 
+-167.3305  -26.1407    2.0878   26.8442  201.6813 
+
+Coefficients:
+        Estimate Std. Error t-value  Pr(&gt;|t|)    
+value   0.104914   0.016331  6.4242 3.296e-08 ***
+capital 0.345298   0.024392 14.1564 &lt; 2.2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Total Sum of Squares:    1888900
+Residual Sum of Squares: 243980
+R-Squared:      0.87084
+Adj. R-Squared: 0.86144
+F-statistic: 185.407 on 2 and 55 DF, p-value: &lt; 2.22e-16</code></pre>
+</div>
+</div>
+</section>
+<section id="coeficientes-estimados-1" class="level3" data-number="5.2.7">
+<h3 data-number="5.2.7" class="anchored" data-anchor-id="coeficientes-estimados-1"><span class="header-section-number">5.2.7</span> Coeficientes Estimados</h3>
+<p>De la salida del modelo, los coeficientes estimados son:</p>
+<ul>
+<li><p>Coeficiente de <span class="math inline">\(\text{value}(\beta_1)\)</span>: <span class="math inline">\(0.104914\)</span></p></li>
+<li><p>Coeficiente de <span class="math inline">\(\text{capital} (\beta_2)\)</span>: <span class="math inline">\(0.345298\)</span></p></li>
+</ul>
+</section>
+<section id="forma-matemática-del-modelo-ajustado-1" class="level3" data-number="5.2.8">
+<h3 data-number="5.2.8" class="anchored" data-anchor-id="forma-matemática-del-modelo-ajustado-1"><span class="header-section-number">5.2.8</span> Forma Matemática del Modelo Ajustado</h3>
+<p>Incorporando estos coeficientes en la ecuación del modelo, obtenemos:</p>
+<p><span class="math display">\[\text{invest}_{it} = \alpha_{i} + 0.104914 \text{value}_{it} + 0.345298\text{capital}_{it}\]</span>​</p>
+</section>
+<section id="interpretación-de-los-coeficientes-1" class="level3" data-number="5.2.9">
+<h3 data-number="5.2.9" class="anchored" data-anchor-id="interpretación-de-los-coeficientes-1"><span class="header-section-number">5.2.9</span> Interpretación de los Coeficientes</h3>
+<ul>
+<li><p><strong>Coeficiente de</strong> <span class="math inline">\(\text{value} (\beta_1 = 0,104914)\)</span>: Este coeficiente indica que, manteniendo constante el capital, un aumento de una unidad en el valor de la firma está asociado con un aumento promedio de <span class="math inline">\(0.104914\)</span> unidades en la inversión.</p></li>
+<li><p><strong>Coeficiente de</strong> <span class="math inline">\(\text{capital}(\beta_{2} = 0.345298)\)</span>: Este coeficiente indica que, manteniendo constante el valor de la firma, un aumento de una unidad en el capital está asociado con un aumento promedio de <span class="math inline">\(0.345298\)</span> unidades en la inversión.</p></li>
+</ul>
+</section>
+<section id="estadísticas-del-modelo-1" class="level3" data-number="5.2.10">
+<h3 data-number="5.2.10" class="anchored" data-anchor-id="estadísticas-del-modelo-1"><span class="header-section-number">5.2.10</span> Estadísticas del Modelo</h3>
+<ul>
+<li><p><strong>R-Squared (0.87084)</strong>: Indica que aproximadamente el 87.08% de la variabilidad en la inversión puede ser explicada por los cambios en el valor y el capital, teniendo en cuenta las diferencias entre firmas.</p></li>
+<li><p><strong>Adj. R-Squared (0.86144)</strong>: Es el R-cuadrado ajustado que toma en cuenta el número de predictores en el modelo.</p></li>
+<li><p><strong>F-statistic (185.407)</strong>: Prueba global de significancia del modelo, con un <span class="math inline">\(p-valor &lt; 2.22e-16\)</span>, lo que indica que el modelo en su conjunto es significativo.</p></li>
+</ul>
+</section>
+<section id="comparación-entre-modelos-de-datos-de-panel-agrupados-y-de-efectos-fijos" class="level3" data-number="5.2.11">
+<h3 data-number="5.2.11" class="anchored" data-anchor-id="comparación-entre-modelos-de-datos-de-panel-agrupados-y-de-efectos-fijos"><span class="header-section-number">5.2.11</span> Comparación entre Modelos de Datos de Panel Agrupados y de Efectos Fijos</h3>
+<p>La comparación entre estos dos modelos se realiza para determinar si existen diferencias significativas entre las unidades (por ejemplo, firmas) que justifiquen el uso de un modelo de efectos fijos en lugar de un modelo de datos agrupados. Esto se hace mediante una prueba F para efectos individuales.</p>
+</section>
+<section id="prueba-f-para-efectos-individuales" class="level3" data-number="5.2.12">
+<h3 data-number="5.2.12" class="anchored" data-anchor-id="prueba-f-para-efectos-individuales"><span class="header-section-number">5.2.12</span> Prueba F para Efectos Individuales</h3>
+<p>La prueba F para efectos individuales (o prueba de efectos fijos) evalúa la hipótesis nula de que todos los interceptos individuales <span class="math inline">\((\alpha_{i})\)</span> son iguales contra la hipótesis alternativa de que al menos uno de ellos es diferente. En otras palabras, la prueba determina si los efectos individuales (firmas) tienen un impacto significativo en el modelo.</p>
+<section id="hipótesis" class="level4" data-number="5.2.12.1">
+<h4 data-number="5.2.12.1" class="anchored" data-anchor-id="hipótesis"><span class="header-section-number">5.2.12.1</span> Hipótesis</h4>
+<ul>
+<li><p><span class="math inline">\(Hipótesis ~ Nula (HO​)\)</span>: No hay efectos individuales significativos. Esto implica que los interceptos individuales son iguales y un modelo de datos agrupados es apropiado.</p></li>
+<li><p><span class="math inline">\(Hipótesis Alternativa (HA)\)</span>: Hay efectos individuales significativos. Esto implica que los interceptos individuales son diferentes y un modelo de efectos fijos es más adecuado.</p></li>
+</ul>
+</section>
+<section id="fórmula-de-la-prueba-f" class="level4" data-number="5.2.12.2">
+<h4 data-number="5.2.12.2" class="anchored" data-anchor-id="fórmula-de-la-prueba-f"><span class="header-section-number">5.2.12.2</span> Fórmula de la Prueba F</h4>
+<p>La prueba F se calcula como sigue:</p>
+<p><span class="math display">\[F = \frac{(RSS_{Pooled} - RSS_{FE}) / (n - 1)}{RSS_{FE} / (N - n - k)}\]</span> ​</p>
+<p>Donde:</p>
+<ul>
+<li><p><span class="math inline">\(RSS_{pooled}\)</span>​ es la suma de los residuos cuadrados del modelo agrupado.</p></li>
+<li><p><span class="math inline">\(RSS_{FE}\)</span>​ es la suma de los residuos cuadrados del modelo de efectos fijos.</p></li>
+<li><p><span class="math inline">\(n\)</span> es el número de unidades (firmas).</p></li>
+<li><p><span class="math inline">\(N\)</span> es el número total de observaciones.</p></li>
+<li><p><span class="math inline">\(k\)</span> es el número de variables explicativas.</p></li>
+</ul>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Prueba F para comparar el modelo de efectos fijos con el modelo OLS agrupado</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="fu">pFtest</span>(gr_fe, gr_pool)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    F test for individual effects
+
+data:  invest ~ value + capital
+F = 56.825, df1 = 2, df2 = 55, p-value = 4.148e-14
+alternative hypothesis: significant effects</code></pre>
+</div>
+</div>
+<ul>
+<li><p><strong>F = 56.825</strong>: Este es el estadístico F calculado.</p></li>
+<li><p><strong>df1 = 2</strong>: Grados de libertad del numerador (número de variables explicativas).</p></li>
+<li><p><strong>df2 = 55</strong>: Grados de libertad del denominador (total de observaciones menos el número de unidades y variables explicativas).</p></li>
+<li><p><strong>p-value = 4.148e-14</strong>: Este es el p-valor asociado con la prueba F.</p></li>
+</ul>
+</section>
+<section id="interpretación-1" class="level4" data-number="5.2.12.3">
+<h4 data-number="5.2.12.3" class="anchored" data-anchor-id="interpretación-1"><span class="header-section-number">5.2.12.3</span> Interpretación</h4>
+<ul>
+<li><p><strong>p-value (4.148e-14)</strong>: El p-valor es extremadamente pequeño (mucho menor que 0.05), lo que indica que rechazamos la hipótesis nula a un nivel de significancia del 5%.</p></li>
+<li><p><strong>Rechazo de</strong> <span class="math inline">\(HO\)</span>: Esto significa que hay evidencia estadística suficiente para concluir que existen efectos individuales significativos. En otras palabras, las interceptaciones individuales son significativamente diferentes entre sí.</p></li>
+</ul>
+</section>
+</section>
+<section id="conclusión" class="level3" data-number="5.2.13">
+<h3 data-number="5.2.13" class="anchored" data-anchor-id="conclusión"><span class="header-section-number">5.2.13</span> Conclusión</h3>
+<p>Dado el resultado de la prueba F, concluimos que el modelo de efectos fijos es más apropiado que el modelo de datos agrupados para estos datos. Los efectos individuales (firmas) tienen un impacto significativo en la inversión, y por lo tanto, deben ser incluidos en el modelo.</p>
+<p>Este análisis es crucial en datos de panel porque ayuda a elegir el modelo que mejor captura la estructura subyacente de los datos, mejorando así la precisión y la interpretación de los resultados.</p>
+</section>
+<section id="modelos-con-efectos-aleatorios" class="level3" data-number="5.2.14">
+<h3 data-number="5.2.14" class="anchored" data-anchor-id="modelos-con-efectos-aleatorios"><span class="header-section-number">5.2.14</span> <strong>Modelos con Efectos Aleatorios</strong></h3>
+<p>El modelo de efectos aleatorios asume que las diferencias entre las unidades (firmas) se capturan mediante un término de error aleatorio. La forma matemática es:</p>
+<p><span class="math display">\[invest_{it} = \beta_{0} + \beta_{1}value_{it} + \beta_{2}capital_{it} + u_{i} + \epsilon_{it}\]</span></p>
+<p>Donde:</p>
+<ul>
+<li><p><span class="math inline">\(\beta_{0}\)</span> = es el intercepto en comun de las firmas.</p></li>
+<li><p><span class="math inline">\(u_{i}\)</span> es el término de error específico de la firma <span class="math inline">\(i\)</span>, que se asume que es un componente aleatorio.</p></li>
+<li><p><span class="math inline">\(\epsilon_{it}\)</span> es el termino de error.</p></li>
+</ul>
+</section>
+<section id="método-de-wallace-hussain" class="level3" data-number="5.2.15">
+<h3 data-number="5.2.15" class="anchored" data-anchor-id="método-de-wallace-hussain"><span class="header-section-number">5.2.15</span> <strong>Método de Wallace-Hussain</strong></h3>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Ajuste del modelo con efectos aleatorios (Wallace-Hussain)</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>gr_re <span class="ot">&lt;-</span> <span class="fu">plm</span>(invest <span class="sc">~</span> value <span class="sc">+</span> capital, <span class="at">data =</span> pgr, <span class="at">model =</span> <span class="st">"random"</span>, <span class="at">random.method =</span> <span class="st">"walhus"</span>)</span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Resumen del modelo con efectos aleatorios (Wallace-Hussain)</span></span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(gr_re)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Oneway (individual) effect Random Effect Model 
+   (Wallace-Hussain's transformation)
+
+Call:
+plm(formula = invest ~ value + capital, data = pgr, model = "random", 
+    random.method = "walhus")
+
+Balanced Panel: n = 3, T = 20, N = 60
+
+Effects:
+                  var std.dev share
+idiosyncratic 4389.31   66.25 0.352
+individual    8079.74   89.89 0.648
+theta: 0.8374
+
+Residuals:
+     Min.   1st Qu.    Median   3rd Qu.      Max. 
+-187.3987  -32.9206    6.9595   31.4322  210.2006 
+
+Coefficients:
+               Estimate  Std. Error z-value  Pr(&gt;|z|)    
+(Intercept) -109.976572   61.701384 -1.7824   0.07468 .  
+value          0.104280    0.014996  6.9539 3.553e-12 ***
+capital        0.344784    0.024520 14.0613 &lt; 2.2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Total Sum of Squares:    1988300
+Residual Sum of Squares: 257520
+R-Squared:      0.87048
+Adj. R-Squared: 0.86594
+Chisq: 383.089 on 2 DF, p-value: &lt; 2.22e-16</code></pre>
+</div>
+</div>
+</section>
+<section id="método-de-amemiya" class="level3" data-number="5.2.16">
+<h3 data-number="5.2.16" class="anchored" data-anchor-id="método-de-amemiya"><span class="header-section-number">5.2.16</span> <strong>Método de Amemiya</strong></h3>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Ajuste del modelo con efectos aleatorios (Amemiya)</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>gr_re1 <span class="ot">&lt;-</span> <span class="fu">plm</span>(invest <span class="sc">~</span> value <span class="sc">+</span> capital, <span class="at">data =</span> pgr, <span class="at">model =</span> <span class="st">"random"</span>, <span class="at">random.method =</span> <span class="st">"amemiya"</span>)</span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Resumen del modelo con efectos aleatorios (Amemiya)</span></span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(gr_re1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Oneway (individual) effect Random Effect Model 
+   (Amemiya's transformation)
+
+Call:
+plm(formula = invest ~ value + capital, data = pgr, model = "random", 
+    random.method = "amemiya")
+
+Balanced Panel: n = 3, T = 20, N = 60
+
+Effects:
+                  var std.dev share
+idiosyncratic 4280.43   65.43  0.34
+individual    8325.12   91.24  0.66
+theta: 0.8417
+
+Residuals:
+     Min.   1st Qu.    Median   3rd Qu.      Max. 
+-186.8821  -33.0073    7.2036   31.0795  209.9289 
+
+Coefficients:
+               Estimate  Std. Error z-value  Pr(&gt;|z|)    
+(Intercept) -110.046862   62.944693 -1.7483   0.08041 .  
+value          0.104306    0.015042  6.9341 4.088e-12 ***
+capital        0.344813    0.024491 14.0793 &lt; 2.2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Total Sum of Squares:    1983100
+Residual Sum of Squares: 256810
+R-Squared:      0.8705
+Adj. R-Squared: 0.86595
+Chisq: 383.148 on 2 DF, p-value: &lt; 2.22e-16</code></pre>
+</div>
+</div>
+</section>
+<section id="método-de-nerlove" class="level3" data-number="5.2.17">
+<h3 data-number="5.2.17" class="anchored" data-anchor-id="método-de-nerlove"><span class="header-section-number">5.2.17</span> <strong>Método de Nerlove</strong></h3>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Ajuste del modelo con efectos aleatorios (Nerlove)</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>gr_re2 <span class="ot">&lt;-</span> <span class="fu">plm</span>(invest <span class="sc">~</span> value <span class="sc">+</span> capital, <span class="at">data =</span> pgr, <span class="at">model =</span> <span class="st">"random"</span>, <span class="at">random.method =</span> <span class="st">"nerlove"</span>)</span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Resumen del modelo con efectos aleatorios (Nerlove)</span></span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(gr_re2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Oneway (individual) effect Random Effect Model 
+   (Nerlove's transformation)
+
+Call:
+plm(formula = invest ~ value + capital, data = pgr, model = "random", 
+    random.method = "nerlove")
+
+Balanced Panel: n = 3, T = 20, N = 60
+
+Effects:
+                   var  std.dev share
+idiosyncratic  4066.41    63.77 0.241
+individual    12808.71   113.18 0.759
+theta: 0.875
+
+Residuals:
+     Min.   1st Qu.    Median   3rd Qu.      Max. 
+-182.8631  -32.7789    6.4448   29.4453  207.9041 
+
+Coefficients:
+               Estimate  Std. Error z-value  Pr(&gt;|z|)    
+(Intercept) -110.563691   75.685576 -1.4608    0.1441    
+value          0.104505    0.015382  6.7938 1.092e-11 ***
+capital        0.345005    0.024290 14.2038 &lt; 2.2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Total Sum of Squares:    1947600
+Residual Sum of Squares: 251980
+R-Squared:      0.87062
+Adj. R-Squared: 0.86608
+Chisq: 383.562 on 2 DF, p-value: &lt; 2.22e-16</code></pre>
+</div>
+</div>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 22%">
+<col style="width: 22%">
+<col style="width: 21%">
+</colgroup>
+<thead>
+<tr class="header">
+<th><strong>Característica</strong></th>
+<th><strong>Wallace-Hussain</strong></th>
+<th><strong>Amemiya</strong></th>
+<th><strong>Nerlove</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Intercepto</strong></td>
+<td>-109.976572 (p = 0.07468)</td>
+<td>-110.046862 (p = 0.08041)</td>
+<td>-110.563691 (p = 0.1441)</td>
+</tr>
+<tr class="even">
+<td><strong>Coeficiente de value</strong></td>
+<td>0.104280 (p &lt; 2.22e-16)</td>
+<td>0.104306 (p &lt; 2.22e-16)</td>
+<td>0.104505 (p &lt; 2.22e-16)</td>
+</tr>
+<tr class="odd">
+<td><strong>Coeficiente de capital</strong></td>
+<td>0.344784 (p &lt; 2.22e-16)</td>
+<td>0.344813 (p &lt; 2.22e-16)</td>
+<td>0.345005 (p &lt; 2.22e-16)</td>
+</tr>
+<tr class="even">
+<td><strong>Varianza idiosincrática</strong></td>
+<td>4389.31</td>
+<td>4280.43</td>
+<td>4066.41</td>
+</tr>
+<tr class="odd">
+<td><strong>Desviación estándar idiosincrática</strong></td>
+<td>66.25</td>
+<td>65.43</td>
+<td>63.77</td>
+</tr>
+<tr class="even">
+<td><strong>Varianza individual</strong></td>
+<td>8079.74</td>
+<td>8325.12</td>
+<td>12808.71</td>
+</tr>
+<tr class="odd">
+<td><strong>Desviación estándar individual</strong></td>
+<td>89.89</td>
+<td>91.24</td>
+<td>113.18</td>
+</tr>
+<tr class="even">
+<td><strong>Theta</strong></td>
+<td>0.8374</td>
+<td>0.8417</td>
+<td>0.875</td>
+</tr>
+<tr class="odd">
+<td><strong>Min Residual</strong></td>
+<td>-187.3987</td>
+<td>-186.8821</td>
+<td>-182.8631</td>
+</tr>
+<tr class="even">
+<td><strong>1er Cuartil Residual</strong></td>
+<td>-32.9206</td>
+<td>-33.0073</td>
+<td>-32.7789</td>
+</tr>
+<tr class="odd">
+<td><strong>Mediana Residual</strong></td>
+<td>6.9595</td>
+<td>7.2036</td>
+<td>6.4448</td>
+</tr>
+<tr class="even">
+<td><strong>3er Cuartil Residual</strong></td>
+<td>31.4322</td>
+<td>31.0795</td>
+<td>29.4453</td>
+</tr>
+<tr class="odd">
+<td><strong>Max Residual</strong></td>
+<td>210.2006</td>
+<td>209.9289</td>
+<td>207.9041</td>
+</tr>
+<tr class="even">
+<td><strong>R-cuadrado</strong></td>
+<td>0.87048</td>
+<td>0.8705</td>
+<td>0.87062</td>
+</tr>
+<tr class="odd">
+<td><strong>R-cuadrado ajustado</strong></td>
+<td>0.86594</td>
+<td>0.86595</td>
+<td>0.86608</td>
+</tr>
+<tr class="even">
+<td><strong>Chisq</strong></td>
+<td>383.089 (p &lt; 2.22e-16)</td>
+<td>383.148 (p &lt; 2.22e-16)</td>
+<td>383.562 (p &lt; 2.22e-16)</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="interpretación-de-la-tabla" class="level3" data-number="5.2.18">
+<h3 data-number="5.2.18" class="anchored" data-anchor-id="interpretación-de-la-tabla"><span class="header-section-number">5.2.18</span> Interpretación de la Tabla:</h3>
+<ol type="1">
+<li><p><strong>Intercepto</strong>: El intercepto varía ligeramente entre los modelos, y todos tienen p-valores que indican que no son significativamente diferentes de cero a niveles tradicionales (0.05), pero son más marginalmente no significativos en Wallace-Hussain y Amemiya.</p></li>
+<li><p><strong>Coeficientes de value y capital</strong>: Los coeficientes de <span class="math inline">\(valeu\)</span> y <span class="math inline">\(capital\)</span> son muy similares entre los modelos, todos siendo altamente significativos <span class="math inline">\((p &lt; 0.001)\)</span>.</p></li>
+<li><p><strong>Varianza y Desviación Estándar</strong>:</p>
+<ul>
+<li><p>La varianza y desviación estándar idiosincrática son menores en el modelo de Nerlove.</p></li>
+<li><p>La varianza y desviación estándar individual son significativamente mayores en el modelo de Nerlove, indicando que este modelo captura más variación entre las firmas.</p></li>
+</ul></li>
+<li><p><strong>Theta</strong>: El valor de theta, que indica la proporción de la variabilidad total explicada por la variabilidad entre unidades individuales, es mayor en el modelo de Nerlove.</p></li>
+<li><p><strong>Residuales</strong>: Los residuales mínimos, el primer cuartil, la mediana, el tercer cuartil y el máximo son similares entre los modelos, con ligeras variaciones.</p></li>
+<li><p><strong>R-cuadrado y R-cuadrado ajustado</strong>: Todos los modelos tienen R-cuadrados y R-cuadrados ajustados similares, indicando que explican aproximadamente el 87% de la variabilidad total en la inversión.</p></li>
+<li><p><strong>Chisq</strong>: Todos los modelos tienen valores de Chi-cuadrado altos y p-valores muy pequeños (&lt; 2.22e-16), indicando que los modelos son significativamente diferentes de un modelo nulo.</p></li>
+</ol>
+<p>Esta tabla proporciona una comparación clara entre los tres métodos de estimación de efectos aleatorios, destacando las pequeñas diferencias y similitudes entre ellos.</p>
+</section>
+<section id="comparación-teórica" class="level3" data-number="5.2.19">
+<h3 data-number="5.2.19" class="anchored" data-anchor-id="comparación-teórica"><span class="header-section-number">5.2.19</span> Comparación Teórica</h3>
+<ul>
+<li><p><strong>Estimación de Varianzas</strong>: Los tres métodos difieren principalmente en cómo estiman las varianzas de los efectos individuales y los errores idiosincráticos.</p>
+<ul>
+<li><p><strong>Wallace-Hussain</strong>: Minimiza la suma de las varianzas.</p></li>
+<li><p><strong>Amemiya</strong>: Ofrece flexibilidad y robustez.</p></li>
+<li><p><strong>Nerlove</strong>: Da mayor peso a las varianzas individuales.</p></li>
+</ul></li>
+<li><p><strong>Theta</strong>: El coeficiente de corrección theta varía según el método, reflejando las diferencias en la estimación de las varianzas.</p></li>
+<li><p><strong>Aplicabilidad</strong>: La elección del método puede depender de las características específicas del conjunto de datos y de los supuestos sobre la estructura de varianza.</p></li>
+</ul>
+</section>
+</section>
+<section id="pruebas-de-hausman-para-comparar-modelos" class="level2" data-number="5.3">
+<h2 data-number="5.3" class="anchored" data-anchor-id="pruebas-de-hausman-para-comparar-modelos"><span class="header-section-number">5.3</span> <strong>Pruebas de Hausman para Comparar Modelos</strong></h2>
+<p><span class="math display">\[Ho: Efectos ~ aleatorios ~ es ~ consistente\]</span></p>
+<p><span class="math display">\[Ha: Efectos ~ fijos ~ es ~ consistente\]</span></p>
+<p>La prueba de Hausman se utiliza para determinar si un modelo de efectos aleatorios es consistente comparado con un modelo de efectos fijos.</p>
+<section id="procedimiento-de-la-prueba" class="level3" data-number="5.3.1">
+<h3 data-number="5.3.1" class="anchored" data-anchor-id="procedimiento-de-la-prueba"><span class="header-section-number">5.3.1</span> Procedimiento de la Prueba:</h3>
+<ol type="1">
+<li><p><strong>Estimación de los Modelos</strong>:</p>
+<ul>
+<li>Se estiman ambos modelos, FE y RE, utilizando los datos de panel.</li>
+</ul></li>
+<li><p><strong>Obtención de los Estimadores</strong>:</p>
+<ul>
+<li>Se calculan los estimadores de los coeficientes bajo ambos modelos.</li>
+</ul></li>
+<li><p><strong>Comparación de los Estimadores</strong>:</p>
+<ul>
+<li>Se calcula la diferencia entre los estimadores bajo los dos modelos <span class="math inline">\((\hat{\beta}_{FE}-\hat{\beta}_{RE})\)</span>.</li>
+</ul></li>
+<li><p><strong>Estimación de la Varianza de la Diferencia</strong>:</p>
+<ul>
+<li>Se estima la varianza de la diferencia considerando las matrices de covarianza de los estimadores bajo ambos modelos.</li>
+</ul></li>
+<li><p><strong>Aplicación de la Estadística de Prueba</strong>:</p>
+<ul>
+<li>Se utiliza la estadística de prueba de Hausman, que sigue una distribución chi-cuadrado bajo las hipótesis nula y alternativa.</li>
+</ul>
+<p><span class="math display">\[H = (\hat{\beta}_{FE} - \hat{\beta}_{RE})' [Var(\hat{\beta}_{FE}) - Var(\hat{\beta}_{RE})]^{-1} (\hat{\beta}_{FE} - \hat{\beta}_{RE}) \sim \chi^2(k)\]</span></p>
+<ul>
+<li><span class="math inline">\(k\)</span>: Número de coeficientes en el modelo (grados de libertad).</li>
+</ul></li>
+<li><p><strong>Interpretación del Valor p</strong>:</p>
+<ul>
+<li>Se evalúa el <span class="math inline">\(valor ~ p\)</span> obtenido de la estadística de prueba. Un valor p pequeño sugiere que existe suficiente evidencia para rechazar la hipótesis nula en favor de la hipótesis alternativa.</li>
+</ul></li>
+</ol>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Prueba de Hausman para el modelo con efectos aleatorios (Wallace-Hussain) vs efectos fijos</span></span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a><span class="fu">phtest</span>(gr_re, gr_fe)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Hausman Test
+
+data:  invest ~ value + capital
+chisq = 0.04038, df = 2, p-value = 0.98
+alternative hypothesis: one model is inconsistent</code></pre>
+</div>
+</div>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Prueba de Hausman para el modelo con efectos aleatorios (Amemiya) vs efectos fijos</span></span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a><span class="fu">phtest</span>(gr_re1, gr_fe)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Hausman Test
+
+data:  invest ~ value + capital
+chisq = 0.044291, df = 2, p-value = 0.9781
+alternative hypothesis: one model is inconsistent</code></pre>
+</div>
+</div>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Prueba de Hausman para el modelo con efectos aleatorios (Nerlove) vs efectos fijos</span></span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a><span class="fu">phtest</span>(gr_re2, gr_fe)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Hausman Test
+
+data:  invest ~ value + capital
+chisq = 0.099882, df = 2, p-value = 0.9513
+alternative hypothesis: one model is inconsistent</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="conclusión-1" class="level2" data-number="5.4">
+<h2 data-number="5.4" class="anchored" data-anchor-id="conclusión-1"><span class="header-section-number">5.4</span> <strong>Conclusión</strong></h2>
+<p>Los resultados de las pruebas de Hausman indican que los modelos de efectos aleatorios son consistentes, lo que sugiere que es preferible utilizar un modelo de efectos aleatorios en lugar de un modelo de efectos fijos para estos datos.</p>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>© 2025, Yuberley</p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+<p>Construido con <a href="https://quarto.org/">Quarto</a></p>
+</div>
+  </div>
+</footer>
+
+
+
+
+</body></html>

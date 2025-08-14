@@ -1,0 +1,1097 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.57">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Yuberley Cruz Caycedo">
+<meta name="dcterms.date" content="2025-08-14">
+
+<title>Taller 6: Modelos de Vectores Autorregresivos (VAR) – Yuberley | Portafolio</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../favicon.png" rel="icon" type="image/png">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="floating nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">Yuberley | Portafolio</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../index.html"> 
+<span class="menu-text">Inicio</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../about.html"> 
+<span class="menu-text">Sobre Mí</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../proyectos.html"> 
+<span class="menu-text">Proyectos</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#introducción-a-los-modelos-var" id="toc-introducción-a-los-modelos-var" class="nav-link active" data-scroll-target="#introducción-a-los-modelos-var"><span class="header-section-number">1</span> Introducción a los Modelos VAR</a>
+  <ul class="collapse">
+  <li><a href="#del-var-estructural-al-var-en-forma-reducida" id="toc-del-var-estructural-al-var-en-forma-reducida" class="nav-link" data-scroll-target="#del-var-estructural-al-var-en-forma-reducida"><span class="header-section-number">1.1</span> Del VAR Estructural al VAR en Forma Reducida</a></li>
+  <li><a href="#criterios-de-información" id="toc-criterios-de-información" class="nav-link" data-scroll-target="#criterios-de-información"><span class="header-section-number">1.2</span> Criterios de Información</a></li>
+  <li><a href="#funciones-de-impulso-respuesta" id="toc-funciones-de-impulso-respuesta" class="nav-link" data-scroll-target="#funciones-de-impulso-respuesta"><span class="header-section-number">1.3</span> Funciones de Impulso Respuesta</a></li>
+  <li><a href="#tipos-de-funcion-de-impulso-respuesta" id="toc-tipos-de-funcion-de-impulso-respuesta" class="nav-link" data-scroll-target="#tipos-de-funcion-de-impulso-respuesta"><span class="header-section-number">1.4</span> Tipos de Funcion de Impulso Respuesta</a></li>
+  <li><a href="#causalidad-de-granger" id="toc-causalidad-de-granger" class="nav-link" data-scroll-target="#causalidad-de-granger"><span class="header-section-number">1.5</span> Causalidad de Granger</a></li>
+  </ul></li>
+  <li><a href="#ejemplo-análisis-de-un-sistema-bivariado-simulado" id="toc-ejemplo-análisis-de-un-sistema-bivariado-simulado" class="nav-link" data-scroll-target="#ejemplo-análisis-de-un-sistema-bivariado-simulado"><span class="header-section-number">2</span> Ejemplo: Análisis de un Sistema Bivariado Simulado</a>
+  <ul class="collapse">
+  <li><a href="#simulación-de-un-proceso-var2" id="toc-simulación-de-un-proceso-var2" class="nav-link" data-scroll-target="#simulación-de-un-proceso-var2"><span class="header-section-number">2.1</span> 1. Simulación de un Proceso VAR(2)</a></li>
+  <li><a href="#pruebas-de-raíz-unitaria" id="toc-pruebas-de-raíz-unitaria" class="nav-link" data-scroll-target="#pruebas-de-raíz-unitaria"><span class="header-section-number">2.2</span> 2. Pruebas de Raíz Unitaria</a></li>
+  <li><a href="#selección-del-número-de-rezagos-p" id="toc-selección-del-número-de-rezagos-p" class="nav-link" data-scroll-target="#selección-del-número-de-rezagos-p"><span class="header-section-number">2.3</span> 3. Selección del Número de Rezagos (p)</a></li>
+  <li><a href="#estimación-y-diagnósticos-del-var" id="toc-estimación-y-diagnósticos-del-var" class="nav-link" data-scroll-target="#estimación-y-diagnósticos-del-var"><span class="header-section-number">2.4</span> 4. Estimación y Diagnósticos del VAR</a></li>
+  <li><a href="#funciones-de-impulso-respuesta-irf" id="toc-funciones-de-impulso-respuesta-irf" class="nav-link" data-scroll-target="#funciones-de-impulso-respuesta-irf"><span class="header-section-number">2.5</span> 5. Funciones de Impulso-Respuesta (IRF)</a></li>
+  <li><a href="#causalidad-de-granger-1" id="toc-causalidad-de-granger-1" class="nav-link" data-scroll-target="#causalidad-de-granger-1"><span class="header-section-number">2.6</span> 6. Causalidad de Granger</a></li>
+  </ul></li>
+  </ul>
+</nav>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Taller 6: Modelos de Vectores Autorregresivos (VAR)</h1>
+<p class="subtitle lead">Análisis de Dinámica Multivariante con Datos Simulados</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Yuberley Cruz Caycedo </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">August 14, 2025</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="introducción-a-los-modelos-var" class="level2" data-number="1">
+<h2 data-number="1" class="anchored" data-anchor-id="introducción-a-los-modelos-var"><span class="header-section-number">1</span> Introducción a los Modelos VAR</h2>
+<p>Un modelo de vectores autorregresivos (VAR) es una herramienta econométrica fundamental para analizar la dinámica y las interdependencias entre múltiples series de tiempo. A diferencia de los modelos univariados (como los ARIMA), un VAR modela cada variable en el sistema como una función de sus propios valores pasados y de los valores pasados de todas las demás variables del sistema.</p>
+<blockquote class="blockquote">
+<p>Definición de VAR: “Los modelos VAR son útiles cuando se está interesado en predecir múltiples series de tiempo y analizar las relaciones dinámicas que existen entre ellas. En un modelo VAR, cada variable es una función lineal de los valores pasados de sí misma y de los valores pasados de las otras variables.”</p>
+<p>— Wooldridge, J. M. (2009). Introductory econometrics: A modern approach (4th ed.).</p>
+</blockquote>
+<p>Por ejemplo, consideremos un sistema con dos series temporales: el PIB y la tasa de desempleo. Un modelo VAR para este sistema podría modelar tanto el PIB como la tasa de desempleo en función de sus valores pasados y de los valores pasados de la otra variable. Esto permitiría analizar cómo el PIB y la tasa de desempleo afectan mutuamente entre sí a lo largo del tiempo.</p>
+<section id="del-var-estructural-al-var-en-forma-reducida" class="level3" data-number="1.1">
+<h3 data-number="1.1" class="anchored" data-anchor-id="del-var-estructural-al-var-en-forma-reducida"><span class="header-section-number">1.1</span> Del VAR Estructural al VAR en Forma Reducida</h3>
+<p>Veamos el modelo estructural dinámico [modelo (1)]:</p>
+<p><span class="math inline">\(y_{1t}= \alpha_{10} + \alpha_{11}y_{2t} + \alpha_{12}y_{1t-1} + \alpha_{13}y_{2t-1} + \gamma^{´}_1z_t +\epsilon_1t\)</span></p>
+<p><span class="math inline">\(y_{2t}= \alpha_{20} + \alpha_{21}y_{1t} + \alpha_{22}y_{1t-1} + \alpha_{23}y_{2t-1} + \gamma^{´}_2z_t +\epsilon_2t\)</span></p>
+<p>Donde <span class="math inline">\(y_{1t}\)</span> , <span class="math inline">\(y_{2t}\)</span> son variables estacionarias, y <span class="math inline">\(\epsilon_{1t}\)</span> , <span class="math inline">\(\epsilon_{2t}\)</span> son procesos ruido blanco con esperanza cero y varianzas <span class="math inline">\(\sigma^{2}_{\epsilon_{1t}}\)</span>, <span class="math inline">\(\sigma^{2}_{\epsilon_{2t}}\)</span> y covarianza <span class="math inline">\(\sigma_{12}\)</span>.</p>
+<p>El modelo (1) es de ecuaciones simultáneas con dos variables endógenas <span class="math inline">\(y_{1t}\)</span> y <span class="math inline">\(y_{2t}\)</span> y un vector <span class="math inline">\(z_t\)</span> de variables exógenas.</p>
+<p>Un shock sobre <span class="math inline">\(y_{2t}\)</span>, en la forma de un valor no nulo de la innovación estructural <span class="math inline">\(\epsilon_{2t}\)</span>, afecta directamente a <span class="math inline">\(y_{2t}\)</span>, pero también influye a <span class="math inline">\(y_{1t}\)</span> a través de la presencia de <span class="math inline">\(y_{2t}\)</span> como variable explicativa en la primera ecuación.</p>
+<p>Además, este efecto se propaga en el tiempo, debido a la presencia de los valores rezagados de ambas variables como variables explicativas.</p>
+<p>Las variables explicativas exógenas <span class="math inline">\(z_t\)</span> también pueden aparecer con rezagos en el modelo. Por ejemplo, <span class="math inline">\(z_t\)</span> podría ser una tendencia determinista o que recoja la estacionalidad.&nbsp;<span class="math inline">\(z_t\)</span>&nbsp;también puede representar variables tal que&nbsp;<span class="math inline">\(E(z_{t−s}{~}\epsilon_{1t})=𝐸(z_{𝑡-s} ~ \epsilon_{2𝑡})=0&nbsp;~ ∀_𝑠\)</span>. Por ejemplo, el precio de barril de petróleo que se determina en mercados internacionales mientras&nbsp;<span class="math inline">\(y_{1t}\)</span> y <span class="math inline">\(y_{2t}\)</span> son variables de la macroeconmía que se determinan en la economia interna.</p>
+<p>Ahora, el Modelo (1) se puede representar de forma matricial de la siguiente forma:</p>
+<p><span class="math inline">\(\Pi y_t = \Gamma_0 + \Gamma_1 y_{t-1} + \Phi z_t + \varepsilon_t\)</span></p>
+<p>Donde:</p>
+<p><span class="math inline">\(\Pi = \begin{equation}\begin{pmatrix}1 &amp; -\alpha_{11} \\-\alpha_{21} &amp; 1 \end{pmatrix}\end{equation}\)</span> , <span class="math inline">\(\Gamma_0 =\begin{equation}\begin{pmatrix} \alpha_{10} \\\alpha_{20} \end{pmatrix}\end{equation}\)</span> , <span class="math inline">\(\Gamma_1 = \begin{equation}\begin{pmatrix} \alpha_{12} &amp; \alpha_{13} \\\alpha_{22} &amp; \alpha_{23} \end{pmatrix}\end{equation}\)</span> , <span class="math inline">\(\Phi =\begin{equation}\begin{pmatrix} \gamma_{1} \\\gamma_{2} \end{pmatrix}\end{equation}\)</span></p>
+<p>Este modelo se conoce como VAR estructural y presenta dos problemas:</p>
+<ol type="1">
+<li><p>la simultaneidad, al aparecer cada una de las dos variables como variable explicativa en la ecuación de la otra, lo que genera inconsistencia del estimador MCO, podría resolverse estimando por variables instrumentales, siempre que contemos con instrumentos adecuados, lo cual no es sencillo de justificar. Además, el segundo problema podría persistir.</p></li>
+<li><p>si los términos de error tuviesen autocorrelación, las estimaciones MCO serían inconsistentes, al tratarse de un modelo dinámico se resuelve tratando de ampliar la estructura dinámica del modelo hasta lograr que los términos de error carezcan de autocorrelación.</p></li>
+</ol>
+<p>Supongamos que la matriz <span class="math inline">\(\Pi\)</span> tiene inversa <span class="math inline">\(det(\Pi) \neq~ 0\)</span> , tenemos entonces:</p>
+<p><span class="math inline">\(y_t = \Pi^{-1} \Gamma_0 + \Pi^{-1}\Gamma_1 y_{t-1} + \Pi^{-1}\Phi z_t + \Pi^{-1} \varepsilon_t\)</span></p>
+<p><span class="math inline">\(y_t = \Pi^{-1} \Gamma_0 + \Pi^{-1}\Gamma_1 y_{t-1} + \Pi^{-1}\Phi z_t + \Pi^{-1} \varepsilon_t\)</span></p>
+<p><span class="math inline">\(y_t = \textbf{A}_0 + \textbf{A}_1 y_{t-1} + \textbf{M} z_t + u_t\)</span></p>
+<p>Donde:</p>
+<p><span class="math inline">\(\textbf{A}_0 = \Pi^{-1} \Gamma_0\)</span> , <span class="math inline">\(\textbf{A}_1 = \Pi^{-1}\Gamma_1\)</span> , <span class="math inline">\(\textbf{M} = \Pi^{-1}\Phi\)</span> , <span class="math inline">\(u_t = \Pi^{-1} \varepsilon_t\)</span></p>
+<p>Asi, hemos obtenido en modelo de forma reducida o modelo vectorial autoregresivo (VAR) en el cual:</p>
+<p><span class="math inline">\(y_{1t}= \beta_{10} + \beta_{11}y_{1t-1} + \beta_{12}y_{2t-1} + \textbf{m}_{11}z_t + u_{1t}\)</span></p>
+<p><span class="math inline">\(y_{2t}= \beta_{20} + \beta_{21}y_{1t-1} + \beta_{22}y_{2t-1} + \textbf{m}_{21}z_t + u_{2t}\)</span></p>
+<p>Este seria un modelo VAR de orden n en su forma reducida:</p>
+<p><span class="math inline">\(y_{1t}= \beta_{10} + \sum_{j=1}^{k}\beta_{j}y_{t-j} + \sum_{j=1}^{k}\textbf{m}_{j}z_{t-j} + u_{1t}\)</span></p>
+<p><span class="math inline">\(y_{2t}= \beta_{20} + \sum_{j=1}^{k}\theta_{j}y_{t-j} + \sum_{j=1}^{k}\textbf{m}_{j}z_t + u_{2t}\)</span></p>
+<p>En la forma reducida de un modelo VAR (Modelo de Vectores Autorregresivos), las ecuaciones se expresan en términos de las variables endógenas del sistema en función de sus rezagos y, posiblemente, variables exógenas. La estructura de un modelo VAR en su forma reducida se puede describir de la siguiente manera:</p>
+<ol type="1">
+<li><p>Variables Endógenas: Estas son las variables que se están modelando en el sistema. Por ejemplo, si estamos modelando el PIB, la inflación y la tasa de interés, estas serían nuestras variables endógenas.</p></li>
+<li><p>Rezagos: Cada variable endógena se expresa como una función lineal de sus propios rezagos y de los rezagos de las otras variables endógenas en el sistema. Por ejemplo, la variable endógena <span class="math inline">\(y_{1t}\)</span> en el rezago <span class="math inline">\(j\)</span> se puede expresar como <span class="math inline">\(y_{t-j}\)</span>​.</p></li>
+<li><p>Variables Exógenas (opcional): Además de las variables endógenas, el modelo VAR en su forma reducida puede incluir variables exógenas que no están determinadas dentro del sistema, pero que pueden afectar a las variables endógenas. Estas variables pueden incluir datos económicos, políticos o cualquier otro factor relevante.</p></li>
+<li><p>Parámetros del Modelo: Los parámetros del modelo son los coeficientes que multiplican a los rezagos de las variables endógenas y, posiblemente, a las variables exógenas. Estos parámetros son estimados a partir de los datos y capturan la relación entre las diferentes variables en el sistema.</p></li>
+<li><p>Error Término (Residuos): El término de error en la forma reducida del modelo VAR captura la parte de la variabilidad de las variables endógenas que no es explicada por los términos autoregresivos y las variables exógenas. Estos errores se suponen que son independientes e idénticamente distribuidos, con una distribución normal. donde las <span class="math inline">\(u\)</span> son los terminos de error estocático, llamados impulsos, innovaciones o choques en el lenguaje VAR.</p></li>
+<li><p>La utilizacion de muchas o muy pocas variables rezagadas puede conducir a un problema de consumo de muchos grados de libertad, la aparicion de la multicolinealidad o errores de especificacion. una forma de decidir esta cuestión es utilizar criterios como el de Akaike o el de Schwarz, para decidir el modelo que proporcione los valores mas bajo de estos.</p></li>
+<li><p>El orden de los modelos VAR está dado por el número de rezagos que se usan en cada ecuación. El modelo descrito anteriormente es entonces un <span class="math inline">\(\textbf{VAR(1)}\)</span>, para denotar también el número de variables se usa<span class="math inline">\(\textbf{VAR}_{2}(1)\)</span></p></li>
+</ol>
+</section>
+<section id="criterios-de-información" class="level3" data-number="1.2">
+<h3 data-number="1.2" class="anchored" data-anchor-id="criterios-de-información"><span class="header-section-number">1.2</span> Criterios de Información</h3>
+<p>Un problema central en el análisis de modelos VAR es encontrar el número de rezagos que produce los mejores resultados. La comparación de modelos generalmente se basa en criterios de información como el Akaike <code>AIC</code>, Bayesiano <code>BIC</code> o Hannan-Quinn <code>HQ</code>, buscando que se minimice el valor del criterio de información.</p>
+<p><span class="math inline">\(AIC=\frac{−2} lT + \frac 2pT\)</span></p>
+<p><span class="math inline">\(BIC=\frac {−2}lT+ \frac {2ln(T)}T\)</span></p>
+<p><span class="math inline">\(HQ=\frac {−2}lT + \frac {2kln(ln(T))}T\)</span></p>
+<p>Donde <span class="math inline">\(l=\frac {−Tk}{2}(1+ln(2π))−\frac T2ln(|Σ|)\)</span>, y <span class="math inline">\(p=k(d+nk)\)</span> el número de parámetros estimados en el modelo VAR, siendo <span class="math inline">\(d\)</span> es el número de variables exógenas, <span class="math inline">\(n\)</span> el orden del VAR, <span class="math inline">\(k\)</span> el número de variables endógenas.</p>
+<p>Por lo general, el <code>AIC</code> es preferible a otros criterios, debido a sus características favorables de pronóstico de muestras pequeñas. El <code>BIC</code> y <code>HQ</code>, sin embargo, funcionan bien en muestras grandes y tienen la ventaja de ser un estimador consistente, es decir, converge a los valores verdaderos.</p>
+</section>
+<section id="funciones-de-impulso-respuesta" class="level3" data-number="1.3">
+<h3 data-number="1.3" class="anchored" data-anchor-id="funciones-de-impulso-respuesta"><span class="header-section-number">1.3</span> Funciones de Impulso Respuesta</h3>
+<p>Las funciones de impulso-respuesta (IRF) son una herramienta importante en el análisis de modelos VAR (Vector Autoregressive). Proporcionan información sobre cómo las variables en un sistema responden a los cambios en otras variables a lo largo del tiempo, específicamente en respuesta a un “impulso” o un shock en una de las variables.</p>
+<p>Aquí hay una explicación detallada de las funciones de impulso-respuesta en modelos VAR:</p>
+<ol type="1">
+<li><p>Definición de Impulso-Respuesta: En un modelo VAR, el término “impulso” se refiere a un choque o shock que afecta a una de las variables del sistema. La función de impulso-respuesta describe cómo las otras variables del sistema responden a este impulso en el tiempo.</p></li>
+<li><p>Cálculo de las IRF: Las IRF se calculan mediante simulación. Una vez estimado el modelo VAR, se introduce un impulso unitario (o un impulso en el nivel deseado) en una de las variables del sistema y se observa cómo las otras variables responden a este impulso a lo largo de múltiples períodos de tiempo.</p></li>
+<li><p>Interpretación de las IRF: Las IRF muestran cómo un cambio en una variable afecta a otras variables en el sistema a lo largo del tiempo. Una IRF típicamente muestra cómo la variable endógena (o variable de respuesta) responde al impulso en una variable exógena (o variable de impulso) en diferentes horizontes temporales.</p></li>
+<li><p>Propiedades de las IRF:</p>
+<ul>
+<li><p>Dirección y Magnitud de la Respuesta: Las IRF muestran si las variables responden positiva o negativamente al impulso, así como la magnitud de esa respuesta.</p></li>
+<li><p>Persistencia: Las IRF también indican si el efecto del impulso persiste en el tiempo o disminuye gradualmente.</p></li>
+<li><p>Efectos Cruzados: Las IRF muestran cómo los diferentes impulsos afectan a las variables en el sistema, lo que puede ayudar a entender las interacciones entre las variables.</p></li>
+</ul></li>
+<li><p>Utilidad de las IRF: Las IRF son útiles para evaluar el impacto de diferentes políticas o choques en una economía, comprender las dinámicas de las variables en un sistema económico y pronosticar el comportamiento futuro de las variables en función de cambios en otras variables.</p></li>
+</ol>
+</section>
+<section id="tipos-de-funcion-de-impulso-respuesta" class="level3" data-number="1.4">
+<h3 data-number="1.4" class="anchored" data-anchor-id="tipos-de-funcion-de-impulso-respuesta"><span class="header-section-number">1.4</span> Tipos de Funcion de Impulso Respuesta</h3>
+<p>En un modelo VAR (Vector Autoregression), se pueden calcular dos tipos de funciones de impulso respuesta:</p>
+<ol type="1">
+<li><p>Funciones de impulso respuesta al impulso unitario: Estas funciones muestran cómo las variables responden a un shock de una desviación estándar en una variable específica en un periodo de tiempo y cómo se propagan esos efectos a lo largo de los periodos siguientes. Es decir, muestran el impacto de un shock de una magnitud específica en una variable sobre las demás variables en el modelo.</p></li>
+<li><p>Funciones de impulso respuesta acumuladas: Estas funciones muestran la respuesta acumulada de las variables a lo largo del tiempo después de un shock en una variable específica. Muestran cómo se acumulan los efectos de un shock en una variable sobre las demás variables en el modelo a lo largo de varios periodos.</p></li>
+</ol>
+<p>Ambos tipos de funciones de impulso respuesta son útiles para analizar cómo se propagan los efectos de un shock en una variable a lo largo del tiempo y cómo afecta a las demás variables en el modelo VAR. Esto permite comprender mejor las interacciones entre las variables y predecir cómo se comportarán en respuesta a cambios en una de ellas.</p>
+</section>
+<section id="causalidad-de-granger" class="level3" data-number="1.5">
+<h3 data-number="1.5" class="anchored" data-anchor-id="causalidad-de-granger"><span class="header-section-number">1.5</span> Causalidad de Granger</h3>
+<p>La causalidad de Granger es un concepto importante en el análisis de series temporales que se utiliza para determinar si una serie temporal proporciona información útil para predecir otra serie temporal. Es una herramienta comúnmente utilizada en el contexto de los modelos VAR (Vector Autoregressive).</p>
+<p>Aquí está una explicación detallada de la causalidad de Granger en el contexto de los modelos VAR:</p>
+<ol type="1">
+<li><p>Definición: La causalidad de Granger establece que una serie temporal <span class="math inline">\(y_{1t}\)</span> “Granger-causa” a otra serie temporal <span class="math inline">\(y_{2t}\)</span> si la información pasada de <span class="math inline">\(y_{1t}\)</span> ayuda a predecir <span class="math inline">\(y_{2t}\)</span> mejor que solo utilizando la información pasada de <span class="math inline">\(y_{2t}\)</span>.</p></li>
+<li><p>Principio: Si la serie <span class="math inline">\(y_{1t}\)</span> Granger-causa a la serie <span class="math inline">\(y_{2t}\)</span>, entonces los rezagos de <span class="math inline">\(y_{1t}\)</span> se incluirán como predictores en el modelo para predecir <span class="math inline">\(y_{2t}\)</span>. En otras palabras, los rezagos de <span class="math inline">\(y_{1t}\)</span> tienen un poder predictivo significativo para <span class="math inline">\(y_{2t}\)</span>.</p></li>
+<li><p>Prueba de Causalidad de Granger: La causalidad de Granger se evalúa mediante una prueba estadística. En el contexto de los modelos VAR, esta prueba implica ajustar dos modelos:</p>
+<ul>
+<li><p>Modelo restringido: Un modelo VAR que solo incluye rezagos de la serie <span class="math inline">\(y_{2t}\)</span> como predictores para predecir <span class="math inline">\(y_{2t}\)</span>.</p></li>
+<li><p>Modelo no restringido: Un modelo VAR que incluye rezagos tanto de la serie <span class="math inline">\(y_{2t}\)</span> como de la serie <span class="math inline">\(y_{1t}\)</span>como predictores para predecir <span class="math inline">\(y_{2t}\)</span>.</p></li>
+</ul></li>
+<li><p>Comparación de Modelos: Después de ajustar ambos modelos, se utiliza una prueba estadística (se utiliza la estadisticaF) para comparar su ajuste. Si el modelo no restringido (que incluye rezagos de <span class="math inline">\(y_{1t}\)</span> ) se ajusta significativamente mejor que el modelo restringido (que no incluye los rezagos de <span class="math inline">\(y_{1t}\)</span>), entonces se concluye que la serie <span class="math inline">\(y_{1t}\)</span> Granger-causa a la serie <span class="math inline">\(y_{2t}\)</span>.</p></li>
+<li><p>Interpretación: Si se establece que la serie <span class="math inline">\(y_{1t}\)</span> Granger-causa a la serie <span class="math inline">\(y_{2t}\)</span>, significa que la información pasada de <span class="math inline">\(y_{1t}\)</span> contiene información adicional que ayuda a predecir <span class="math inline">\(y_{2t}\)</span>, más allá de lo que ya se puede predecir con la información pasada de <span class="math inline">\(y_{2t}\)</span>.</p></li>
+</ol>
+<p>Causalidad de Granger: <span class="math inline">\(y_{1t}\)</span> granger causa <span class="math inline">\(y_{2t}\)</span> si un modelo que usa valores actuales <span class="math inline">\(y_{2t}\)</span> pasados de <span class="math inline">\(y_{1t}\)</span> y valores actuales y pasados de <span class="math inline">\(y_{2t}\)</span> para predecir valores futuros de <span class="math inline">\(y_{2t}\)</span> tiene un error de pronóstico menor que un modelo que solo usa valores actuales y pasados de <span class="math inline">\(y_{2t}\)</span> para predecir <span class="math inline">\(y_{2t}\)</span>. En otras palabras, la causalidad de Granger responde a la siguiente pregunta: ¿ayuda el pasado de la variable <span class="math inline">\(y_{1t}\)</span> a mejorar la predicción de los valores futuros de <span class="math inline">\(y_{2t}\)</span>?</p>
+<p>Causalidad instantánea: <span class="math inline">\(y_{1t}\)</span> causa <span class="math inline">\(y_{2t}\)</span> (en el sentido de Granger instantáneo) si un modelo que usa valores actuales, pasados y futuros de <span class="math inline">\(y_{1t}\)</span> y valores actuales y pasados de <span class="math inline">\(y_{2t}\)</span> para predecir <span class="math inline">\(y_{2t}\)</span> tiene un error de pronóstico menor que un modelo que solo usa valores actuales y pasados de <span class="math inline">\(y_{1t}\)</span> y valores actuales y valores pasados de <span class="math inline">\(y_{2t}\)</span>. En otras palabras, la causalidad instantánea de Granger responde a la pregunta: ¿conocer el futuro de <span class="math inline">\(y_{1t}\)</span> me ayuda a predecir mejor el futuro de <span class="math inline">\(y_{2t}\)</span>? Si sé que va a hacer <span class="math inline">\(y_{1t}\)</span>, ¿me ayuda a saber lo que va a saber <span class="math inline">\(y_{2t}\)</span>?</p>
+<hr>
+</section>
+</section>
+<section id="ejemplo-análisis-de-un-sistema-bivariado-simulado" class="level2" data-number="2">
+<h2 data-number="2" class="anchored" data-anchor-id="ejemplo-análisis-de-un-sistema-bivariado-simulado"><span class="header-section-number">2</span> Ejemplo: Análisis de un Sistema Bivariado Simulado</h2>
+<p>Para entender la metodología VAR, utilizaremos datos simulados. Esto nos permite conocer el verdadero proceso generador de datos y evaluar qué tan bien las herramientas econométricas lo recuperan.</p>
+<section id="simulación-de-un-proceso-var2" class="level3" data-number="2.1">
+<h3 data-number="2.1" class="anchored" data-anchor-id="simulación-de-un-proceso-var2"><span class="header-section-number">2.1</span> 1. Simulación de un Proceso VAR(2)</h3>
+<p>Generamos un sistema de dos variables (<code>V1</code> y <code>V2</code>) que siguen un proceso VAR(2) estacionario.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># --- Simulación del Modelo ---</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>) <span class="co"># Misma semilla para tener los mismos resultados</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Generamos muestra</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>t <span class="ot">&lt;-</span> <span class="dv">200</span> <span class="co"># tamaño de la serie</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>k <span class="ot">&lt;-</span> <span class="dv">2</span> <span class="co"># Número de variables endogenas</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="dv">2</span> <span class="co"># numero de rezagos</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Generamos matriz de coeficientes</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>A<span class="fl">.1</span> <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="sc">-</span>.<span class="dv">3</span>, .<span class="dv">6</span>, <span class="sc">-</span>.<span class="dv">4</span>, .<span class="dv">5</span>), k) <span class="co"># Matriz de coeficientes del rezago 1</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>A<span class="fl">.2</span> <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="sc">-</span>.<span class="dv">1</span>, <span class="sc">-</span>.<span class="dv">2</span>, .<span class="dv">1</span>, .<span class="dv">05</span>), k) <span class="co"># Matriz de coeficientes del rezago 2</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>A <span class="ot">&lt;-</span> <span class="fu">cbind</span>(A<span class="fl">.1</span>, A<span class="fl">.2</span>) <span class="co"># Forma compuesta</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Generamos las series</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>series_matrix <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="dv">0</span>, k, t <span class="sc">+</span> <span class="dv">2</span><span class="sc">*</span>p) <span class="co"># Inicio serie con ceros</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> (p <span class="sc">+</span> <span class="dv">1</span>)<span class="sc">:</span>(t <span class="sc">+</span> <span class="dv">2</span><span class="sc">*</span>p)){ <span class="co"># Generamos los errores e ~ N(0,0.5)  </span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>  series_matrix[, i] <span class="ot">&lt;-</span> A<span class="fl">.1</span><span class="sc">%*%</span>series_matrix[, i<span class="dv">-1</span>] <span class="sc">+</span> A<span class="fl">.2</span><span class="sc">%*%</span>series_matrix[, i<span class="dv">-2</span>] <span class="sc">+</span> <span class="fu">rnorm</span>(k, <span class="dv">0</span>, .<span class="dv">5</span>)</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>series <span class="ot">&lt;-</span> <span class="fu">ts</span>(<span class="fu">t</span>(series_matrix[, <span class="sc">-</span>(<span class="dv">1</span><span class="sc">:</span>p)])) <span class="co"># Convertimos a formato ts</span></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(series) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"V1"</span>, <span class="st">"V2"</span>) <span class="co"># Renombrar variables</span></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="co"># Convertir a un data frame largo para ggplot2</span></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>plot_data <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(series) <span class="sc">%&gt;%</span></span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Tiempo =</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(.)) <span class="sc">%&gt;%</span></span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="fu">c</span>(<span class="st">"V1"</span>, <span class="st">"V2"</span>), <span class="at">names_to =</span> <span class="st">"Variable"</span>, <span class="at">values_to =</span> <span class="st">"Valor"</span>)</span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a><span class="co"># Graficos de la serie con ggplot2</span></span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(plot_data, <span class="fu">aes</span>(<span class="at">x =</span> Tiempo, <span class="at">y =</span> Valor, <span class="at">color =</span> Variable)) <span class="sc">+</span></span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>Variable, <span class="at">scales =</span> <span class="st">"free_y"</span>, <span class="at">ncol =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Series Simuladas de un Proceso VAR(2)"</span>, <span class="at">x =</span> <span class="st">"Tiempo"</span>, <span class="at">y =</span> <span class="st">"Valor"</span>) <span class="sc">+</span></span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Modelos-VAR_files/figure-html/data-simulation-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Interpretación Gráfica: Las series simuladas parecen fluctuar alrededor de una media de cero, lo que es consistente con un proceso estacionario, como fue diseñado.</p>
+</section>
+<section id="pruebas-de-raíz-unitaria" class="level3" data-number="2.2">
+<h3 data-number="2.2" class="anchored" data-anchor-id="pruebas-de-raíz-unitaria"><span class="header-section-number">2.2</span> 2. Pruebas de Raíz Unitaria</h3>
+<p>Aunque sabemos que las series son estacionarias por construcción, en un caso real verificaríamos esto formalmente.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Aplicar la prueba de Phillips-Perron a cada columna</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">apply</span>(series, <span class="dv">2</span>, <span class="cf">function</span>(s){</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ur.pp</span>(s, <span class="at">type =</span> <span class="st">"Z-tau"</span>, <span class="at">model =</span> <span class="st">"constant"</span>, <span class="at">lags =</span> <span class="st">"short"</span>)<span class="sc">@</span>teststat</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>}) <span class="sc">%&gt;%</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">t</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>(<span class="at">caption =</span> <span class="st">"Estadísticos de Prueba de Phillips-Perron para las Series Simuladas"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<caption>Estadísticos de Prueba de Phillips-Perron para las Series Simuladas</caption>
+<thead>
+<tr class="header">
+<th style="text-align: right;">V1</th>
+<th style="text-align: right;">V2</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">-17.5378</td>
+<td style="text-align: right;">-12.42686</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>Interpretación: Los estadísticos de prueba son mucho más negativos que los valores críticos, lo que nos llevaría a rechazar la hipótesis nula de raíz unitaria y confirmar que las series son estacionarias.</p>
+</section>
+<section id="selección-del-número-de-rezagos-p" class="level3" data-number="2.3">
+<h3 data-number="2.3" class="anchored" data-anchor-id="selección-del-número-de-rezagos-p"><span class="header-section-number">2.3</span> 3. Selección del Número de Rezagos (p)</h3>
+<p>Ahora, usamos los criterios de información para ver si podemos recuperar el verdadero orden del proceso, que sabemos es <span class="math inline">\(p=2\)</span>.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Selección de rezagos usando VARselect</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>sel <span class="ot">&lt;-</span> <span class="fu">VARselect</span>(series, <span class="at">lag.max =</span> <span class="dv">6</span>, <span class="at">type =</span> <span class="st">"none"</span>)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Presentar los resultados en una tabla</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="fu">t</span>(<span class="fu">as.matrix</span>(sel<span class="sc">$</span>criteria)) <span class="sc">%&gt;%</span> </span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>(<span class="at">caption =</span> <span class="st">"Criterios de Selección de Rezagos"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<caption>Criterios de Selección de Rezagos</caption>
+<thead>
+<tr class="header">
+<th style="text-align: right;">AIC(n)</th>
+<th style="text-align: right;">HQ(n)</th>
+<th style="text-align: right;">SC(n)</th>
+<th style="text-align: right;">FPE(n)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">-2.837988</td>
+<td style="text-align: right;">-2.810904</td>
+<td style="text-align: right;">-2.771088</td>
+<td style="text-align: right;">0.0585434</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">-2.922849</td>
+<td style="text-align: right;">-2.868680</td>
+<td style="text-align: right;">-2.789049</td>
+<td style="text-align: right;">0.0537808</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">-2.910680</td>
+<td style="text-align: right;">-2.829427</td>
+<td style="text-align: right;">-2.709979</td>
+<td style="text-align: right;">0.0544408</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">-2.876234</td>
+<td style="text-align: right;">-2.767896</td>
+<td style="text-align: right;">-2.608633</td>
+<td style="text-align: right;">0.0563517</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">-2.843625</td>
+<td style="text-align: right;">-2.708202</td>
+<td style="text-align: right;">-2.509123</td>
+<td style="text-align: right;">0.0582246</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">-2.809024</td>
+<td style="text-align: right;">-2.646517</td>
+<td style="text-align: right;">-2.407622</td>
+<td style="text-align: right;">0.0602823</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>Interpretación: Todos los criterios de información (AIC, HQ, SC y FPE) seleccionan correctamente un orden de <span class="math inline">\(p=2\)</span>. Esto demuestra la efectividad de estos criterios cuando el modelo está bien especificado.</p>
+</section>
+<section id="estimación-y-diagnósticos-del-var" class="level3" data-number="2.4">
+<h3 data-number="2.4" class="anchored" data-anchor-id="estimación-y-diagnósticos-del-var"><span class="header-section-number">2.4</span> 4. Estimación y Diagnósticos del VAR</h3>
+<p>Estimamos el modelo VAR(2) y realizamos las pruebas de diagnóstico.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Estimar el modelo VAR(2)</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>modVar <span class="ot">&lt;-</span> <span class="fu">VAR</span>(series, <span class="at">p =</span> <span class="dv">2</span>, <span class="at">type =</span> <span class="st">"none"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<section id="prueba-de-estabilidad" class="level4" data-number="2.4.1">
+<h4 data-number="2.4.1" class="anchored" data-anchor-id="prueba-de-estabilidad"><span class="header-section-number">2.4.1</span> 4.1 Prueba de Estabilidad</h4>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Prueba de estabilidad</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>roots_modVar <span class="ot">&lt;-</span> <span class="fu">roots</span>(modVar)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">paste</span>(<span class="st">"Todas las raíces son menores a 1:"</span>, <span class="fu">all</span>(roots_modVar <span class="sc">&lt;</span> <span class="dv">1</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Todas las raíces son menores a 1: TRUE"</code></pre>
+</div>
+</div>
+<p>Interpretación: Todas las raíces tienen un módulo menor a 1, por lo que el modelo VAR(2) estimado es estable, como se esperaba.</p>
+</section>
+<section id="diagnósticos-sobre-los-residuos" class="level4" data-number="2.4.2">
+<h4 data-number="2.4.2" class="anchored" data-anchor-id="diagnósticos-sobre-los-residuos"><span class="header-section-number">2.4.2</span> 4.2 Diagnósticos sobre los Residuos</h4>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Pruebas de diagnóstico</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>serial_test <span class="ot">&lt;-</span> <span class="fu">serial.test</span>(modVar, <span class="at">lags.bg =</span> <span class="dv">12</span>, <span class="at">type =</span> <span class="st">"BG"</span>)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>arch_test <span class="ot">&lt;-</span> <span class="fu">arch.test</span>(modVar, <span class="at">lags.multi =</span> <span class="dv">5</span>)</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>normality_test <span class="ot">&lt;-</span> <span class="fu">normality.test</span>(modVar)</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="co"># CORREGIDO: Calcular el estadístico y p-value de Jarque-Bera combinado</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>jb_stat <span class="ot">&lt;-</span> normality_test<span class="sc">$</span>jb.mul<span class="sc">$</span>Skewness<span class="sc">$</span>statistic <span class="sc">+</span> normality_test<span class="sc">$</span>jb.mul<span class="sc">$</span>Kurtosis<span class="sc">$</span>statistic</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>jb_df <span class="ot">&lt;-</span> normality_test<span class="sc">$</span>jb.mul<span class="sc">$</span>Skewness<span class="sc">$</span>parameter <span class="sc">+</span> normality_test<span class="sc">$</span>jb.mul<span class="sc">$</span>Kurtosis<span class="sc">$</span>parameter</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>jb_pval <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">-</span> <span class="fu">pchisq</span>(jb_stat, <span class="at">df =</span> jb_df)</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Presentar resultados en una tabla</span></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a><span class="fu">tibble</span>(</span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">Prueba =</span> <span class="fu">c</span>(<span class="st">"Breusch-Godfrey (Autocorrelación)"</span>, <span class="st">"ARCH-LM (Heterocedasticidad)"</span>, <span class="st">"Jarque-Bera (Normalidad)"</span>),</span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>  <span class="st">`</span><span class="at">Estadístico</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">c</span>(serial_test<span class="sc">$</span>serial<span class="sc">$</span>statistic, arch_test<span class="sc">$</span>arch.mul<span class="sc">$</span>statistic, jb_stat),</span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>  <span class="st">`</span><span class="at">p-value</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">c</span>(serial_test<span class="sc">$</span>serial<span class="sc">$</span>p.value, arch_test<span class="sc">$</span>arch.mul<span class="sc">$</span>p.value, jb_pval)</span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>) <span class="sc">%&gt;%</span> <span class="fu">kable</span>(<span class="at">caption =</span> <span class="st">"Pruebas de Diagnóstico Multivariantes sobre los Residuos"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<caption>Pruebas de Diagnóstico Multivariantes sobre los Residuos</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Prueba</th>
+<th style="text-align: right;">Estadístico</th>
+<th style="text-align: right;">p-value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Breusch-Godfrey (Autocorrelación)</td>
+<td style="text-align: right;">43.628478</td>
+<td style="text-align: right;">0.6524127</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">ARCH-LM (Heterocedasticidad)</td>
+<td style="text-align: right;">40.459685</td>
+<td style="text-align: right;">0.6644916</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Jarque-Bera (Normalidad)</td>
+<td style="text-align: right;">4.586017</td>
+<td style="text-align: right;">0.3324696</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>Interpretación de los Diagnósticos: Todos los <code>p-values</code> son altos (mayores a 0.05), por lo que no rechazamos las hipótesis nulas. Esto indica que los residuos del modelo se comportan como un ruido blanco: no tienen autocorrelación, son homocedásticos y se distribuyen normalmente. El modelo está bien especificado.</p>
+</section>
+</section>
+<section id="funciones-de-impulso-respuesta-irf" class="level3" data-number="2.5">
+<h3 data-number="2.5" class="anchored" data-anchor-id="funciones-de-impulso-respuesta-irf"><span class="header-section-number">2.5</span> 5. Funciones de Impulso-Respuesta (IRF)</h3>
+<p>Analizamos cómo responde una variable a un shock en la otra. Usamos la descomposición de Cholesky, asumiendo que <code>V1</code> es contemporáneamente más exógena que <code>V2</code>.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calcular y graficar la IRF</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>ir_v1_v2 <span class="ot">&lt;-</span> <span class="fu">irf</span>(modVar, </span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>                <span class="at">impulse =</span> <span class="st">"V1"</span>, </span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>                <span class="at">response =</span> <span class="st">"V2"</span>, </span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>                <span class="at">ortho =</span> <span class="cn">TRUE</span>, <span class="co"># Usar descomposición de Cholesky</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>                <span class="at">boot =</span> <span class="cn">TRUE</span>, <span class="at">runs =</span> <span class="dv">1000</span>, <span class="at">ci =</span> <span class="fl">0.95</span>)</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(ir_v1_v2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="Modelos-VAR_files/figure-html/irf-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption>Respuesta de V2 a un shock en V1.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>Interpretación: El gráfico muestra la respuesta de <code>V2</code> a un shock positivo de una desviación estándar en <code>V1</code>. Se observa un efecto positivo y significativo en <code>V2</code> durante los primeros periodos, que luego se disipa y converge a cero, como es de esperar en un sistema estacionario.</p>
+</section>
+<section id="causalidad-de-granger-1" class="level3" data-number="2.6">
+<h3 data-number="2.6" class="anchored" data-anchor-id="causalidad-de-granger-1"><span class="header-section-number">2.6</span> 6. Causalidad de Granger</h3>
+<p>Finalmente, evaluamos si los rezagos de una variable ayudan a predecir a la otra.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Realizar pruebas de causalidad para cada variable</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>causality_results <span class="ot">&lt;-</span> <span class="fu">list</span>()</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(v <span class="cf">in</span> <span class="fu">colnames</span>(series)){</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  causality_results[[v]] <span class="ot">&lt;-</span> <span class="fu">causality</span>(modVar, <span class="at">cause =</span> v)</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Presentar un resumen</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="fu">tibble</span>(</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">Causa =</span> <span class="fu">names</span>(causality_results),</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>  <span class="st">`</span><span class="at">p-value Granger</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">map_dbl</span>(causality_results, <span class="sc">~</span> .x<span class="sc">$</span>Granger<span class="sc">$</span>p.value),</span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>  <span class="st">`</span><span class="at">p-value Instantánea</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">map_dbl</span>(causality_results, <span class="sc">~</span> .x<span class="sc">$</span>Instant<span class="sc">$</span>p.value)</span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>) <span class="sc">%&gt;%</span> <span class="fu">kable</span>(<span class="at">caption =</span> <span class="st">"Resultados de las Pruebas de Causalidad de Granger"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<caption>Resultados de las Pruebas de Causalidad de Granger</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Causa</th>
+<th style="text-align: right;">p-value Granger</th>
+<th style="text-align: right;">p-value Instantánea</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">V1</td>
+<td style="text-align: right;">0.00e+00</td>
+<td style="text-align: right;">0.0503066</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">V2</td>
+<td style="text-align: right;">1.03e-05</td>
+<td style="text-align: right;">0.0503066</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>Interpretación: Ambos <code>p-values</code> para la causalidad de Granger son muy bajos (menores a 0.05). Esto significa que rechazamos la hipótesis nula en ambos casos. Concluimos que los rezagos de <code>V1</code> ayudan a predecir <code>V2</code>, y los rezagos de <code>V2</code> ayudan a predecir <code>V1</code>. Existe una causalidad bidireccional, lo cual es consistente con la forma en que construimos nuestras matrices de coeficientes.</p>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>© 2025, Yuberley</p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+<p>Construido con <a href="https://quarto.org/">Quarto</a></p>
+</div>
+  </div>
+</footer>
+
+
+
+
+</body></html>

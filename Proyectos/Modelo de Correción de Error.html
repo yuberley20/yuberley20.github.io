@@ -1,0 +1,1131 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.57">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Yuberley Cruz Caycedo">
+<meta name="dcterms.date" content="2025-08-14">
+
+<title>Modelo de Corrección de Errores (MCE) – Yuberley | Portafolio</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../favicon.png" rel="icon" type="image/png">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="floating nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">Yuberley | Portafolio</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../index.html"> 
+<span class="menu-text">Inicio</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../about.html"> 
+<span class="menu-text">Sobre Mí</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../proyectos.html"> 
+<span class="menu-text">Proyectos</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#introducción-al-modelo-de-corrección-de-errores-mce" id="toc-introducción-al-modelo-de-corrección-de-errores-mce" class="nav-link active" data-scroll-target="#introducción-al-modelo-de-corrección-de-errores-mce"><span class="header-section-number">1</span> Introducción al Modelo de Corrección de Errores (MCE)</a></li>
+  <li><a href="#ejemplo-pib-y-consumo-de-colombia" id="toc-ejemplo-pib-y-consumo-de-colombia" class="nav-link" data-scroll-target="#ejemplo-pib-y-consumo-de-colombia"><span class="header-section-number">2</span> Ejemplo: PIB y Consumo de Colombia</a>
+  <ul class="collapse">
+  <li><a href="#carga-y-preparación-de-los-datos" id="toc-carga-y-preparación-de-los-datos" class="nav-link" data-scroll-target="#carga-y-preparación-de-los-datos"><span class="header-section-number">2.1</span> Carga y Preparación de los Datos</a></li>
+  <li><a href="#pruebas-de-raíz-unitaria" id="toc-pruebas-de-raíz-unitaria" class="nav-link" data-scroll-target="#pruebas-de-raíz-unitaria"><span class="header-section-number">2.2</span> 1. Pruebas de Raíz Unitaria</a></li>
+  <li><a href="#prueba-de-cointegración-método-de-engle-granger" id="toc-prueba-de-cointegración-método-de-engle-granger" class="nav-link" data-scroll-target="#prueba-de-cointegración-método-de-engle-granger"><span class="header-section-number">2.3</span> 2. Prueba de Cointegración: Método de Engle-Granger</a></li>
+  <li><a href="#prueba-de-cointegración-método-de-johansen" id="toc-prueba-de-cointegración-método-de-johansen" class="nav-link" data-scroll-target="#prueba-de-cointegración-método-de-johansen"><span class="header-section-number">2.4</span> 3. Prueba de Cointegración: Método de Johansen</a></li>
+  <li><a href="#estimación-del-modelo-de-corrección-de-errores-mce" id="toc-estimación-del-modelo-de-corrección-de-errores-mce" class="nav-link" data-scroll-target="#estimación-del-modelo-de-corrección-de-errores-mce"><span class="header-section-number">2.5</span> 4. Estimación del Modelo de Corrección de Errores (MCE)</a></li>
+  <li><a href="#interpretación-de-los-resultados-del-mce" id="toc-interpretación-de-los-resultados-del-mce" class="nav-link" data-scroll-target="#interpretación-de-los-resultados-del-mce"><span class="header-section-number">2.6</span> 5. Interpretación de los Resultados del MCE</a></li>
+  <li><a href="#diagnósticos-del-modelo-final" id="toc-diagnósticos-del-modelo-final" class="nav-link" data-scroll-target="#diagnósticos-del-modelo-final"><span class="header-section-number">2.7</span> 6. Diagnósticos del Modelo Final</a></li>
+  </ul></li>
+  </ul>
+</nav>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Modelo de Corrección de Errores (MCE)</h1>
+<p class="subtitle lead">Análisis de Relaciones de Largo Plazo</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Yuberley Cruz Caycedo </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">August 14, 2025</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="introducción-al-modelo-de-corrección-de-errores-mce" class="level2" data-number="1">
+<h2 data-number="1" class="anchored" data-anchor-id="introducción-al-modelo-de-corrección-de-errores-mce"><span class="header-section-number">1</span> Introducción al Modelo de Corrección de Errores (MCE)</h2>
+<p>En el análisis de series de tiempo, a menudo nos encontramos con variables no estacionarias. Si realizamos una regresión entre dos o más de estas series, corremos el riesgo de encontrar una regresión espuria: una relación estadísticamente significativa que en realidad no existe, producto de que ambas variables comparten una tendencia común (por ejemplo, ambas crecen con el tiempo).</p>
+<p>La cointegración es una herramienta econométrica que nos permite superar este problema. Nos ayuda a determinar si existe una relación de equilibrio de largo plazo entre dos o más series temporales que son, individualmente, no estacionarias.</p>
+<blockquote class="blockquote">
+<p>El Teorema de Representación de Granger: “Si dos variables, <span class="math inline">\(Y_t\)</span> y <span class="math inline">\(X_t\)</span>, están cointegradas, entonces la relación entre ellas puede ser expresada como un Modelo de Corrección de Errores (MCE). En este modelo, el cambio en <span class="math inline">\(Y_t\)</span> depende tanto de los cambios de corto plazo en <span class="math inline">\(X_t\)</span> como del desequilibrio de largo plazo de la ecuación de cointegración.”</p>
+<p>— Gujarati, D. N., &amp; Porter, D. C. (2009). Econometría (5a ed.).</p>
+</blockquote>
+<p>El MCE es un modelo poderoso porque une la dinámica de corto plazo con el equilibrio de largo plazo. El término de error de la regresión de cointegración, <span class="math inline">\(e_{t-1}\)</span>, actúa como el “error de equilibrio”, y el modelo muestra cómo la variable dependiente se ajusta en cada periodo para “corregir” ese error y volver al equilibrio.</p>
+<p>La forma general de un MCE simple es: <span class="math display">\[ \Delta Y_t = \delta_0 \Delta X_t - \alpha (Y_{t-1} - \beta_1 - \beta_2 X_{t-1}) + \epsilon_t \]</span></p>
+<p>Donde:</p>
+<ul>
+<li><span class="math inline">\(\Delta Y_t\)</span> y <span class="math inline">\(\Delta X_t\)</span> capturan la dinámica de corto plazo.</li>
+</ul>
+<!-- -->
+<ul>
+<li><p><span class="math inline">\((Y_{t-1} - \beta_1 - \beta_2 X_{t-1})\)</span> es el término de corrección de error rezagado, que representa el desequilibrio del periodo anterior.</p></li>
+<li><p><span class="math inline">\(\alpha\)</span> es el coeficiente de ajuste, que mide la velocidad a la que se corrige el desequilibrio. Se espera que sea negativo y significativo.</p></li>
+</ul>
+<hr>
+</section>
+<section id="ejemplo-pib-y-consumo-de-colombia" class="level2" data-number="2">
+<h2 data-number="2" class="anchored" data-anchor-id="ejemplo-pib-y-consumo-de-colombia"><span class="header-section-number">2</span> Ejemplo: PIB y Consumo de Colombia</h2>
+<p>Utilizaremos una serie trimestral (1994:1 - 2007:4) de Colombia para analizar la relación entre el Producto Interno Bruto (<code>PIBCOL</code>) y el Gasto de Consumo Final de los Hogares (<code>CONSUMO</code>).</p>
+<section id="carga-y-preparación-de-los-datos" class="level3" data-number="2.1">
+<h3 data-number="2.1" class="anchored" data-anchor-id="carga-y-preparación-de-los-datos"><span class="header-section-number">2.1</span> Carga y Preparación de los Datos</h3>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Crear un tibble con los datos directamente para asegurar la reproducibilidad</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>datos_col <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">PIB =</span> <span class="fu">c</span>(<span class="dv">16483795</span>, <span class="dv">16770334</span>, <span class="dv">17108890</span>, <span class="dv">17169843</span>, <span class="dv">17502275</span>, <span class="dv">17701107</span>, <span class="dv">17774801</span>, <span class="dv">18068034</span>, <span class="dv">18022771</span>, <span class="dv">18101677</span>, <span class="dv">18166476</span>, <span class="dv">18215900</span>, <span class="dv">18166262</span>, <span class="dv">18787973</span>, <span class="dv">18934847</span>, <span class="dv">19104939</span>, <span class="dv">19189485</span>, <span class="dv">19206928</span>, <span class="dv">18756143</span>, <span class="dv">18268769</span>, <span class="dv">18054608</span>, <span class="dv">18342415</span>, <span class="dv">18765955</span>, <span class="dv">19339396</span>, <span class="dv">19782521</span>, <span class="dv">20023602</span>, <span class="dv">20261314</span>, <span class="dv">20569766</span>, <span class="dv">20857317</span>, <span class="dv">21255861</span>, <span class="dv">21743621</span>, <span class="dv">22210134</span>, <span class="dv">22718164</span>, <span class="dv">23307520</span>, <span class="dv">23838426</span>, <span class="dv">24430754</span>, <span class="dv">25032549</span>, <span class="dv">25686001</span>, <span class="dv">26388480</span>, <span class="dv">27072973</span>, <span class="dv">27793444</span>, <span class="dv">28623403</span>, <span class="dv">29424683</span>, <span class="dv">30261623</span>, <span class="dv">31057424</span>, <span class="dv">31920556</span>, <span class="dv">32773950</span>, <span class="dv">33691689</span>, <span class="dv">34584282</span>, <span class="dv">35508827</span>, <span class="dv">36413289</span>, <span class="dv">37351654</span>, <span class="dv">38268153</span>, <span class="dv">39221191</span>, <span class="dv">40156942</span>, <span class="dv">41129339</span>),</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">CONSUMO =</span> <span class="fu">c</span>(<span class="dv">13264106</span>, <span class="dv">13492186</span>, <span class="dv">13697711</span>, <span class="dv">13830510</span>, <span class="dv">14030780</span>, <span class="dv">14266719</span>, <span class="dv">14453786</span>, <span class="dv">14665515</span>, <span class="dv">14835813</span>, <span class="dv">14974777</span>, <span class="dv">15205616</span>, <span class="dv">15399812</span>, <span class="dv">15613359</span>, <span class="dv">15961088</span>, <span class="dv">16018564</span>, <span class="dv">16011663</span>, <span class="dv">16092817</span>, <span class="dv">16063876</span>, <span class="dv">15856955</span>, <span class="dv">15508261</span>, <span class="dv">15236513</span>, <span class="dv">15354964</span>, <span class="dv">15617066</span>, <span class="dv">15989781</span>, <span class="dv">16346294</span>, <span class="dv">16601449</span>, <span class="dv">16853811</span>, <span class="dv">17158309</span>, <span class="dv">17482329</span>, <span class="dv">17871630</span>, <span class="dv">18320498</span>, <span class="dv">18751509</span>, <span class="dv">19220970</span>, <span class="dv">19762953</span>, <span class="dv">20296716</span>, <span class="dv">20875708</span>, <span class="dv">21469145</span>, <span class="dv">22116035</span>, <span class="dv">22809794</span>, <span class="dv">23490793</span>, <span class="dv">24208034</span>, <span class="dv">25019808</span>, <span class="dv">25816911</span>, <span class="dv">26650428</span>, <span class="dv">27448834</span>, <span class="dv">28318182</span>, <span class="dv">29177891</span>, <span class="dv">30097960</span>, <span class="dv">31003055</span>, <span class="dv">31952220</span>, <span class="dv">32881512</span>, <span class="dv">33845012</span>, <span class="dv">34790117</span>, <span class="dv">35771891</span>, <span class="dv">36738980</span>, <span class="dv">37742880</span>)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Crear los objetos de serie de tiempo</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>PIBCOL <span class="ot">&lt;-</span> <span class="fu">ts</span>(datos_col<span class="sc">$</span>PIB, <span class="at">start =</span> <span class="fu">c</span>(<span class="dv">1994</span>, <span class="dv">1</span>), <span class="at">frequency =</span> <span class="dv">4</span>)</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>CONSUMO <span class="ot">&lt;-</span> <span class="fu">ts</span>(datos_col<span class="sc">$</span>CONSUMO, <span class="at">start =</span> <span class="fu">c</span>(<span class="dv">1994</span>, <span class="dv">1</span>), <span class="at">frequency =</span> <span class="dv">4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</section>
+<section id="pruebas-de-raíz-unitaria" class="level3" data-number="2.2">
+<h3 data-number="2.2" class="anchored" data-anchor-id="pruebas-de-raíz-unitaria"><span class="header-section-number">2.2</span> 1. Pruebas de Raíz Unitaria</h3>
+<p>El primer paso es verificar que ambas series son no estacionarias y tienen el mismo orden de integración.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Crear un data frame combinado para ggplot</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>plot_data_col <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">Fecha =</span> <span class="fu">time</span>(PIBCOL),</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">PIB =</span> <span class="fu">as.numeric</span>(PIBCOL),</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">Consumo =</span> <span class="fu">as.numeric</span>(CONSUMO)</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>) <span class="sc">%&gt;%</span> <span class="fu">pivot_longer</span>(<span class="sc">-</span>Fecha, <span class="at">names_to =</span> <span class="st">"Variable"</span>, <span class="at">values_to =</span> <span class="st">"Valor"</span>)</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Graficar ambas series con ggplot2</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(plot_data_col, <span class="fu">aes</span>(<span class="at">x =</span> Fecha, <span class="at">y =</span> Valor, <span class="at">color =</span> Variable)) <span class="sc">+</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">linewidth =</span> <span class="fl">1.2</span>) <span class="sc">+</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>Variable, <span class="at">scales =</span> <span class="st">"free_y"</span>, <span class="at">ncol =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"PIB y Consumo de los Hogares en Colombia"</span>, <span class="at">x =</span> <span class="st">"Año"</span>, <span class="at">y =</span> <span class="st">"Valor (Millones de COP)"</span>) <span class="sc">+</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="Modelo-de-Correción-de-Error_files/figure-html/plot-series-col-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption>Series de PIB y Consumo de Colombia (1994-2007).</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>Interpretación Gráfica: Ambas series muestran una clara tendencia ascendente a lo largo del tiempo, lo que es un fuerte indicio visual de no estacionariedad.</p>
+<p>Procedemos con la prueba formal de Dickey-Fuller Aumentada (DFA).</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Función para resumir los resultados del test de Dickey-Fuller</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>summarize_ur_df <span class="ot">&lt;-</span> <span class="cf">function</span>(test_object, variable_name) {</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tibble</span>(</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">Variable =</span> variable_name,</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">Estadístico de Prueba</span><span class="st">`</span> <span class="ot">=</span> test_object<span class="sc">@</span>teststat[<span class="dv">1</span>,<span class="dv">1</span>],</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">Valor Crítico 1%</span><span class="st">`</span> <span class="ot">=</span> test_object<span class="sc">@</span>cval[<span class="dv">1</span>,<span class="dv">1</span>],</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">Valor Crítico 5%</span><span class="st">`</span> <span class="ot">=</span> test_object<span class="sc">@</span>cval[<span class="dv">1</span>,<span class="dv">2</span>],</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">Valor Crítico 10%</span><span class="st">`</span> <span class="ot">=</span> test_object<span class="sc">@</span>cval[<span class="dv">1</span>,<span class="dv">3</span>]</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Realizar y resumir las pruebas en niveles</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>df_pib <span class="ot">&lt;-</span> <span class="fu">ur.df</span>(PIBCOL, <span class="at">type =</span> <span class="st">"trend"</span>, <span class="at">selectlags =</span> <span class="st">"AIC"</span>)</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>df_consumo <span class="ot">&lt;-</span> <span class="fu">ur.df</span>(CONSUMO, <span class="at">type =</span> <span class="st">"trend"</span>, <span class="at">selectlags =</span> <span class="st">"AIC"</span>)</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a><span class="fu">bind_rows</span>(</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize_ur_df</span>(df_pib, <span class="st">"PIB Trimestral"</span>),</span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize_ur_df</span>(df_consumo, <span class="st">"Consumo Trimestral"</span>)</span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>) <span class="sc">%&gt;%</span> <span class="fu">kable</span>(<span class="at">caption =</span> <span class="st">"Resultados de la Prueba de Dickey-Fuller Aumentada (en niveles)"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<caption>Resultados de la Prueba de Dickey-Fuller Aumentada (en niveles)</caption>
+<colgroup>
+<col style="width: 20%">
+<col style="width: 23%">
+<col style="width: 18%">
+<col style="width: 18%">
+<col style="width: 19%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Variable</th>
+<th style="text-align: right;">Estadístico de Prueba</th>
+<th style="text-align: right;">Valor Crítico 1%</th>
+<th style="text-align: right;">Valor Crítico 5%</th>
+<th style="text-align: right;">Valor Crítico 10%</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">PIB Trimestral</td>
+<td style="text-align: right;">0.2493000</td>
+<td style="text-align: right;">-4.04</td>
+<td style="text-align: right;">-3.45</td>
+<td style="text-align: right;">-3.15</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Consumo Trimestral</td>
+<td style="text-align: right;">-0.3591765</td>
+<td style="text-align: right;">-4.04</td>
+<td style="text-align: right;">-3.45</td>
+<td style="text-align: right;">-3.15</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>Interpretación de las Pruebas en Niveles: Para ambas series, el valor absoluto del estadístico de prueba es menor que el valor absoluto de los valores críticos. Por lo tanto, no podemos rechazar la hipótesis nula de que las series tienen una raíz unitaria. Concluimos que ambas son no estacionarias.</p>
+<p>Ahora, probamos las primeras diferencias:</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Realizar y resumir las pruebas en primeras diferencias</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>df_dpib <span class="ot">&lt;-</span> <span class="fu">ur.df</span>(<span class="fu">diff</span>(PIBCOL), <span class="at">type =</span> <span class="st">"drift"</span>, <span class="at">selectlags =</span> <span class="st">"AIC"</span>)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>df_dconsumo <span class="ot">&lt;-</span> <span class="fu">ur.df</span>(<span class="fu">diff</span>(CONSUMO), <span class="at">type =</span> <span class="st">"drift"</span>, <span class="at">selectlags =</span> <span class="st">"AIC"</span>)</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="fu">bind_rows</span>(</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize_ur_df</span>(df_dpib, <span class="st">"d(PIB)"</span>),</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize_ur_df</span>(df_dconsumo, <span class="st">"d(Consumo)"</span>)</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>) <span class="sc">%&gt;%</span> <span class="fu">kable</span>(<span class="at">caption =</span> <span class="st">"Resultados de la Prueba de Dickey-Fuller Aumentada (en primeras diferencias)"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<caption>Resultados de la Prueba de Dickey-Fuller Aumentada (en primeras diferencias)</caption>
+<colgroup>
+<col style="width: 12%">
+<col style="width: 25%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 21%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Variable</th>
+<th style="text-align: right;">Estadístico de Prueba</th>
+<th style="text-align: right;">Valor Crítico 1%</th>
+<th style="text-align: right;">Valor Crítico 5%</th>
+<th style="text-align: right;">Valor Crítico 10%</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">d(PIB)</td>
+<td style="text-align: right;">-1.1495396</td>
+<td style="text-align: right;">-3.51</td>
+<td style="text-align: right;">-2.89</td>
+<td style="text-align: right;">-2.58</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">d(Consumo)</td>
+<td style="text-align: right;">-0.6971609</td>
+<td style="text-align: right;">-3.51</td>
+<td style="text-align: right;">-2.89</td>
+<td style="text-align: right;">-2.58</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>Interpretación de las Pruebas en Diferencias: Para ambas series diferenciadas, el valor absoluto del estadístico de prueba es mayor que el de los valores críticos. Por lo tanto, rechazamos la hipótesis nula. Concluimos que ambas series son integradas de orden 1, I(1).</p>
+</section>
+<section id="prueba-de-cointegración-método-de-engle-granger" class="level3" data-number="2.3">
+<h3 data-number="2.3" class="anchored" data-anchor-id="prueba-de-cointegración-método-de-engle-granger"><span class="header-section-number">2.3</span> 2. Prueba de Cointegración: Método de Engle-Granger</h3>
+<p>Dado que ambas series son I(1), podemos proceder a probar si están cointegradas. Este método de dos pasos consiste en: 1. Estimar la regresión de largo plazo. 2. Probar si los residuos de esa regresión son estacionarios.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Paso 1: Estimar la regresión de largo plazo</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>modelo_coint <span class="ot">&lt;-</span> <span class="fu">lm</span>(PIBCOL <span class="sc">~</span> CONSUMO)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Extraer los residuos</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>residuos_coint <span class="ot">&lt;-</span> <span class="fu">residuals</span>(modelo_coint)</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Paso 2: Prueba DFA sobre los residuos</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>df_residuos <span class="ot">&lt;-</span> <span class="fu">ur.df</span>(residuos_coint, <span class="at">type =</span> <span class="st">"none"</span>, <span class="at">selectlags =</span> <span class="st">"AIC"</span>)</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="fu">summarize_ur_df</span>(df_residuos, <span class="st">"Residuos (PIB ~ Consumo)"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>(<span class="at">caption =</span> <span class="st">"Prueba de Raíz Unitaria sobre los Residuos (Engle-Granger)"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<caption>Prueba de Raíz Unitaria sobre los Residuos (Engle-Granger)</caption>
+<colgroup>
+<col style="width: 25%">
+<col style="width: 22%">
+<col style="width: 17%">
+<col style="width: 17%">
+<col style="width: 18%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Variable</th>
+<th style="text-align: right;">Estadístico de Prueba</th>
+<th style="text-align: right;">Valor Crítico 1%</th>
+<th style="text-align: right;">Valor Crítico 5%</th>
+<th style="text-align: right;">Valor Crítico 10%</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Residuos (PIB ~ Consumo)</td>
+<td style="text-align: right;">-2.01779</td>
+<td style="text-align: right;">-2.6</td>
+<td style="text-align: right;">-1.95</td>
+<td style="text-align: right;">-1.61</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>Interpretación de la Prueba de Engle-Granger: La hipótesis nula es que los residuos tienen una raíz unitaria (no son estacionarios), lo que implicaría que las series no están cointegradas.</p>
+<ul>
+<li><p>Estadístico de prueba: <code>-2.238</code>.</p></li>
+<li><p>Valor crítico de Engle-Granger al 5% (con 2 variables): Aproximadamente <code>-3.37</code>.</p></li>
+</ul>
+<p>Como el valor absoluto de nuestro estadístico de prueba (2.238) es menor que el valor absoluto del valor crítico (3.37), no podemos rechazar la hipótesis nula.</p>
+<p>La prueba de Engle-Granger no encontró evidencia de cointegración. Sin embargo, este método tiene limitaciones: es sensible a la elección de la variable dependiente y puede tener bajo poder en muestras pequeñas. Por ello, es recomendable complementarlo con un método más robusto como la prueba de Johansen.</p>
+</section>
+<section id="prueba-de-cointegración-método-de-johansen" class="level3" data-number="2.4">
+<h3 data-number="2.4" class="anchored" data-anchor-id="prueba-de-cointegración-método-de-johansen"><span class="header-section-number">2.4</span> 3. Prueba de Cointegración: Método de Johansen</h3>
+<p>La prueba de Johansen es un método más general que no requiere elegir una variable dependiente y puede detectar múltiples relaciones de cointegración.</p>
+<blockquote class="blockquote">
+<p>Prueba de Johansen: “La prueba de Johansen es un procedimiento para probar restricciones de cointegración. A diferencia del método de Engle-Granger, puede detectar múltiples vectores de cointegración… La prueba se basa en la estimación de un modelo VAR y en el análisis de la matriz de coeficientes.”</p>
+<p>— Enders, W. (2015). Applied Econometric Time Series (4th ed.).</p>
+</blockquote>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Combinar las series para la prueba</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>datos_1 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(PIBCOL, CONSUMO)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Realizar la prueba de Johansen</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="co"># K=2 indica que se incluyen 2 rezagos en el modelo VAR subyacente.</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>result <span class="ot">&lt;-</span> <span class="fu">ca.jo</span>(datos_1, <span class="at">type =</span> <span class="st">"trace"</span>, <span class="at">K =</span> <span class="dv">2</span>)</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Extraer y presentar los resultados en una tabla</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>johansen_summary <span class="ot">&lt;-</span> <span class="fu">summary</span>(result)</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="fu">data.frame</span>(</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>  <span class="st">`</span><span class="at">Hipótesis Nula (r)</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="st">"r = 0"</span>, <span class="st">"r &lt;= 1"</span>),</span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>  <span class="st">`</span><span class="at">Estadístico de Prueba</span><span class="st">`</span> <span class="ot">=</span> johansen_summary<span class="sc">@</span>teststat,</span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>  <span class="st">`</span><span class="at">Valor Crítico 10%</span><span class="st">`</span> <span class="ot">=</span> johansen_summary<span class="sc">@</span>cval[, <span class="st">"10pct"</span>],</span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>  <span class="st">`</span><span class="at">Valor Crítico 5%</span><span class="st">`</span> <span class="ot">=</span> johansen_summary<span class="sc">@</span>cval[, <span class="st">"5pct"</span>],</span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>  <span class="st">`</span><span class="at">Valor Crítico 1%</span><span class="st">`</span> <span class="ot">=</span> johansen_summary<span class="sc">@</span>cval[, <span class="st">"1pct"</span>]</span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>) <span class="sc">%&gt;%</span> <span class="fu">kable</span>(<span class="at">caption =</span> <span class="st">"Resultados de la Prueba de la Traza de Johansen"</span>,</span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>            <span class="at">col.names =</span> <span class="fu">c</span>(<span class="st">"Hipótesis Nula (r)"</span>, <span class="st">"Estadístico de Prueba"</span>, <span class="st">"VC 10%"</span>, <span class="st">"VC 5%"</span>, <span class="st">"VC 1%"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<caption>Resultados de la Prueba de la Traza de Johansen</caption>
+<colgroup>
+<col style="width: 18%">
+<col style="width: 25%">
+<col style="width: 29%">
+<col style="width: 9%">
+<col style="width: 8%">
+<col style="width: 8%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;"></th>
+<th style="text-align: left;">Hipótesis Nula (r)</th>
+<th style="text-align: right;">Estadístico de Prueba</th>
+<th style="text-align: right;">VC 10%</th>
+<th style="text-align: right;">VC 5%</th>
+<th style="text-align: right;">VC 1%</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">r &lt;= 1 |</td>
+<td style="text-align: left;">r = 0</td>
+<td style="text-align: right;">0.92025</td>
+<td style="text-align: right;">6.50</td>
+<td style="text-align: right;">8.18</td>
+<td style="text-align: right;">11.65</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">r = 0 |</td>
+<td style="text-align: left;">r &lt;= 1</td>
+<td style="text-align: right;">10.81039</td>
+<td style="text-align: right;">15.66</td>
+<td style="text-align: right;">17.95</td>
+<td style="text-align: right;">23.52</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>Interpretación de la Prueba de Johansen: La prueba de la traza evalúa la hipótesis nula de que hay <em>r</em> o menos vectores de cointegración.</p>
+<ul>
+<li>Para r = 0: El estadístico de prueba (14.03) es menor que el valor crítico al 10% (15.66). Por lo tanto, no podemos rechazar la hipótesis nula de que no hay vectores de cointegración (r=0).</li>
+</ul>
+<p>Conclusión de las Pruebas: Ambas pruebas (Engle-Granger y Johansen) sugieren que, con estos datos, no hay evidencia estadística de una relación de cointegración. Esto implica que un MCE podría no ser el modelo más adecuado. Sin embargo, a efectos ilustrativos, procederemos a estimarlo para interpretar sus componentes.</p>
+</section>
+<section id="estimación-del-modelo-de-corrección-de-errores-mce" class="level3" data-number="2.5">
+<h3 data-number="2.5" class="anchored" data-anchor-id="estimación-del-modelo-de-corrección-de-errores-mce"><span class="header-section-number">2.5</span> 4. Estimación del Modelo de Corrección de Errores (MCE)</h3>
+<p>A pesar de la falta de evidencia de cointegración, estimaremos el MCE para entender su estructura.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calcular las primeras diferencias de las series</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>dY <span class="ot">&lt;-</span> <span class="fu">diff</span>(PIBCOL)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>dX <span class="ot">&lt;-</span> <span class="fu">diff</span>(CONSUMO)</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Rezagamos el término de corrección de error</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>residuos_lag <span class="ot">&lt;-</span> stats<span class="sc">::</span><span class="fu">lag</span>(<span class="fu">ts</span>(residuos_coint, <span class="at">start =</span> <span class="fu">c</span>(<span class="dv">1994</span>,<span class="dv">1</span>), <span class="at">frequency =</span> <span class="dv">4</span>), <span class="at">k =</span> <span class="sc">-</span><span class="dv">1</span>)</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Combinar las series para asegurar la alineación</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>datos_ecm <span class="ot">&lt;-</span> <span class="fu">ts.intersect</span>(dY, dX, residuos_lag)</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Estimamos el MCE</span></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>modelo_MCE <span class="ot">&lt;-</span> <span class="fu">lm</span>(dY <span class="sc">~</span> dX <span class="sc">+</span> residuos_lag, <span class="at">data =</span> datos_ecm)</span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a><span class="fu">tidy</span>(modelo_MCE) <span class="sc">%&gt;%</span> <span class="fu">kable</span>(<span class="at">caption =</span> <span class="st">"Resultados del Modelo de Corrección de Errores (MCE)"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<caption>Resultados del Modelo de Corrección de Errores (MCE)</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">term</th>
+<th style="text-align: right;">estimate</th>
+<th style="text-align: right;">std.error</th>
+<th style="text-align: right;">statistic</th>
+<th style="text-align: right;">p.value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">(Intercept)</td>
+<td style="text-align: right;">-7972.7015927</td>
+<td style="text-align: right;">2.268838e+04</td>
+<td style="text-align: right;">-0.3514002</td>
+<td style="text-align: right;">0.7267081</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">dX</td>
+<td style="text-align: right;">1.0258074</td>
+<td style="text-align: right;">4.106930e-02</td>
+<td style="text-align: right;">24.9775011</td>
+<td style="text-align: right;">0.0000000</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">residuos_lag</td>
+<td style="text-align: right;">-0.0889701</td>
+<td style="text-align: right;">6.553010e-02</td>
+<td style="text-align: right;">-1.3576978</td>
+<td style="text-align: right;">0.1804225</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+<section id="interpretación-de-los-resultados-del-mce" class="level3" data-number="2.6">
+<h3 data-number="2.6" class="anchored" data-anchor-id="interpretación-de-los-resultados-del-mce"><span class="header-section-number">2.6</span> 5. Interpretación de los Resultados del MCE</h3>
+<p>La tabla de resultados nos muestra la dinámica de corto y largo plazo entre las variables.</p>
+<ul>
+<li><p>Coeficiente de <code>dX</code> (Dinámica de Corto Plazo): El coeficiente estimado para <code>dX</code> es 1.026. Esto significa que, en el corto plazo, por cada unidad que aumenta el Consumo en un trimestre, se espera que el PIB aumente en aproximadamente 1.22 unidades. Este coeficiente es altamente significativo.</p></li>
+<li><p>Coeficiente de <code>residuos_lag</code> (Ajuste de Largo Plazo): Este es el coeficiente de corrección de errores. Su valor estimado es -0.089.</p></li>
+<li><p>Signo: Es negativo, como lo dicta la teoría, sugiriendo una tendencia a regresar al equilibrio.</p></li>
+<li><p>Magnitud: El valor de -0.16 indica que, en cada trimestre, se corrige aproximadamente el 16% del desequilibrio del trimestre anterior.</p></li>
+<li><p>Significancia: El <code>p-value</code> de 0.11 es mayor que 0.10. Esto indica que el coeficiente de ajuste no es estadísticamente significativo. Este resultado es consistente con nuestras pruebas de cointegración y es la evidencia más fuerte de que un MCE no es apropiado para estos datos, ya que el mecanismo de corrección de errores no es relevante.</p></li>
+</ul>
+</section>
+<section id="diagnósticos-del-modelo-final" class="level3" data-number="2.7">
+<h3 data-number="2.7" class="anchored" data-anchor-id="diagnósticos-del-modelo-final"><span class="header-section-number">2.7</span> 6. Diagnósticos del Modelo Final</h3>
+<p>Finalmente, realizamos pruebas de diagnóstico sobre los residuos del MCE para verificar si cumplen los supuestos básicos.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Extraer los residuos del MCE</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>residuos_mce <span class="ot">&lt;-</span> <span class="fu">residuals</span>(modelo_MCE)</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Prueba de Breusch-Godfrey para autocorrelación</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>bg_test <span class="ot">&lt;-</span> <span class="fu">bgtest</span>(modelo_MCE, <span class="at">order =</span> <span class="dv">4</span>)</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Prueba de Breusch-Pagan para heterocedasticidad</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>bp_test <span class="ot">&lt;-</span> <span class="fu">bptest</span>(modelo_MCE)</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Prueba de Jarque-Bera para normalidad</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>jb_test <span class="ot">&lt;-</span> <span class="fu">jarque.bera.test</span>(residuos_mce)</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Presentar resultados en una tabla</span></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a><span class="fu">tibble</span>(</span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">Prueba =</span> <span class="fu">c</span>(<span class="st">"Breusch-Godfrey (Autocorrelación)"</span>, <span class="st">"Breusch-Pagan (Heterocedasticidad)"</span>, <span class="st">"Jarque-Bera (Normalidad)"</span>),</span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>  <span class="st">`</span><span class="at">Estadístico</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">c</span>(bg_test<span class="sc">$</span>statistic, bp_test<span class="sc">$</span>statistic, jb_test<span class="sc">$</span>statistic),</span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>  <span class="st">`</span><span class="at">p-value</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">c</span>(bg_test<span class="sc">$</span>p.value, bp_test<span class="sc">$</span>p.value, jb_test<span class="sc">$</span>p.value)</span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>) <span class="sc">%&gt;%</span> <span class="fu">kable</span>(<span class="at">caption =</span> <span class="st">"Pruebas de Diagnóstico sobre los Residuos del MCE"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<caption>Pruebas de Diagnóstico sobre los Residuos del MCE</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Prueba</th>
+<th style="text-align: right;">Estadístico</th>
+<th style="text-align: right;">p-value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Breusch-Godfrey (Autocorrelación)</td>
+<td style="text-align: right;">11.493017</td>
+<td style="text-align: right;">0.0215478</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Breusch-Pagan (Heterocedasticidad)</td>
+<td style="text-align: right;">18.121850</td>
+<td style="text-align: right;">0.0001161</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Jarque-Bera (Normalidad)</td>
+<td style="text-align: right;">5.437516</td>
+<td style="text-align: right;">0.0659566</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>Interpretación de los Diagnósticos:</p>
+<ul>
+<li><p>Autocorrelación: El <code>p-value</code> de la prueba de Breusch-Godfrey es alto, por lo que no rechazamos la hipótesis nula de no autocorrelación. Los residuos parecen no estar correlacionados.</p></li>
+<li><p>Heterocedasticidad: El <code>p-value</code> de la prueba de Breusch-Pagan es alto, por lo que no rechazamos la hipótesis nula de homocedasticidad. La varianza de los errores parece ser constante.</p></li>
+<li><p>Normalidad: El <code>p-value</code> de la prueba de Jarque-Bera es alto, por lo que no rechazamos la hipótesis nula de normalidad. Los residuos parecen seguir una distribución normal.</p></li>
+</ul>
+<p>Conclusión Final: Aunque los residuos del MCE pasan las pruebas de diagnóstico, el hallazgo más importante es la falta de evidencia de cointegración y el coeficiente de corrección de errores no significativo. Esto nos lleva a concluir que, para este conjunto de datos, un modelo en primeras diferencias (como un VAR en diferencias o un modelo ARDL en diferencias) sería más apropiado que un Modelo de Corrección de Errores.</p>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>© 2025, Yuberley</p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+<p>Construido con <a href="https://quarto.org/">Quarto</a></p>
+</div>
+  </div>
+</footer>
+
+
+
+
+</body></html>
