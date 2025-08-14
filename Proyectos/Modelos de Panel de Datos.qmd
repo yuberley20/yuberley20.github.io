@@ -1,0 +1,938 @@
+---
+title: "Panel de Datos"
+author: "Yuberley Cruz Caycedo"
+date: "today"
+subtitle: Analisis de Modelos de corte Longitudinal
+format:
+  html:
+    toc: true
+    toc-location: left
+    code-fold: true
+    number-sections: true
+---
+
+# **Modelo de Panel de Datos**
+
+Los modelos de panel de datos son una técnica econométrica que se utiliza para analizar datos que tienen tanto una dimensión temporal (series de tiempo) como una dimensión transversal. Es decir, estos modelos trabajan con datos que se recogen para varios individuos (como personas, empresas, países, etc.) a lo largo del tiempo. Este tipo de datos también se conoce como datos longitudinales o datos de panel
+
+## **Características y Ventajas de los Datos del Panel**
+
+Dimensión Temporal y Transversal : Los datos de panel permiten analizar el comportamiento de los individuos a lo largo del tiempo, lo que proporciona información tanto sobre diferencias entre individuos (dimensión transversal) como sobre cambios dentro de los individuos a lo largo del tiempo (dimensión temporal).
+
+Control de Heterogeneidad : Permiten controlar la heterogeneidad no observada, es decir, las características no observables que pueden influir en las variables de interés y que no cambian con el tiempo para cada individuo.
+
+Mejora de la Eficiencia : Incrementan la eficiencia de las estimaciones econométricas al proporcionar más información y reducir la colinealidad entre variables.
+
+al estudiar la sección transversal repetida de observaciones, los datos de panel resulta mas adecuado para estudiar la dinamica de cambio.
+
+Con datos de panel tenemos N individuos observados en varios periodos consecutivos, asi:
+
+$$Y_{it} = \beta_{1} + \beta_{2}X_{2it} + \beta_{3}X_{3it} + \epsilon_{t}$$
+
+Donde:
+
+-   $Y_{it}$ = valor de $Y$ para el individuo $i$ en el periodo $t$.
+
+-   $i$ = es la i-ésima unidad transversal
+
+-   $t$ = es el tiempo
+
+-   $X$ = son la variables independientes, que en un principios no se suponen estocasticas
+
+El termino de error cumple con las suposiciones clasicas $\epsilon_{t} \sim \textbf{N}(0, \sigma_{t}^{2})$
+
+Nota 1: se supone que hay un maximo de N unidades transversales u observaciones, y un maximo de T periodos.
+
+Nota 2: si cada unidad tranversal tiene el mismo el mismo número de observaciones de series de tiempo, entonces dicho panel (de datos) se llama panel balanceado . Si el número de observaciones difiere entre los miembros del panel se dice que es un panel desbalanceado
+
+Nota 3: existen otras fomas de clasificación de los datos de panel.
+
+macropaneles: los individuso son paises, sectores, regiones. N es pequeños respecto a T. (N \> T) o (T \> N)
+
+micropaneles: los individuos son personal u hogares. N es mucho mas grande que T
+
+# **El modelo de panel de datos agrupado**
+
+Es una técnica de análisis econométrico utilizada cuando se tienen datos que combinan aspectos de series temporales y datos de corte transversal, pero sin distinguir entre diferentes entidades (individuos, empresas, países, etc.) en términos de interceptos específicos. En este modelo, se asume que las diferencias entre las entidades no son significativas o que no es necesario modelarlas explícitamente.
+
+## **Características del Modelo de Panel de Datos Agrupado:**
+
+### **Intercepción Común**:
+
+Asume que todas las entidades en el panel tienen el mismo intercepto. No se controla por diferencias específicas entre entidades.
+
+### **Homogeneidad**:
+
+Se considera que todas las entidades son homogéneas en cuanto a las variables explicativas y su relación con la variable dependiente.
+
+### **Simplificación**:
+
+La especificación del modelo es más simple en comparación con los modelos de efectos fijos y aleatorios, ya que no incorpora interceptos o efectos específicos de cada entidad.
+
+### **Formulación del Modelo**:
+
+El modelo de panel de datos agrupado se puede representar de la siguiente manera:
+
+$$Y_{it}=\alpha + \beta X_{it} + \epsilon_{it}$$​
+
+Donde:
+
+-   $Y_{it}$ es la variable dependiente para la entidad $i$ en el tiempo $t$.
+
+-   $\alpha$ es el intercepto común para todas las entidades.
+
+-   $\beta$ es un vector de coeficientes que mide el efecto de las variables explicativas.
+
+-   $X_{it}$​ es un vector fila de variables explicativas para la entidad $i$ en el tiempo $t$.
+
+-   $\epsilon_{it}$ es el término de error.
+
+Nota: los parametrso estimados del modelo son validos para todos los individuos en todos los peridos de tiempo.
+
+## **Supuestos del Modelo de Panel de Datos Agrupados**:
+
+### **Homogeneidad de los Interceptos**:
+
+Supuesto: Se asume que todas las entidades tienen el mismo intercepto $(\alpha)$.
+
+Implicación: No se consideran diferencias específicas entre entidades que podrían influir en la variable dependiente.
+
+### **Linealidad**:
+
+Supuesto: La relación entre las variables independientes $(X_{it}​$) y la variable dependiente $(Y_{it})$ es lineal.
+
+Implicación: Se puede modelar mediante una combinación lineal de las variables explicativas.
+
+### **Exogeneidad**:
+
+Supuesto: Las variables explicativas $(X_{it}​)$ no están correlacionadas con el término de error $(\epsilon_{it}​)$.
+
+Implicación: $\mathbb{E}(\epsilon_{it} | X_{it}) = 0$. Esto asegura que las variables independientes no están influenciadas por factores inobservables que afectan a la variable dependiente.
+
+### **No Autocorrelación**:
+
+Supuesto: Los errores $(\epsilon_{it}​)$ no están correlacionados a lo largo del tiempo para una misma entidad.
+
+Implicación: $\mathbb{E}(\epsilon_{it} \epsilon_{is}) = 0$ para $t \neq s$. Esto significa que no hay relación entre los errores en diferentes períodos de tiempo para una misma entidad.
+
+### **No Correlación entre Entidades**:
+
+Supuesto: Los errores $(\epsilon_{it})$ de diferentes entidades no están correlacionados.
+
+Implicación: $\mathbb{E}(\epsilon_{it} \epsilon_{jt}) = 0$ para $i \neq j$. Esto asegura que no hay dependencia entre los errores de diferentes entidades.
+
+### **Homoscedasticidad**:
+
+Supuesto: La varianza de los errores $(\epsilon_{it}​$) es constante para todas las observaciones.
+
+Implicación: $\text{Var}(\epsilon_{it}) = \sigma^{2}$. Esto significa que la dispersión de los errores es constante a lo largo del tiempo y entre las entidades.
+
+### **Independencia de las Variables Explicativas**:
+
+Supuesto: Las variables explicativas $(X_{it}​)$ son independientes entre sí.
+
+Implicación: No hay multicolinealidad perfecta entre las variables explicativas.
+
+### **Parametro Estimado del Modelo Agrupado**
+
+Para estimar el parámetro $\beta$, se utiliza la fórmula de Mínimos Cuadrados Ordinarios (MCO), que se aplica de la misma manera que en un modelo de regresión lineal estándar. La fórmula para el estimador de $\beta$ es:
+
+$$\hat{\beta} = (X´ X)^{-1}X´Y$$
+
+Donde:
+
+-   $X$ es la matriz de las variables explicativas, incluyendo todas las observaciones de todas las entidades y períodos de tiempo.
+
+-   $X´$ es la transpuesta de la matriz $X$.
+
+-   $Y$ es el vector de las observaciones de la variable dependiente.
+
+-   $\hat{\beta}$​ es el vector de coeficientes estimados.
+
+Nota: en este caso el modelo de homogeneidad total (modelo agrupado) tendria la siguiente representación de la ecuación de parametrso estimados
+
+$$\hat{\beta}_{agrupado} = (\sum_{i=1}^{N}\sum_{t=1}^{T}x´_{it} x_{it})^{-1} \sum_{i=1}^{N}\sum_{t=1}^{T}x´_{it} y_{it}$$
+
+## **Ventajas y Desventajas**:
+
+### **Ventajas**:
+
+#### **Simplicidad**:
+
+Es más fácil de estimar y entender debido a su simplicidad en comparación con los modelos de efectos fijos o aleatorios.
+
+#### **Menos Demandante de Datos**:
+
+Requiere menos datos para estimar, ya que no necesita suficientes observaciones para cada entidad como en los modelos de efectos fijos.
+
+### **Desventajas**:
+
+#### **Ignora Heterogeneidad**:
+
+No controla por la heterogeneidad no observable entre entidades, lo que puede sesgar las estimaciones si las diferencias entre entidades son significativas.
+
+#### **Asunción Fuerte de Homogeneidad**:
+
+Asume que todas las entidades son idénticas en cuanto a su relación con las variables explicativas, lo cual puede no ser realista en muchos casos.
+
+### **Ejemplos de Aplicación**:
+
+**Análisis de Ventas en Diferentes Tiendas**:
+
+Suponiendo que se tiene un panel de datos de ventas de varias tiendas a lo largo del tiempo y se asume que todas las tiendas responden de la misma manera a las estrategias de marketing.
+
+**Estudio del Impacto de Políticas Económicas**:
+
+Análisis del impacto de una política económica específica en varios países, asumiendo que la política tiene el mismo efecto en todos los países.
+
+## **Ejemplo**
+
+Supongamos que estamos interesados en analizar el impacto del gasto en investigación y desarrollo (I+D) en las ventas de una muestra de empresas a lo largo del tiempo. Para ello, contamos con datos de panel que incluyen observaciones de varias empresas en varios años.
+
+### Datos Simulados
+
+Supongamos que tenemos datos de 3 empresas (A, B y C) durante 5 años (2015-2019). Los datos incluyen las ventas (en millones de dólares) y el gasto en I+D (en millones de dólares) para cada empresa en cada año.
+
+| Empresa | Año  | Ventas | Gasto en I+D |
+|:-------:|:----:|:------:|:------------:|
+|    A    | 2015 |   50   |      5       |
+|    A    | 2016 |   55   |      6       |
+|    A    | 2017 |   53   |     5.5      |
+|    A    | 2018 |   60   |     6.2      |
+|    A    | 2019 |   62   |     6.5      |
+|    B    | 2015 |   40   |      4       |
+|    B    | 2016 |   42   |     4.5      |
+|    B    | 2017 |   45   |     4.8      |
+|    B    | 2018 |   47   |      5       |
+|    B    | 2019 |   50   |     5.2      |
+|    C    | 2015 |   60   |      6       |
+|    C    | 2016 |   65   |     6.5      |
+|    C    | 2017 |   67   |     6.8      |
+|    C    | 2018 |   70   |      7       |
+|    C    | 2019 |   73   |     7.2      |
+
+### Modelo de Datos de Panel Agrupados
+
+En un modelo de datos de panel agrupados, consideramos que hay un solo intercepto común para todas las empresas y no se permiten efectos individuales específicos para cada empresa. El modelo es el siguiente:
+
+$$y_{it} = \alpha + \beta x_{it} + \epsilon_{it}$$
+
+donde:
+
+-   $y_{it}$​ es la variable dependiente (Ventas) para la empresa $i$ en el año $t$.
+
+-   $\alpha$ es el intercepto común.
+
+-   $\beta$ es el coeficiente del gasto en I+D.
+
+-   $x_{it}$​ es la variable independiente (Gasto en I+D) para la empresa $i$ en el año $t$.
+
+-   $\epsilon_{it}$​ es el término de error.
+
+### Estimación del Modelo
+
+```{r}
+# Instalar y cargar paquetes necesarios
+library(dplyr)
+library(broom)
+library(stargazer)
+
+# Crear el dataframe
+data <- data.frame(
+  Empresa = rep(c("A", "B", "C"), each = 5),
+  Año = rep(2015:2019, times = 3),
+  Ventas = c(50, 55, 53, 60, 62, 40, 42, 45, 47, 50, 60, 65, 67, 70, 73),
+  Gasto_ID = c(5, 6, 5.5, 6.2, 6.5, 4, 4.5, 4.8, 5, 5.2, 6, 6.5, 6.8, 7, 7.2)
+)
+
+```
+
+```{r}
+# Ajustar el modelo MCO
+modelo <- lm(Ventas ~ Gasto_ID, data = data)
+
+# Mostrar el resumen del modelo en formato Rmarkdown
+summary(modelo)
+
+# Crear tabla de resultados usando stargazer
+stargazer(modelo, type = "text", title = "Resultados del Modelo MCO")
+```
+
+### Interpretación
+
+-   El coeficiente de la constante ($\alpha$) es 16.123.
+
+-   El coeficiente del gasto en I+D ($\beta$) es 6.944, lo que sugiere que, en promedio, un aumento de 1 millón de dólares en el gasto en I+D está asociado con un aumento de aproximadamente 6.944 millones de dólares en ventas.
+
+-   El valor $R^2$ es 0.993, lo que indica que el modelo explica el 99.3% de la variabilidad en las ventas.
+
+# **Modelo de Efecto Fijos**
+
+El modelo de efectos fijos en panel de datos se utiliza para controlar por heterogeneidad inobservable que puede variar entre entidades (individuos, empresas, países, etc.) pero no a lo largo del tiempo. Este modelo permite que cada entidad tenga su propio intercepto, capturando así efectos específicos de cada entidad.
+
+-   Nota: entonces, podemos pensar que $COV(X_{it},~\alpha_{i}) \neq 0$. Una posible solución es eliminar $\alpha_{i}$. (endogeneidad por variables omitidas)
+
+## **Formulación Matemática del Modelo de Efectos Fijos**:
+
+El modelo de efectos fijos se puede escribir de la siguiente manera:
+
+$y_{it} = \alpha_{i} + \beta x_{ it} + \epsilon_{it}$
+
+Donde:
+
+-   $y_{it}$ es la variable dependiente para la entidad $i$ en el tiempo $t$.
+
+-   $\alpha_{i}$ ​ es el intercepto específico de la entidad $i$, capturando los efectos fijos.
+
+-   $\beta$ es el vector de coeficientes que mide el efecto de las variables explicativas.
+
+-   $x_{it}$​ es el vector de variables explicativas para la entidad $i$ en el tiempo $t$.
+
+-   $\epsilon_{it}$ es el término de error.
+
+### **Eliminación de los Efectos Fijos**:
+
+Para estimar el modelo sin tener que estimar directamente cada $\alpha_{i}$​, se utiliza la transformación de "dentro de la entidad"
+
+-   Nota: se quiere eliminar el intercepto específico de la entidad $i$, que captura los efectos fijos. Se debe entender que el concepto efectos fijos hace referencia a habilidades propias de cada individuo o entidad, los cuales son inobservable por ser propios de cada individuo o entidad.
+
+### **Calcular la Media Dentro de la Entidad**:
+
+-   $\bar{y}_{i} = \frac{1}{T_{i}}\sum_{t=1}^{T_{i}}y_{it}$
+
+-   $\bar{x}_{i} = \frac{1}{T_{i}}\sum_{t=1}^{T_{i}}x_{it}$​
+
+ademas,
+
+-   $\bar{\beta}_{0} = \frac{1}{T_{i}}\sum_{t=1}^{T_{i}}\beta_{0} = \frac{1}{T}T\beta_{0} = \beta_{0}$ es una constante si se tuviera un intercepto en comun.
+
+-   $\bar{\alpha}_{i} = \frac{1}{T_{i}}\sum_{t=1}^{T_{i}}\alpha_{i} = \frac{1}{T}T\alpha_{i} = \alpha_{i}$
+
+Donde $T_{i}$​ es el número de observaciones de la entidad $i$.
+
+### **Restar las Medias**:
+
+Restamos la media dentro de la entidad de cada observación:
+
+$$y_{it} - \bar{y}_{i} = (\alpha_{i} + \beta X_{ it} + \epsilon_{it}) - ( \alpha_{i} + \beta \bar{X}_{i} + \bar{\epsilon}_{i})$$
+
+$$y_{it} - \bar{y}_{i} = (\alpha_{i} - \alpha_{i}) + \beta (X_{ it} - \bar{X}_{i}) + (\epsilon_{it} - \bar{\epsilon}_{i})$$
+
+-   Nota: se elimina $(\alpha_{i} - \alpha_{i})$ y nos queda un modeloque recibe el nombre de transformación de efectos fijo
+
+Esto simplifica a:
+
+$$\tilde{y}_{it} = \beta \tilde{x}_{it} + \tilde{\epsilon}_{it}$$​
+
+Donde:
+
+-   $\tilde{y}_{it} = y_{it} - \bar{y}_{i}$
+
+-   $\tilde{x}_{it} = x_{it} - \bar{x}_{i}$
+
+-   $\tilde{\epsilon}_{it} = \epsilon_{it} - \bar{\epsilon}_{i}$​
+
+Estimación por Mínimos Cuadrados Ordinarios (MCO):
+
+El modelo transformado se puede estimar usando Mínimos Cuadrados Ordinarios (MCO):
+
+$$\hat{\beta} = (\tilde{X´} \tilde{X})^{-1}\tilde{X´}\tilde{Y}$$
+
+​Donde:
+
+-   $\tilde{X}$ es la matriz de las variables explicativas después de restar las medias dentro de cada entidad.
+
+-   $\tilde{Y}$​ es el vector de la variable dependiente después de restar las medias dentro de cada entidad.
+
+Nota 1: este modelo explora la variabilidad de $x$ y de $y$ dentro de los individuos a traves del tiempo, donde $\tilde{x}$ y $\tilde{y}$​ son las desviaciones de $y_{it}$ y de $x_{it}$ respecto a su media.
+
+Nota 2: un limitación utilizar estimación por efectos fijos esta en el hecho de no permitir variables constantes a traves del tiempo.
+
+Nota 3: otra limitación es el hecho de obtener estimaciones estadisticamente menos significativas con efectos fijos, ya que la varianza muestral de las variables originales $y_{it}, ~ x_{it},...,x_{ik}$ es mucho mayor que las tranformadas.
+
+Alternativa: Modelo con Dummies
+
+Otra manera de especificar el modelo de efectos fijos es incluyendo variables indicadoras (dummies) para cada entidad:
+
+$$Y_{it} = \alpha +\sum_{i=1}^{N-1} \delta_{i} D_{i} + \beta X_{it} + \epsilon_{it}$$
+
+Donde:
+
+-   $D_{i}$ es una dummy que toma el valor 1 si la observación pertenece a la entidad $i$ y 0 en caso contrario.
+
+-   $\delta_{i}$​ captura el efecto fijo de la entidad $i$.
+
+Sin embargo, este enfoque puede ser computacionalmente intensivo si hay muchas entidades.
+
+## **Ejemplo Práctico**:
+
+Supongamos que tenemos un panel de datos con las siguientes variables:
+
+$y_{it}$: Ingresos de la persona $i$ en el año $t$.
+
+$X_{it}$​: Años de educación de la persona $i$ en el año $t$.
+
+Calcular la Media de Ingresos y Educación para Cada Persona:
+
+$\bar{y}_{i} = \frac{1}{T_{i}}\sum_{t=1}^{T_{i}}y_{it}$
+
+$\bar{x}_{i} = \frac{1}{T_{i}}\sum_{t=1}^{T_{i}}x_{it}$​
+
+Restar las Medias:
+
+$\tilde{y}_{it} = y_{it} - \bar{y}_{i}$
+
+$\tilde{X}_{it} = X_{it} - \bar{X}_{i}$​
+
+Estimar el Modelo Transformado con MCO:
+
+$\hat{\beta} = (\tilde{X´} \tilde{X})^{-1}\tilde{X´}\tilde{Y}$​
+
+En resumen, el modelo de efectos fijos en panel de datos controla por la heterogeneidad inobservable específica de cada entidad, permitiendo estimar los efectos de las variables explicativas de manera más precisa. La transformación de "dentro de la entidad" elimina los efectos fijos, facilitando la estimación mediante MCO.
+
+# **Efectos Aleatorios**
+
+El modelo de datos de panel de efectos aleatorios es una herramienta estadística utilizada para analizar datos de panel donde se asume que las diferencias entre unidades (por ejemplo, individuos, empresas, países) pueden ser mejor capturadas por efectos aleatorios en lugar de efectos fijos. Este modelo es adecuado cuando se piensa que los efectos individuales no están correlacionados con las variables explicativas del modelo.
+
+Nota: con efectos fijos queriamos eliminar $\alpha_{i}$ porque creiamos que habia una correlación entre $\alpha_{i}$ y alguna de las variables explicativas. Con efectos aleatorios se asume que $COV(X_{it},~\mu_{i}) = 0 ($ $\mu_{i}$ es la variable que em recoge los efectos heterogeneos, es decir, remplazamos $\alpha_{i}$ por $\mu_{i}$ )
+
+## Estructura del Modelo de Efectos Aleatorios
+
+El modelo de efectos aleatorios puede ser formulado matemáticamente de la siguiente manera:
+
+$$y_{it} = \alpha + \beta x_{it} + u_{it}$$
+
+Donde:
+
+-   $y_{it}$​ es la variable dependiente para la unidad $i$ en el tiempo $t$.
+
+-   $\alpha$ es el intercepto común a todas las unidades.
+
+-   $x_{it}$​ es un vector de variables explicativas para la unidad $i$ en el tiempo $t$.
+
+-   $\beta$ es un vector de coeficientes que mide el impacto de las variables explicativas en $y_{it}$​.
+
+-   $u_{it}$ es el término de error compuesto.
+
+El término de error compuesto $u_{it}$ se descompone en dos partes:
+
+-   $u_{it} = \mu_{i} + \epsilon_{it}$ ​
+
+Donde:
+
+-   $\mu_{i}$​ es el efecto aleatorio específico de la unidad $i$, que se asume que sigue una distribución normal con media cero y varianza $\sigma_{\mu}^{2}$​. Es decir, $\mu_{i} \sim \mathcal{N}(0, \sigma_{\mu}^{2})$.
+
+-   $\epsilon_{it}$​ es el término de error idiosincrático, que también se asume que sigue una distribución normal con media cero y varianza $\sigma_{\epsilon}^{2}$. Es decir, $\epsilon_{it} \sim \mathcal{N}(0, \sigma_{\epsilon}^{2})$.
+
+## Supuestos del Modelo de Efectos Aleatorios
+
+1.  **No correlación entre efectos individuales y variables explicativas**:
+
+    $$\mathbb{E}(\mu_i | x_{it}) = 0$$
+
+    Esto implica que los efectos aleatorios $\mu_{i}$​ no están correlacionados con las variables explicativas $x_{it}$.
+
+2.  **Homocedasticidad**:
+
+    La varianza de los errores idiosincráticos es constante:
+
+    $$\mathbb{E}(\epsilon_{it}^{2}) = \sigma_{\epsilon}^{2}$$
+
+3.  **No autocorrelación de los errores idiosincráticos**:
+
+    $$\mathbb{E}(\epsilon_{it} \epsilon_{js}) = 0 \quad \text{para} \quad (i \neq j) \, \text{o} \, (t \neq s)$$
+
+4.  **Distribución Normal de los Efectos Aleatorios**:
+
+    $$\mu_i \sim \mathcal{N}(0, \sigma_{\mu}^{2})$$
+
+## Varianza Compuesta del Error
+
+Dado que $u_{it} = \mu_i + \epsilon_{it}$, la varianza total del error puede ser expresada como:
+
+$$\sigma_{u}^{2} = \sigma_{\mu}^{2} + \sigma_{\epsilon}^{2}$$​
+
+## Estimación del Modelo de Efectos Aleatorios
+
+El modelo de efectos aleatorios se estima comúnmente utilizando el estimador de mínimos cuadrados generalizados (MCG). El estimador MCG considera la estructura de la varianza-covarianza del error para proporcionar estimaciones eficientes de los coeficientes $\beta$.
+
+veamos: ¿podemos calcular los parametros por MCG?
+
+1.  Reescribamos el modelo como: $y_{it} = \alpha + \beta x_{it} + u_{it}$
+
+Donde:
+
+-   $y_{it}$​ es la variable dependiente para la unidad $i$ en el tiempo $t$.
+
+-   $\alpha$ es el intercepto común a todas las unidades.
+
+-   $x_{it}$​ es un vector de variables explicativas para la unidad $i$ en el tiempo $t$.
+
+-   $\beta$ es un vector de coeficientes que mide el impacto de las variables explicativas en $y_{it}$​.
+
+-   $u_{it}$ es el término de error compuesto. (heterogeneidad no observada + el error idiosincrático)
+
+    Nota: $\epsilon_{it}$ es homocedastico y no esta serialmete correlacionado.
+
+2.  No se conoce el comportamiento de $u_{it}$. Es decir, se tiene que saber si $u_{it}$ esta bien comportada. para esto asumimos que :
+
+    $VAR(\mu_{i}) = \sigma_{\mu_{i}}^{2}$ y $VAR(\epsilon_{i}) = \sigma_{\epsilon_{i}}^{2}$
+
+3.  ¿cúal es la correlación intertemporal entre $u_{it}$ y $u_{is}$ $(Corr(u_{it}~ u_{is}))$
+
+    $$\mathbb{Corr}(u_{it}u_{is})= \frac{Cov(u_{it} u_{is})}{\sqrt{VAR(u_{it})VAR(u_{is})}} = \frac{Cov(\mu_{i}+\epsilon_{it}, \mu_{i}+\epsilon_{is})}{\sqrt{[VAR(\mu_{i})+VAR(\epsilon_{it})]^{2}}}$$
+
+    Nota: se expresa la $\mathbb{Corr}(u_{it}u_{is})$ por definición de correlación y se hacemos las sustituciones a partir de las identidades ya halladas.
+
+    $$\mathbb{Corr}(u_{it}u_{is})= \frac{Cov(\mu_i\mu_i) + Cov(\mu_{i} \epsilon_{is}) + Cov(\epsilon_{it}\mu_{i}) + Cov(\epsilon_{it}\epsilon_{is})}{\sigma_{\mu}^{2} + \sigma_{\epsilon}^{2}}$$
+
+Donde: $Cov(\mu_{i} \epsilon_{is}) = 0$, $Cov(\epsilon_{it}\mu_{i})=0$, $Cov(\epsilon_{it}\epsilon_{is}) = 0$
+
+A partir de loa naterior se llega a:
+
+$\mathbb{Corr}(u_{it}u_{is}) = \frac{\sigma_{\mu}^{2}}{\sigma_{\mu}^2 + \sigma_\epsilon^2}$ , es decir $u_{it}$ esta serialmente correlacionado
+
+4.  Filtro de transformación
+
+Una transformación comúnmente usada en el modelo de efectos aleatorios es la deglación de los efectos individuales mediante el factor $\theta$, donde:
+
+​​$$\theta = 1 - \sqrt{\frac{\sigma_\epsilon^2}{\sigma_\mu^2 + \sigma_\epsilon^2}}$$
+
+Nota: efectos aleatorios corrige esa correlacion serial por medio de $\theta$ .
+
+Aplicando esta transformación:
+
+$$y_{it} - \theta \bar{y}_{i} = \alpha(1 - \theta) + \beta (x_{it} - \theta \bar{x}_{i}) + (u_{it} - \theta \bar{u}_{i})$$
+
+Donde $\bar{y}_{i}$ y $\bar{x}_{i}$ son las medias de $y_{it}$​ y $x_{it}$​ a través del tiempo para la unidad $i$.
+
+Nota 1: la presencia de $\alpha_{i}$ se suaviza por medio de $(1-\theta)$. a medida que $\theta$ se va caercando a 1, la expresión $(1-\theta)$ se va haciendo cero, por lo que $\mu_{i}$ se va a desaparecer.
+
+Nota 2: el parametro $\theta$ nunca es conocido en la practica porque depende de variables poblacionales, pero es facil de estimar. los software estadisticos implementan esta formula de forma inmediata.
+
+$$\hat{\theta} = 1 - \{\frac{1}{[1 +\frac{T \hat{\sigma}_{\mu}^{2}}{\hat{\sigma}_{\epsilon}^{2}}]}\}$$
+
+**Prueba de Breusch-Pagan Multiplicador de Lagrange (LM) para Efectos Aleatorios en Datos de Panel**
+
+La Prueba de Breusch-Pagan LM se utiliza para determinar la presencia de efectos aleatorios en datos de panel. Se analiza la varianza de los residuos para detectar efectos individuales específicos no observables.
+
+La Prueba de Breusch-Pagan LM se utiliza para detectar efectos aleatorios en datos de panel mediante el análisis de la varianza de los residuos. Esto permite determinar si existen efectos individuales específicos no observables.
+
+**Pasos Clave:**
+
+1.  **Modelo de Datos de Panel:** Relaciona una variable dependiente con variables explicativas y un término de error descompuesto en efectos individuales y errores idiosincráticos.
+
+2.  **Hipótesis de la Prueba:**
+
+    -   **Nula:** No hay efectos aleatorios ($\sigma_{\mu}^2 = 0$).
+
+    -   **Alternativa:** Hay efectos aleatorios ($\sigma_{\mu}^2 > 0$).
+
+3.  **Proceso de Prueba:**
+
+    -   Estimar el modelo de efectos comunes.
+
+    -   Calcular las sumas de residuos cuadrados agrupados y dentro de los grupos.
+
+    -   Comparar el estadístico LM con la distribución chi-cuadrado para determinar la presencia de efectos aleatorios.
+
+**Interpretación:** Si el estadístico LM es mayor que el valor crítico de la chi-cuadrado, se rechaza la hipótesis nula, indicando la presencia de efectos aleatorios en los datos de panel.
+
+**Interpretación del Resultado**
+
+El estadístico LM sigue una distribución chi-cuadrado ($\chi^{2}$) con grados de libertad igual al número de parámetros en el modelo (excluyendo la constante). Si el valor del estadístico LM es mayor que el valor crítico de la distribución chi-cuadrado para un nivel de significancia dado (por ejemplo, 0.05), se rechaza la hipótesis nula, indicando la presencia de efectos aleatorios en los datos de panel.
+
+## Resumen
+
+El modelo de efectos aleatorios es apropiado cuando se puede asumir que las diferencias no observadas entre las unidades del panel son no correlacionadas con las variables explicativas. Este modelo permite una estimación más eficiente al aprovechar la variabilidad tanto entre unidades como dentro de las unidades en el tiempo.
+
+Nota 1: efctos aleatorios es consistente, pero no insesgado para $N \longrightarrow \infty$ y $T$ fijo (datos para muchos individuos en un tiempo muy corto)
+
+Nota 2: en el caso donde $T \longrightarrow \infty$ y $N$ fijo no se sabe si efectos aleatorios es consistente. (en este caso es mejor pensar en un metodo de series de tiempo).
+
+Nota 3: volviendo al modelo transformado se tiene:
+
+$$y_{it} - \theta \bar{y}_{i} = \alpha(1 - \theta) + \beta (x_{it} - \theta \bar{x}_{i}) + (u_{it} - \theta \bar{u}_{i})$$
+
+-   si $\theta = 0$ se tiene MCO agrupados (no existe una correlación serial)
+
+-   si $0 < \theta < 1$ se tiene efectos aleatorios (existe correlación serial)
+
+-   si $\theta =1$ se tiene efectos fijos. (nos da la transformación de efectos fijos)
+
+Nota: sabemos que el $\theta$ se remplaza por $\hat{\theta}$ por la imposibilidad de calcular el primero.
+
+# **Ejemplo**
+
+```{r setup, include=FALSE}
+# Configuración global para knitr
+knitr::opts_chunk$set(
+  echo = TRUE,       
+  warning = FALSE,   
+  message = FALSE,   
+  fig.width = 7,     
+  fig.height = 5    
+)
+
+
+
+# Instalación de paquetes necesarios
+if (!require("AER")) install.packages("AER")
+if (!require("plm")) install.packages("plm")
+
+# Carga de paquetes
+library(AER)
+library(plm)
+```
+
+11 grandes compañias, 3 variables macro en el periodo de 1935-1954
+
+```{r}
+# Carga del conjunto de datos Grunfeld
+data("Grunfeld", package = "AER")
+# Visualización del conjunto de datos
+print(Grunfeld)
+```
+
+```{r}
+# Conversión del conjunto de datos en formato de panel
+Grun_all <- pdata.frame(Grunfeld, index = c("firm", "year"))
+# Visualización del conjunto de datos en formato de panel
+print(Grun_all)
+```
+
+## **Análisis con un Subconjunto de Datos**
+
+Para algunos análisis, utilizaremos solo los datos de tres compañías: General Electric, General Motors e IBM.
+
+```{r}
+# Filtrado del subconjunto de datos para tres firmas específicas
+gr <- subset(Grunfeld, firm %in% c("General Electric", "General Motors", "IBM"))
+# Visualización del subconjunto de datos
+print(gr)
+```
+
+```{r}
+# Conversión del subconjunto de datos en formato de panel
+pgr <- pdata.frame(gr, index = c("firm", "year"))
+# Visualización del subconjunto de datos en formato de panel
+print(pgr)
+```
+
+## **Modelos de Regresión**
+
+### **Modelo de Datos Agrupados (MCO)**
+
+El modelo de datos agrupados asume que los coeficientes son constantes a lo largo del tiempo y entre las unidades (firmas). La forma matemática es:
+
+$$invest_{it} = \beta_{0} + \beta_{1}value_{it} + \beta_{2}capital_{it} + \epsilon_{it}$$
+
+donde:
+
+-   $invest_{it}$ = es la inversion de la firma $i$ en el tiempo $t$
+
+-   $value_{it}$ = es el valor de la firma $i$ en el tiempo $t$.
+
+-   $capital_{it}$ = es el valor del capital $i$ en el timpo $t$.
+
+-   $\epsilon_{it}$ es el termino de error.
+
+```{r}
+# Ajuste del modelo OLS agrupado
+gr_pool <- plm(invest ~ value + capital, data = pgr, model = "pooling")
+# Resumen del modelo OLS agrupado
+summary(gr_pool)
+```
+
+### Coeficientes Estimados
+
+De la salida del modelo, los coeficientes estimados son:
+
+-   Intercepto $(\beta_0​)$: $−101.603040$
+
+-   Coeficiente de $\text{value}(\beta_1)$: $0.105016$
+
+-   Coeficiente de $\text{capital} (\beta_{2}​)$: $0.318719$
+
+### Forma Matemática del Modelo Ajustado
+
+Incorporando estos coeficientes en la ecuación del modelo, obtenemos:
+
+$$\hat{\text{invest}}_{it} = -101.603040 + 0.105016 \hat{\text{value}}_{it} + 0.318719\hat{\text{capital}}_{it}$$
+
+Este es el modelo ajustado de datos de panel agrupados basado en los coeficientes estimados de la salida del modelo gr_pool.
+
+### Interpretación de los Coeficientes
+
+-   **Intercepto** $\beta_{0} = - 101.603040$ : Este es el valor promedio de la inversión cuando tanto el valor como el capital son cero. Aunque esta interpretación no siempre tiene sentido práctico, depende del contexto de los datos.
+
+-   **Coeficiente de** $\text{value} ~ (\beta_{1}=0.105016$: Este coeficiente indica que, manteniendo constante el capital, un aumento de una unidad en el valor de la firma está asociado con un aumento promedio de $0.105016$ unidades en la inversión.
+
+-   **Coeficiente de** $\text{capital} ~ \beta_{2}=0.318719)$: Este coeficiente indica que, manteniendo constante el valor de la firma, un aumento de una unidad en el capital está asociado con un aumento promedio de $0.318719$ unidades en la inversión.
+
+### Estadísticas del Modelo
+
+-   **R-Squared (0.86746)**: Indica que aproximadamente el 86.75% de la variabilidad en la inversión puede ser explicada por los cambios en el valor y el capital.
+
+-   **Adj. R-Squared (0.86281)**: Es el R-cuadrado ajustado que toma en cuenta el número de predictores en el modelo.
+
+-   **F-statistic (186.524)**: Prueba global de significancia del modelo, con un $p-valor < 2.22e-16$, lo que indica que el modelo en su conjunto es significativo.
+
+### **Modelo con Efectos fijos**
+
+El modelo de efectos fijos permite que las interceptas varíen entre las unidades (firmas) pero no en el tiempo. La forma matemática es:
+
+$$invest_{it} = \alpha_{i} + \beta_{1}value_{it} + \beta_{2}capital_{it} + \epsilon_{it}$$
+
+Donde:
+
+-   $\alpha_{i}$ = es el termino de efectos especifico de la firma $i$
+
+-   $\beta_{1}$ y $\beta_{2}$ son los parametros para $value_{it}$ y $capital_{it}$ respectivamente.
+
+-   $\epsilon_{it}$ es el termino de error.
+
+```{r}
+# Ajuste del modelo con efectos fijos
+gr_fe <- plm(invest ~ value + capital, data = pgr, model = "within")
+# Resumen del modelo con efectos fijos
+summary(gr_fe)
+```
+
+### Coeficientes Estimados
+
+De la salida del modelo, los coeficientes estimados son:
+
+-   Coeficiente de $\text{value}(\beta_1)$: $0.104914$
+
+-   Coeficiente de $\text{capital} (\beta_2)$: $0.345298$
+
+### Forma Matemática del Modelo Ajustado
+
+Incorporando estos coeficientes en la ecuación del modelo, obtenemos:
+
+$$\text{invest}_{it} = \alpha_{i} + 0.104914 \text{value}_{it} + 0.345298\text{capital}_{it}$$​
+
+### Interpretación de los Coeficientes
+
+-   **Coeficiente de** $\text{value} (\beta_1 = 0,104914)$: Este coeficiente indica que, manteniendo constante el capital, un aumento de una unidad en el valor de la firma está asociado con un aumento promedio de $0.104914$ unidades en la inversión.
+
+-   **Coeficiente de** $\text{capital}(\beta_{2} = 0.345298)$: Este coeficiente indica que, manteniendo constante el valor de la firma, un aumento de una unidad en el capital está asociado con un aumento promedio de $0.345298$ unidades en la inversión.
+
+### Estadísticas del Modelo
+
+-   **R-Squared (0.87084)**: Indica que aproximadamente el 87.08% de la variabilidad en la inversión puede ser explicada por los cambios en el valor y el capital, teniendo en cuenta las diferencias entre firmas.
+
+-   **Adj. R-Squared (0.86144)**: Es el R-cuadrado ajustado que toma en cuenta el número de predictores en el modelo.
+
+-   **F-statistic (185.407)**: Prueba global de significancia del modelo, con un $p-valor < 2.22e-16$, lo que indica que el modelo en su conjunto es significativo.
+
+### Comparación entre Modelos de Datos de Panel Agrupados y de Efectos Fijos
+
+La comparación entre estos dos modelos se realiza para determinar si existen diferencias significativas entre las unidades (por ejemplo, firmas) que justifiquen el uso de un modelo de efectos fijos en lugar de un modelo de datos agrupados. Esto se hace mediante una prueba F para efectos individuales.
+
+### Prueba F para Efectos Individuales
+
+La prueba F para efectos individuales (o prueba de efectos fijos) evalúa la hipótesis nula de que todos los interceptos individuales $(\alpha_{i})$ son iguales contra la hipótesis alternativa de que al menos uno de ellos es diferente. En otras palabras, la prueba determina si los efectos individuales (firmas) tienen un impacto significativo en el modelo.
+
+#### Hipótesis
+
+-   $Hipótesis ~ Nula (HO​)$: No hay efectos individuales significativos. Esto implica que los interceptos individuales son iguales y un modelo de datos agrupados es apropiado.
+
+-   $Hipótesis Alternativa (HA)$: Hay efectos individuales significativos. Esto implica que los interceptos individuales son diferentes y un modelo de efectos fijos es más adecuado.
+
+#### Fórmula de la Prueba F
+
+La prueba F se calcula como sigue:
+
+$$F = \frac{(RSS_{Pooled} - RSS_{FE}) / (n - 1)}{RSS_{FE} / (N - n - k)}$$ ​
+
+Donde:
+
+-   $RSS_{pooled}$​ es la suma de los residuos cuadrados del modelo agrupado.
+
+-   $RSS_{FE}$​ es la suma de los residuos cuadrados del modelo de efectos fijos.
+
+-   $n$ es el número de unidades (firmas).
+
+-   $N$ es el número total de observaciones.
+
+-   $k$ es el número de variables explicativas.
+
+```{r}
+# Prueba F para comparar el modelo de efectos fijos con el modelo OLS agrupado
+pFtest(gr_fe, gr_pool)
+```
+
+-   **F = 56.825**: Este es el estadístico F calculado.
+
+-   **df1 = 2**: Grados de libertad del numerador (número de variables explicativas).
+
+-   **df2 = 55**: Grados de libertad del denominador (total de observaciones menos el número de unidades y variables explicativas).
+
+-   **p-value = 4.148e-14**: Este es el p-valor asociado con la prueba F.
+
+#### Interpretación
+
+-   **p-value (4.148e-14)**: El p-valor es extremadamente pequeño (mucho menor que 0.05), lo que indica que rechazamos la hipótesis nula a un nivel de significancia del 5%.
+
+-   **Rechazo de** $HO$: Esto significa que hay evidencia estadística suficiente para concluir que existen efectos individuales significativos. En otras palabras, las interceptaciones individuales son significativamente diferentes entre sí.
+
+### Conclusión
+
+Dado el resultado de la prueba F, concluimos que el modelo de efectos fijos es más apropiado que el modelo de datos agrupados para estos datos. Los efectos individuales (firmas) tienen un impacto significativo en la inversión, y por lo tanto, deben ser incluidos en el modelo.
+
+Este análisis es crucial en datos de panel porque ayuda a elegir el modelo que mejor captura la estructura subyacente de los datos, mejorando así la precisión y la interpretación de los resultados.
+
+### **Modelos con Efectos Aleatorios**
+
+El modelo de efectos aleatorios asume que las diferencias entre las unidades (firmas) se capturan mediante un término de error aleatorio. La forma matemática es:
+
+$$invest_{it} = \beta_{0} + \beta_{1}value_{it} + \beta_{2}capital_{it} + u_{i} + \epsilon_{it}$$
+
+Donde:
+
+-   $\beta_{0}$ = es el intercepto en comun de las firmas.
+
+-   $u_{i}$ es el término de error específico de la firma $i$, que se asume que es un componente aleatorio.
+
+-   $\epsilon_{it}$ es el termino de error.
+
+### **Método de Wallace-Hussain**
+
+```{r}
+# Ajuste del modelo con efectos aleatorios (Wallace-Hussain)
+gr_re <- plm(invest ~ value + capital, data = pgr, model = "random", random.method = "walhus")
+# Resumen del modelo con efectos aleatorios (Wallace-Hussain)
+summary(gr_re)
+```
+
+### **Método de Amemiya**
+
+```{r}
+# Ajuste del modelo con efectos aleatorios (Amemiya)
+gr_re1 <- plm(invest ~ value + capital, data = pgr, model = "random", random.method = "amemiya")
+# Resumen del modelo con efectos aleatorios (Amemiya)
+summary(gr_re1)
+```
+
+### **Método de Nerlove**
+
+```{r}
+# Ajuste del modelo con efectos aleatorios (Nerlove)
+gr_re2 <- plm(invest ~ value + capital, data = pgr, model = "random", random.method = "nerlove")
+# Resumen del modelo con efectos aleatorios (Nerlove)
+summary(gr_re2)
+```
+
+| **Característica**                     | **Wallace-Hussain**       | **Amemiya**               | **Nerlove**              |
+|----------------------------------------|---------------------------|---------------------------|--------------------------|
+| **Intercepto**                         | -109.976572 (p = 0.07468) | -110.046862 (p = 0.08041) | -110.563691 (p = 0.1441) |
+| **Coeficiente de value**               | 0.104280 (p \< 2.22e-16)  | 0.104306 (p \< 2.22e-16)  | 0.104505 (p \< 2.22e-16) |
+| **Coeficiente de capital**             | 0.344784 (p \< 2.22e-16)  | 0.344813 (p \< 2.22e-16)  | 0.345005 (p \< 2.22e-16) |
+| **Varianza idiosincrática**            | 4389.31                   | 4280.43                   | 4066.41                  |
+| **Desviación estándar idiosincrática** | 66.25                     | 65.43                     | 63.77                    |
+| **Varianza individual**                | 8079.74                   | 8325.12                   | 12808.71                 |
+| **Desviación estándar individual**     | 89.89                     | 91.24                     | 113.18                   |
+| **Theta**                              | 0.8374                    | 0.8417                    | 0.875                    |
+| **Min Residual**                       | -187.3987                 | -186.8821                 | -182.8631                |
+| **1er Cuartil Residual**               | -32.9206                  | -33.0073                  | -32.7789                 |
+| **Mediana Residual**                   | 6.9595                    | 7.2036                    | 6.4448                   |
+| **3er Cuartil Residual**               | 31.4322                   | 31.0795                   | 29.4453                  |
+| **Max Residual**                       | 210.2006                  | 209.9289                  | 207.9041                 |
+| **R-cuadrado**                         | 0.87048                   | 0.8705                    | 0.87062                  |
+| **R-cuadrado ajustado**                | 0.86594                   | 0.86595                   | 0.86608                  |
+| **Chisq**                              | 383.089 (p \< 2.22e-16)   | 383.148 (p \< 2.22e-16)   | 383.562 (p \< 2.22e-16)  |
+
+### Interpretación de la Tabla:
+
+1.  **Intercepto**: El intercepto varía ligeramente entre los modelos, y todos tienen p-valores que indican que no son significativamente diferentes de cero a niveles tradicionales (0.05), pero son más marginalmente no significativos en Wallace-Hussain y Amemiya.
+
+2.  **Coeficientes de value y capital**: Los coeficientes de $valeu$ y $capital$ son muy similares entre los modelos, todos siendo altamente significativos $(p < 0.001)$.
+
+3.  **Varianza y Desviación Estándar**:
+
+    -   La varianza y desviación estándar idiosincrática son menores en el modelo de Nerlove.
+
+    -   La varianza y desviación estándar individual son significativamente mayores en el modelo de Nerlove, indicando que este modelo captura más variación entre las firmas.
+
+4.  **Theta**: El valor de theta, que indica la proporción de la variabilidad total explicada por la variabilidad entre unidades individuales, es mayor en el modelo de Nerlove.
+
+5.  **Residuales**: Los residuales mínimos, el primer cuartil, la mediana, el tercer cuartil y el máximo son similares entre los modelos, con ligeras variaciones.
+
+6.  **R-cuadrado y R-cuadrado ajustado**: Todos los modelos tienen R-cuadrados y R-cuadrados ajustados similares, indicando que explican aproximadamente el 87% de la variabilidad total en la inversión.
+
+7.  **Chisq**: Todos los modelos tienen valores de Chi-cuadrado altos y p-valores muy pequeños (\< 2.22e-16), indicando que los modelos son significativamente diferentes de un modelo nulo.
+
+Esta tabla proporciona una comparación clara entre los tres métodos de estimación de efectos aleatorios, destacando las pequeñas diferencias y similitudes entre ellos.
+
+### Comparación Teórica
+
+-   **Estimación de Varianzas**: Los tres métodos difieren principalmente en cómo estiman las varianzas de los efectos individuales y los errores idiosincráticos.
+
+    -   **Wallace-Hussain**: Minimiza la suma de las varianzas.
+
+    -   **Amemiya**: Ofrece flexibilidad y robustez.
+
+    -   **Nerlove**: Da mayor peso a las varianzas individuales.
+
+-   **Theta**: El coeficiente de corrección theta varía según el método, reflejando las diferencias en la estimación de las varianzas.
+
+-   **Aplicabilidad**: La elección del método puede depender de las características específicas del conjunto de datos y de los supuestos sobre la estructura de varianza.
+
+## **Pruebas de Hausman para Comparar Modelos**
+
+$$Ho: Efectos ~ aleatorios ~ es ~ consistente$$
+
+$$Ha: Efectos ~ fijos ~ es ~ consistente$$
+
+La prueba de Hausman se utiliza para determinar si un modelo de efectos aleatorios es consistente comparado con un modelo de efectos fijos.
+
+### Procedimiento de la Prueba:
+
+1.  **Estimación de los Modelos**:
+
+    -   Se estiman ambos modelos, FE y RE, utilizando los datos de panel.
+
+2.  **Obtención de los Estimadores**:
+
+    -   Se calculan los estimadores de los coeficientes bajo ambos modelos.
+
+3.  **Comparación de los Estimadores**:
+
+    -   Se calcula la diferencia entre los estimadores bajo los dos modelos $(\hat{\beta}_{FE}-\hat{\beta}_{RE})$.
+
+4.  **Estimación de la Varianza de la Diferencia**:
+
+    -   Se estima la varianza de la diferencia considerando las matrices de covarianza de los estimadores bajo ambos modelos.
+
+5.  **Aplicación de la Estadística de Prueba**:
+
+    -   Se utiliza la estadística de prueba de Hausman, que sigue una distribución chi-cuadrado bajo las hipótesis nula y alternativa.
+
+    $$H = (\hat{\beta}_{FE} - \hat{\beta}_{RE})' [Var(\hat{\beta}_{FE}) - Var(\hat{\beta}_{RE})]^{-1} (\hat{\beta}_{FE} - \hat{\beta}_{RE}) \sim \chi^2(k)$$
+
+    -   $k$: Número de coeficientes en el modelo (grados de libertad).
+
+6.  **Interpretación del Valor p**:
+
+    -   Se evalúa el $valor ~ p$ obtenido de la estadística de prueba. Un valor p pequeño sugiere que existe suficiente evidencia para rechazar la hipótesis nula en favor de la hipótesis alternativa.
+
+```{r}
+# Prueba de Hausman para el modelo con efectos aleatorios (Wallace-Hussain) vs efectos fijos
+phtest(gr_re, gr_fe)
+```
+
+```{r}
+# Prueba de Hausman para el modelo con efectos aleatorios (Amemiya) vs efectos fijos
+phtest(gr_re1, gr_fe)
+```
+
+```{r}
+# Prueba de Hausman para el modelo con efectos aleatorios (Nerlove) vs efectos fijos
+phtest(gr_re2, gr_fe)
+```
+
+## **Conclusión**
+
+Los resultados de las pruebas de Hausman indican que los modelos de efectos aleatorios son consistentes, lo que sugiere que es preferible utilizar un modelo de efectos aleatorios en lugar de un modelo de efectos fijos para estos datos.
