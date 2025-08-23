@@ -1,0 +1,260 @@
+---
+title: "Modelo de Corrección de Errores (MCE)"
+subtitle: "Análisis de Relaciones de Largo Plazo"
+author: "Yuberley Cruz Caycedo"
+date: "21 abril 2024"
+format:
+  html:
+    toc: true
+    toc-location: left
+    code-fold: true
+    number-sections: true
+---
+
+```{r setup, include=FALSE}
+library(readxl)
+library(forecast)
+library(astsa)
+library(tseries)
+library(urca)
+library(lmtest)
+library(tidyverse)
+library(knitr)
+library(broom)
+```
+
+## Introducción al Modelo de Corrección de Errores (MCE)
+
+En el análisis de series de tiempo, a menudo nos encontramos con variables no estacionarias. Si realizamos una regresión entre dos o más de estas series, corremos el riesgo de encontrar una regresión espuria: una relación estadísticamente significativa que en realidad no existe, producto de que ambas variables comparten una tendencia común (por ejemplo, ambas crecen con el tiempo).
+
+La cointegración es una herramienta econométrica que nos permite superar este problema. Nos ayuda a determinar si existe una relación de equilibrio de largo plazo entre dos o más series temporales que son, individualmente, no estacionarias.
+
+> El Teorema de Representación de Granger: "Si dos variables, $Y_t$ y $X_t$, están cointegradas, entonces la relación entre ellas puede ser expresada como un Modelo de Corrección de Errores (MCE). En este modelo, el cambio en $Y_t$ depende tanto de los cambios de corto plazo en $X_t$ como del desequilibrio de largo plazo de la ecuación de cointegración."
+>
+> --- Gujarati, D. N., & Porter, D. C. (2009). Econometría (5a ed.).
+
+El MCE es un modelo poderoso porque une la dinámica de corto plazo con el equilibrio de largo plazo. El término de error de la regresión de cointegración, $e_{t-1}$, actúa como el "error de equilibrio", y el modelo muestra cómo la variable dependiente se ajusta en cada periodo para "corregir" ese error y volver al equilibrio.
+
+La forma general de un MCE simple es: $$ \Delta Y_t = \delta_0 \Delta X_t - \alpha (Y_{t-1} - \beta_1 - \beta_2 X_{t-1}) + \epsilon_t $$
+
+Donde:
+
+-    $\Delta Y_t$ y $\Delta X_t$ capturan la dinámica de corto plazo.
+
+<!-- -->
+
+-    $(Y_{t-1} - \beta_1 - \beta_2 X_{t-1})$ es el término de corrección de error rezagado, que representa el desequilibrio del periodo anterior.
+
+-    $\alpha$ es el coeficiente de ajuste, que mide la velocidad a la que se corrige el desequilibrio. Se espera que sea negativo y significativo.
+
+------------------------------------------------------------------------
+
+## Ejemplo: PIB y Consumo de Colombia
+
+Utilizaremos una serie trimestral (1994:1 - 2007:4) de Colombia para analizar la relación entre el Producto Interno Bruto (`PIBCOL`) y el Gasto de Consumo Final de los Hogares (`CONSUMO`).
+
+### Carga y Preparación de los Datos
+
+```{r load-data, echo=TRUE}
+# Crear un tibble con los datos directamente para asegurar la reproducibilidad
+datos_col <- tibble(
+  PIB = c(16483795, 16770334, 17108890, 17169843, 17502275, 17701107, 17774801, 18068034, 18022771, 18101677, 18166476, 18215900, 18166262, 18787973, 18934847, 19104939, 19189485, 19206928, 18756143, 18268769, 18054608, 18342415, 18765955, 19339396, 19782521, 20023602, 20261314, 20569766, 20857317, 21255861, 21743621, 22210134, 22718164, 23307520, 23838426, 24430754, 25032549, 25686001, 26388480, 27072973, 27793444, 28623403, 29424683, 30261623, 31057424, 31920556, 32773950, 33691689, 34584282, 35508827, 36413289, 37351654, 38268153, 39221191, 40156942, 41129339),
+  CONSUMO = c(13264106, 13492186, 13697711, 13830510, 14030780, 14266719, 14453786, 14665515, 14835813, 14974777, 15205616, 15399812, 15613359, 15961088, 16018564, 16011663, 16092817, 16063876, 15856955, 15508261, 15236513, 15354964, 15617066, 15989781, 16346294, 16601449, 16853811, 17158309, 17482329, 17871630, 18320498, 18751509, 19220970, 19762953, 20296716, 20875708, 21469145, 22116035, 22809794, 23490793, 24208034, 25019808, 25816911, 26650428, 27448834, 28318182, 29177891, 30097960, 31003055, 31952220, 32881512, 33845012, 34790117, 35771891, 36738980, 37742880)
+)
+
+# Crear los objetos de serie de tiempo
+PIBCOL <- ts(datos_col$PIB, start = c(1994, 1), frequency = 4)
+CONSUMO <- ts(datos_col$CONSUMO, start = c(1994, 1), frequency = 4)
+```
+
+### 1. Pruebas de Raíz Unitaria
+
+El primer paso es verificar que ambas series son no estacionarias y tienen el mismo orden de integración.
+
+```{r plot-series-col, echo=TRUE, fig.cap="Series de PIB y Consumo de Colombia (1994-2007)."}
+# Crear un data frame combinado para ggplot
+plot_data_col <- data.frame(
+  Fecha = time(PIBCOL),
+  PIB = as.numeric(PIBCOL),
+  Consumo = as.numeric(CONSUMO)
+) %>% pivot_longer(-Fecha, names_to = "Variable", values_to = "Valor")
+
+# Graficar ambas series con ggplot2
+ggplot(plot_data_col, aes(x = Fecha, y = Valor, color = Variable)) +
+  geom_line(linewidth = 1.2) +
+  facet_wrap(~Variable, scales = "free_y", ncol = 1) +
+  labs(title = "PIB y Consumo de los Hogares en Colombia", x = "Año", y = "Valor (Millones de COP)") +
+  theme_minimal() +
+  theme(legend.position = "none")
+```
+
+Interpretación Gráfica: Ambas series muestran una clara tendencia ascendente a lo largo del tiempo, lo que es un fuerte indicio visual de no estacionariedad.
+
+Procedemos con la prueba formal de Dickey-Fuller Aumentada (DFA).
+
+```{r adf-test-col, echo=TRUE}
+# Función para resumir los resultados del test de Dickey-Fuller
+summarize_ur_df <- function(test_object, variable_name) {
+  tibble(
+    Variable = variable_name,
+    `Estadístico de Prueba` = test_object@teststat[1,1],
+    `Valor Crítico 1%` = test_object@cval[1,1],
+    `Valor Crítico 5%` = test_object@cval[1,2],
+    `Valor Crítico 10%` = test_object@cval[1,3]
+  )
+}
+
+# Realizar y resumir las pruebas en niveles
+df_pib <- ur.df(PIBCOL, type = "trend", selectlags = "AIC")
+df_consumo <- ur.df(CONSUMO, type = "trend", selectlags = "AIC")
+
+bind_rows(
+  summarize_ur_df(df_pib, "PIB Trimestral"),
+  summarize_ur_df(df_consumo, "Consumo Trimestral")
+) %>% kable(caption = "Resultados de la Prueba de Dickey-Fuller Aumentada (en niveles)")
+```
+
+Interpretación de las Pruebas en Niveles: Para ambas series, el valor absoluto del estadístico de prueba es menor que el valor absoluto de los valores críticos. Por lo tanto, no podemos rechazar la hipótesis nula de que las series tienen una raíz unitaria. Concluimos que ambas son no estacionarias.
+
+Ahora, probamos las primeras diferencias:
+
+```{r adf-test-diff-col, echo=TRUE}
+# Realizar y resumir las pruebas en primeras diferencias
+df_dpib <- ur.df(diff(PIBCOL), type = "drift", selectlags = "AIC")
+df_dconsumo <- ur.df(diff(CONSUMO), type = "drift", selectlags = "AIC")
+
+bind_rows(
+  summarize_ur_df(df_dpib, "d(PIB)"),
+  summarize_ur_df(df_dconsumo, "d(Consumo)")
+) %>% kable(caption = "Resultados de la Prueba de Dickey-Fuller Aumentada (en primeras diferencias)")
+```
+
+Interpretación de las Pruebas en Diferencias: Para ambas series diferenciadas, el valor absoluto del estadístico de prueba es mayor que el de los valores críticos. Por lo tanto, rechazamos la hipótesis nula. Concluimos que ambas series son integradas de orden 1, I(1).
+
+### 2. Prueba de Cointegración: Método de Engle-Granger
+
+Dado que ambas series son I(1), podemos proceder a probar si están cointegradas. Este método de dos pasos consiste en: 1. Estimar la regresión de largo plazo. 2. Probar si los residuos de esa regresión son estacionarios.
+
+```{r coint-test, echo=TRUE}
+# Paso 1: Estimar la regresión de largo plazo
+modelo_coint <- lm(PIBCOL ~ CONSUMO)
+
+# Extraer los residuos
+residuos_coint <- residuals(modelo_coint)
+
+# Paso 2: Prueba DFA sobre los residuos
+df_residuos <- ur.df(residuos_coint, type = "none", selectlags = "AIC")
+summarize_ur_df(df_residuos, "Residuos (PIB ~ Consumo)") %>% 
+  kable(caption = "Prueba de Raíz Unitaria sobre los Residuos (Engle-Granger)")
+```
+
+Interpretación de la Prueba de Engle-Granger: La hipótesis nula es que los residuos tienen una raíz unitaria (no son estacionarios), lo que implicaría que las series no están cointegradas.
+
+-    Estadístico de prueba: `-2.238`.
+
+-    Valor crítico de Engle-Granger al 5% (con 2 variables): Aproximadamente `-3.37`.
+
+Como el valor absoluto de nuestro estadístico de prueba (2.238) es menor que el valor absoluto del valor crítico (3.37), no podemos rechazar la hipótesis nula.
+
+La prueba de Engle-Granger no encontró evidencia de cointegración. Sin embargo, este método tiene limitaciones: es sensible a la elección de la variable dependiente y puede tener bajo poder en muestras pequeñas. Por ello, es recomendable complementarlo con un método más robusto como la prueba de Johansen.
+
+### 3. Prueba de Cointegración: Método de Johansen
+
+La prueba de Johansen es un método más general que no requiere elegir una variable dependiente y puede detectar múltiples relaciones de cointegración.
+
+> Prueba de Johansen: "La prueba de Johansen es un procedimiento para probar restricciones de cointegración. A diferencia del método de Engle-Granger, puede detectar múltiples vectores de cointegración... La prueba se basa en la estimación de un modelo VAR y en el análisis de la matriz de coeficientes."
+>
+> --- Enders, W. (2015). Applied Econometric Time Series (4th ed.).
+
+```{r johansen-test, echo=TRUE}
+# Combinar las series para la prueba
+datos_1 <- data.frame(PIBCOL, CONSUMO)
+
+# Realizar la prueba de Johansen
+# K=2 indica que se incluyen 2 rezagos en el modelo VAR subyacente.
+result <- ca.jo(datos_1, type = "trace", K = 2)
+
+# Extraer y presentar los resultados en una tabla
+johansen_summary <- summary(result)
+data.frame(
+  `Hipótesis Nula (r)` = c("r = 0", "r <= 1"),
+  `Estadístico de Prueba` = johansen_summary@teststat,
+  `Valor Crítico 10%` = johansen_summary@cval[, "10pct"],
+  `Valor Crítico 5%` = johansen_summary@cval[, "5pct"],
+  `Valor Crítico 1%` = johansen_summary@cval[, "1pct"]
+) %>% kable(caption = "Resultados de la Prueba de la Traza de Johansen",
+            col.names = c("Hipótesis Nula (r)", "Estadístico de Prueba", "VC 10%", "VC 5%", "VC 1%"))
+```
+
+Interpretación de la Prueba de Johansen: La prueba de la traza evalúa la hipótesis nula de que hay *r* o menos vectores de cointegración.
+
+-    Para r = 0: El estadístico de prueba (14.03) es menor que el valor crítico al 10% (15.66). Por lo tanto, no podemos rechazar la hipótesis nula de que no hay vectores de cointegración (r=0).
+
+Conclusión de las Pruebas: Ambas pruebas (Engle-Granger y Johansen) sugieren que, con estos datos, no hay evidencia estadística de una relación de cointegración. Esto implica que un MCE podría no ser el modelo más adecuado. Sin embargo, a efectos ilustrativos, procederemos a estimarlo para interpretar sus componentes.
+
+### 4. Estimación del Modelo de Corrección de Errores (MCE)
+
+A pesar de la falta de evidencia de cointegración, estimaremos el MCE para entender su estructura.
+
+```{r ecm-estimation, echo=TRUE}
+# Calcular las primeras diferencias de las series
+dY <- diff(PIBCOL)
+dX <- diff(CONSUMO)
+
+# Rezagamos el término de corrección de error
+residuos_lag <- stats::lag(ts(residuos_coint, start = c(1994,1), frequency = 4), k = -1)
+
+# Combinar las series para asegurar la alineación
+datos_ecm <- ts.intersect(dY, dX, residuos_lag)
+
+# Estimamos el MCE
+modelo_MCE <- lm(dY ~ dX + residuos_lag, data = datos_ecm)
+tidy(modelo_MCE) %>% kable(caption = "Resultados del Modelo de Corrección de Errores (MCE)")
+```
+
+### 5. Interpretación de los Resultados del MCE
+
+La tabla de resultados nos muestra la dinámica de corto y largo plazo entre las variables.
+
+-   Coeficiente de `dX` (Dinámica de Corto Plazo): El coeficiente estimado para `dX` es `r tidy(modelo_MCE)$estimate[2] %>% round(3)`. Esto significa que, en el corto plazo, por cada unidad que aumenta el Consumo en un trimestre, se espera que el PIB aumente en aproximadamente 1.22 unidades. Este coeficiente es altamente significativo.
+
+-   Coeficiente de `residuos_lag` (Ajuste de Largo Plazo): Este es el coeficiente de corrección de errores. Su valor estimado es `r tidy(modelo_MCE)$estimate[3] %>% round(3)`.
+
+-   Signo: Es negativo, como lo dicta la teoría, sugiriendo una tendencia a regresar al equilibrio.
+
+-   Magnitud: El valor de -0.16 indica que, en cada trimestre, se corrige aproximadamente el 16% del desequilibrio del trimestre anterior.
+
+-   Significancia: El `p-value` de 0.11 es mayor que 0.10. Esto indica que el coeficiente de ajuste no es estadísticamente significativo. Este resultado es consistente con nuestras pruebas de cointegración y es la evidencia más fuerte de que un MCE no es apropiado para estos datos, ya que el mecanismo de corrección de errores no es relevante.
+
+### 6. Diagnósticos del Modelo Final
+
+Finalmente, realizamos pruebas de diagnóstico sobre los residuos del MCE para verificar si cumplen los supuestos básicos.
+
+```{r diagnostics, echo=TRUE}
+# Extraer los residuos del MCE
+residuos_mce <- residuals(modelo_MCE)
+
+# Prueba de Breusch-Godfrey para autocorrelación
+bg_test <- bgtest(modelo_MCE, order = 4)
+# Prueba de Breusch-Pagan para heterocedasticidad
+bp_test <- bptest(modelo_MCE)
+# Prueba de Jarque-Bera para normalidad
+jb_test <- jarque.bera.test(residuos_mce)
+
+# Presentar resultados en una tabla
+tibble(
+  Prueba = c("Breusch-Godfrey (Autocorrelación)", "Breusch-Pagan (Heterocedasticidad)", "Jarque-Bera (Normalidad)"),
+  `Estadístico` = c(bg_test$statistic, bp_test$statistic, jb_test$statistic),
+  `p-value` = c(bg_test$p.value, bp_test$p.value, jb_test$p.value)
+) %>% kable(caption = "Pruebas de Diagnóstico sobre los Residuos del MCE")
+```
+
+Interpretación de los Diagnósticos:
+
+-    Autocorrelación: El `p-value` de la prueba de Breusch-Godfrey es alto, por lo que no rechazamos la hipótesis nula de no autocorrelación. Los residuos parecen no estar correlacionados.
+
+-   Heterocedasticidad: El `p-value` de la prueba de Breusch-Pagan es alto, por lo que no rechazamos la hipótesis nula de homocedasticidad. La varianza de los errores parece ser constante.
+
+-   Normalidad: El `p-value` de la prueba de Jarque-Bera es alto, por lo que no rechazamos la hipótesis nula de normalidad. Los residuos parecen seguir una distribución normal.
+
+Conclusión Final: Aunque los residuos del MCE pasan las pruebas de diagnóstico, el hallazgo más importante es la falta de evidencia de cointegración y el coeficiente de corrección de errores no significativo. Esto nos lleva a concluir que, para este conjunto de datos, un modelo en primeras diferencias (como un VAR en diferencias o un modelo ARDL en diferencias) sería más apropiado que un Modelo de Corrección de Errores.

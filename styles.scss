@@ -1,0 +1,34 @@
+/*-- scss:defaults --*/
+
+// ======= FUENTES =======
+// Importamos una fuente limpia y moderna de Google Fonts.
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap');
+
+// Asignamos la fuente principal del cuerpo y de los encabezados.
+$font-family-sans-serif: "Lato", sans-serif;
+$headings-font-family: "Lato", sans-serif;
+$headings-font-weight: 700;
+
+
+// ======= COLORES =======
+// El tema base es 'darkly', pero podemos sobrescribir colores clave.
+// Por ejemplo, para cambiar el color de los enlaces a un azul más brillante.
+$link-color: #58a6ff;
+
+
+// ======= BARRA DE NAVEGACIÓN =======
+// Podemos personalizar el fondo y el color del texto de la barra de navegación.
+// Descomenta estas líneas para probar un fondo ligeramente diferente.
+// $navbar-bg: #1c2128; 
+// $navbar-fg: #FFFFFF;
+
+
+/*-- scss:rules --*/
+
+// Aquí puedes añadir reglas de CSS personalizadas si lo necesitas.
+// Por ejemplo, para hacer el título principal un poco más grande.
+h1.title {
+  font-size: 2.8em;
+}
+
+

@@ -1,0 +1,39 @@
+---
+title: "Mis Proyectos"
+---
+
+Aquí encontrarás una selección de los talleres y análisis que he desarrollado. Cada proyecto explora diferentes técnicas y conceptos de econometría y ciencia de datos. Haz clic en cualquiera de ellos para ver el análisis completo.
+
+---
+
+### Serie de Talleres: Monitoria de Econometría 2
+
+Estos talleres fueron creados como material de apoyo para el curso de Econometría 2, cubriendo desde los fundamentos de las series de tiempo hasta modelos multivariados.
+
+* **[Taller 1: Conceptos sobre Series de Tiempo](./Proyectos/Conceptos sobre Series de Tiempo.html)**
+    * *Descripción:* Una introducción a los componentes fundamentales de las series de tiempo, incluyendo tendencia, estacionalidad, ciclo y estacionariedad.
+
+* **[Taller 2: Metodología Box-Jenkins para Modelos ARIMA](./Proyectos/Metodología Box-Jenkins para Modelos ARIMA.html)**
+    * *Descripción:* Una guía práctica completa para la construcción de un modelo ARIMA, aplicada al análisis y pronóstico del PIB de Argentina.
+
+* **[Taller 3: Modelo de Ecuaciones Simultáneas](./Proyectos/Modelos de Ecuaciones Simultaneas.html)**
+    * *Descripción:* Un análisis teórico de los modelos de ecuaciones simultáneas, el problema de la endogeneidad, la identificación y los métodos de estimación como MC2E.
+
+* **[Taller 4: Pruebas de Cointegración](./Proyectos/Pruebas de Cointegración.html)**
+    * *Descripción:* Exploración de las relaciones de largo plazo entre series no estacionarias, aplicando y comparando las pruebas de Engle-Granger y Johansen.
+
+* **[Taller 5: Modelo de Corrección de Errores (MCE)](./Proyectos/Modelo de Correción de Error.html)**
+    * *Descripción:* Un taller práctico sobre cómo modelar la dinámica de corto plazo y la velocidad de ajuste hacia el equilibrio de largo plazo en series cointegradas.
+
+* **[Taller 6: Modelos de Vectores Autorregresivos (VAR)](./Proyectos/Modelos VAR.html)**
+    * *Descripción:* Introducción al análisis de sistemas multivariados, utilizando datos simulados para interpretar funciones de impulso-respuesta y causalidad de Granger.
+
+* **[Taller 7: Modelos ARCH y GARCH](./Proyectos/Modelos ARCH Y GARCH.html)**
+    * *Descripción:* Se desarrolla de forma pedagogica los temas referentes a modelos para series de tiempo con alta volatilidad.
+
+* **[Taller 8: Modelos de Panel de Datos](./Proyectos/Modelos de Panel de Datos.html)**
+    * *Descripción:* Trabajamos un taller paractico para demsotar de forma matématica y por medio de códigos en R todo lo conveniente sobre modelos de cortes longitudinal.
+    
+* **[Taller 9: Repaso Tercer Parcial](./Proyectos/Repaso Tercer Parcial.html)**
+    * *Descripción:* Para finalizar en curso se lleva a cabo un taller final que permite recopilar toda vista durante el curso de econometria 2.    
+---

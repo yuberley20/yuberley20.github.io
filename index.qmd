@@ -1,0 +1,14 @@
+---
+title: "Portafolio de Proyectos"
+---
+
+## ¡Hola! Soy Yuberley 👋
+
+Bienvenido a mi espacio digital. Soy un estudiante de economía de la Universidad Nacional de Colombia, apasionado por la ciencia de datos, la econometría y el poder de la programación para resolver problemas complejos.
+
+Este sitio web es una colección de los proyectos y talleres que he desarrollado, donde aplico mis conocimientos en R, LaTeX y otras herramientas.
+
+**Te invito a explorar mis trabajos:**
+
+-   Ve a la sección [**Proyectos**](/proyectos.html) para ver un listado de mis análisis.
+-   Conoce más sobre mi trayectoria en la página [**Sobre mí**](/about.html).

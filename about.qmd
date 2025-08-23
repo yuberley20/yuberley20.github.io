@@ -1,0 +1,36 @@
+---
+title: "Sobre Mí"
+image: FOTO.jpeg
+about:
+  template: jolla
+  links:
+    - icon: linkedin
+      text: LinkedIn
+      href: https://www.linkedin.com/in/yuberley-cruz-caycedo-b805731bb/
+    - icon: github
+      text: GitHub
+      href: https://github.com/yuberley20
+---
+
+### Educación
+
+**Universidad Nacional de Colombia** | Medellín, Colombia
+*Pregrado en Economía* | 2019-2 - Presente
+
+---
+
+### Perfil Profesional
+
+Soy un estudiante de economía con una fuerte inclinación hacia el análisis cuantitativo, modelos de equilibrio general estocásticos dinámicos (DSGE) y la ciencia de datos. Mi formación me ha proporcionado una base sólida en teoría económica y econometría, la cual complemento con una pasión por la programación y el manejo de datos para extraer información valiosa y contar historias a través de los números.
+
+Busco constantemente oportunidades para aplicar mis habilidades en proyectos desafiantes, ya sea en el ámbito académico, en investigación o en la industria. Me considero una persona curiosa, autodidacta y con una gran capacidad para resolver problemas.
+
+---
+
+### Habilidades Técnicas
+
+* **Lenguajes de Programación:** R, Python (Básico), STATA y Matlab
+* **Software y Herramientas:** RStudio, Quarto, R Markdown, LaTeX, Git, GitHub
+* **Áreas de Interés:** Econometría, Series de Tiempo, Machine Learning, DSGE y Visualización de Datos
+* **Idiomas:** Español (Nativo), Inglés (Nivel B1)
+

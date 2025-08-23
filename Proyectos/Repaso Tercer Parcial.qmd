@@ -1,0 +1,1614 @@
+---
+title: "Repaso Tercer Parcial"
+author: "Yuberley Cruz Caycedo"
+date: "2024-06-22"
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    toc-location: left
+    number-sections: false
+    highlight: tango
+    include-in-header:
+      text: |
+        <style>
+          body {
+            font-family: "Times New Roman", Times, serif;
+            line-height: 1.5;
+            margin-left: 2cm;
+            margin-right: 2cm;
+          }
+        </style>
+---
+## Serie de Tiempo
+
+Una serie de tiempo es una secuencia de datos recogidos y ordenados en intervalos de tiempo regulares. Estos datos pueden representar cualquier tipo de variable económica, como precios de acciones, producto interno bruto (PIB), tasas de desempleo, entre otros.
+
+$$Y_t, Y_ {t-1}, Y_{t-2}, … Y_{t-k}, Y_{t+1}, Y_{t+2}, … Y_{t+h}$$
+
+-   Serie estocástica: una parte conocida (sistemática) susceptible de predecir y de una parte totalmente desconocida (aleatoria)
+
+-   Serie determinística: el futuro se puede predecir sin error Es una variable que está determinada o fija y que no cambia de una muestra a otra
+
+### Componentes de una Serie de Tiempo
+
+Las series de tiempo pueden descomponerse en varios componentes fundamentales:
+
+1.  **Tendencia (T)**: Movimiento general y a largo plazo en los datos.
+
+![Serie con tendencia](Serie%20de%20Tiempo%20con%20Tendencia.png){withd="100%"}
+
+2.  Estacionalidad (S): Patrones repetitivos y predecibles en los datos dentro de un año o cualquier período fijo.
+
+![Serie con Estacionalidad](Serie%20de%20Tiempo%20Estacional.png){withd="100%"}
+
+3.  Ciclo (C): Fluctuaciones que ocurren en el largo plazo, relacionadas con el ciclo económico.
+
+![Serie con tendencia](Serie%20de%20Tiempo%20Ciclica.png){withd="100%"}
+
+4.  Componentes Aleatorios (E): Variaciones irregulares y no predecibles en los datos.
+
+![Serie con aleatoria](Serie%20de%20Tiempo%20Irregular.png){withd="100%"}
+
+#### Ejemplos
+
+##### Ejemplo 1: Tendencia
+
+Si analizamos el PIB de un país durante 20 años, podríamos observar una tendencia ascendente debido al crecimiento económico sostenido.
+
+##### Ejemplo 2: Estacionalidad
+
+Las ventas de ropa pueden mostrar estacionalidad, con picos en invierno y verano, y bajas en primavera y otoño.
+
+##### Ejemplo 3: Ciclo
+
+La economía puede experimentar ciclos de auge y recesión que duran varios años, reflejando períodos de expansión y contracción.
+
+##### Ejemplo 4: Componentes Aleatorios
+
+Un evento inesperado, como un desastre natural, puede introducir fluctuaciones aleatorias en una serie de tiempo de precios de productos agrícolas.
+
+### Cuadros Comparativos
+
+#### Componentes de Series de Tiempo
+
+| Componente         | Descripción                              | Ejemplo                                           |
+|------------------|-------------------------|-----------------------------|
+| Tendencia (T)      | Movimiento general a largo plazo         | Crecimiento del PIB a lo largo de las décadas     |
+| Estacionalidad (S) | Patrones repetitivos en períodos fijos   | Ventas de helados más altas en verano             |
+| Ciclo (C)          | Fluctuaciones de largo plazo             | Ciclos económicos de expansión y recesión         |
+| Aleatorio (E)      | Variaciones irregulares y no predecibles | Impacto de un terremoto en la producción agrícola |
+
+## Modelos de Regresión para Series de Tiempo
+
+#### Conceptos Clave
+
+1.  **Autocorrelación**
+
+    -   Definición: La autocorrelación es la correlación de una serie de tiempo con sus propios valores rezagados. Esto significa que los valores anteriores de la serie pueden influir en los valores futuros.
+
+        -   Ejemplo: Si el precio de una acción hoy depende del precio de la acción en días anteriores, estamos viendo autocorrelación.
+
+La correlación indica dos aspectos:
+
+-   El valor indica la magnitud de la asociación (-1 y 1)
+
+-   El signo indica la dirección de la relación
+
+Negativa: cuando los valores de $t$ aumentan los de $t+k$ disminuyen
+
+Cero: No hay relación armónica en como los valores de $t$ y $t+k$ cambian
+
+Positiva: cuando los valores de $t$ aumentan, los valores de $t+k$ también aumentan
+
+$$r_{k}= \frac{\sum_{t=1}^{n-k}(Y_{t}-\bar{Y})(Y_{t+k}-\bar{Y})}{\sum_{t=1}^{n}(Y_{t}-\bar{Y})^{2}}= \frac{Cov_{k}}{S^{2}}$$
+
+2.  **Modelo Autorregresivo (AR)**
+
+    -   **Definición**: Un modelo autorregresivo usa los valores pasados de la variable dependiente para predecir su valor futuro. Se denota como AR(p), donde p es el número de rezagos.
+
+    -   **Ecuación**: $$Y_t = \phi_0 + \phi_1 Y_{t-1} + \phi_2 Y_{t-2} + ... + \phi_p Y_{t-p} + \epsilon_t$$​
+
+    -   **Ejemplo**: Un AR(1) para el PIB puede ser $PIB_t = \phi_0 + \phi_1 PIB_{t-1} + \epsilon_t$.
+
+3.  **Modelo de Media Móvil (MA)**
+
+    -   **Definición**: Un modelo de media móvil utiliza los errores pasados para predecir el valor futuro de la variable dependiente. Se denota como MA(q), donde q es el número de rezagos de los errores.
+
+    -   **Ecuación**: $$Y_t = \mu + \theta_1 \epsilon_{t-1} + \theta_2 \epsilon_{t-2} + ... + \theta_q \epsilon_{t-q} + \epsilon_t$$​​
+
+    -   **Ejemplo**: Un MA(1) para las tasas de inflación puede ser $$\text{Inflación}_t = \mu + \theta_1 \epsilon_{t-1} + \epsilon_t$$.
+
+4.  **Modelo Autorregresivo de Media Móvil (ARMA)**
+
+    -   **Definición**: Combina los modelos AR y MA para capturar tanto la autocorrelación como las relaciones de media móvil en una serie de tiempo. Se denota como ARMA(p,q).
+
+    -   **Ecuación**: $$Y_t = \phi_0 + \phi_1 Y_{t-1} + ... + \phi_p Y_{t-p} + \theta_1 \epsilon_{t-1} + ... + \theta_q \epsilon_{t-q} + \epsilon_t$$
+
+#### **Ejemplos**
+
+##### Ejemplo 1: Modelo AR(2)
+
+Supongamos que estamos modelando el consumo de energía en función de sus valores pasados: $$\text{Energía}_{t} = 0.5 + 0.6 \text{Energía}_{t-1} + 0.3 \text{Energía}_{t-2} + \epsilon_t$$​
+
+##### Ejemplo 2: Modelo MA(1)
+
+Si queremos modelar el índice de precios al consumidor (IPC) teniendo en cuenta el error del mes pasado: $$\text{IPC}_{t} = 2 + 0.8 \epsilon_{t-1} + \epsilon_{t}$$
+
+##### Ejemplo 3: Modelo ARMA(1,1)
+
+Para modelar el PIB considerando tanto el valor pasado del PIB como el error del período anterior: $$PIB_t = 3 + 0.7 PIB_{t-1} + 0.5 \epsilon_{t-1} + \epsilon_t$$​
+
+### Cuadro Comparativo de Modelos
+
+| Modelo    | Ecuación                                                                                           | Características                | Uso Principal                          |
+|------------------|-------------------|------------------|------------------|
+| AR(p)     | $$Y_t = \phi_0 + \sum_{i=1}^p \phi_i Y_{t-i} + \epsilon_t$$                                        | Captura autocorrelación        | Series con fuerte dependencia temporal |
+| MA(q)     | $$Y_t = \mu + \sum_{i=1}^q \theta_i \epsilon_{t-i} + \epsilon_t$$                                  | Captura dependencia en errores | Series con fluctuaciones irregulares   |
+| ARMA(p,q) | $$Y_t = \phi_0 + \sum_{i=1}^p \phi_i Y_{t-i} + \sum_{j=1}^q \theta_j \epsilon_{t-j} + \epsilon_t$$ | Combina AR y MA                | Series con patrones complejos          |
+
+## Conceptos Ampliados
+
+#### Autocorrelación y Función de Autocorrelación (ACF)
+
+-   **Autocorrelación**: La correlación de una serie de tiempo con sus propios valores rezagados.
+
+-   **Función de Autocorrelación (ACF)**: Mide la autocorrelación de la serie de tiempo en diferentes rezagos. Ayuda a identificar patrones y a determinar la estructura del modelo ARMA.
+
+#### Función de Autocorrelación Parcial (PACF)
+
+-   **PACF**: Mide la correlación entre la serie de tiempo y sus rezagos, eliminando el efecto de los rezagos intermedios. Es útil para identificar el orden p de un modelo AR(p).
+
+![ACF Y ACFP](ACF%20y%20ACFP.png){withd="100%"}
+
+#### Identificación del Modelo
+
+-   **ACF y PACF**: Usadas para determinar los órdenes p y q de los modelos AR(p), MA(q) y ARMA(p,q).
+
+    -   **AR(p)**: La PACF muestra un corte brusco después del rezago p.
+
+    -   **MA(q)**: La ACF muestra un corte brusco después del rezago q.
+
+    -   **ARMA(p,q)**: Tanto la ACF como la PACF decaen exponencialmente.
+
+#### Estimación de Parámetros
+
+-   **Métodos**: Máxima Verosimilitud y Mínimos Cuadrados.
+
+-   **Desafíos**: Complejidad debido a la dependencia temporal y problemas de no estacionariedad.
+
+#### Diagnóstico del Modelo
+
+-   **Residuales**: Deben comportarse como ruido blanco después del ajuste del modelo.
+
+-   **Pruebas**: Ljung-Box para verificar si los residuales son ruido blanco.
+
+#### Criterios de Selección del Modelo
+
+-   **AIC (Akaike Information Criterion)** y **BIC (Bayesian Information Criterion)**: Usados para seleccionar el modelo que mejor se ajusta a los datos, penalizando la complejidad del modelo.
+
+#### Pronósticos
+
+-   **Metodología**: Uso de modelos ajustados para predecir valores futuros.
+
+-   **Evaluación del Pronóstico**: Métricas como MSE (Mean Squared Error) y MAE (Mean Absolute Error) para evaluar la precisión de los pronósticos.
+
+### Resumen en Tabla
+
+| Concepto                                  | Definición/Descripción                                                                | Uso Principal                             |
+|-------------------|----------------------------------|-------------------|
+| Autocorrelación                           | Correlación de una serie de tiempo con sus propios valores rezagados.                 | Identificación de patrones temporales     |
+| Función de Autocorrelación (ACF)          | Mide la autocorrelación en diferentes rezagos.                                        | Determinación de la estructura del modelo |
+| Función de Autocorrelación Parcial (PACF) | Mide la correlación entre la serie y sus rezagos, eliminando efectos intermedios.     | Identificación del orden p en AR(p)       |
+| Identificación del Modelo                 | Uso de ACF y PACF para determinar los órdenes p y q de AR(p), MA(q) y ARMA(p,q).      | Selección de modelo adecuado              |
+| Estimación de Parámetros                  | Métodos de Máxima Verosimilitud y Mínimos Cuadrados.                                  | Ajuste del modelo                         |
+| Diagnóstico del Modelo                    | Análisis de residuales; uso de pruebas como Ljung-Box.                                | Verificación de la adecuación del modelo  |
+| Criterios de Selección del Modelo         | AIC y BIC para seleccionar el modelo que mejor se ajusta, penalizando la complejidad. | Optimización del modelo                   |
+| Pronósticos                               | Uso de modelos ajustados para predecir valores futuros; evaluación con MSE y MAE.     | Predicción y evaluación de precisión      |
+
+## Estacionariedad y Pruebas de Raíz Unitaria
+
+#### Definición de Estacionariedad
+
+-   **Serie Estacionaria**: Una serie de tiempo es estacionaria si sus propiedades estadísticas, como la media, la varianza y la autocorrelación, son constantes a lo largo del tiempo. Esto significa que los patrones de comportamiento de la serie no dependen del tiempo en que se observan.
+
+-   **Serie No Estacionaria**: Una serie cuya media, varianza o autocorrelación cambian con el tiempo. Estas series pueden tener tendencias, estacionalidades o varianzas que evolucionan con el tiempo.
+
+#### Tipos de Estacionariedad
+
+1.  **Estacionariedad Estricta**: Una serie de tiempo es estrictamente estacionaria si la distribución conjunta de cualquier conjunto de valores de la serie es la misma independientemente del tiempo en que se observe.
+
+2.  **Estacionariedad Débil (o Covarianza Estacionaria)**: Una serie es débilmente estacionaria si la media, la varianza y la autocorrelación son constantes a lo largo del tiempo.
+
+#### Importancia de la Estacionariedad
+
+-   **Modelado**: Los modelos ARMA (AutoRegressive Moving Average) requieren que las series sean estacionarias. Si la serie no es estacionaria, se deben aplicar transformaciones como la diferenciación.
+
+-   **Pronósticos**: Las series estacionarias son más predecibles, ya que sus propiedades no cambian con el tiempo.
+
+### Pruebas de Raíz Unitaria
+
+#### Definición de Raíz Unitaria
+
+-   Una serie de tiempo tiene una raíz unitaria si uno de los coeficientes del polinomio característico es igual a uno, lo que indica que la serie es no estacionaria. Esto implica que los efectos de un shock en la serie no se disipan con el tiempo y la serie sigue una caminata aleatoria.
+
+#### Pruebas de Raíz Unitaria
+
+1.  **Prueba de Dickey-Fuller (DF)**
+
+    -   **Objetivo**: Determinar si una serie de tiempo tiene una raíz unitaria.
+
+    -   **Hipótesis**:
+
+        -   $H_0$​: La serie tiene una raíz unitaria (no estacionaria).
+
+        -   $H_1$​: La serie no tiene una raíz unitaria (estacionaria).
+
+    -   **Proceso**: Ajuste del modelo $$ y_t = \alpha y_{t-1} + \epsilon_t$$. Si $\alpha = 0$, hay una raíz unitaria.
+
+2.  **Prueba de Dickey-Fuller Aumentada (ADF)**
+
+    -   **Extensión**: Incluye términos rezagados adicionales para corregir la autocorrelación en los errores.
+
+    -   **Modelo**: $$\Delta y_t = \alpha y_{t-1} + \sum_{i=1}^p \beta_i \Delta y_{t-i} + \epsilon_t$$.
+
+    -   **Importancia**: Es más robusta que la prueba DF básica porque maneja la autocorrelación en los residuales, lo cual es crucial para obtener resultados confiables.
+
+3.  **Prueba de Phillips-Perron (PP)**
+
+    -   **Alternativa**: Similar a ADF, pero corrige la heterocedasticidad y autocorrelación en los errores sin agregar términos rezagados.
+
+    -   **Método**: Utiliza estimadores no paramétricos para ajustar las varianzas asintóticas.
+
+    -   **Ventaja**: Es útil en casos donde se sospecha de heterocedasticidad en los errores y es más flexible que ADF en ciertos contextos.
+
+### Conceptos Clave
+
+#### Transformaciones para Estacionariedad
+
+-   **Diferenciación**: Aplicar la diferencia de primer orden ($\Delta y_t = y_t - y_{t-1}$) o de orden superior para eliminar tendencias. La diferenciación puede convertir una serie no estacionaria en estacionaria.
+
+-   **Transformación Logarítmica**: Usada para estabilizar la varianza en series que exhiben varianza no constante.
+
+#### Componentes de una Serie No Estacionaria
+
+1.  **Tendencia**: Componente determinista o estocástico que aumenta o disminuye con el tiempo. Puede ser eliminada mediante diferenciación o detrending.
+
+2.  **Estacionalidad**: Componentes que se repiten a intervalos regulares, como anualmente, trimestralmente, etc. Puede ser ajustada utilizando técnicas como desestacionalización.
+
+3.  **Ciclo**: Fluctuaciones a largo plazo alrededor de una tendencia. Identificar los ciclos ayuda a entender los movimientos a largo plazo de la serie.
+
+#### Importancia del Diagnóstico
+
+-   **Análisis de Residuales**: Después de ajustar un modelo ARIMA, es crucial examinar los residuales para asegurarse de que se comportan como ruido blanco. Si no es así, el modelo puede no ser adecuado.
+
+-   **Pruebas de Diagnóstico**: Pruebas como Ljung-Box se utilizan para verificar la autocorrelación en los residuales.
+
+### Resumen en Tabla
+
+| Concepto                         | Definición/Descripción                                                                 | Importancia/Aplicación                    |
+|:------------------|:---------------------------------|:------------------|
+| **Serie Estacionaria**           | Serie con propiedades estadísticas constantes a lo largo del tiempo.                   | Modelado y pronósticos precisos.          |
+| **Serie No Estacionaria**        | Serie con media, varianza o autocorrelación cambiantes con el tiempo.                  | Requiere transformaciones.                |
+| **Estacionariedad Estricta**     | Distribución conjunta de valores de la serie es constante en el tiempo.                | Análisis teórico.                         |
+| **Estacionariedad Débil**        | Media, varianza y autocorrelación son constantes en el tiempo.                         | Modelos ARMA.                             |
+| **Raíz Unitaria**                | Un coeficiente del polinomio característico es igual a uno; indica no estacionariedad. | Identificación de no estacionariedad.     |
+| **Prueba de Dickey-Fuller (DF)** | Prueba para detectar raíz unitaria.                                                    | Identificación de no estacionariedad.     |
+| **Prueba de ADF**                | Extensión de DF con términos rezagados para autocorrelación.                           | Más robusta que DF.                       |
+| **Prueba de PP**                 | Corrige heterocedasticidad y autocorrelación sin términos rezagados.                   | Alternativa a ADF.                        |
+| **Diferenciación**               | Transformación para eliminar tendencias.                                               | Estacionarización de la serie.            |
+| **Transformación Logarítmica**   | Usada para estabilizar la varianza.                                                    | Preprocesamiento de datos.                |
+| **Tendencia**                    | Componente de la serie que aumenta o disminuye con el tiempo.                          | Identificación de patrones.               |
+| **Estacionalidad**               | Componentes que se repiten a intervalos regulares.                                     | Análisis de patrones recurrentes.         |
+| **Ciclo**                        | Fluctuaciones a largo plazo alrededor de una tendencia.                                | Análisis de fluctuaciones de largo plazo. |
+| **Análisis de Residuales**       | Verificación de que los residuales de un modelo se comportan como ruido blanco.        | Validación del modelo.                    |
+| **Pruebas de Diagnóstico**       | Pruebas como Ljung-Box para verificar la autocorrelación en los residuales.            | Verificación de la idoneidad del modelo.  |
+
+## Metodología Box-Jenkins para Pronosticar Series de Tiempo
+
+La metodología Box-Jenkins es un enfoque sistemático para identificar, estimar y verificar modelos ARIMA (AutoRegressive Integrated Moving Average) aplicables a series temporales estacionarias o no estacionarias. Este método, desarrollado por George Box y Gwilym Jenkins, sigue varios pasos: identificación, estimación, diagnóstico y pronóstico.
+
+#### Pasos de la Metodología Box-Jenkins:
+
+1.  **Identificación:**
+
+    -   Determinar si la serie temporal es estacionaria o no.
+
+    -   Usar gráficos (como el correlograma) y pruebas estadísticas (como la prueba de Dickey-Fuller) para verificar la estacionariedad.
+
+    -   Identificar el orden del modelo ARIMA (p, d, q) utilizando el correlograma y el parciorregresograma.
+
+2.  **Estación de Modelos:**
+
+    -   Seleccionar los valores iniciales de p, d y q basados en los gráficos de autocorrelación (ACF) y autocorrelación parcial (PACF).
+
+    -   Utilizar métodos de estimación como Máxima Verosimilitud para ajustar los parámetros del modelo.
+
+3.  **Diagnóstico:**
+
+    -   Evaluar la adecuación del modelo ajustado mediante el análisis de los residuales.
+
+    -   Utilizar pruebas estadísticas como la prueba de Ljung-Box para verificar la ausencia de autocorrelación en los residuales.
+
+    -   Ajustar y refinar el modelo si los residuales no se comportan como ruido blanco.
+
+4.  **Pronóstico:**
+
+    -   Usar el modelo ajustado para realizar pronósticos futuros.
+
+    -   Evaluar la precisión de los pronósticos y ajustar el modelo si es necesario.
+
+#### Teoría Matemática:
+
+-   **Modelo ARIMA(p,d,q):** Este modelo combina las partes AR (AutoRegresiva), I (Integrada) y MA (Media Móvil).
+
+    $$Y_t = \phi_0 + \sum_{i=1}^{p} \phi_i Y_{t-i} + \sum_{i=1}^{q} \theta_i \epsilon_{t-i} + \epsilon_t$$
+
+-   Donde:
+
+    -   $Y_t$​ es la serie temporal en el tiempo t.
+
+    -   $\phi_i$​ son los coeficientes del modelo AR.
+
+    -   $\theta_i$​ son los coeficientes del modelo MA.
+
+    -   $\epsilon_t$ es el término de error en el tiempo t.
+
+    -   $p$ es el orden del modelo AR.
+
+    -   $q$ es el orden del modelo MA.
+
+    -   $d$ es el número de diferenciaciones necesarias para hacer la serie estacionaria.
+
+#### Tabla Resumen:
+
+| Paso           | Descripción                                                                            | Herramientas/Pruebas                     |
+|-------------------|----------------------------------|-------------------|
+| Identificación | Determinar estacionariedad y seleccionar orden inicial del modelo ARIMA.               | Correlograma, Prueba Dickey-Fuller       |
+| Estimación     | Ajustar los parámetros del modelo utilizando métodos estadísticos.                     | Máxima Verosimilitud                     |
+| Diagnóstico    | Verificar la adecuación del modelo evaluando los residuales.                           | Prueba Ljung-Box, Análisis de Residuales |
+| Pronóstico     | Utilizar el modelo ajustado para realizar predicciones futuras y evaluar su precisión. | Forecasting, Evaluación de Pronósticos   |
+
+## Prueba de Cointegración para Series de Tiempo
+
+La prueba de cointegración es utilizada para determinar si existe una relación de equilibrio a largo plazo entre dos o más series temporales no estacionarias. Conceptualmente, si dos o más series temporales están cointegradas, significa que aunque individualmente pueden ser no estacionarias, alguna combinación lineal de ellas es estacionaria. Esta relación de equilibrio a largo plazo es de interés económico y financiero.
+
+#### Conceptual:
+
+-   **Cointegración:** Si dos series temporales $X_t$​ e $Y_t$​ son integradas de orden 1 (I(1)), y existe un coeficiente $\beta$ tal que la combinación lineal $X_t - \beta Y_t$ es estacionaria (I(0)), entonces $X_t$​ e $Y_t$​ están cointegradas.
+
+#### Matemáticamente:
+
+Para dos series temporales $X_t$​ e $Y_t$​:
+
+1.  Si $Xt​∼I(1)$ y $Y_t \sim I(1)$.
+
+2.  Existe $\beta$ tal que $Z_t = X_t - \beta Y_t \sim I(0)$.
+
+### Métodos de Prueba de Cointegración
+
+#### 1. Método de Engle y Granger:
+
+El método de Engle y Granger se utiliza para probar la cointegración entre dos series temporales.
+
+1.  **Paso 1:** Realizar una regresión de $Y_t$​ sobre $X_t$​:
+
+    $$Y_t = \alpha + \beta X_t + \epsilon_t$$
+
+2.  **Paso 2:** Obtener los residuos $\epsilon_t$​ de la regresión.
+
+3.  **Paso 3:** Aplicar una prueba de raíz unitaria (como la prueba de Dickey-Fuller) a los residuos $\epsilon_t$​.
+
+    -   Si los residuos $\epsilon_t$​ son estacionarios, $Y_t$​ y $X_t$​ están cointegrados.
+
+#### 2. Prueba de Johansen:
+
+La prueba de Johansen se utiliza para determinar el número de vectores de cointegración en un sistema de múltiples series temporales.
+
+1.  **Modelo VAR:** Formar un modelo Vector Autoregresivo (VAR).
+
+2.  **Modelo VECM:** Transformar el modelo VAR en un Modelo de Corrección de Errores Vectorial (VECM):
+
+    $$\Delta Y_t = \Pi Y_{t-1} + \sum_{i=1}^{k-1} \Gamma_i \Delta Y_{t-i} + \epsilon_t$$
+
+    Donde $\Pi$ y $\Gamma_i$ son matrices de parámetros.
+
+3.  **Test de Rango de la Matriz** $\Pi$: Evaluar el rango de la matriz $\Pi$ para determinar el número de vectores de cointegración.
+
+    -   **Prueba Trace:** Evalúa el rango de $\Pi$ mediante la traza.
+
+    -   **Prueba Máximo Eigenvalor:** Evalúa el mayor eigenvalor de $\Pi$.
+
+#### 3. Prueba de Phillips-Ouliaris:
+
+El método de Phillips-Ouliaris es una prueba de cointegración residual similar al método de Engle y Granger, pero con ajustes para la no estacionariedad y la autocorrelación en los residuos.
+
+1.  **Regresión de Cointegración:**
+
+    -   Realizar una regresión entre las series temporales.
+
+2.  **Residuos Ajustados:**
+
+    -   Obtener los residuos y ajustar por autocorrelación.
+
+3.  **Prueba de Raíz Unitaria:**
+
+    -   Aplicar la prueba de raíz unitaria ajustada a los residuos.
+
+### Tabla Comparativa de Métodos de Cointegración
+
+| Característica            | Método de Engle y Granger                    | Prueba de Johansen                               | Prueba de Phillips-Ouliaris                            |
+|------------------|------------------|------------------|-------------------|
+| Series Temporales         | Bivariada (dos series)                       | Multivariada (más de dos series)                 | Bivariada (dos series)                                 |
+| Enfoque                   | Residual                                     | Vector Autoregresivo (VAR/VECM)                  | Residual                                               |
+| Pasos Principales         | Regresión, Residuos, Prueba de Raíz Unitaria | Modelo VAR, Transformación VECM, Prueba de Rango | Regresión, Residuos Ajustados, Prueba de Raíz Unitaria |
+| Tipo de Prueba            | Prueba de Dickey-Fuller sobre residuos       | Prueba Trace y Máximo Eigenvalor                 | Prueba de raíz unitaria ajustada                       |
+| Considera Autocorrelación | No explícitamente                            | Sí                                               | Sí                                                     |
+| Complejidad               | Relativamente Simple                         | Más Complejo                                     | Intermedio                                             |
+| Aplicabilidad             | Dos series, análisis sencillo                | Múltiples series, análisis avanzado              | Dos series, robusto a autocorrelación                  |
+
+## Modelo de Correción de Errores MCE
+
+El modelo de corrección de errores me permite probar el equilibrio en el corto plazo sabiendo que existe un equilibrio en el largo plazo (demostrado a traves de una prueba de cointegracion). Por supuesto en el corto plazo, puede haber desequilibrio. En consecuencia puede tratarse el termino de error, como error de eqilibrio. Y se puede utilizar este termino de error para atar el comportamiento de corto plazo con el de largo plazo. El ECM corrige el desequilibrio. Engle y Granger (1987) establece una equivalencia entre los conceptos de cointegración y modelo ECM, en cuanto cointegración implica un modelo de ECM y a la vez un modelo de ECM implica cointegracion (teorema de representación). para entenderlo consideremos dos series de tiempo escalares $Y_t$ y $X_t$, ambas $L(1)$. Un modelo autorregresivo distribuidos de rezagos (ADL) de orden (1, 1) de estas series es:
+
+$$Y_t = \delta + \theta Y_{t-1} + \delta_0X_t + \delta_1X_{t-1} + \epsilon_t$$
+
+donde:
+
+$$\epsilon_t \overset{iid}{\sim} N(0,1)$$
+
+$$\delta + \theta Y_{t-1}$$ = autoregresivo
+
+$$\delta_0X_t + \delta_1X_{t-1}$$ = rezago distribuido
+
+$$\epsilon_t$$ = termino de error
+
+Se tiene que cumplir estas condiciones para encontrar la relación de largo plazo
+
+$$X \sim I(1)$$
+
+$$Y \sim I(1)$$
+
+$$\epsilon \sim I(0)$$
+
+Pero pese a que $\epsilon_t$ sea estacionario, aún puede presentar autocorrelación. Una posible solución es incluir términos rezagados para obtener residuos que no tengan autocorrelación. Por ejemplo:
+
+Introducimos en el ARDL
+
+$$Y_t = Y_{t-1} = Y$$
+
+$$X_t = X_{t-1} = X$$
+
+$$\epsilon_t = 0$$
+
+### Reparametrización de la Ecuación ADL
+
+Puedo reescribir el ARDL (1, 1)
+
+$$Y = \delta + \theta_1 Y+ \delta_0X + \delta_1X$$
+
+$$(1 - \theta_1) Y = \delta + (\delta_0 + \delta_1)X$$
+
+$$Y = \frac{\delta}{(1 - \theta_1)} + \frac{(\delta_0 + \delta_1)}{(1 - \theta_1)}X$$
+
+$$Y = \beta_1 + \beta_2X$$
+
+Donde:
+
+$$\beta_1 = \frac{\delta}{(1 - \theta_1)}$$
+
+$$\beta_2 = \frac{(\delta_0 + \delta_1)}{(1 - \theta_1)}$$
+
+La primera diferencia es un cambio del corto plazo
+
+$$\Delta Y_t = Y_t - Y_{t-1}$$
+
+$$\Delta X_t = X_t - X_{t-1}$$
+
+Restar a ambos lados $Y_{t-1}$ y restando $\delta_0 X_{t-1}$ (manipulación algebraica)
+
+$$Y_t = \delta + \theta Y_{t-1} + \delta_0X_t + \delta_1X_{t-1} + \epsilon_t$$
+
+$$Y_t - Y_{t-1} = \delta + \theta_1 Y_{t-1} - Y_{t-1} + \delta_0X_t + \delta_0 X_{t-1} -\delta_0 X_{t-1} + \theta_1X_{t-1} + \epsilon_t$$
+
+$$\Delta Y_t = \delta + (\theta -1)Y_{t-1} + \delta_0(X_t - X_{t-1}) + (\delta_0 + \delta_1)X_{t-1} + \epsilon_t$$
+
+$$\Delta Y_t = \delta + (\theta -1)Y_{t-1} + \delta_0 \Delta X_t + (\delta_0 + \delta_1)X_{t-1} + \epsilon_t$$
+
+$$\Delta Y_t = [\delta + (\theta -1)Y_{t-1} + (\delta_0 + \delta_1)X_{t-1}] + \delta_0 \Delta X_t + \epsilon_t$$
+
+Multiplicamos y dividimos por $(\theta -1)$ la expresion $[\delta + (\theta -1)Y_{t-1} + (\delta_0 + \delta_1)X_{t-1}]$, asi:
+
+$$\Delta Y_t = (\theta -1)[\frac{\delta}{\theta -1)} + \frac{\theta -1}{\theta -1}Y_{t-1} + \frac{\delta_0 + \delta_1}{\theta-1}X_{t-1}] + \delta_0 \Delta X_t + \epsilon_t$$
+
+Ahora $\theta-1 = -(1-\theta)$
+
+$$\Delta Y_t = -(1-\theta)[\frac{\delta}{-(1-\theta)} + Y_{t-1} + \frac{\delta_0 + \delta_1}{-(1-\theta)}X_{t-1}] + \delta_0 \Delta X_t + \epsilon_t$$
+
+Donde:
+
+$$\frac{\delta}{(1-\theta)} = -\beta_1$$
+
+$$\frac{\delta_0 + \delta_1}{(1-\theta)} = -\beta_2$$
+
+$$\Delta Y_t = -(1-\theta)[-\beta_1 + Y_{t-1} - \beta_2X_{t-1}] + \delta_0 \Delta X_t + \epsilon_t$$
+
+$$\Delta Y_t = -(1-\theta)[Y_{t-1}-\beta_1 -\beta_2X_{t-1}] + \delta_0 \Delta X_t + \epsilon_t$$
+
+Recordemos que $Y_t = Y_{t-1} = Y$ , donde $\hat{Y} = \beta_1 + \beta_2X$
+
+$\Delta Y_t = -(1-\theta)[Y_{t-1}-\hat Y_{t-1}] + \delta_0 \Delta X_t + \epsilon_t$ Se puede ver que: $Y_{t-1} - \hat{Y_{t-1}} = \epsilon_{t-1}$ , quedando la ecuacion de correción de errores
+
+$$\Delta Y_t = -(1-\theta)\epsilon_{t-1} + \delta_0 \Delta X_t + \epsilon_t$$
+
+$$\Delta Y_t = -\alpha \epsilon_{t-1} + \delta_0 \Delta X_t + \epsilon_t$$
+
+Donde:
+
+$$(1-\theta_1) = \delta_0$$
+
+$$-(1-\theta) = -\alpha$$
+
+$$\frac{\delta}{(1-\theta)} = -\beta_1$$
+
+$$\frac{\delta_0 + \delta_1}{(1-\theta)} = -\beta_2$$
+
+-   Se debe indicar que $\delta_0 \Delta X_t$ recoge la relacion de corto plazo donde, $(1-\theta_1) = \delta_0$ es un coeficiente de impacto, el cual mide los efectos de corto plazo de un cambio de $X_t$
+
+-   $-\alpha \epsilon_{t-1}$, me recoge la relacion de largo plazo donde, $-(1-\theta) = -\alpha$ muestra la correcion de $\Delta Y_t$ respecto al error (desviación del largo plazo) en ${t-1}$ (coeficiente de ajuste).
+
+-   Si se da un $\epsilon_{t-1}$ positivo es porque $Y_{t-1}>\beta_1+\beta_2 X_{t-1}$, entonces $Y_t$ debe caer y $\Delta Y_{t-1}$ sera negativo (y viceversa).
+
+-   si hay una relacion de cointegracion, siempre se daran ajustes que corrigen el error.
+
+-   empiricamente debemos encontrar que $\delta_0 = 1- \theta_1 > 0$ , $\theta_1<0$ , ya que se demostraria que los cambios son hacia el equilibrio (modelovalido).
+
+-   El término $$-\alpha (Y_{t-1} - \beta_1 + \beta_2X_{t-1})$$
+
+    -   también se puede representar como $-\alpha(\epsilon_{t-1})$
+
+    -   se conoce como el **mecanismo de corrección de errores**.
+
+    Recuerda que $Y_{t} = \beta_1 + \beta_2X_{t}$ representa el equilibrio de largo plazo:
+
+    -   si $\epsilon_t = Y_t - \beta_1 + \beta_2X_{t}~>~0, Y_t$ está sobre el punto de equilibrio en $t−1$.
+
+    -   si $\epsilon_t = Y_t - \beta_1 + \beta_2X_{t}~<~0, Y_t$está debajo el punto de equilibrio en $t−1$.
+
+Nota: El mecanismo de corrección de errores se refiere a la forma en que un sistema o proceso ajusta su comportamiento para volver a un estado de equilibrio. En el contexto de las ecuaciones presentadas, se hace referencia a cómo la variable $Y_t$ se ajusta hacia el equilibrio representado por $\beta_1 + \beta_2X_{t}$ cuando la diferencia entre $Y_t ~y~ \beta_1 + \beta_2X_{t}$ es positiva $(\epsilon_t > 0 )$ o negativa $(\epsilon_t < 0)$. Si $(\epsilon_t > 0)$, significa que $Y_t$ está por encima del punto de equilibrio en $t-1$, mientras que si $(\epsilon_t < 0)$, significa que $Y_t$ está por debajo del punto de equilibrio en $t-1$. En ambos casos, el sistema tiende a corregir el error y volver al equilibrio de largo plazo.
+
+#### Interpretación de los Coeficientes
+
+-   $\phi$ : Coeficiente de impacto a corto plazo, mide el efecto inmediato de un cambio en XXX.
+
+-   $\psi$ : Coeficiente de ajuste, indica cómo se corrige el desequilibrio a largo plazo.
+
+-   $Y_{t-1} - \theta X_{t-1}$​: Error de equilibrio que el MCE corrige.
+
+### Tabla Comparativa
+
+| Característica          | Modelo ADL                                                                  | Modelo de Corrección de Errores (MCE)                                           |
+|------------------|--------------------------|----------------------------|
+| Ecuación Base           | $$Y_t = \alpha + \beta X_t + \gamma Y_{t-1} + \delta X_{t-1} + \epsilon_t$$ | $$\Delta Y_t = \phi \Delta X_t + \psi (Y_{t-1} - \theta X_{t-1}) + \epsilon_t$$ |
+| Objetivo                | Relación entre variables con rezagos                                        | Corrección de desequilibrio a corto y largo plazo                               |
+| Cointegración           | No directamente considerado                                                 | Implícita, basada en el teorema de representación                               |
+| Desequilibrio           | No explícitamente tratado                                                   | Corregido mediante el término de error                                          |
+| Coeficiente de Impacto  | $$\beta$$                                                                   | $$\phi$$                                                                        |
+| Coeficiente de Ajuste   | No explícito                                                                | $$\psi$$                                                                        |
+| Relación de Largo Plazo | No considerado                                                              | $$Y_{t-1} - \theta X_{t-1}$$​                                                    |
+| Primera Diferencia      | No aplicado                                                                 | Sí, $\Delta Y_t$ y $\Delta X_t$                                                 |
+| Estacionariedad         | Puede tener autocorrelación                                                 | Se ajusta para lograr residuales no autocorrelacionados                         |
+
+## **Modelos de Ecuaciones Simultaneas (MES)**
+
+La estimación en modelos de ecuaciones simultáneas (MES) es esencial en econometría para modelar sistemas donde las variables endógenas influyen mutuamente. Este enfoque es vital para entender interacciones complejas en economía y otras ciencias sociales. Los modelos MES permiten la estimación de parámetros estructurales que reflejan relaciones causales directas entre las variables endógenas, diferenciándolos de los parámetros de la forma reducida que solo reflejan correlaciones observadas.
+
+### **Identificación**
+
+La identificación asegura que los parámetros estructurales del modelo puedan estimarse de manera única. Esto es crucial porque, sin identificación, no es posible distinguir entre diferentes conjuntos de parámetros que generan los mismos resultados observables.
+
+1.  **Condición de Orden**:
+
+    -   **Definición 1**: En un modelo con MMM ecuaciones, una ecuación está identificada si se excluyen al menos M−1M-1M−1 variables (endógenas y predeterminadas) del modelo.
+
+    -   **Definición 2**: La ecuación está identificada si el número de variables predeterminadas excluidas (K−kK-kK−k) es mayor o igual al número de variables endógenas incluidas menos uno (m−1m-1m−1).
+
+    -   **Interpretación**:
+
+        -   Si K−k=m−1K-k = m-1K−k=m−1, la ecuación está exactamente identificada.
+
+        -   Si K−k>m−1K-k > m-1K−k\>m−1, está sobreidentificada.
+
+        -   Si K−k<m−1K-k < m-1K−k\<m−1, no está identificada.
+
+2.  **Condición de Rango**:
+
+    -   Una ecuación está identificada si se puede construir al menos un determinante no nulo de orden (M−1)(M-1)(M−1) a partir de los coeficientes de variables excluidas de esa ecuación, pero incluidas en otras ecuaciones del modelo.
+
+    -   Esto garantiza que las variables excluidas aportan suficiente información para identificar los parámetros estructurales de la ecuación en cuestión.
+
+### **Métodos de Estimación**
+
+Existen varios métodos para estimar los parámetros en modelos de ecuaciones simultáneas, dependiendo de si las ecuaciones están exactamente identificadas o sobreidentificadas.
+
+1.  **Método de Mínimos Cuadrados Indirectos (MCI)**:
+
+    -   Se aplica cuando el modelo estructural está exactamente identificado.
+
+    -   **Pasos**:
+
+        1.  **Forma Reducida**: Convertir el sistema estructural en su forma reducida, donde cada variable endógena se expresa en función de todas las variables predeterminadas y los errores.
+
+        2.  **Estimación por MCO**: Aplicar mínimos cuadrados ordinarios (MCO) a las ecuaciones de la forma reducida para obtener estimaciones de los parámetros de la forma reducida.
+
+        3.  **Derivación de Parámetros Estructurales**: Utilizar las relaciones entre los parámetros estructurales y los parámetros de la forma reducida para estimar los primeros a partir de los segundos.
+
+2.  **Método de Mínimos Cuadrados en Dos Etapas (MC2E)**:
+
+    -   Se utiliza cuando una ecuación está sobreidentificada.
+
+    -   **Pasos**:
+
+        1.  **Primera Etapa**: Regresión de las variables endógenas sobre todas las variables predeterminadas para obtener estimaciones libres de error de las variables endógenas.
+
+        2.  **Segunda Etapa**: Sustituir las variables endógenas por sus valores estimados en la primera etapa y aplicar MCO a las ecuaciones modificadas para estimar los parámetros estructurales.
+
+#### Ejemplo Matemático
+
+#### Identificación
+
+Consideremos el siguiente sistema de ecuaciones:
+
+1.  Demanda: $$Q_{t}^{d} = \alpha_0 + \alpha_1 P_t + \alpha_2 I_t + u_{t}^{d}$$
+
+2.  Oferta: $$Q_t^s = \beta_0 + \beta_1 P_t + \beta_2 P_{t-1} + u_t^s$$
+
+    **Condición de Orden**:
+
+-   **Demanda**:
+
+    -   Número de variables excluidas ($K-k$): 1 ($P_{t-1}$​).
+
+    -   Número de variables endógenas menos uno ($m-1$): 1 ($P_t$​).
+
+    -   **Conclusión**: Exactamente identificada ($K-k = m-1$).
+
+-   **Oferta**:
+
+    -   Número de variables excluidas ($K-k$): 1 ($I_t$​).
+
+    -   Número de variables endógenas menos uno ($m-1$): 1 ($P_t$​).
+
+    -   **Conclusión**: Exactamente identificada ($K-k = m-1$).
+
+**Condición de Rango**:
+
+-   Matriz de coeficientes de variables excluidas debe tener un determinante no nulo.
+
+-   Para la ecuación de demanda, se excluye $P_{t-1}$​, cuya matriz de coeficientes no debe ser cero en la ecuación de oferta.
+
+-   **Conclusión**: Si $\det(\beta_2) > 0$, la condición de rango se satisface.
+
+#### Estimación
+
+**Método de MCI**:
+
+1.  **Forma Reducida**:
+
+    -   Demanda: $P_t = \Pi_0 + \Pi_1 I_t + \Pi_2 P_{t-1} + v_t$
+
+    -   Oferta: $Q_t = \Pi_3 + \Pi_4 I_t + \Pi_5 P_{t-1} + v_t$​
+
+2.  **Aplicación de MCO**:
+
+    -   Estimación de parámetros de forma reducida ($\Pi$) usando MCO.
+
+3.  **Coeficientes Estructurales**:
+
+    -   Derivación de los coeficientes estructurales a partir de las estimaciones de la forma reducida:
+
+        -   $\Pi_0 = (\beta_0 - \alpha_0) / (\alpha_1 - \beta_1)$
+
+        -   $\Pi_1 = -\alpha_2 / (\alpha_1 - \beta_1)$
+
+        -   $\Pi_2 = \beta_2 / (\alpha_1 - \beta_1)$
+
+**Método de MC2E**:
+
+1.  **Primera Etapa**:
+
+    -   Regresión de $Y_1$​ (variable endógena) sobre todas las variables predeterminadas ($X_1, X_2, X_3, X_4$) para obtener $\hat{Y}_1$​:
+
+        -   $Y_1 = \hat{\Pi}_0 + \hat{\Pi}_1 X_1 + \hat{\Pi}_2 X_2 + \hat{\Pi}_3 X_3 + \hat{\Pi}_4 X_4 + \hat{u}_1$​
+
+2.  **Segunda Etapa**:
+
+    -   Sustitución de $Y_1$​ por $\hat{Y}_1$​ y aplicar MCO:
+
+        -   $Y_1 = \beta_0 + \beta_{12} \hat{Y}_2 + \gamma_{11} X_1 + \gamma_{12} X_2 + u^*_1$​
+
+### Tabla de Resumen
+
+| Concepto           | Descripción                                                 | Fórmulas Importantes                                                                                              |
+|-------------------------|----------------------|-------------------------|
+| **Identificación** | Asegura la estimabilidad única de parámetros estructurales. | Condicioˊn de Orden: $K−k≥m−1$                                                                                    |
+|                    |                                                             | Condición de Rango: $det(\text{matriz de excluidas})\neq0$                                                        |
+| **Método de MCI**  | Se usa para modelos exactamente identificados.              | Paso 1: Forma reducida: $$P_t = \Pi_0 + \Pi_1 I_t + \Pi_2 P_{t-1} + v_t$$                                         |
+|                    |                                                             | Paso 2: MCO en forma reducida: $$\beta = (X^T X)^{-1} X^T Y$$                                                     |
+|                    |                                                             | Paso 3: Coeficientes estructurales: $$\Pi = f(\alpha, \beta)$$                                                    |
+| **Método de MC2E** | Se usa para ecuaciones sobreidentificadas.                  | Paso 1: $$Y_1 = \hat{\Pi}_0 + \hat{\Pi}_1 X_1 + \hat{\Pi}_2 X_2 + \hat{\Pi}_3 X_3 + \hat{\Pi}_4 X_4 + \hat{u}_1$$​ |
+|                    |                                                             | Paso 2: $$Y_1 = \beta_0 + \beta_{12} \hat{Y}_2 + \gamma_{11} X_1 + \gamma_{12} X_2 + u^*_1$$                      |
+
+## Modelo de Vectores Autorregresivos (VAR)
+
+Un modelo de vectores autorregresivos (VAR) es un tipo de modelo estadístico utilizado para analizar la relación entre múltiples series temporales. En lugar de modelar cada serie temporal por separado, como se haría en un modelo univariado, un VAR modela simultáneamente todas las series temporales en un sistema.
+
+La idea fundamental detrás de un VAR es que cada variable en el sistema se regresa a sí misma en función de sus valores pasados, así como de los valores pasados de las otras variables en el sistema. Esto significa que cada variable en el sistema se modela como una función lineal de sus propios rezagos (valores pasados) y de los rezagos de todas las demás variables.
+
+Por ejemplo, consideremos un sistema con dos series temporales: el PIB y la tasa de desempleo. Un modelo VAR para este sistema podría modelar tanto el PIB como la tasa de desempleo en función de sus valores pasados y de los valores pasados de la otra variable. Esto permitiría analizar cómo el PIB y la tasa de desempleo afectan mutuamente entre sí a lo largo del tiempo.
+
+Veamos el modelo estructural dinámico [modelo (1)]:
+
+$$y_{1t}= \alpha_{10} + \alpha_{11}y_{2t} + \alpha_{12}y_{1t-1} + \alpha_{13}y_{2t-1} + \gamma^{´}_1z_t +\epsilon_1t$$
+
+$$y_{2t}= \alpha_{20} + \alpha_{21}y_{1t} + \alpha_{22}y_{1t-1} + \alpha_{23}y_{2t-1} + \gamma^{´}_2z_t +\epsilon_2t$$
+
+Donde $y_{1t}$ , $y_{2t}$ son **variables estacionarias**, y $\epsilon_{1t}$ , $\epsilon_{2t}$ son procesos ruido blanco con esperanza cero y varianzas $\sigma^{2}_{\epsilon_{1t}}$, $\sigma^{2}_{\epsilon_{2t}}$ y covarianza $\sigma_{12}$.
+
+El modelo (1) es de ecuaciones simultáneas con **dos variables endógenas** $y_{1t}$ y $y_{2t}$ y un vector $z_t$ de **variables exógenas**.
+
+Un *shock* sobre $y_{2t}$, en la forma de un valor no nulo de la **innovación** estructural $\epsilon_{2t}$, afecta directamente a $y_{2t}$, pero también influye a $y_{1t}$ a través de la presencia de $y_{2t}$ como variable explicativa en la primera ecuación.
+
+Además, este **efecto se propaga en el tiempo**, debido a la presencia de los valores rezagados de ambas variables como variables explicativas.
+
+Las variables explicativas exógenas $z_t$ **también pueden aparecer con rezagos en el modelo**. Por ejemplo, $z_t$ podría ser una tendencia determinista o que recoja la estacionalidad. $z_t$ también puede representar variables tal que $E(z_{t−s}{~}\epsilon_{1t})=𝐸(z_{𝑡-s} ~ \epsilon_{2𝑡})=0 ~ ∀_𝑠$. Por ejemplo, el precio de barril de petróleo que se determina en mercados internacionales mientras $y_{1t}$ y $y_{2t}$ son variables de la macroeconmía que se determinan en la economia interna.
+
+Ahora, el Modelo (1) se puede representar de forma matricial de la siguiente forma:
+
+$$\Pi y_t = \Gamma_0 + \Gamma_1 y_{t-1} + \Phi z_t + \varepsilon_t$$
+
+Donde:
+
+$$\Pi = \begin{equation}\begin{pmatrix}1 & -\alpha_{11} \\-\alpha_{21} & 1 \end{pmatrix}\end{equation}$$ , $\Gamma_0 =\begin{equation}\begin{pmatrix} \alpha_{10} \\\alpha_{20} \end{pmatrix}\end{equation}$ , $\Gamma_1 = \begin{equation}\begin{pmatrix} \alpha_{12} & \alpha_{13} \\\alpha_{22} & \alpha_{23} \end{pmatrix}\end{equation}$ , $\Phi =\begin{equation}\begin{pmatrix} \gamma_{1} \\\gamma_{2} \end{pmatrix}\end{equation}$
+
+Este modelo se conoce como *VAR estructural* y presenta dos problemas:
+
+1.  la simultaneidad, al aparecer cada una de las dos variables como variable explicativa en la ecuación de la otra, lo que genera inconsistencia del estimador MCO, podría resolverse estimando por variables instrumentales, siempre que contemos con instrumentos adecuados, lo cual no es sencillo de justificar. Además, el segundo problema podría persistir.
+
+2.  si los términos de error tuviesen autocorrelación, las estimaciones MCO serían inconsistentes, al tratarse de un modelo dinámico se resuelve tratando de ampliar la estructura dinámica del modelo hasta lograr que los términos de error carezcan de autocorrelación.
+
+Supongamos que la matriz $\Pi$ tiene inversa $det(\Pi) \neq~ 0$ , tenemos entonces:
+
+$$y_t = \Pi^{-1} \Gamma_0 + \Pi^{-1}\Gamma_1 y_{t-1} + \Pi^{-1}\Phi z_t + \Pi^{-1} \varepsilon_t$$
+
+$$y_t = \Pi^{-1} \Gamma_0 + \Pi^{-1}\Gamma_1 y_{t-1} + \Pi^{-1}\Phi z_t + \Pi^{-1} \varepsilon_t$$
+
+$$y_t = \textbf{A}_0 + \textbf{A}_1 y_{t-1} + \textbf{M} z_t + u_t$$
+
+Donde:
+
+$$\textbf{A}_0 = \Pi^{-1} \Gamma_0$$ , $$\textbf{A}_1 = \Pi^{-1}\Gamma_1$$ , $$\textbf{M} = \Pi^{-1}\Phi$$ , $$u_t = \Pi^{-1} \varepsilon_t$$
+
+Asi, hemos obtenido en modelo de forma reducida o **modelo vectorial autoregresivo** (VAR) en el cual:
+
+$y_{1t}= \beta_{10} + \beta_{11}y_{1t-1} + \beta_{12}y_{2t-1} + \textbf{m}_{11}z_t + u_{1t}$
+
+$y_{2t}= \beta_{20} + \beta_{21}y_{1t-1} + \beta_{22}y_{2t-1} + \textbf{m}_{21}z_t + u_{2t}$
+
+Este seria un modelo VAR de orden n en su forma reducida:
+
+$$y_{1t}= \beta_{10} + \sum_{j=1}^{k}\beta_{j}y_{t-j} + \sum_{j=1}^{k}\textbf{m}_{j}z_{t-j} + u_{1t}$$
+
+$$y_{2t}= \beta_{20} + \sum_{j=1}^{k}\theta_{j}y_{t-j} + \sum_{j=1}^{k}\textbf{m}_{j}z_t + u_{2t}$$
+
+En la forma reducida de un modelo VAR (Modelo de Vectores Autorregresivos), las ecuaciones se expresan en términos de las variables endógenas del sistema en función de sus rezagos y, posiblemente, variables exógenas. La estructura de un modelo VAR en su forma reducida se puede describir de la siguiente manera:
+
+1.  **Variables Endógenas**: Estas son las variables que se están modelando en el sistema. Por ejemplo, si estamos modelando el PIB, la inflación y la tasa de interés, estas serían nuestras variables endógenas.
+
+2.  **Rezagos**: Cada variable endógena se expresa como una función lineal de sus propios rezagos y de los rezagos de las otras variables endógenas en el sistema. Por ejemplo, la variable endógena $y_{1t}$ en el rezago $j$ se puede expresar como $y_{t-j}$​.
+
+3.  **Variables Exógenas (opcional)**: Además de las variables endógenas, el modelo VAR en su forma reducida puede incluir variables exógenas que no están determinadas dentro del sistema, pero que pueden afectar a las variables endógenas. Estas variables pueden incluir datos económicos, políticos o cualquier otro factor relevante.
+
+4.  **Parámetros del Modelo**: Los parámetros del modelo son los coeficientes que multiplican a los rezagos de las variables endógenas y, posiblemente, a las variables exógenas. Estos parámetros son estimados a partir de los datos y capturan la relación entre las diferentes variables en el sistema.
+
+5.  **Error Término (Residuos)**: El término de error en la forma reducida del modelo VAR captura la parte de la variabilidad de las variables endógenas que no es explicada por los términos autoregresivos y las variables exógenas. Estos errores se suponen que son independientes e idénticamente distribuidos, con una distribución normal. donde las $u$ son los terminos de error estocático, llamados impulsos, innovaciones o choques en el lenguaje VAR.
+
+6.  La utilizacion de muchas o muy pocas variables rezagadas puede conducir a un problema de consumo de muchos grados de libertad, la aparicion de la multicolinealidad o errores de especificacion. una forma de decidir esta cuestión es utilizar criterios como el de Akaike o el de Schwarz, para decidir el modelo que proporcione los valores mas bajo de estos.
+
+7.  El**orden de los modelos VAR está dado por el número de rezagos**que se usa en cada ecuación. El modelo descrito anteriormente es entonces un $\textbf{VAR(1)}$, para denotar también el número de variables se usa$\textbf{VAR}_{2}(1)$
+
+### Criterios de Información
+
+Un problema central en el análisis de modelos VAR es encontrar el número de rezagos que produce los mejores resultados. La comparación de modelos generalmente se basa en criterios de información como el Akaike `AIC`, Bayesiano `BIC` o Hannan-Quinn `HQ`, buscando que se minimice el valor del criterio de información.
+
+$$AIC=\frac{−2} lT + \frac 2pT$$
+
+$$BIC=\frac {−2}lT+ \frac {2ln(T)}T$$
+
+$$HQ=\frac {−2}lT + \frac {2kln(ln(T))}T$$
+
+Donde $l=\frac {−Tk}{2}(1+ln(2π))−\frac T2ln(|Σ|)$, y $p=k(d+nk)$ el número de parámetros estimados en el modelo VAR, siendo $d$ es el número de variables exógenas, $n$ el orden del VAR, $k$ el número de variables endógenas.
+
+Por lo general, el `AIC` es preferible a otros criterios, debido a sus características favorables de pronóstico de muestras pequeñas. El `BIC` y `HQ`, sin embargo, funcionan bien en muestras grandes y tienen la ventaja de ser un estimador consistente, es decir, converge a los valores verdaderos.
+
+### Funciones de Impulso Respuesta
+
+Las funciones de impulso-respuesta (IRF) son una herramienta importante en el análisis de modelos VAR (Vector Autoregressive). Proporcionan información sobre cómo las variables en un sistema responden a los cambios en otras variables a lo largo del tiempo, específicamente en respuesta a un "impulso" o un shock en una de las variables.
+
+Aquí hay una explicación detallada de las funciones de impulso-respuesta en modelos VAR:
+
+1.  **Definición de Impulso-Respuesta**: En un modelo VAR, el término "impulso" se refiere a un choque o shock que afecta a una de las variables del sistema. La función de impulso-respuesta describe cómo las otras variables del sistema responden a este impulso en el tiempo.
+
+2.  **Cálculo de las IRF**: Las IRF se calculan mediante simulación. Una vez estimado el modelo VAR, se introduce un impulso unitario (o un impulso en el nivel deseado) en una de las variables del sistema y se observa cómo las otras variables responden a este impulso a lo largo de múltiples períodos de tiempo.
+
+3.  **Interpretación de las IRF**: Las IRF muestran cómo un cambio en una variable afecta a otras variables en el sistema a lo largo del tiempo. Una IRF típicamente muestra cómo la variable endógena (o variable de respuesta) responde al impulso en una variable exógena (o variable de impulso) en diferentes horizontes temporales.
+
+4.  **Propiedades de las IRF**:
+
+    -   **Dirección y Magnitud de la Respuesta**: Las IRF muestran si las variables responden positiva o negativamente al impulso, así como la magnitud de esa respuesta.
+
+    -   **Persistencia**: Las IRF también indican si el efecto del impulso persiste en el tiempo o disminuye gradualmente.
+
+    -   **Efectos Cruzados**: Las IRF muestran cómo los diferentes impulsos afectan a las variables en el sistema, lo que puede ayudar a entender las interacciones entre las variables.
+
+5.  **Utilidad de las IRF**: Las IRF son útiles para evaluar el impacto de diferentes políticas o choques en una economía, comprender las dinámicas de las variables en un sistema económico y pronosticar el comportamiento futuro de las variables en función de cambios en otras variables.
+
+### Tipos de Funcion de Impulso Respuesta
+
+En un modelo VAR (Vector Autoregression), se pueden calcular dos tipos de funciones de impulso respuesta:
+
+1.  Funciones de impulso respuesta al impulso unitario: Estas funciones muestran cómo las variables responden a un shock de una desviación estándar en una variable específica en un periodo de tiempo y cómo se propagan esos efectos a lo largo de los periodos siguientes. Es decir, muestran el impacto de un shock de una magnitud específica en una variable sobre las demás variables en el modelo.
+
+2.  Funciones de impulso respuesta acumuladas: Estas funciones muestran la respuesta acumulada de las variables a lo largo del tiempo después de un shock en una variable específica. Muestran cómo se acumulan los efectos de un shock en una variable sobre las demás variables en el modelo a lo largo de varios periodos.
+
+Ambos tipos de funciones de impulso respuesta son útiles para analizar cómo se propagan los efectos de un shock en una variable a lo largo del tiempo y cómo afecta a las demás variables en el modelo VAR. Esto permite comprender mejor las interacciones entre las variables y predecir cómo se comportarán en respuesta a cambios en una de ellas.
+
+### Causalidad de Granger
+
+La causalidad de Granger es un concepto importante en el análisis de series temporales que se utiliza para determinar si una serie temporal proporciona información útil para predecir otra serie temporal. Es una herramienta comúnmente utilizada en el contexto de los modelos VAR (Vector Autoregressive).
+
+Aquí está una explicación detallada de la causalidad de Granger en el contexto de los modelos VAR:
+
+1.  **Definición**: La causalidad de Granger establece que una serie temporal $y_{1t}$ "Granger-causa" a otra serie temporal $y_{2t}$ si la información pasada de $y_{1t}$ ayuda a predecir $y_{2t}$ mejor que solo utilizando la información pasada de $y_{2t}$.
+
+2.  **Principio**: Si la serie $y_{1t}$ Granger-causa a la serie $y_{2t}$, entonces los rezagos de $y_{1t}$ se incluirán como predictores en el modelo para predecir $y_{2t}$. En otras palabras, los rezagos de $y_{1t}$ tienen un poder predictivo significativo para $y_{2t}$.
+
+3.  **Prueba de Causalidad de Granger**: La causalidad de Granger se evalúa mediante una prueba estadística. En el contexto de los modelos VAR, esta prueba implica ajustar dos modelos:
+
+    -   Modelo restringido: Un modelo VAR que solo incluye rezagos de la serie $y_{2t}$ como predictores para predecir $y_{2t}$.
+
+    -   Modelo no restringido: Un modelo VAR que incluye rezagos tanto de la serie $y_{2t}$ como de la serie $y_{1t}$como predictores para predecir $y_{2t}$.
+
+4.  **Comparación de Modelos**: Después de ajustar ambos modelos, se utiliza una prueba estadística (se utiliza la estadisticaF) para comparar su ajuste. Si el modelo no restringido (que incluye rezagos de $y_{1t}$ ) se ajusta significativamente mejor que el modelo restringido (que no incluye los rezagos de $y_{1t}$), entonces se concluye que la serie $y_{1t}$ Granger-causa a la serie $y_{2t}$.
+
+5.  **Interpretación**: Si se establece que la serie $y_{1t}$ Granger-causa a la serie $y_{2t}$, significa que la información pasada de $y_{1t}$ contiene información adicional que ayuda a predecir $y_{2t}$, más allá de lo que ya se puede predecir con la información pasada de $y_{2t}$.
+
+**Causalidad de Granger**: $y_{1t}$ granger causa $y_{2t}$ si un modelo que usa valores actuales $y_{2t}$ pasados de $y_{1t}$ y valores actuales y pasados de $y_{2t}$ para predecir valores futuros de $y_{2t}$ tiene un error de pronóstico menor que un modelo que solo usa valores actuales y pasados de $y_{2t}$ para predecir $y_{2t}$. En otras palabras, la causalidad de Granger responde a la siguiente pregunta: **¿ayuda el pasado de la variable** $y_{1t}$ a mejorar la predicción de los valores futuros de $y_{2t}$?
+
+**Causalidad instantánea**: $y_{1t}$ causa $y_{2t}$ (en el sentido de Granger instantáneo) si un modelo que usa valores actuales, pasados y futuros de $y_{1t}$ y valores actuales y pasados de $y_{2t}$ para predecir $y_{2t}$ tiene un error de pronóstico menor que un modelo que solo usa valores actuales y pasados de $y_{1t}$ y valores actuales y valores pasados de $y_{2t}$. En otras palabras, la causalidad instantánea de Granger responde a la pregunta: **¿conocer el futuro de** $y_{1t}$ me ayuda a predecir mejor el futuro de $y_{2t}$? Si sé que va a hacer $y_{1t}$, ¿me ayuda a saber lo que va a saber $y_{2t}$?
+
+### Tabla Resumen
+
+| Concepto                           | Descripción                                                                                                                                                                         |
+|------------------------|------------------------------------------------|
+| **Modelo VAR**                     | Modelo que analiza la relación entre múltiples series temporales simultáneamente, modelando cada variable en función de sus valores pasados y los de otras variables en el sistema. |
+| **Estructura Matricial**           | $$y_t = \Gamma_0 + \Gamma_1 y_{t-1} + \Phi z_t + \varepsilon_t$$                                                                                                                    |
+| **Matrices del Modelo**            | $\Gamma_0, \Gamma_1, \Phi$​ derivadas de las ecuaciones individuales.                                                                                                                |
+| **Forma Reducida del VAR**         | $$y_t = \textbf{A}_0 + \textbf{A}_1 y_{t-1} + \textbf{M} z_t + u_t$$                                                                                                                |
+| **Problemas en VAR**               | Simultaneidad (inconsistencia del MCO), autocorrelación (inconsistencia de estimaciones MCO).                                                                                       |
+| **Criterios de Información**       | **AIC:** Mejor para muestras pequeñas. **BIC y HQ:** Mejores para muestras grandes. Fórmulas específicas para cada criterio.                                                        |
+| **Funciones de Impulso-Respuesta** | Muestran cómo las variables responden a choques en otras variables a lo largo del tiempo.                                                                                           |
+| **Causalidad de Granger**          | Determina si una serie temporal proporciona información útil para predecir otra. **Prueba de Causalidad:** Comparación entre modelos restringidos y no restringidos.                |
+| **Errores y Soluciones**           | Simultaneidad resuelta con variables instrumentales. Autocorrelación resuelta ampliando la estructura dinámica.                                                                     |
+
+## **Modelo Heterocedástico Condicional Autorregresivo (ARCH)**
+
+el Modelo Heterocedástico Condicional Autorregresivo (ARCH) es un modelo utilizado en econometría y finanzas para modelar la volatilidad de series temporales. Fue introducido por Robert F. Engle en 1982 y es particularmente útil para capturar la heterocedasticidad condicional en los datos financieros, donde la variabilidad puede cambiar con el tiempo.
+
+### **Conceptos Clave del Modelo ARCH**
+
+1.  **Heterocedasticidad Condicional:** La varianza de los errores no es constante a lo largo del tiempo, sino que depende de los errores pasados. En un contexto financiero, esto significa que los periodos de alta volatilidad tienden a ser seguidos por periodos de alta volatilidad, y lo mismo ocurre para los periodos de baja volatilidad.
+
+2.  **Autorregresividad de la Varianza:** La varianza condicional de los errores en un momento dado se modela como una función lineal de los errores pasados.
+
+### **Especificación del Modelo ARCH(p)**
+
+El modelo ARCH(p) (donde $p$ denota el número de retardos incluidos) se especifica de la siguiente manera:
+
+1.  **Modelo de Media:** Primero, se especifica el modelo para la serie temporal $y_t$​. Esto puede ser un modelo simple de media o un modelo ARMA, por ejemplo:
+
+    $y_{t} = \mu + \epsilon_{t}$
+
+    donde $\epsilon_{t}$ son los errores (residuos) del modelo de media, y $\mu$ es la media del proceso.
+
+2.  **Modelo de Varianza Condicional:** La varianza condicional de los errores $\epsilon_{t}$ se modela como una función de los errores pasados:
+
+    $\sigma_{t}^{2} = \alpha_{0} + \alpha_{1}\epsilon_{t-1}^{2} + \alpha_{2}\epsilon_{t-2}^{2} + ... + \alpha_{p}\epsilon_{t-p}^{2}$ ​
+
+    donde:
+
+    -   $\sigma_{t}^{2}$ es la varianza condicional en el tiempo $t$.
+
+    -   $\alpha_{0} > 0$ es una constante.
+
+    -   $\alpha_{i} ≥ 0$ son los coeficientes que miden el impacto de los errores pasados en la varianza condicional.
+
+3.  **Errores:** Los errores $\epsilon_{t}$ se suponen que son ruido blanco con media cero y varianza condicional $\sigma_{t}^{2}$ :
+
+    $\epsilon_{t} \sim \textbf{N}(0, \sigma_{t}^{2})$
+
+### **Estimación del Modelo ARCH**
+
+La estimación del modelo ARCH generalmente implica los siguientes pasos:
+
+1.  **Estimar el Modelo de Media:** Ajustar el modelo de media (por ejemplo, un modelo ARMA) y obtener los residuos $\epsilon_{t}$​.
+
+2.  **Estimación de la Varianza Condicional:** Ajustar el modelo de varianza condicional ARCH(p) a los residuos al cuadrado $\epsilon_{t}^{2}$ ​ utilizando técnicas de máxima verosimilitud.
+
+3.  **Evaluación del Modelo:** Verificar si los residuos del modelo ARCH muestran las características esperadas (por ejemplo, verificar que los residuos estandarizados son ruido blanco).
+
+### **Ejemplo de Aplicación**
+
+Supongamos que queremos modelar la volatilidad de los retornos diarios de una acción. Podríamos especificar un modelo ARCH(1) de la siguiente manera:
+
+1.  **Modelo de Media:** $y_{t} = \mu + \epsilon_{t}$
+
+2.  **Modelo ARCH(1):** $\sigma_{t}^{2} = \alpha_{0} + \alpha_{1}\epsilon_{t-1}^{2}$
+
+Aquí, la varianza condicional $\sigma_{t}^{2}$​ en el tiempo $t$ depende linealmente del cuadrado del error en el tiempo $t-1$. Si $\alpha_{1}$​ es significativo, indica que hay dependencia en la volatilidad de los retornos.
+
+### **Limitaciones del Modelo ARCH**
+
+-   **Simplicidad:** Los modelos ARCH pueden ser demasiado simples para capturar todas las características de la volatilidad en series temporales financieras.
+
+-   **Número de Parámetros:** A medida que $p$ aumenta, el número de parámetros a estimar también aumenta, lo que puede complicar la estimación y la interpretación.
+
+### **Extensiones**
+
+Para superar algunas de las limitaciones del modelo ARCH, se han desarrollado extensiones como el modelo GARCH (Generalización ARCH), que incluye tanto retardos de los errores como retardos de las varianzas pasadas.
+
+### **Resumen**
+
+El modelo ARCH es una herramienta poderosa para modelar la heterocedasticidad condicional en series temporales, permitiendo capturar la naturaleza cambiante de la volatilidad en los datos financieros. Específicamente, la varianza de los errores se modela como una función de los errores pasados, proporcionando una forma de capturar la agrupación de volatilidad observada en muchas series temporales financieras.
+
+## **Modelo Heterocedástico Condicional Autorregresivo Generalizado (GARCH)**
+
+El Modelo Heterocedástico Condicional Autorregresivo Generalizado (GARCH) es una extensión del modelo ARCH que captura la variabilidad temporal en la volatilidad de una serie temporal. Fue introducido por Tim Bollerslev en 1986. El modelo GARCH es ampliamente utilizado en finanzas y econometría para modelar series temporales financieras, donde la volatilidad puede cambiar con el tiempo.
+
+### **Conceptos Clave del Modelo GARCH**
+
+1.  **Heterocedasticidad Condicional:** La varianza de los errores en una serie temporal no es constante a lo largo del tiempo, sino que depende de los errores y varianzas pasadas.
+
+2.  **Autorregresividad en la Varianza:** La varianza condicional de los errores depende de los errores pasados y de las varianzas condicionales pasadas, proporcionando una estructura más completa y flexible que el modelo ARCH.
+
+### **Especificación del Modelo GARCH(p, q)**
+
+El modelo GARCH(p, q) se especifica de la siguiente manera:
+
+1.  **Modelo de Media:** Primero, se especifica el modelo para la serie temporal $y_{t}$:
+
+    $y_{t} = \mu + \epsilon_{t}$
+
+    donde $\epsilon_{t}$​ son los errores (residuos) del modelo de media, y $\mu$ es la media del proceso.
+
+2.  **Modelo de Varianza Condicional:** La varianza condicional $\sigma_{t}^{2}$​ se modela como una función lineal de los errores pasados y de las varianzas condicionales pasadas:
+
+    $\sigma_{t}^{2} = \alpha_{0} + \sum_{i=1}^{q} \alpha_{i}\epsilon_{t-i}^{2} + \sum_{j=1}^{p} \beta_{j}\sigma_{t-j}^{2}$
+
+    donde:
+
+    -   $\sigma_{t}^{2}$​ es la varianza condicional en el tiempo $t$.
+
+    -   $\alpha_{0} > 0$ es una constante.
+
+    -   $\alpha_{i} ≥ 0$ son los coeficientes que miden el impacto de los errores pasados al cuadrado.
+
+    -   $\beta_{j} ≥ 0$ son los coeficientes que miden el impacto de las varianzas condicionales pasadas.
+
+### **Estimación del Modelo GARCH**
+
+La estimación del modelo GARCH generalmente implica los siguientes pasos:
+
+1.  **Estimar el Modelo de Media:** Ajustar el modelo de media (por ejemplo, un modelo ARMA) y obtener los residuos $\epsilon_{t}$​.
+
+2.  **Estimación de la Varianza Condicional:** Ajustar el modelo de varianza condicional GARCH(p, q) a los residuos al cuadrado $\epsilon_{t}^{2}$​ utilizando técnicas de máxima verosimilitud.
+
+3.  **Evaluación del Modelo:** Verificar si los residuos del modelo GARCH muestran las características esperadas (por ejemplo, verificar que los residuos estandarizados son ruido blanco).
+
+### **Ejemplo de Aplicación**
+
+Supongamos que queremos modelar la volatilidad de los retornos diarios de una acción. Podríamos especificar un modelo GARCH(1, 1) de la siguiente manera:
+
+1.  **Modelo de Media:** $y_{t} = \mu + \epsilon_{t}$​
+
+2.  **Modelo GARCH(1, 1):** $\sigma_{t}^{2} = \alpha_{0} + \alpha_{1}\epsilon_{t-1}^{2} + \beta_{1}\sigma_{t-1}^{2}$
+
+Aquí, la varianza condicional $\sigma_{t}^{2}$ en el tiempo $t$ depende linealmente del cuadrado del error en el tiempo $t−1$ y de la varianza condicional en el tiempo $t−1$. Este modelo captura tanto la memoria corta (a través de $\epsilon_{t-1}^{2}$ ) como la memoria larga (a través de $\sigma_{t-1}^{2}$) de la volatilidad.
+
+### **Ventajas del Modelo GARCH**
+
+-   **Flexibilidad:** Al incluir tanto errores pasados como varianzas pasadas, el modelo GARCH puede capturar de manera más efectiva la dinámica de la volatilidad en los datos financieros.
+
+-   **Aplicabilidad:** Los modelos GARCH son aplicables a una amplia variedad de series temporales financieras, incluyendo precios de acciones, tasas de cambio y tasas de interés.
+
+### **Limitaciones del Modelo GARCH**
+
+-   **Complejidad:** La estimación de modelos GARCH puede ser compleja y computacionalmente intensiva, especialmente para valores altos de $p$ y $q$.
+
+-   **Suposición de Normalidad:** La suposición de que los errores estandarizados son normales puede no ser realista en todos los casos. Existen extensiones como GARCH-T que permiten distribuciones alternativas para los errores.
+
+### **Resumen**
+
+El modelo GARCH es una herramienta poderosa para modelar la volatilidad condicional en series temporales financieras. Extiende el modelo ARCH al incluir tanto errores pasados como varianzas pasadas, lo que permite capturar la naturaleza persistente de la volatilidad en los datos. Es ampliamente utilizado en econometría y finanzas para prever la volatilidad y gestionar el riesgo.
+
+### **Pruebas, Estimaciones y Pronósticos**
+
+La prueba del multiplicador de Lagrange (LM) es una herramienta estadística utilizada para detectar la presencia de efectos ARCH en una serie temporal. Los efectos ARCH se refieren a la situación en la que la varianza de los errores no es constante a lo largo del tiempo, sino que depende de los errores pasados.
+
+A continuación, se describe el procedimiento para llevar a cabo una prueba LM para efectos ARCH:
+
+### **Procedimiento de la Prueba LM para Efectos ARCH**
+
+1.  **Estimar un Modelo de Regresión Básico:** Primero, estima el modelo de regresión básico, que podría ser un modelo ARIMA o cualquier otro modelo de serie temporal adecuado. Obtén los residuos de este modelo.
+
+    $y_{t}= \beta X_{t} + \epsilon_{t}$
+
+    Aquí, $y_{t}$​ es la variable dependiente, $X_{t}$ son las variables independientes, $\beta$ son los coeficientes del modelo, y $\epsilon_{t}$​ son los residuos.
+
+2.  **Cuadrar los Residuos:** Calcula los residuos al cuadrado $(e_{t}^{2})$ . Estos valores se usarán para detectar la heterocedasticidad.
+
+3.  **Regresión Auxiliar:** Realiza una regresión auxiliar donde los residuos cuadrados se regresan sobre $q$ retardos de los mismos residuos cuadrados.
+
+    $e_{t}^{2}=\alpha_{0} + \alpha_{1}e_{t-1}^{2}+\alpha_{2}e_{t-2}^{2} + ... + \alpha_{q}e_{t-q}^{2} + v_{t}$
+
+    Aquí, $\alpha_{0}$ es el intercepto, $\alpha_{i}$ son los coeficientes de los residuos retardados, y $v_{t}$ es el término de error de esta regresión auxiliar.
+
+4.  **Calcular el Estadístico de Prueba:** El estadístico de prueba LM se calcula como $\textbf{T*R}^{2}$, donde $\textbf{T}$es el número de observaciones y $\textbf{R}^{2}$ es el coeficiente de determinación de la regresión auxiliar.
+
+    $\textbf{LM}=\textbf{T*R}^{2}$
+
+5.  **Distribución Asintótica:** Bajo la hipótesis nula de que no hay efectos ARCH (es decir, todos los $\alpha_{i}=0$, el estadístico LM sigue una distribución chi-cuadrado $\textbf{X}^{2}$ con $q$ grados de libertad.
+
+6.  **Decisión:** Compara el estadístico LM con el valor crítico de la distribución $\textbf{X}^{2}$ con $q$ grados de libertad. Si el estadístico LM es mayor que el valor crítico, se rechaza la hipótesis nula, indicando la presencia de efectos ARCH. De lo contrario, no se rechaza la hipótesis nula.
+
+### **Resumen**
+
+La prueba del multiplicador de Lagrange (LM) para efectos ARCH sigue estos pasos principales:
+
+1.  Estimar el modelo básico y obtener los residuos.
+
+2.  Calcular los residuos al cuadrado.
+
+3.  Realizar una regresión auxiliar de los residuos cuadrados sobre $q$ retardos de los mismos.
+
+4.  Calcular el estadístico $\textbf{T*R}^{2}$.
+
+5.  Comparar el estadístico con la distribución chi-cuadrado para tomar la decisión.
+
+Esta prueba es una herramienta efectiva para detectar heterocedasticidad condicional en las series temporales, y es ampliamente utilizada en econometría y finanzas para modelar y prever la volatilidad.
+
+## **¿Que son los Errores Estandarizados?**
+
+Los errores estandarizados son una forma de normalizar los residuos de un modelo para hacerlos comparables a lo largo del tiempo y evaluar su comportamiento de una manera más uniforme. En el contexto de modelos de heterocedasticidad condicional como GARCH, los errores estandarizados son particularmente útiles para verificar la adecuación del modelo y la presencia de heterocedasticidad residual.
+
+### **Definición de Errores Estandarizados**
+
+Para una serie temporal $y_{t}$​ modelada con un modelo de media y un modelo de varianza condicional (como un GARCH), los errores estandarizados se calculan de la siguiente manera:
+
+1.  **Errores del Modelo** $(\epsilon_{t})$​: Estos son los residuos del modelo, que se obtienen como la diferencia entre los valores observados y los valores ajustados por el modelo de media: $\epsilon_{t} = y_{t} -  \hat y_{t}$ ​ donde $\hat y_{t}$ es el valor ajustado.
+
+2.  **Varianza Condicional** $(\sigma_{t}^{2})$: Esta es la varianza condicional estimada en cada punto en el tiempo, que se obtiene del modelo de varianza condicional (por ejemplo, GARCH): $(\sigma_{t}^{2})$​
+
+3.  **Errores Estandarizados** $(e_{t})$ : Los errores estandarizados se obtienen dividiendo los errores del modelo por la raíz cuadrada de la varianza condicional: $e_{t} = \frac{\epsilon_{t}} {\sigma_{t}}$ ​​ donde $\sigma_{t} = \sqrt{\sigma_{t}^{2}}$​ es la desviación estándar condicional.
+
+### **Interpretación y Uso**
+
+Los errores estandarizados $e_{t}$​ tienen una media esperada de cero y una varianza esperada de uno, siempre y cuando el modelo esté correctamente especificado. Esto permite comparar los errores a lo largo del tiempo y verificar si hay patrones que indiquen una mala especificación del modelo.
+
+### **Evaluación del Modelo con Errores Estandarizados**
+
+1.  **Análisis de Ruido Blanco:** Los errores estandarizados deben comportarse como ruido blanco, es decir, deben ser independientes e idénticamente distribuidos con media cero y varianza uno. Si no se comportan de esta manera, podría indicar que el modelo no ha capturado adecuadamente la dinámica de la serie temporal.
+
+2.  **Gráficos de Errores Estandarizados:** Los gráficos de los errores estandarizados pueden ayudar a identificar patrones o anomalías en los residuos que no fueron capturados por el modelo. Por ejemplo, si los errores estandarizados muestran agrupaciones de valores altos o bajos, puede ser un signo de que hay heterocedasticidad residual no modelada.
+
+3.  **Pruebas Estadísticas:** Pruebas estadísticas, como la prueba de Ljung-Box, pueden ser aplicadas a los errores estandarizados para verificar la presencia de autocorrelación. También se pueden usar pruebas para la normalidad de los errores estandarizados, como la prueba de Jarque-Bera.
+
+### **Ejemplo Práctico**
+
+Supongamos que hemos ajustado un modelo GARCH(1,1) a una serie temporal de retornos financieros:
+
+1.  **Estimación del Modelo:** Ajustamos el modelo y obtenemos los residuos $\epsilon_{t}$.
+
+2.  **Cálculo de la Varianza Condicional:** Estimamos la varianza condicional $\sigma_{t}^{2}$ utilizando los parámetros del modelo GARCH.
+
+3.  **Cálculo de los Errores Estandarizados:** Dividimos cada residuo $\epsilon_{t}$ por la desviación estándar condicional $\sigma_{t}$​: $e_{t} = \frac{\epsilon_{t}} {\sigma_{t}}$
+
+4.  **Evaluación:** Analizamos los errores estandarizados $e_{t}$​ para verificar si son ruido blanco y si siguen una distribución normal.
+
+### **Resumen**
+
+Los errores estandarizados son una herramienta clave para evaluar la adecuación de los modelos de series temporales con heterocedasticidad condicional. Al normalizar los errores, permiten una evaluación uniforme de los residuos a lo largo del tiempo y ayudan a identificar posibles problemas de especificación del modelo.
+
+## Identificación
+
+La mejor herramienta de identificación puede ser un gráfico de la serie de tiempo. Por lo general, es fácil detectar periodos de mayor variación esparcidos a lo largo de la serie.
+
+Puede resultar útil examinar el ACF y el PACF de $\epsilon_{t}$ y $\epsilon_{t}^{2}$. Por ejemplo,
+
+-   si $\epsilon_{t}$ parece ser ruido blanco y parece ser $𝐴𝑅(1)$, se sugiere un modelo $ARCH(1)$ para la varianza.
+
+-   Si el PACF de sugiere $AR(p)$, entonces $ARCH(m)$ puede funcionar.
+
+Los modelos $GARCH$ pueden ser sugeridos por una estructura de tipo ARMA en el ACF y PACF de $\epsilon_{t}^{2}$.
+
+En la práctica, es posible que tengas que experimentar con varias estructuras ARCH y GARCH después de detectar que es necesario aborar el problema con este tipo de modelos.
+
+# **Modelo de Panel de Datos**
+
+Los modelos de panel de datos son una técnica econométrica que se utiliza para analizar datos que tienen tanto una dimensión temporal (series de tiempo) como una dimensión transversal. Es decir, estos modelos trabajan con datos que se recogen para varios individuos (como personas, empresas, países, etc.) a lo largo del tiempo. Este tipo de datos también se conoce como datos longitudinales o datos de panel
+
+## **Características y Ventajas de los Datos del Panel**
+
+Dimensión Temporal y Transversal : Los datos de panel permiten analizar el comportamiento de los individuos a lo largo del tiempo, lo que proporciona información tanto sobre diferencias entre individuos (dimensión transversal) como sobre cambios dentro de los individuos a lo largo del tiempo (dimensión temporal).
+
+Control de Heterogeneidad : Permiten controlar la heterogeneidad no observada, es decir, las características no observables que pueden influir en las variables de interés y que no cambian con el tiempo para cada individuo.
+
+Mejora de la Eficiencia : Incrementan la eficiencia de las estimaciones econométricas al proporcionar más información y reducir la colinealidad entre variables.
+
+al estudiar la sección transversal repetida de observaciones, los datos de panel resulta mas adecuado para estudiar la dinamica de cambio.
+
+Con datos de panel tenemos N individuos observados en varios periodos consecutivos, asi:
+
+$$Y_{it} = \beta_{1} + \beta_{2}X_{2it} + \beta_{3}X_{3it} + \epsilon_{t}$$
+
+Donde:
+
+-   $Y_{it}$ = valor de $Y$ para el individuo $i$ en el periodo $t$.
+
+-   $i$ = es la i-ésima unidad transversal
+
+-   $t$ = es el tiempo
+
+-   $X$ = son la variables independientes, que en un principios no se suponen estocasticas
+
+El termino de error cumple con las suposiciones clasicas $\epsilon_{t} \sim \textbf{N}(0, \sigma_{t}^{2})$
+
+Nota 1: se supone que hay un maximo de N unidades transversales u observaciones, y un maximo de T periodos.
+
+Nota 2: si cada unidad tranversal tiene el mismo el mismo número de observaciones de series de tiempo, entonces dicho panel (de datos) se llama panel balanceado . Si el número de observaciones difiere entre los miembros del panel se dice que es un panel desbalanceado
+
+Nota 3: existen otras fomas de clasificación de los datos de panel.
+
+macropaneles: los individuso son paises, sectores, regiones. N es pequeños respecto a T. (N \> T) o (T \> N)
+
+micropaneles: los individuos son personal u hogares. N es mucho mas grande que T
+
+# **El modelo de panel de datos agrupado**
+
+Es una técnica de análisis econométrico utilizada cuando se tienen datos que combinan aspectos de series temporales y datos de corte transversal, pero sin distinguir entre diferentes entidades (individuos, empresas, países, etc.) en términos de interceptos específicos. En este modelo, se asume que las diferencias entre las entidades no son significativas o que no es necesario modelarlas explícitamente.
+
+## **Características del Modelo de Panel de Datos Agrupado:**
+
+### **Intercepción Común**:
+
+Asume que todas las entidades en el panel tienen el mismo intercepto. No se controla por diferencias específicas entre entidades.
+
+### **Homogeneidad**:
+
+Se considera que todas las entidades son homogéneas en cuanto a las variables explicativas y su relación con la variable dependiente.
+
+### **Simplificación**:
+
+La especificación del modelo es más simple en comparación con los modelos de efectos fijos y aleatorios, ya que no incorpora interceptos o efectos específicos de cada entidad.
+
+### **Formulación del Modelo**:
+
+El modelo de panel de datos agrupado se puede representar de la siguiente manera:
+
+$$Y_{it}=\alpha + \beta X_{it} + \epsilon_{it}$$​
+
+Donde:
+
+-   $Y_{it}$ es la variable dependiente para la entidad $i$ en el tiempo $t$.
+
+-   $\alpha$ es el intercepto común para todas las entidades.
+
+-   $\beta$ es un vector de coeficientes que mide el efecto de las variables explicativas.
+
+-   $X_{it}$​ es un vector fila de variables explicativas para la entidad $i$ en el tiempo $t$.
+
+-   $\epsilon_{it}$ es el término de error.
+
+Nota: los parametrso estimados del modelo son validos para todos los individuos en todos los peridos de tiempo.
+
+## **Supuestos del Modelo de Panel de Datos Agrupados**:
+
+### **Homogeneidad de los Interceptos**:
+
+Supuesto: Se asume que todas las entidades tienen el mismo intercepto $(\alpha)$.
+
+Implicación: No se consideran diferencias específicas entre entidades que podrían influir en la variable dependiente.
+
+### **Linealidad**:
+
+Supuesto: La relación entre las variables independientes $(X_{it}​$) y la variable dependiente $(Y_{it})$ es lineal.
+
+Implicación: Se puede modelar mediante una combinación lineal de las variables explicativas.
+
+### **Exogeneidad**:
+
+Supuesto: Las variables explicativas $(X_{it}​)$ no están correlacionadas con el término de error $(\epsilon_{it}​)$.
+
+Implicación: $\mathbb{E}(\epsilon_{it} | X_{it}) = 0$. Esto asegura que las variables independientes no están influenciadas por factores inobservables que afectan a la variable dependiente.
+
+### **No Autocorrelación**:
+
+Supuesto: Los errores $(\epsilon_{it}​)$ no están correlacionados a lo largo del tiempo para una misma entidad.
+
+Implicación: $\mathbb{E}(\epsilon_{it} \epsilon_{is}) = 0$ para $t \neq s$. Esto significa que no hay relación entre los errores en diferentes períodos de tiempo para una misma entidad.
+
+### **No Correlación entre Entidades**:
+
+Supuesto: Los errores $(\epsilon_{it})$ de diferentes entidades no están correlacionados.
+
+Implicación: $\mathbb{E}(\epsilon_{it} \epsilon_{jt}) = 0$ para $i \neq j$. Esto asegura que no hay dependencia entre los errores de diferentes entidades.
+
+### **Homoscedasticidad**:
+
+Supuesto: La varianza de los errores $(\epsilon_{it}​$) es constante para todas las observaciones.
+
+Implicación: $\text{Var}(\epsilon_{it}) = \sigma^{2}$. Esto significa que la dispersión de los errores es constante a lo largo del tiempo y entre las entidades.
+
+### **Independencia de las Variables Explicativas**:
+
+Supuesto: Las variables explicativas $(X_{it}​)$ son independientes entre sí.
+
+Implicación: No hay multicolinealidad perfecta entre las variables explicativas.
+
+### **Parametro Estimado del Modelo Agrupado**
+
+Para estimar el parámetro $\beta$, se utiliza la fórmula de Mínimos Cuadrados Ordinarios (MCO), que se aplica de la misma manera que en un modelo de regresión lineal estándar. La fórmula para el estimador de $\beta$ es:
+
+$$\hat{\beta} = (X´ X)^{-1}X´Y$$
+
+Donde:
+
+-   $X$ es la matriz de las variables explicativas, incluyendo todas las observaciones de todas las entidades y períodos de tiempo.
+
+-   $X´$ es la transpuesta de la matriz $X$.
+
+-   $Y$ es el vector de las observaciones de la variable dependiente.
+
+-   $\hat{\beta}$​ es el vector de coeficientes estimados.
+
+Nota: en este caso el modelo de homogeneidad total (modelo agrupado) tendria la siguiente representación de la ecuación de parametrso estimados
+
+$$\hat{\beta}_{agrupado} = (\sum_{i=1}^{N}\sum_{t=1}^{T}x´_{it} x_{it})^{-1} \sum_{i=1}^{N}\sum_{t=1}^{T}x´_{it} y_{it}$$
+
+## **Ventajas y Desventajas**:
+
+### **Ventajas**:
+
+#### **Simplicidad**:
+
+Es más fácil de estimar y entender debido a su simplicidad en comparación con los modelos de efectos fijos o aleatorios.
+
+#### **Menos Demandante de Datos**:
+
+Requiere menos datos para estimar, ya que no necesita suficientes observaciones para cada entidad como en los modelos de efectos fijos.
+
+### **Desventajas**:
+
+#### **Ignora Heterogeneidad**:
+
+No controla por la heterogeneidad no observable entre entidades, lo que puede sesgar las estimaciones si las diferencias entre entidades son significativas.
+
+#### **Asunción Fuerte de Homogeneidad**:
+
+Asume que todas las entidades son idénticas en cuanto a su relación con las variables explicativas, lo cual puede no ser realista en muchos casos.
+
+### **Ejemplos de Aplicación**:
+
+**Análisis de Ventas en Diferentes Tiendas**:
+
+Suponiendo que se tiene un panel de datos de ventas de varias tiendas a lo largo del tiempo y se asume que todas las tiendas responden de la misma manera a las estrategias de marketing.
+
+**Estudio del Impacto de Políticas Económicas**:
+
+Análisis del impacto de una política económica específica en varios países, asumiendo que la política tiene el mismo efecto en todos los países.
+
+# **Modelo de Efecto Fijos**
+
+El modelo de efectos fijos en panel de datos se utiliza para controlar por heterogeneidad inobservable que puede variar entre entidades (individuos, empresas, países, etc.) pero no a lo largo del tiempo. Este modelo permite que cada entidad tenga su propio intercepto, capturando así efectos específicos de cada entidad.
+
+-   Nota: entonces, podemos pensar que $COV(X_{it},~\alpha_{i}) \neq 0$. Una posible solución es eliminar $\alpha_{i}$. (endogeneidad por variables omitidas)
+
+## **Formulación Matemática del Modelo de Efectos Fijos**:
+
+El modelo de efectos fijos se puede escribir de la siguiente manera:
+
+$y_{it} = \alpha_{i} + \beta x_{ it} + \epsilon_{it}$
+
+Donde:
+
+-   $y_{it}$ es la variable dependiente para la entidad $i$ en el tiempo $t$.
+
+-   $\alpha_{i}$ ​ es el intercepto específico de la entidad $i$, capturando los efectos fijos.
+
+-   $\beta$ es el vector de coeficientes que mide el efecto de las variables explicativas.
+
+-   $x_{it}$​ es el vector de variables explicativas para la entidad $i$ en el tiempo $t$.
+
+-   $\epsilon_{it}$ es el término de error.
+
+### **Eliminación de los Efectos Fijos**:
+
+Para estimar el modelo sin tener que estimar directamente cada $\alpha_{i}$​, se utiliza la transformación de "dentro de la entidad"
+
+-   Nota: se quiere eliminar el intercepto específico de la entidad $i$, que captura los efectos fijos. Se debe entender que el concepto efectos fijos hace referencia a habilidades propias de cada individuo o entidad, los cuales son inobservable por ser propios de cada individuo o entidad.
+
+### **Calcular la Media Dentro de la Entidad**:
+
+-   $\bar{y}_{i} = \frac{1}{T_{i}}\sum_{t=1}^{T_{i}}y_{it}$
+
+-   $\bar{x}_{i} = \frac{1}{T_{i}}\sum_{t=1}^{T_{i}}x_{it}$​
+
+ademas,
+
+-   $\bar{\beta}_{0} = \frac{1}{T_{i}}\sum_{t=1}^{T_{i}}\beta_{0} = \frac{1}{T}T\beta_{0} = \beta_{0}$ es una constante si se tuviera un intercepto en comun.
+
+-   $\bar{\alpha}_{i} = \frac{1}{T_{i}}\sum_{t=1}^{T_{i}}\alpha_{i} = \frac{1}{T}T\alpha_{i} = \alpha_{i}$
+
+Donde $T_{i}$​ es el número de observaciones de la entidad $i$.
+
+### **Restar las Medias**:
+
+Restamos la media dentro de la entidad de cada observación:
+
+$$y_{it} - \bar{y}_{i} = (\alpha_{i} + \beta X_{ it} + \epsilon_{it}) - ( \alpha_{i} + \beta \bar{X}_{i} + \bar{\epsilon}_{i})$$
+
+$$y_{it} - \bar{y}_{i} = (\alpha_{i} - \alpha_{i}) + \beta (X_{ it} - \bar{X}_{i}) + (\epsilon_{it} - \bar{\epsilon}_{i})$$
+
+-   Nota: se elimina $(\alpha_{i} - \alpha_{i})$ y nos queda un modeloque recibe el nombre de transformación de efectos fijo
+
+Esto simplifica a:
+
+$$\tilde{y}_{it} = \beta \tilde{x}_{it} + \tilde{\epsilon}_{it}$$​
+
+Donde:
+
+-   $\tilde{y}_{it} = y_{it} - \bar{y}_{i}$
+
+-   $\tilde{x}_{it} = x_{it} - \bar{x}_{i}$
+
+-   $\tilde{\epsilon}_{it} = \epsilon_{it} - \bar{\epsilon}_{i}$​
+
+Estimación por Mínimos Cuadrados Ordinarios (MCO):
+
+El modelo transformado se puede estimar usando Mínimos Cuadrados Ordinarios (MCO):
+
+$$\hat{\beta} = (\tilde{X´} \tilde{X})^{-1}\tilde{X´}\tilde{Y}$$
+
+​Donde:
+
+-   $\tilde{X}$ es la matriz de las variables explicativas después de restar las medias dentro de cada entidad.
+
+-   $\tilde{Y}$​ es el vector de la variable dependiente después de restar las medias dentro de cada entidad.
+
+Nota 1: este modelo explora la variabilidad de $x$ y de $y$ dentro de los individuos a traves del tiempo, donde $\tilde{x}$ y $\tilde{y}$​ son las desviaciones de $y_{it}$ y de $x_{it}$ respecto a su media.
+
+Nota 2: un limitación utilizar estimación por efectos fijos esta en el hecho de no permitir variables constantes a traves del tiempo.
+
+Nota 3: otra limitación es el hecho de obtener estimaciones estadisticamente menos significativas con efectos fijos, ya que la varianza muestral de las variables originales $y_{it}, ~ x_{it},...,x_{ik}$ es mucho mayor que las tranformadas.
+
+Alternativa: Modelo con Dummies
+
+Otra manera de especificar el modelo de efectos fijos es incluyendo variables indicadoras (dummies) para cada entidad:
+
+$$Y_{it} = \alpha +\sum_{i=1}^{N-1} \delta_{i} D_{i} + \beta X_{it} + \epsilon_{it}$$
+
+Donde:
+
+-   $D_{i}$ es una dummy que toma el valor 1 si la observación pertenece a la entidad $i$ y 0 en caso contrario.
+
+-   $\delta_{i}$​ captura el efecto fijo de la entidad $i$.
+
+Sin embargo, este enfoque puede ser computacionalmente intensivo si hay muchas entidades.
+
+## **Ejemplo Práctico**:
+
+Supongamos que tenemos un panel de datos con las siguientes variables:
+
+$y_{it}$: Ingresos de la persona $i$ en el año $t$.
+
+$X_{it}$​: Años de educación de la persona $i$ en el año $t$.
+
+Calcular la Media de Ingresos y Educación para Cada Persona:
+
+$\bar{y}_{i} = \frac{1}{T_{i}}\sum_{t=1}^{T_{i}}y_{it}$
+
+$\bar{x}_{i} = \frac{1}{T_{i}}\sum_{t=1}^{T_{i}}x_{it}$​
+
+Restar las Medias:
+
+$\tilde{y}_{it} = y_{it} - \bar{y}_{i}$
+
+$\tilde{X}_{it} = X_{it} - \bar{X}_{i}$​
+
+Estimar el Modelo Transformado con MCO:
+
+$\hat{\beta} = (\tilde{X´} \tilde{X})^{-1}\tilde{X´}\tilde{Y}$​
+
+En resumen, el modelo de efectos fijos en panel de datos controla por la heterogeneidad inobservable específica de cada entidad, permitiendo estimar los efectos de las variables explicativas de manera más precisa. La transformación de "dentro de la entidad" elimina los efectos fijos, facilitando la estimación mediante MCO.
+
+# **Efectos Aleatorios**
+
+El modelo de datos de panel de efectos aleatorios es una herramienta estadística utilizada para analizar datos de panel donde se asume que las diferencias entre unidades (por ejemplo, individuos, empresas, países) pueden ser mejor capturadas por efectos aleatorios en lugar de efectos fijos. Este modelo es adecuado cuando se piensa que los efectos individuales no están correlacionados con las variables explicativas del modelo.
+
+Nota: con efectos fijos queriamos eliminar $\alpha_{i}$ porque creiamos que habia una correlación entre $\alpha_{i}$ y alguna de las variables explicativas. Con efectos aleatorios se asume que $COV(X_{it},~\mu_{i}) = 0 ($ $\mu_{i}$ es la variable que em recoge los efectos heterogeneos, es decir, remplazamos $\alpha_{i}$ por $\mu_{i}$ )
+
+## Estructura del Modelo de Efectos Aleatorios
+
+El modelo de efectos aleatorios puede ser formulado matemáticamente de la siguiente manera:
+
+$$y_{it} = \alpha + \beta x_{it} + u_{it}$$
+
+Donde:
+
+-   $y_{it}$​ es la variable dependiente para la unidad $i$ en el tiempo $t$.
+
+-   $\alpha$ es el intercepto común a todas las unidades.
+
+-   $x_{it}$​ es un vector de variables explicativas para la unidad $i$ en el tiempo $t$.
+
+-   $\beta$ es un vector de coeficientes que mide el impacto de las variables explicativas en $y_{it}$​.
+
+-   $u_{it}$ es el término de error compuesto.
+
+El término de error compuesto $u_{it}$ se descompone en dos partes:
+
+-   $u_{it} = \mu_{i} + \epsilon_{it}$ ​
+
+Donde:
+
+-   $\mu_{i}$​ es el efecto aleatorio específico de la unidad $i$, que se asume que sigue una distribución normal con media cero y varianza $\sigma_{\mu}^{2}$​. Es decir, $\mu_{i} \sim \mathcal{N}(0, \sigma_{\mu}^{2})$.
+
+-   $\epsilon_{it}$​ es el término de error idiosincrático, que también se asume que sigue una distribución normal con media cero y varianza $\sigma_{\epsilon}^{2}$. Es decir, $\epsilon_{it} \sim \mathcal{N}(0, \sigma_{\epsilon}^{2})$.
+
+## Supuestos del Modelo de Efectos Aleatorios
+
+1.  **No correlación entre efectos individuales y variables explicativas**:
+
+    $$\mathbb{E}(\mu_i | x_{it}) = 0$$
+
+    Esto implica que los efectos aleatorios $\mu_{i}$​ no están correlacionados con las variables explicativas $x_{it}$.
+
+2.  **Homocedasticidad**:
+
+    La varianza de los errores idiosincráticos es constante:
+
+    $$\mathbb{E}(\epsilon_{it}^{2}) = \sigma_{\epsilon}^{2}$$
+
+3.  **No autocorrelación de los errores idiosincráticos**:
+
+    $$\mathbb{E}(\epsilon_{it} \epsilon_{js}) = 0 \quad \text{para} \quad (i \neq j) \, \text{o} \, (t \neq s)$$
+
+4.  **Distribución Normal de los Efectos Aleatorios**:
+
+    $$\mu_i \sim \mathcal{N}(0, \sigma_{\mu}^{2})$$
+
+## Varianza Compuesta del Error
+
+Dado que $u_{it} = \mu_i + \epsilon_{it}$, la varianza total del error puede ser expresada como:
+
+$$\sigma_{u}^{2} = \sigma_{\mu}^{2} + \sigma_{\epsilon}^{2}$$​
+
+## Estimación del Modelo de Efectos Aleatorios
+
+El modelo de efectos aleatorios se estima comúnmente utilizando el estimador de mínimos cuadrados generalizados (MCG). El estimador MCG considera la estructura de la varianza-covarianza del error para proporcionar estimaciones eficientes de los coeficientes $\beta$.
+
+veamos: ¿podemos calcular los parametros por MCG?
+
+1.  Reescribamos el modelo como: $y_{it} = \alpha + \beta x_{it} + u_{it}$
+
+Donde:
+
+-   $y_{it}$​ es la variable dependiente para la unidad $i$ en el tiempo $t$.
+
+-   $\alpha$ es el intercepto común a todas las unidades.
+
+-   $x_{it}$​ es un vector de variables explicativas para la unidad $i$ en el tiempo $t$.
+
+-   $\beta$ es un vector de coeficientes que mide el impacto de las variables explicativas en $y_{it}$​.
+
+-   $u_{it}$ es el término de error compuesto. (heterogeneidad no observada + el error idiosincrático)
+
+    Nota: $\epsilon_{it}$ es homocedastico y no esta serialmete correlacionado.
+
+2.  No se conoce el comportamiento de $u_{it}$. Es decir, se tiene que saber si $u_{it}$ esta bien comportada. para esto asumimos que :
+
+    $VAR(\mu_{i}) = \sigma_{\mu_{i}}^{2}$ y $VAR(\epsilon_{i}) = \sigma_{\epsilon_{i}}^{2}$
+
+3.  ¿cúal es la correlación intertemporal entre $u_{it}$ y $u_{is}$ $(Corr(u_{it}~ u_{is}))$
+
+    $$\mathbb{Corr}(u_{it}u_{is})= \frac{Cov(u_{it} u_{is})}{\sqrt{VAR(u_{it})VAR(u_{is})}} = \frac{Cov(\mu_{i}+\epsilon_{it}, \mu_{i}+\epsilon_{is})}{\sqrt{[VAR(\mu_{i})+VAR(\epsilon_{it})]^{2}}}$$
+
+    Nota: se expresa la $\mathbb{Corr}(u_{it}u_{is})$ por definición de correlación y se hacemos las sustituciones a partir de las identidades ya halladas.
+
+    $$\mathbb{Corr}(u_{it}u_{is})= \frac{Cov(\mu_i\mu_i) + Cov(\mu_{i} \epsilon_{is}) + Cov(\epsilon_{it}\mu_{i}) + Cov(\epsilon_{it}\epsilon_{is})}{\sigma_{\mu}^{2} + \sigma_{\epsilon}^{2}}$$
+
+Donde: $Cov(\mu_{i} \epsilon_{is}) = 0$, $Cov(\epsilon_{it}\mu_{i})=0$, $Cov(\epsilon_{it}\epsilon_{is}) = 0$
+
+A partir de loa naterior se llega a:
+
+$\mathbb{Corr}(u_{it}u_{is}) = \frac{\sigma_{\mu}^{2}}{\sigma_{\mu}^2 + \sigma_\epsilon^2}$ , es decir $u_{it}$ esta serialmente correlacionado
+
+4.  Filtro de transformación
+
+Una transformación comúnmente usada en el modelo de efectos aleatorios es la deglación de los efectos individuales mediante el factor $\theta$, donde:
+
+​​$$\theta = 1 - \sqrt{\frac{\sigma_\epsilon^2}{\sigma_\mu^2 + \sigma_\epsilon^2}}$$
+
+Nota: efectos aleatorios corrige esa correlacion serial por medio de $\theta$ .
+
+Aplicando esta transformación:
+
+$$y_{it} - \theta \bar{y}_{i} = \alpha(1 - \theta) + \beta (x_{it} - \theta \bar{x}_{i}) + (u_{it} - \theta \bar{u}_{i})$$
+
+Donde $\bar{y}_{i}$ y $\bar{x}_{i}$ son las medias de $y_{it}$​ y $x_{it}$​ a través del tiempo para la unidad $i$.
+
+Nota 1: la presencia de $\alpha_{i}$ se suaviza por medio de $(1-\theta)$. a medida que $\theta$ se va caercando a 1, la expresión $(1-\theta)$ se va haciendo cero, por lo que $\mu_{i}$ se va a desaparecer.
+
+Nota 2: el parametro $\theta$ nunca es conocido en la practica porque depende de variables poblacionales, pero es facil de estimar. los software estadisticos implementan esta formula de forma inmediata.
+
+$$\hat{\theta} = 1 - \{\frac{1}{[1 +\frac{T \hat{\sigma}_{\mu}^{2}}{\hat{\sigma}_{\epsilon}^{2}}]}\}$$
+
+**Prueba de Breusch-Pagan Multiplicador de Lagrange (LM) para Efectos Aleatorios en Datos de Panel**
+
+La Prueba de Breusch-Pagan LM se utiliza para determinar la presencia de efectos aleatorios en datos de panel. Se analiza la varianza de los residuos para detectar efectos individuales específicos no observables.
+
+La Prueba de Breusch-Pagan LM se utiliza para detectar efectos aleatorios en datos de panel mediante el análisis de la varianza de los residuos. Esto permite determinar si existen efectos individuales específicos no observables.
+
+**Pasos Clave:**
+
+1.  **Modelo de Datos de Panel:** Relaciona una variable dependiente con variables explicativas y un término de error descompuesto en efectos individuales y errores idiosincráticos.
+
+2.  **Hipótesis de la Prueba:**
+
+    -   **Nula:** No hay efectos aleatorios ($\sigma_{\mu}^2 = 0$).
+
+    -   **Alternativa:** Hay efectos aleatorios ($\sigma_{\mu}^2 > 0$).
+
+3.  **Proceso de Prueba:**
+
+    -   Estimar el modelo de efectos comunes.
+
+    -   Calcular las sumas de residuos cuadrados agrupados y dentro de los grupos.
+
+    -   Comparar el estadístico LM con la distribución chi-cuadrado para determinar la presencia de efectos aleatorios.
+
+**Interpretación:** Si el estadístico LM es mayor que el valor crítico de la chi-cuadrado, se rechaza la hipótesis nula, indicando la presencia de efectos aleatorios en los datos de panel.
+
+**Interpretación del Resultado**
+
+El estadístico LM sigue una distribución chi-cuadrado ($\chi^{2}$) con grados de libertad igual al número de parámetros en el modelo (excluyendo la constante). Si el valor del estadístico LM es mayor que el valor crítico de la distribución chi-cuadrado para un nivel de significancia dado (por ejemplo, 0.05), se rechaza la hipótesis nula, indicando la presencia de efectos aleatorios en los datos de panel.
+
+## Resumen
+
+El modelo de efectos aleatorios es apropiado cuando se puede asumir que las diferencias no observadas entre las unidades del panel son no correlacionadas con las variables explicativas. Este modelo permite una estimación más eficiente al aprovechar la variabilidad tanto entre unidades como dentro de las unidades en el tiempo.
+
+Nota 1: efctos aleatorios es consistente, pero no insesgado para $N \longrightarrow \infty$ y $T$ fijo (datos para muchos individuos en un tiempo muy corto)
+
+Nota 2: en el caso donde $T \longrightarrow \infty$ y $N$ fijo no se sabe si efectos aleatorios es consistente. (en este caso es mejor pensar en un metodo de series de tiempo).
+
+Nota 3: volviendo al modelo transformado se tiene:
+
+$$y_{it} - \theta \bar{y}_{i} = \alpha(1 - \theta) + \beta (x_{it} - \theta \bar{x}_{i}) + (u_{it} - \theta \bar{u}_{i})$$
+
+-   si $\theta = 0$ se tiene MCO agrupados (no existe una correlación serial)
+
+-   si $0 < \theta < 1$ se tiene efectos aleatorios (existe correlación serial)
+
+-   si $\theta =1$ se tiene efectos fijos. (nos da la transformación de efectos fijos)
+
+Nota: sabemos que el $\theta$ se remplaza por $\hat{\theta}$ por la imposibilidad de calcular el primero.

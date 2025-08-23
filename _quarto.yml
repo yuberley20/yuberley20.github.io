@@ -1,0 +1,39 @@
+# --- Configuración del Proyecto ---
+project:
+  type: website
+  output-dir: docs
+
+# --- Configuración del Sitio Web ---
+website:
+  title: "Yuberley Cruz Caycedo | Portafolio" # Título que aparece en la barra de navegación
+  favicon: favicon.png # Referencia a tu icono de pestaña
+
+  # --- Barra de Navegación Superior ---
+  navbar:
+    left:
+      - href: index.qmd
+        text: Inicio
+      - href: about.qmd
+        text: Sobre Mí
+      - href: proyectos.qmd
+        text: Proyectos
+    right:
+      - icon: github
+        href: https://github.com/yuberley20
+        aria-label: GitHub
+      - icon: linkedin
+        href: https://www.linkedin.com/in/tu-usuario/ # Reemplaza con tu usuario de LinkedIn
+        aria-label: LinkedIn
+
+  # --- Pie de Página ---
+  page-footer:
+    right: "Construido con [Quarto](https://quarto.org/)"
+    left: "&copy; 2025, Yuberley Cruz Caycedo"
+
+# --- Formato de Salida HTML ---
+format:
+  html:
+    theme: darkly # Tema base oscuro
+    scss: styles.scss # Archivo para personalizaciones
+    toc: true # Muestra una tabla de contenidos en las páginas
+    smooth-scroll: true # Activa el desplazamiento suave

@@ -1,0 +1,13 @@
+# Archivos de RStudio
+.Rproj.user/
+.Rhistory
+.RData
+.Ruserdata
+
+# Archivos generados por Quarto
+_site/
+_freeze/
+*.html
+*.pdf
+.quarto/
+/.quarto/
