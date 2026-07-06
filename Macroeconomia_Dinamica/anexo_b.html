@@ -6,10 +6,8 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Yuberley Cruz Caycedo">
-<meta name="dcterms.date" content="2024-03-15">
 
-<title>Conceptos Fundamentales sobre Series de Tiempo – Yuberley Cruz Caycedo | Portafolio</title>
+<title>anexo_b – Yuberley Cruz Caycedo | Portafolio</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -21,41 +19,6 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
-}
-/* CSS for syntax highlighting */
-html { -webkit-text-size-adjust: 100%; }
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -144,7 +107,7 @@ window.Quarto = {
 
 </head>
 
-<body class="floating nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+<body class="nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
     const toggleBodyColorMode = (bsSheetEl) => {
       const mode = bsSheetEl.getAttribute("data-mode");
       const bodyEl = window.document.querySelector("body");
@@ -373,288 +336,165 @@ window.Quarto = {
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
-    <nav id="TOC" role="doc-toc" class="toc-active">
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#qué-es-una-serie-de-tiempo" id="toc-qué-es-una-serie-de-tiempo" class="nav-link active" data-scroll-target="#qué-es-una-serie-de-tiempo"><span class="header-section-number">1</span> ¿Qué es una Serie de Tiempo?</a></li>
-  <li><a href="#componentes-de-una-serie-de-tiempo" id="toc-componentes-de-una-serie-de-tiempo" class="nav-link" data-scroll-target="#componentes-de-una-serie-de-tiempo"><span class="header-section-number">2</span> Componentes de una Serie de Tiempo</a>
-  <ul class="collapse">
-  <li><a href="#tendencia" id="toc-tendencia" class="nav-link" data-scroll-target="#tendencia"><span class="header-section-number">2.1</span> Tendencia</a></li>
-  <li><a href="#estacionalidad" id="toc-estacionalidad" class="nav-link" data-scroll-target="#estacionalidad"><span class="header-section-number">2.2</span> Estacionalidad</a></li>
-  <li><a href="#ciclo" id="toc-ciclo" class="nav-link" data-scroll-target="#ciclo"><span class="header-section-number">2.3</span> Ciclo</a></li>
-  <li><a href="#variación-irregular-o-aleatoria-ruido" id="toc-variación-irregular-o-aleatoria-ruido" class="nav-link" data-scroll-target="#variación-irregular-o-aleatoria-ruido"><span class="header-section-number">2.4</span> Variación Irregular o Aleatoria (Ruido)</a></li>
-  </ul></li>
-  <li><a href="#naturaleza-de-una-serie-de-tiempo" id="toc-naturaleza-de-una-serie-de-tiempo" class="nav-link" data-scroll-target="#naturaleza-de-una-serie-de-tiempo"><span class="header-section-number">3</span> Naturaleza de una Serie de Tiempo</a>
-  <ul class="collapse">
-  <li><a href="#naturaleza-aditiva" id="toc-naturaleza-aditiva" class="nav-link" data-scroll-target="#naturaleza-aditiva"><span class="header-section-number">3.1</span> Naturaleza Aditiva</a></li>
-  <li><a href="#naturaleza-multiplicativa" id="toc-naturaleza-multiplicativa" class="nav-link" data-scroll-target="#naturaleza-multiplicativa"><span class="header-section-number">3.2</span> Naturaleza Multiplicativa</a></li>
-  </ul></li>
-  <li><a href="#procesos-estocásticos-y-estacionariedad" id="toc-procesos-estocásticos-y-estacionariedad" class="nav-link" data-scroll-target="#procesos-estocásticos-y-estacionariedad"><span class="header-section-number">4</span> Procesos Estocásticos y Estacionariedad</a>
-  <ul class="collapse">
-  <li><a href="#ruido-blanco-white-noise" id="toc-ruido-blanco-white-noise" class="nav-link" data-scroll-target="#ruido-blanco-white-noise"><span class="header-section-number">4.1</span> Ruido Blanco (White Noise)</a></li>
-  <li><a href="#estacionariedad" id="toc-estacionariedad" class="nav-link" data-scroll-target="#estacionariedad"><span class="header-section-number">4.2</span> Estacionariedad</a></li>
-  <li><a href="#caminata-aleatoria-random-walk" id="toc-caminata-aleatoria-random-walk" class="nav-link" data-scroll-target="#caminata-aleatoria-random-walk"><span class="header-section-number">4.3</span> Caminata Aleatoria (Random Walk)</a></li>
-  </ul></li>
-  <li><a href="#referencias" id="toc-referencias" class="nav-link" data-scroll-target="#referencias"><span class="header-section-number">5</span> Referencias</a></li>
+  
   </ul>
 </nav>
-</nav>
-<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
-<!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
 
 
-<header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title">
-<h1 class="title">Conceptos Fundamentales sobre Series de Tiempo</h1>
-<p class="subtitle lead">Material de Monitoria para Econometría 2</p>
+
+
+
+
+
+<div id="quarto-appendix" class="default"><section id="anexo-b-modelo-autorregresivo-de-orden-1" class="level1 appendix"><h2 class="anchored quarto-appendix-heading">Anexo B: Modelo Autorregresivo de Orden 1</h2><div class="quarto-appendix-contents">
+
+<p>Este apéndice detalla los resultados completos de la estimación del proceso autorregresivo de primer orden (AR(1)) para la tasa de desempleo trimestral en Colombia durante el período 2001-2023.</p>
+<div id="tbl-modelo-ar1" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-modelo-ar1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;1: Análisis de Varianza (ANOVA) del Modelo AR(1)
+</figcaption>
+<div aria-describedby="tbl-modelo-ar1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;"><strong>Source</strong></th>
+<th style="text-align: right;"><strong>SS</strong></th>
+<th style="text-align: right;"><strong>df</strong></th>
+<th style="text-align: right;"><strong>MS</strong></th>
+<th style="text-align: left;"></th>
+<th style="text-align: left;"><strong>Number of obs</strong></th>
+<th style="text-align: left;">= 90</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Model</td>
+<td style="text-align: right;">315.343494</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">315.343494</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><strong>F(1, 88)</strong></td>
+<td style="text-align: left;">= 238.05</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Residual</td>
+<td style="text-align: right;">116.573955</td>
+<td style="text-align: right;">88</td>
+<td style="text-align: right;">1.32470403</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><strong>Prob &gt; F</strong></td>
+<td style="text-align: left;">= 0.0000</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Total</strong></td>
+<td style="text-align: right;">431.917449</td>
+<td style="text-align: right;">89</td>
+<td style="text-align: right;">4.85300504</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><strong>R-squared</strong></td>
+<td style="text-align: left;">= 0.7301</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"></td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><strong>Adj R-squared</strong></td>
+<td style="text-align: left;">= 0.7270</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"></td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><strong>Root MSE</strong></td>
+<td style="text-align: left;">= 1.151</td>
+</tr>
+</tbody>
+</table>
 </div>
-
-
-
-<div class="quarto-title-meta">
-
-    <div>
-    <div class="quarto-title-meta-heading">Author</div>
-    <div class="quarto-title-meta-contents">
-             <p>Yuberley Cruz Caycedo </p>
-          </div>
-  </div>
-    
-    <div>
-    <div class="quarto-title-meta-heading">Published</div>
-    <div class="quarto-title-meta-contents">
-      <p class="date">March 15, 2024</p>
-    </div>
-  </div>
-  
-    
-  </div>
-  
-
-
-</header>
-
-
-<section id="qué-es-una-serie-de-tiempo" class="level2" data-number="1">
-<h2 data-number="1" class="anchored" data-anchor-id="qué-es-una-serie-de-tiempo"><span class="header-section-number">1</span> ¿Qué es una Serie de Tiempo?</h2>
-<p>En un sentido intuitivo, una serie de tiempo es un conjunto de observaciones sobre los valores que toma una variable en diferentes momentos. Tales datos pueden ser recopilados a intervalos regulares (diarios, semanales, mensuales, trimestrales, anuales, etc.).</p>
-<blockquote class="blockquote">
-<p><strong>Definición Formal:</strong> “Aunque es difícil dar una definición completa del término serie de tiempo, el objetivo principal del análisis de series de tiempo es desarrollar modelos estocásticos que brinden una descripción verosímil del comportamiento de una serie de datos.”</p>
-<p>— <em>Gujarati, D. N., &amp; Porter, D. C. (2009). Econometría (5a ed.).</em></p>
-</blockquote>
-<p>El análisis de series temporales nos permite observar la evolución de una variable a lo largo del tiempo, analizar su dinámica y estudiar correlaciones no contemporáneas entre distintas variables.</p>
-<hr>
-</section>
-<section id="componentes-de-una-serie-de-tiempo" class="level2" data-number="2">
-<h2 data-number="2" class="anchored" data-anchor-id="componentes-de-una-serie-de-tiempo"><span class="header-section-number">2</span> Componentes de una Serie de Tiempo</h2>
-<p>Tradicionalmente, se considera que una serie de tiempo puede descomponerse en varios componentes que describen diferentes aspectos de su variabilidad.</p>
-<section id="tendencia" class="level3" data-number="2.1">
-<h3 data-number="2.1" class="anchored" data-anchor-id="tendencia"><span class="header-section-number">2.1</span> Tendencia</h3>
-<p>Representa el movimiento de largo plazo de la serie. Es la dirección general (ascendente, descendente o constante) que sigue la serie a lo largo de un periodo extenso.</p>
-<blockquote class="blockquote">
-<p><strong>Sobre la Tendencia:</strong> “Una tendencia es un movimiento de largo plazo en una serie de tiempo. Para muchos analistas, encontrar la tendencia es la parte más importante del análisis, ya que con frecuencia forma parte del proceso de pronóstico.”</p>
-<p>— <em>Pindyck, R. S., &amp; Rubinfeld, D. L. (2001). Econometría: Modelos y Pronósticos (4a ed.).</em></p>
-</blockquote>
-<div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># --- Gráfico de Tendencia ---</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Creamos datos sintéticos para ilustrar una tendencia lineal.</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>tiempo <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">100</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>tendencia <span class="ot">&lt;-</span> <span class="fl">0.5</span> <span class="sc">*</span> tiempo <span class="sc">+</span> <span class="fu">rnorm</span>(<span class="dv">100</span>, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">5</span>)</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>datos_tendencia <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">periodo =</span> tiempo, <span class="at">valor =</span> tendencia)</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Graficamos con ggplot2</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(datos_tendencia, <span class="fu">aes</span>(<span class="at">x =</span> periodo, <span class="at">y =</span> valor)) <span class="sc">+</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">color =</span> <span class="st">"#0072B2"</span>, <span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Componente de Tendencia"</span>,</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"Movimiento ascendente a largo plazo"</span>,</span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Tiempo"</span>,</span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Valor de la Serie"</span></span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="Conceptos-sobre-Series-de-Tiempo_files/figure-html/trend-plot-1.png" class="img-fluid figure-img" width="672"></p>
-<figcaption>Ejemplo de una serie con tendencia ascendente.</figcaption>
 </figure>
 </div>
+<p><br></p>
+<div id="tbl-coeficientes-ar1" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-coeficientes-ar1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;2: Coeficientes de Estimación del Modelo AR(1)
+</figcaption>
+<div aria-describedby="tbl-coeficientes-ar1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;"><strong>TD</strong></th>
+<th style="text-align: right;"><strong>Coefficient</strong></th>
+<th style="text-align: right;"><strong>Std. err.</strong></th>
+<th style="text-align: right;"><strong>t</strong></th>
+<th style="text-align: right;"><strong>P&gt;|t|</strong></th>
+<th style="text-align: right;"><strong>[95% conf.</strong></th>
+<th style="text-align: right;"><strong>interval]</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>LTD (Rezago)</strong></td>
+<td style="text-align: right;">0.8455959</td>
+<td style="text-align: right;">0.0548063</td>
+<td style="text-align: right;">15.43</td>
+<td style="text-align: right;">0.000</td>
+<td style="text-align: right;">0.7366799</td>
+<td style="text-align: right;">0.9545118</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">**_cons (Constante)**</td>
+<td style="text-align: right;">1.757247</td>
+<td style="text-align: right;">0.6595353</td>
+<td style="text-align: right;">2.66</td>
+<td style="text-align: right;">0.009</td>
+<td style="text-align: right;">0.4465588</td>
+<td style="text-align: right;">3.067935</td>
+</tr>
+</tbody>
+</table>
 </div>
-</div>
-</section>
-<section id="estacionalidad" class="level3" data-number="2.2">
-<h3 data-number="2.2" class="anchored" data-anchor-id="estacionalidad"><span class="header-section-number">2.2</span> Estacionalidad</h3>
-<p>Se refiere a patrones repetitivos y predecibles que ocurren a intervalos regulares, generalmente dentro de un año (ej. mensual, trimestral).</p>
-<blockquote class="blockquote">
-<p><strong>Sobre la Estacionalidad:</strong> “Muchas series de tiempo económicas y de negocios presentan un patrón estacional. Por ejemplo, las ventas de abrigos de invierno son consistentemente más altas en los meses de invierno, mientras que las ventas de helado son más altas en el verano.”</p>
-<p>— <em>Pindyck, R. S., &amp; Rubinfeld, D. L. (2001). Econometría: Modelos y Pronósticos (4a ed.).</em></p>
-</blockquote>
-<div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># --- Gráfico de Estacionalidad ---</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Usamos una función seno para simular un patrón estacional (ej. mensual).</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>tiempo <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">100</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>estacionalidad <span class="ot">&lt;-</span> <span class="dv">5</span> <span class="sc">*</span> <span class="fu">sin</span>(<span class="dv">2</span> <span class="sc">*</span> pi <span class="sc">*</span> tiempo <span class="sc">/</span> <span class="dv">12</span>) <span class="sc">+</span> <span class="fu">rnorm</span>(<span class="dv">100</span>, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="fl">0.5</span>)</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>datos_estacionalidad <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">periodo =</span> tiempo, <span class="at">valor =</span> estacionalidad)</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Graficamos con ggplot2</span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(datos_estacionalidad, <span class="fu">aes</span>(<span class="at">x =</span> periodo, <span class="at">y =</span> valor)) <span class="sc">+</span></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">color =</span> <span class="st">"#D55E00"</span>, <span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Componente Estacional"</span>,</span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"Patrones que se repiten a intervalos fijos"</span>,</span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Tiempo"</span>,</span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Valor de la Serie"</span></span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="Conceptos-sobre-Series-de-Tiempo_files/figure-html/seasonality-plot-1.png" class="img-fluid figure-img" width="672"></p>
-<figcaption>Ejemplo de un patrón estacional que se repite cada 12 periodos.</figcaption>
 </figure>
 </div>
+<div style="text-align: left; margin-top: 5px; font-size: 0.75em; line-height: 1.3; opacity: 0.85;">
+<p><em>Fuente:</em> Elaboración propia a partir de datos tomados del Departamento Administrativo Nacional de Estadística (DANE) y Banco de la República.</p>
+<p><em>Nota 1:</em> Esta tabla presenta la estimación de un modelo autorregresivo de orden 1. El modelo dicta que existe una relación altamente significativa entre la tasa de desempleo y su primer rezago (<span class="math inline">\(p\text{-valor} &lt; 0.05\)</span>).</p>
 </div>
-</div>
-</section>
-<section id="ciclo" class="level3" data-number="2.3">
-<h3 data-number="2.3" class="anchored" data-anchor-id="ciclo"><span class="header-section-number">2.3</span> Ciclo</h3>
-<p>Describe fluctuaciones ondulatorias alrededor de la tendencia, cuya duración suele ser mayor a un año. Estos ciclos no tienen una periodicidad fija como la estacionalidad y a menudo están ligados a los ciclos económicos o de negocio.</p>
-<div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># --- Gráfico de Ciclo ---</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Usamos otra función seno pero con un período mucho más largo para simular un ciclo.</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>tiempo <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">100</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>ciclo <span class="ot">&lt;-</span> <span class="dv">8</span> <span class="sc">*</span> <span class="fu">sin</span>(<span class="dv">2</span> <span class="sc">*</span> pi <span class="sc">*</span> tiempo <span class="sc">/</span> <span class="dv">50</span>) <span class="sc">+</span> <span class="fu">rnorm</span>(<span class="dv">100</span>, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>)</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>datos_ciclo <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">periodo =</span> tiempo, <span class="at">valor =</span> ciclo)</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Graficamos con ggplot2</span></span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(datos_ciclo, <span class="fu">aes</span>(<span class="at">x =</span> periodo, <span class="at">y =</span> valor)) <span class="sc">+</span></span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">color =</span> <span class="st">"#009E73"</span>, <span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Componente Cíclico"</span>,</span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"Fluctuaciones de largo plazo sin periodicidad fija"</span>,</span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Tiempo"</span>,</span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Valor de la Serie"</span></span>
-<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="Conceptos-sobre-Series-de-Tiempo_files/figure-html/cycle-plot-1.png" class="img-fluid figure-img" width="672"></p>
-<figcaption>Ejemplo de un ciclo económico con una duración larga y no fija.</figcaption>
-</figure>
-</div>
-</div>
-</div>
-</section>
-<section id="variación-irregular-o-aleatoria-ruido" class="level3" data-number="2.4">
-<h3 data-number="2.4" class="anchored" data-anchor-id="variación-irregular-o-aleatoria-ruido"><span class="header-section-number">2.4</span> Variación Irregular o Aleatoria (Ruido)</h3>
-<p>Representa las fluctuaciones aleatorias y no sistemáticas en los datos que no pueden atribuirse a los componentes anteriores. Es el residuo que queda después de que la tendencia, la estacionalidad y el ciclo han sido removidos.</p>
-<div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># --- Gráfico de Ruido ---</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Generamos ruido blanco a partir de una distribución normal.</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>tiempo <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">100</span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>ruido <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">100</span>, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">2</span>)</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>datos_ruido <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">periodo =</span> tiempo, <span class="at">valor =</span> ruido)</span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Graficamos con ggplot2</span></span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(datos_ruido, <span class="fu">aes</span>(<span class="at">x =</span> periodo, <span class="at">y =</span> valor)) <span class="sc">+</span></span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">color =</span> <span class="st">"#CC79A7"</span>, <span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Componente Aleatorio (Ruido)"</span>,</span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"Variaciones impredecibles y no sistemáticas"</span>,</span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Tiempo"</span>,</span>
-<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Valor de la Serie"</span></span>
-<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="Conceptos-sobre-Series-de-Tiempo_files/figure-html/noise-plot-1.png" class="img-fluid figure-img" width="672"></p>
-<figcaption>Ejemplo de ruido blanco: fluctuaciones aleatorias sin un patrón discernible.</figcaption>
-</figure>
-</div>
-</div>
-</div>
-<hr>
-</section>
-</section>
-<section id="naturaleza-de-una-serie-de-tiempo" class="level2" data-number="3">
-<h2 data-number="3" class="anchored" data-anchor-id="naturaleza-de-una-serie-de-tiempo"><span class="header-section-number">3</span> Naturaleza de una Serie de Tiempo</h2>
-<p>Describe cómo se combinan los componentes. Los dos enfoques principales son el aditivo y el multiplicativo.</p>
-<section id="naturaleza-aditiva" class="level3" data-number="3.1">
-<h3 data-number="3.1" class="anchored" data-anchor-id="naturaleza-aditiva"><span class="header-section-number">3.1</span> Naturaleza Aditiva</h3>
-<p>Los componentes se suman: <span class="math inline">\(Y_t = T_t + E_t + C_t + I_t\)</span>. Este enfoque es apropiado cuando la magnitud de las fluctuaciones estacionales y cíclicas es relativamente constante, sin importar el nivel de la serie.</p>
-</section>
-<section id="naturaleza-multiplicativa" class="level3" data-number="3.2">
-<h3 data-number="3.2" class="anchored" data-anchor-id="naturaleza-multiplicativa"><span class="header-section-number">3.2</span> Naturaleza Multiplicativa</h3>
-<p>Los componentes se multiplican: <span class="math inline">\(Y_t = T_t \times E_t \times C_t \times I_t\)</span>. Este modelo es más adecuado cuando la magnitud de las fluctuaciones es proporcional al nivel de la serie.</p>
-<hr>
-</section>
-</section>
-<section id="procesos-estocásticos-y-estacionariedad" class="level2" data-number="4">
-<h2 data-number="4" class="anchored" data-anchor-id="procesos-estocásticos-y-estacionariedad"><span class="header-section-number">4</span> Procesos Estocásticos y Estacionariedad</h2>
-<p>Para modelar una serie, asumimos que fue generada por un <strong>proceso estocástico</strong>.</p>
-<blockquote class="blockquote">
-<p><strong>Proceso Estocástico:</strong> “Un proceso estocástico (o proceso aleatorio) es una colección de variables aleatorias ordenadas en el tiempo. Si establecemos que una serie de tiempo particular es una realización de un proceso estocástico, implica que el conjunto de datos que vemos es solo uno de los muchos resultados posibles que el proceso estocástico podría haber producido.”</p>
-<p>— <em>Enders, W. (2015). Applied Econometric Time Series (4th ed.).</em></p>
-</blockquote>
-<section id="ruido-blanco-white-noise" class="level3" data-number="4.1">
-<h3 data-number="4.1" class="anchored" data-anchor-id="ruido-blanco-white-noise"><span class="header-section-number">4.1</span> Ruido Blanco (White Noise)</h3>
-<p>Es el bloque de construcción más básico. Un proceso de ruido blanco <span class="math inline">\(\epsilon_t\)</span> cumple con:</p>
-<ol type="1">
-<li><p>Media cero: <span class="math inline">\(E(\epsilon_t) = 0\)</span></p></li>
-<li><p>Varianza constante: <span class="math inline">\(Var(\epsilon_t) = \sigma^2\)</span></p></li>
-<li><p>No autocorrelación: <span class="math inline">\(Cov(\epsilon_t, \epsilon_s) = 0\)</span> para <span class="math inline">\(t \neq s\)</span></p></li>
-</ol>
-</section>
-<section id="estacionariedad" class="level3" data-number="4.2">
-<h3 data-number="4.2" class="anchored" data-anchor-id="estacionariedad"><span class="header-section-number">4.2</span> Estacionariedad</h3>
-<p>Un concepto crucial en series de tiempo es la estacionariedad. Si las características de un proceso estocástico no cambian con el tiempo, el proceso es <strong>estacionario</strong>.</p>
-<blockquote class="blockquote">
-<p><strong>Estacionariedad Débil o Covarianza-Estacionaria:</strong> Un proceso estocástico se dice que es débilmente estacionario si su media y su varianza son constantes en el tiempo, y si el valor de la covarianza entre dos periodos depende solo de la distancia o rezago entre estos dos periodos, y no del tiempo en el cual se calcula la covarianza.</p>
-<p>— <em>Gujarati, D. N., &amp; Porter, D. C. (2009). Econometría (5a ed.).</em></p>
-</blockquote>
-<ul>
-<li><strong>Serie Estacionaria:</strong> <span class="math inline">\(E(y_t) = \mu\)</span>; <span class="math inline">\(Var(y_t) = \sigma^2\)</span>; <span class="math inline">\(Cov(y_t, y_{t-k}) = \gamma_k\)</span></li>
-<li><strong>Serie No Estacionaria:</strong> Sus propiedades estadísticas (media, varianza) dependen del tiempo.</li>
-</ul>
-</section>
-<section id="caminata-aleatoria-random-walk" class="level3" data-number="4.3">
-<h3 data-number="4.3" class="anchored" data-anchor-id="caminata-aleatoria-random-walk"><span class="header-section-number">4.3</span> Caminata Aleatoria (Random Walk)</h3>
-<p>Un modelo de caminata aleatoria se define como: <span class="math inline">\(y_t = y_{t-1} + \epsilon_t\)</span>, donde <span class="math inline">\(\epsilon_t\)</span> es un ruido blanco. Es un ejemplo clásico de un proceso no estacionario porque su varianza depende del tiempo (<span class="math inline">\(Var(y_t) = t\sigma^2\)</span>).</p>
-<hr>
-</section>
-</section>
-<section id="referencias" class="level2" data-number="5">
-<h2 data-number="5" class="anchored" data-anchor-id="referencias"><span class="header-section-number">5</span> Referencias</h2>
-<ul>
-<li>Enders, W. (2015). <em>Applied Econometric Time Series</em> (4th ed.). Wiley.</li>
-<li>Gujarati, D. N., &amp; Porter, D. C. (2009). <em>Econometría</em> (5a ed.). McGraw-Hill.</li>
-<li>Pindyck, R. S., &amp; Rubinfeld, D. L. (2001). <em>Econometría: Modelos y Pronósticos</em> (4a ed.). McGraw-Hill.</li>
-</ul>
 
 
-</section>
-
-</main> <!-- /main -->
+</div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     // Ensure there is a toggle, if there isn't float one in the top right
