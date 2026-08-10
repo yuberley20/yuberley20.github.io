@@ -1,0 +1,1129 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.27">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Yuberley Cruz Caycedo">
+<meta name="dcterms.date" content="2025-11-21">
+
+<title>Modelos de Equilibrio General Estocásticos – Yuberley Cruz Caycedo</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../gemini-svg.svg" rel="icon" type="image/svg+xml">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-4d9afe2b8d18ee9fa5d0d57b5ed4214d.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-3470c19045b936093ae76ec4c914bf38.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<style>html{ scroll-behavior: smooth; }</style>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="floating nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">Yuberley Cruz Caycedo</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../index.html"> 
+<span class="menu-text">Inicio</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../about.html"> 
+<span class="menu-text">Sobre Mí</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../proyectos.html"> 
+<span class="menu-text">Proyectos</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-macroeconomía-dinámica" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Macroeconomía Dinámica</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-macroeconomía-dinámica">    
+        <li>
+    <a class="dropdown-item" href="../Macroeconomia_Dinamica/Modelo Neokeynesiano con precios rigidoz.html">
+ <span class="dropdown-text">Modelo Neokeynesiano con Precios Rigidoz.qmd</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../Macroeconomia_Dinamica/Transcripcion_Modelo_Busqueda.html">
+ <span class="dropdown-text">Modelo de Búsqueda y Emparejamiento</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../Macroeconomia_Dinamica/Proyecto_final_Practicas.html">
+ <span class="dropdown-text">Fricciones, Informalidad y Dinámica Laboral</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../Macroeconomia_Dinamica/KPR (Solución análitica).html">
+ <span class="dropdown-text">Modelo KPR (Solución Analítica)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../Macroeconomia_Dinamica/Informe_sobre_MMS_para_un_Modelo_RBC.html">
+ <span class="dropdown-text">MMS para un Modelo RBC</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../Macroeconomia_Dinamica/DSGE_RBC.qmd">
+ <span class="dropdown-text">Modelos de Equilibrio General Estocásticos</span></a>
+  </li>  
+    </ul>
+  </li>
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/yuberley20"> <i class="bi bi-github" role="img" aria-label="GitHub">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://www.linkedin.com/in/yuberley-cruz-caycedo-b805731bb"> <i class="bi bi-linkedin" role="img" aria-label="LinkedIn">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">En esta página</h2>
+   
+  <ul>
+  <li><a href="#introducción-a-la-dinámica-macroeconómica" id="toc-introducción-a-la-dinámica-macroeconómica" class="nav-link active" data-scroll-target="#introducción-a-la-dinámica-macroeconómica"><span class="header-section-number">1</span> Introducción a la Dinámica Macroeconómica</a></li>
+  <li><a href="#el-debate-teórico-el-origen-de-las-fluctuaciones" id="toc-el-debate-teórico-el-origen-de-las-fluctuaciones" class="nav-link" data-scroll-target="#el-debate-teórico-el-origen-de-las-fluctuaciones"><span class="header-section-number">2</span> El Debate Teórico: El Origen de las Fluctuaciones</a></li>
+  <li><a href="#raíces-históricas-y-evolución-del-pensamiento" id="toc-raíces-históricas-y-evolución-del-pensamiento" class="nav-link" data-scroll-target="#raíces-históricas-y-evolución-del-pensamiento"><span class="header-section-number">3</span> Raíces Históricas y Evolución del Pensamiento</a></li>
+  <li><a href="#fundamentos-de-la-teoría-de-ciclos-económicos-reales-rbc" id="toc-fundamentos-de-la-teoría-de-ciclos-económicos-reales-rbc" class="nav-link" data-scroll-target="#fundamentos-de-la-teoría-de-ciclos-económicos-reales-rbc"><span class="header-section-number">4</span> Fundamentos de la Teoría de Ciclos Económicos Reales (RBC)</a>
+  <ul class="collapse">
+  <li><a href="#microfundamentos-y-el-modelo-kpr-determinista" id="toc-microfundamentos-y-el-modelo-kpr-determinista" class="nav-link" data-scroll-target="#microfundamentos-y-el-modelo-kpr-determinista"><span class="header-section-number">4.1</span> Microfundamentos y el Modelo KPR Determinista</a></li>
+  <li><a href="#introduciendo-el-ruido-el-modelo-estocástico" id="toc-introduciendo-el-ruido-el-modelo-estocástico" class="nav-link" data-scroll-target="#introduciendo-el-ruido-el-modelo-estocástico"><span class="header-section-number">4.2</span> Introduciendo el Ruido: El Modelo Estocástico</a></li>
+  <li><a href="#estimación-empírica-método-de-momentos-simulados-smm" id="toc-estimación-empírica-método-de-momentos-simulados-smm" class="nav-link" data-scroll-target="#estimación-empírica-método-de-momentos-simulados-smm"><span class="header-section-number">4.3</span> Estimación Empírica: Método de Momentos Simulados (SMM)</a></li>
+  </ul></li>
+  <li><a href="#de-la-fricción-cero-a-la-realidad-estructural-la-necesidad-de-nuevos-paradigmas" id="toc-de-la-fricción-cero-a-la-realidad-estructural-la-necesidad-de-nuevos-paradigmas" class="nav-link" data-scroll-target="#de-la-fricción-cero-a-la-realidad-estructural-la-necesidad-de-nuevos-paradigmas"><span class="header-section-number">5</span> De la Fricción Cero a la Realidad Estructural: La Necesidad de Nuevos Paradigmas</a>
+  <ul class="collapse">
+  <li><a href="#evidencia-empírica-contra-el-agente-representativo-restricciones-de-liquidez-en-colombia" id="toc-evidencia-empírica-contra-el-agente-representativo-restricciones-de-liquidez-en-colombia" class="nav-link" data-scroll-target="#evidencia-empírica-contra-el-agente-representativo-restricciones-de-liquidez-en-colombia"><span class="header-section-number">5.1</span> Evidencia Empírica contra el Agente Representativo: Restricciones de Liquidez en Colombia</a>
+  <ul class="collapse">
+  <li><a href="#análisis-de-variables-y-procesos-de-transformación" id="toc-análisis-de-variables-y-procesos-de-transformación" class="nav-link" data-scroll-target="#análisis-de-variables-y-procesos-de-transformación"><span class="header-section-number">5.1.1</span> Análisis de Variables y Procesos de Transformación</a></li>
+  <li><a href="#presentación-de-resultados-modelos-de-sensibilidad" id="toc-presentación-de-resultados-modelos-de-sensibilidad" class="nav-link" data-scroll-target="#presentación-de-resultados-modelos-de-sensibilidad"><span class="header-section-number">5.1.2</span> Presentación de Resultados: Modelos de Sensibilidad</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#solución-a-la-rigideces-laborales" id="toc-solución-a-la-rigideces-laborales" class="nav-link" data-scroll-target="#solución-a-la-rigideces-laborales"><span class="header-section-number">6</span> Solución a la Rigideces Laborales</a></li>
+  <li><a href="#representación-matemática-hacia-la-síntesis-neokeynesiana" id="toc-representación-matemática-hacia-la-síntesis-neokeynesiana" class="nav-link" data-scroll-target="#representación-matemática-hacia-la-síntesis-neokeynesiana"><span class="header-section-number">7</span> Representación Matemática: Hacia la Síntesis Neokeynesiana</a></li>
+  <li><a href="#conclusiones-y-próximos-pasos" id="toc-conclusiones-y-próximos-pasos" class="nav-link" data-scroll-target="#conclusiones-y-próximos-pasos"><span class="header-section-number">8</span> Conclusiones y Próximos Pasos</a>
+  <ul class="collapse">
+  <li><a href="#próximos-pasos-en-la-investigación" id="toc-próximos-pasos-en-la-investigación" class="nav-link" data-scroll-target="#próximos-pasos-en-la-investigación"><span class="header-section-number">8.1</span> Próximos Pasos en la Investigación</a></li>
+  </ul></li>
+  </ul>
+</nav>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Modelos de Equilibrio General Estocásticos</h1>
+<p class="subtitle lead">Examen Propio Sobre el Etendimiento Detras de la Macroeconomia Moderna</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Yuberley Cruz Caycedo </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">November 21, 2025</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="introducción-a-la-dinámica-macroeconómica" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Introducción a la Dinámica Macroeconómica</h1>
+<p>El estudio de los Modelos de Equilibrio General Dinámico Estocástico (DSGE) surge de la necesidad de examinar las bases del consenso macroeconómico actual. Su marco matemático se cimenta en la metodología del ciclo económico real desarrollada por Finn E. Kydland y Edward C. Prescott en su artículo “Time to Build and Aggregate Fluctuations” <span class="citation" data-cites="kydland1982time">(<a href="#ref-kydland1982time" role="doc-biblioref">Kydland and Prescott 1830</a>)</span><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>, la cual fue posteriormente enriquecida por la síntesis neokeynesiana. No obstante, al constituir el núcleo de la ortodoxia macroeconómica, su hegemonía exige un debate crítico que incorpore las objeciones formuladas por escuelas heterodoxas. En este sentido, este estudio analiza la trayectoria de los modelos estocásticos de equilibrio general desde los esquemas RBC originales hasta sus extensiones neokeynesianas, poniendo especial énfasis en sus restricciones teóricas y en el valor de integrar enfoques heterodoxos para profundizar en la comprensión de la macroeconomía contemporánea.</p>
+<p>Si bien <span class="citation" data-cites="kydland1982time">Kydland and Prescott (<a href="#ref-kydland1982time" role="doc-biblioref">1830</a>)</span> presentan la formalización matemática que permite entender a los ciclos en la economía como una respuesta a los choques exógenos y no como una representación de un mecanismo del mercado, no es hasta 1988 que se consolida el paradigma neoclásico con la estandarización y simplificación del modelo que llevan a cabo Robert King, Charles Plosser y Sergio Rebelo <span class="citation" data-cites="king1988production">(<a href="#ref-king1988production" role="doc-biblioref">King, Plosser, and Rebelo 1988</a>)</span>, conocido como KPR.</p>
+</section>
+<section id="el-debate-teórico-el-origen-de-las-fluctuaciones" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> El Debate Teórico: El Origen de las Fluctuaciones</h1>
+<p>Es importante presentar la discusión sobre el entendimiento del origen de las fluctuaciones a partir del tipo de choque, puesto que se puede entender que estas pueden darse por un choque de demanda o por un choque de oferta (choque exógeno). La diferencia de origen hace que los movimientos de variables económicas tan importantes como producción y precios se muevan de formas diferentes:</p>
+<ul>
+<li><strong>Ciclo de Oferta (Choque de PTF/Costos)</strong> ──&gt; Producción y Precios se mueven en direcciones opuestas (Estanflación/Deflación expansiva).</li>
+<li><strong>Ciclo de Demanda (Choque de Gasto/Monetario)</strong> ──&gt; Producción y Precios se mueven en la misma dirección (Filosofía de curva de Phillips tradicional).</li>
+</ul>
+<p>El paradigma de fluctuaciones generadas por un choque de oferta empieza a ganar la discusión en los años 70 cuando la crisis de los precios del petróleo genera un escenario de estanflación que contradice la teoría detrás de la curva de Phillips tradicional.</p>
+<p>Bajo este punto de vista de la oferta, las fluctuaciones son óptimas y eficientes; el mercado se ajusta de inmediato a las nuevas realidades tecnológicas. Mientras que desde la demanda, las fluctuaciones provocan ineficiencias (desempleo involuntario) que requieren políticas de estabilización del gobierno. Esta ruptura teórica sigue hasta nuestros tiempos y separa a la economía entre ortodoxos y heterodoxos o, más concretamente, neokeynesianos y postkeynesianos.</p>
+</section>
+<section id="raíces-históricas-y-evolución-del-pensamiento" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Raíces Históricas y Evolución del Pensamiento</h1>
+<p>Para entender el lugar del modelo RBC, es fundamental observar sus raíces y ramificaciones (ver <a href="#fig-evolucion" class="quarto-xref">Figura&nbsp;1</a>). El modelo toma como base la optimización intertemporal de la Teoría del Crecimiento (Ramsey-Cass-Koopmans) y la Revolución de las Expectativas Racionales -Crítica de Lucas- <span class="citation" data-cites="lucas1976econometric">(<a href="#ref-lucas1976econometric" role="doc-biblioref">Lucas 1976</a>)</span>.</p>
+<div id="fig-evolucion" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-evolucion-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="Evolucion_modelos_dsge.jpg" class="img-fluid figure-img" style="width:100.0%"></p>
+<figcaption>Evolución de los Modelos Macroeconómicos</figcaption>
+</figure>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-evolucion-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1
+</figcaption>
+</figure>
+</div>
+<p>La premisa que postula <span class="citation" data-cites="lucas1976econometric">Lucas (<a href="#ref-lucas1976econometric" role="doc-biblioref">1976</a>)</span> ataca la macroeconomía tradicional de los años 60: es ingenuo predecir los efectos de una política económica utilizando relaciones estadísticas observadas en el pasado. Cuando el gobierno cambia sus políticas, los agentes económicos (familias y empresas) modifican sus expectativas y comportamientos. Por lo tanto, los parámetros estadísticos cambian por completo.</p>
+<p>Lo anterior obligó a la macroeconomía a buscar microfundamentos. Los modelos ya no podían basarse en ecuaciones agregadas arbitrarias, sino que se tuvo que modelar a partir de los parámetros estructurales profundos de la economía (preferencias de los consumidores, tasa de descuento intertemporal y restricciones tecnológicas), los cuales no cambian ante modificaciones de política y que son recogidas tanto por los modelos RBC como los Neokeynesianos actuales, ya que estos incorporan expectativas racionales para blindarse contra la Crítica de Lucas.</p>
+<p>La evolución de la optimización intertemporal se construyó a través de tres grandes hitos históricos:</p>
+<ol type="1">
+<li><strong>Modelo de elección intertemporal (Irving Fisher, 1930):</strong> Establece que las familias deciden su consumo basándose en sus ingresos totales esperados a lo largo de su vida.</li>
+<li><strong>Optimización dinámica (Frank Ramsey, 1928):</strong> Introduce familias con horizontes infinitos (dinastías altruistas) que maximizan una función de utilidad intertemporal descontada.</li>
+<li><strong>Hipótesis del Ciclo de Vida y del Ingreso Permanente (Modigliani, 1954; Friedman, 1957):</strong> Concluyen que los agentes buscan suavizar su consumo a lo largo de los años.</li>
+</ol>
+</section>
+<section id="fundamentos-de-la-teoría-de-ciclos-económicos-reales-rbc" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> Fundamentos de la Teoría de Ciclos Económicos Reales (RBC)</h1>
+<p>¿Qué impulsa los ciclos económicos? A diferencia de la visión Keynesiana, la teoría de los Ciclos Económicos Reales (RBC), fundamentada por <span class="citation" data-cites="kydland1982time">Kydland and Prescott (<a href="#ref-kydland1982time" role="doc-biblioref">1830</a>)</span>, propone que:</p>
+<ul>
+<li>Los ciclos son la respuesta óptima y eficiente de los agentes racionales ante cambios en el entorno.</li>
+<li>El impulsor principal son los <strong>Choques Tecnológicos</strong> o variaciones en la Productividad Total de los Factores (PTF).</li>
+<li>Los precios y salarios son perfectamente flexibles, asegurando el vaciado continuo de los mercados.</li>
+</ul>
+<section id="microfundamentos-y-el-modelo-kpr-determinista" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="microfundamentos-y-el-modelo-kpr-determinista"><span class="header-section-number">4.1</span> Microfundamentos y el Modelo KPR Determinista</h2>
+<p>Para modelar esta dinámica, utilizamos un enfoque de equilibrio general estocástico dinámico (DSGE) con agentes representativos. En el modelo determinista básico (basado en <span class="citation" data-cites="king1988production">King, Plosser, and Rebelo (<a href="#ref-king1988production" role="doc-biblioref">1988</a>)</span>), los agentes conocen el futuro perfectamente y la productividad <span class="math inline">\(A\)</span> es constante.</p>
+<ol type="1">
+<li><strong>Producción:</strong> <span class="math display">\[Y_{t}=AK_{t}^{\alpha}N_{t}^{1-\alpha}\]</span></li>
+<li><strong>Ecuación de Euler (Ahorro/Consumo):</strong> <span class="math display">\[\frac{1}{C_{t}}=\beta\frac{1}{C_{t+1}}(1-\delta+r_{t+1})\]</span></li>
+<li><strong>Oferta Laboral:</strong> <span class="math display">\[\phi\frac{1}{1-N_{t}}=\frac{w_{t}}{C_{t}}\]</span></li>
+</ol>
+<p><a href="https://github.com/yuberley20/Modelos-DSGE/blob/main/RBC_det.mod" class="btn btn-outline-primary" target="_blank">💻 Ver Código Fuente en GitHub: <code>RBC_det.mod</code></a></p>
+</section>
+<section id="introduciendo-el-ruido-el-modelo-estocástico" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="introduciendo-el-ruido-el-modelo-estocástico"><span class="header-section-number">4.2</span> Introduciendo el Ruido: El Modelo Estocástico</h2>
+<p>Para analizar verdaderos ciclos económicos, transformamos la productividad <span class="math inline">\(A\)</span> en una variable aleatoria que sigue un proceso autorregresivo de primer orden <span class="math inline">\(AR(1)\)</span>:</p>
+<p><span class="math display">\[\log(A_{t})=(1-\rho)\log(A_{ss})+\rho\log(A_{t-1})+\epsilon_{t}\]</span></p>
+<p>Donde <span class="math inline">\(\epsilon_{t}\)</span> representa la sorpresa o choque tecnológico. A través de las <strong>Funciones de Impulso Respuesta (IRF)</strong> generadas en Dynare, evaluamos qué sucede ante un aumento inesperado del 1% en la tecnología: el Producto (<span class="math inline">\(Y\)</span>) y Empleo (<span class="math inline">\(N\)</span>) aumentan de inmediato, la Inversión (<span class="math inline">\(I\)</span>) sube agresivamente, y el Consumo (<span class="math inline">\(C\)</span>) aumenta en menor proporción debido al suavizamiento intertemporal.</p>
+<p><a href="https://github.com/yuberley20/Modelos-DSGE/blob/main/RBC_Estocastico.mod" class="btn btn-outline-success" target="_blank">💻 Ver Simulación Estocástica en GitHub: <code>RBC_Estocastico.mod</code></a></p>
+</section>
+<section id="estimación-empírica-método-de-momentos-simulados-smm" class="level2" data-number="4.3">
+<h2 data-number="4.3" class="anchored" data-anchor-id="estimación-empírica-método-de-momentos-simulados-smm"><span class="header-section-number">4.3</span> Estimación Empírica: Método de Momentos Simulados (SMM)</h2>
+<p>Para evitar calibraciones arbitrarias, empleamos datos reales mediante el <strong>Método de Momentos Simulados (SMM)</strong>. Tras limpiar y procesar los datos cíclicos, la estimación arrojó parámetros estructurales como una persistencia del choque (<span class="math inline">\(\rho_A\)</span>) de 0.99 y una volatilidad (<span class="math inline">\(\sigma_{\epsilon}\)</span>) de 0.13% trimestral.</p>
+<p>El ajuste de las varianzas simuladas contra los datos empíricos mostró lo siguiente (ver <a href="#tbl-ajuste-smm" class="quarto-xref">Tabla&nbsp;1</a>):</p>
+<div id="tbl-ajuste-smm" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-ajuste-smm-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;1: Evaluación de Momentos Simulados vs.&nbsp;Datos Reales
+</figcaption>
+<div aria-describedby="tbl-ajuste-smm-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: center;">Variable</th>
+<th style="text-align: center;">Varianza Dato Real</th>
+<th style="text-align: center;">Varianza Modelo RBC</th>
+<th style="text-align: center;">Evaluación</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><strong>PIB (</strong><span class="math inline">\(Y\)</span>)</td>
+<td style="text-align: center;">0.00010</td>
+<td style="text-align: center;">0.00009</td>
+<td style="text-align: center;">¡Excelente!</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>Consumo (</strong><span class="math inline">\(C\)</span>)</td>
+<td style="text-align: center;">0.00004</td>
+<td style="text-align: center;">0.00004</td>
+<td style="text-align: center;">¡Excelente!</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>Empleo (</strong><span class="math inline">\(N\)</span>)</td>
+<td style="text-align: center;">0.00008</td>
+<td style="text-align: center;"><span class="math inline">\(\approx 0.00\)</span></td>
+<td style="text-align: center;">Falla</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<blockquote class="blockquote">
+<p><strong>Scripts de Estimación y Limpieza de Datos:</strong> <a href="https://github.com/yuberley20/Modelos-DSGE/blob/main/Convertir_datos.m" class="btn btn-sm btn-secondary" target="_blank">📊 Ver <code>Convertir_datos.m</code></a> <a href="https://github.com/yuberley20/Modelos-DSGE/blob/main/RBC_SMM.mod" class="btn btn-sm btn-secondary" target="_blank">⚙️ Ver <code>RBC_SMM.mod</code></a></p>
+</blockquote>
+<hr>
+</section>
+</section>
+<section id="de-la-fricción-cero-a-la-realidad-estructural-la-necesidad-de-nuevos-paradigmas" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> De la Fricción Cero a la Realidad Estructural: La Necesidad de Nuevos Paradigmas</h1>
+<p>A pesar de su elegancia matemática, la estimación del modelo RBC básico revela una falla empírica ineludible: es incapaz de replicar la alta volatilidad del empleo observada en los datos, como se evidenció en la <a href="#tbl-ajuste-smm" class="quarto-xref">Tabla&nbsp;1</a>. El paradigma RBC asume precios y salarios perfectamente flexibles, garantizando un vaciado continuo de los mercados. Sin embargo, la evidencia empírica contradice este supuesto de ajuste instantáneo. Para reconciliar la teoría con la realidad, es imperativo abandonar la noción del agente representativo puro y el vaciado instantáneo, introduciendo fricciones tanto en las decisiones de consumo (restricciones de liquidez) como en el mercado de bienes (rigideces nominales).</p>
+<section id="evidencia-empírica-contra-el-agente-representativo-restricciones-de-liquidez-en-colombia" class="level2" data-number="5.1">
+<h2 data-number="5.1" class="anchored" data-anchor-id="evidencia-empírica-contra-el-agente-representativo-restricciones-de-liquidez-en-colombia"><span class="header-section-number">5.1</span> Evidencia Empírica contra el Agente Representativo: Restricciones de Liquidez en Colombia</h2>
+<p>Resulta pertinente abordar esta discusión porque la teoría neoclásica del consumo, desarrollada por autores ya mencionados como Fisher, Modigliani y Friedman, que sostienen que los hogares suavizan su consumo a lo largo del tiempo con base en su ingreso permanente, de modo que las fluctuaciones transitorias del ingreso no deberían afectar significativamente sus decisiones de consumo. Sin embargo, la evidencia para economías emergentes como Colombia sugiere la existencia de importantes restricciones financieras que limitan este comportamiento. En este contexto surge una pregunta central: ¿qué proporción de los hogares colombianos consume de la mano a la boca, dependiendo principalmente de su ingreso corriente?</p>
+<p>Con el propósito de aportar evidencia a este debate, se analiza la validez de la hipótesis de optimización intertemporal para el caso colombiano. Mediante la estimación de un Modelo de Corrección de Errores Vectorial (VECM) y el uso de instrumentos exógenos —los precios internacionales del petróleo y la tasa de cambio— se encuentra que el consumo de los hogares colombianos presenta una sensibilidad extrema al ingreso corriente (<span class="math inline">\(\lambda &gt; 1\)</span>), resultado que cuestiona la capacidad de suavización del consumo postulada por la teoría neoclásica. En esta presentación se expondrán únicamente las principales conclusiones del estudio, invitando al lector a examinar críticamente los resultados y a contrastarlos con evidencia adicional.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></p>
+<section id="análisis-de-variables-y-procesos-de-transformación" class="level3" data-number="5.1.1">
+<h3 data-number="5.1.1" class="anchored" data-anchor-id="análisis-de-variables-y-procesos-de-transformación"><span class="header-section-number">5.1.1</span> Análisis de Variables y Procesos de Transformación</h3>
+<p>La siguiente tabla resume la base de datos construida, detallando la justificación de cada variable, su transformación y la fuente de origen. Se aplicó el filtro X-13ARIMA-SEATS para corregir la estacionalidad de todas las series y se hiceron las debidas interpolaciones para permitirme trabajar con datos trimestrales (ver <a href="#tbl-caracteristicas-variables" class="quarto-xref">Tabla&nbsp;2</a>).</p>
+<div id="tbl-caracteristicas-variables" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-caracteristicas-variables-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;2: Transparencia Metodológica
+</figcaption>
+<div aria-describedby="tbl-caracteristicas-variables-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Variable</th>
+<th style="text-align: left;">Rol Económico</th>
+<th style="text-align: left;">Transformación / Proceso</th>
+<th style="text-align: left;">Fuente</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>Consumo (</strong><span class="math inline">\(C\)</span>)</td>
+<td style="text-align: left;">Variable Dependiente</td>
+<td style="text-align: left;">Logaritmo, Filtro X-13 (SA)</td>
+<td style="text-align: left;">DANE (CNT)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Ingreso Disp. (</strong><span class="math inline">\(Y\)</span>)</td>
+<td style="text-align: left;">Explanatoria Principal</td>
+<td style="text-align: left;">Logaritmo, Filtro X-13 (SA), Deflactado IPC</td>
+<td style="text-align: left;">Banco de la República/ DANE</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>PIB Constante</strong></td>
+<td style="text-align: left;">Robustez</td>
+<td style="text-align: left;">Logaritmo, Filtro X-13 (SA)</td>
+<td style="text-align: left;">DANE</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Tasa Int. Real (</strong><span class="math inline">\(r\)</span>)</td>
+<td style="text-align: left;">Control Financiero</td>
+<td style="text-align: left;">Ecuación de Fisher, Filtro X-13 (SA)</td>
+<td style="text-align: left;">Superfinanciera</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Petróleo (USD)</strong></td>
+<td style="text-align: left;">Instrumento (Shock)</td>
+<td style="text-align: left;">Logaritmo, Primera diferencia (<span class="math inline">\(\Delta\)</span>)</td>
+<td style="text-align: left;">Investing</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Tasa de Cambio</strong></td>
+<td style="text-align: left;">Instrumento (Shock)</td>
+<td style="text-align: left;">Logaritmo, Primera diferencia (<span class="math inline">\(\Delta\)</span>)</td>
+<td style="text-align: left;">Banco de la República</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p><em>Nota: Todas las series fueron ajustadas por estacionalidad (SA) usando el filtro X-13ARIMA-SEATS para eliminar el ruido calendario.</em></p>
+</section>
+<section id="presentación-de-resultados-modelos-de-sensibilidad" class="level3" data-number="5.1.2">
+<h3 data-number="5.1.2" class="anchored" data-anchor-id="presentación-de-resultados-modelos-de-sensibilidad"><span class="header-section-number">5.1.2</span> Presentación de Resultados: Modelos de Sensibilidad</h3>
+<p>A continuación se presentan las estimaciones del Modelo de Corrección de Errores Vectorial (VECM) mediante Variables Instrumentales (IV). El objetivo es identificar la sensibilidad del consumo de los hogares frente a variaciones en la actividad económica, corrigiendo los posibles problemas de endogeneidad mediante el uso del precio internacional del petróleo y la tasa representativa del mercado (TRM) como instrumentos exógenos. El parámetro de interés es la elasticidad de corto plazo (<span class="math inline">\(\lambda\)</span>), la cual mide la respuesta del consumo ante cambios en el ingreso corriente o en el producto.</p>
+<p>La <a href="#tbl-Comparacion-Modelos" class="quarto-xref">Tabla&nbsp;3</a> resume los resultados de dos especificaciones. El <strong>Modelo 1</strong> utiliza la variación del ingreso disponible como principal variable explicativa, mientras que el <strong>Modelo 2</strong> reemplaza esta variable el Producto Interno Bruto (PIB), con el propósito de evaluar la robustez de los resultados utilizando una medida agregada de la actividad económica.</p>
+<div id="tbl-Comparacion-Modelos" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-Comparacion-Modelos-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;3: Comparación de Modelos
+</figcaption>
+<div aria-describedby="tbl-Comparacion-Modelos-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Variable / Estadístico</th>
+<th style="text-align: center;">Modelo 1: Ingreso Disp.</th>
+<th style="text-align: center;">Modelo 2: PIB</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>Intercepto</strong></td>
+<td style="text-align: center;">0.0313</td>
+<td style="text-align: center;">0.0421</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"></td>
+<td style="text-align: center;">(0.0215)</td>
+<td style="text-align: center;">(0.0214)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(\Delta\)</span> Ingreso / PIB (<span class="math inline">\(\lambda\)</span>)</td>
+<td style="text-align: center;">1.1640***</td>
+<td style="text-align: center;">0.7292***</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"></td>
+<td style="text-align: center;">(0.2851)</td>
+<td style="text-align: center;">(0.1927)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>ECT (Término Corrección)</strong></td>
+<td style="text-align: center;">-0.8282***</td>
+<td style="text-align: center;">-0.4038**</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"></td>
+<td style="text-align: center;">(0.1680)</td>
+<td style="text-align: center;">(0.1844)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Tasa Interés Real</strong></td>
+<td style="text-align: center;">-0.0014</td>
+<td style="text-align: center;">-0.0018</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"></td>
+<td style="text-align: center;">(0.0010)</td>
+<td style="text-align: center;">(0.0011)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Estadísticos de Diagnóstico (p-values)</strong></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><em>Wald Test (Model Fit)</em></td>
+<td style="text-align: center;">&lt; 0.001***</td>
+<td style="text-align: center;">&lt; 0.001***</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><em>Weak Instruments Test</em></td>
+<td style="text-align: center;">0.0332**</td>
+<td style="text-align: center;">0.0110**</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><em>Wu-Hausman Test (Endogeneidad)</em></td>
+<td style="text-align: center;">0.8968</td>
+<td style="text-align: center;">0.7567</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><em>Sargan Test (Sobreidentificación)</em></td>
+<td style="text-align: center;">&lt; 0.001***</td>
+<td style="text-align: center;">&lt; 0.001***</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Observaciones</strong></td>
+<td style="text-align: center;">40</td>
+<td style="text-align: center;">40</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>R² Ajustado</strong></td>
+<td style="text-align: center;">0.6638</td>
+<td style="text-align: center;">0.6314</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p><em>Nota: Errores estándar en paréntesis. Significancia: * p&lt;0.1, ** p&lt;0.05, *** p&lt;0.01. La prueba de Weak Instruments se evalúa sobre la significancia de los instrumentos en la primera etapa. El Test de Sargan evalúa la validez de los instrumentos excluidos.</em></p>
+<p>Los resultados obtenidos permiten concluir que, en el contexto colombiano (2016-2026), el consumo privado exhibe una sensibilidad al ingreso corriente significativamente alta. Al utilizar el ingreso disponible como variable explicativa, se estimó una elasticidad de corto plazo de <span class="math inline">\(\lambda=1.164\)</span> (<span class="math inline">\(p&lt;0.01\)</span>), lo que indica que, ante un choque positivo en el ingreso, el consumo de los hogares se expande de manera más que proporcional. Este hallazgo constituye evidencia empírica robusta en contra de la hipótesis de suavizamiento del consumo sugerida por la teoría del ingreso permanente, posicionando a las restricciones de liquidez como un determinante estructural del comportamiento del consumidor nacional.</p>
+<p>En contraste, al sustituir el ingreso disponible por el PIB, la elasticidad se ajusta a <span class="math inline">\(\lambda=0.729\)</span> (<span class="math inline">\(p&lt;0.01\)</span>). Aunque la magnitud es menor, su significancia estadística ratifica el carácter pro-cíclico del consumo frente a la actividad económica general. La discrepancia en los coeficientes subraya la importancia metodológica de utilizar el ingreso disponible bruto como medida de la restricción presupuestaria real, ya que esta variable captura de forma más precisa el flujo de recursos efectivamente percibido por las familias, en comparación con el producto agregado<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a>.</p>
+<p>La dinámica de ajuste al equilibrio, capturada por el término de corrección de error (ECT), ratifica la rapidez con la que los hogares colombianos reaccionan ante las desviaciones de su senda de largo plazo. La velocidad de ajuste del 83 % (Modelo 1) sugiere un mecanismo de respuesta inmediata, característico de agentes que, al no poseer activos de reserva o acceso fluido al crédito, se ven obligados a ajustar su consumo de manera cuasi-instantánea ante cualquier variación en su flujo de ingresos.</p>
+<p>Si bien las pruebas de diagnóstico respaldan la especificación mediante la significancia conjunta del modelo (Wald test), el rechazo de la hipótesis nula en la prueba de Sargan indica la presencia de sobreidentificación, un fenómeno recurrente en modelos macroeconómicos donde las variables instrumentales (precios del petróleo y TRM) ejercen efectos directos sobre el consumo por canales alternos al ingreso. No obstante, dada la estabilidad del coeficiente <span class="math inline">\(\lambda\)</span> ante distintas especificaciones y el cumplimiento de las condiciones de exogeneidad (Wu-Hausman), se concluye que los resultados son robustos.</p>
+<p>En suma, la evidencia presentada sugiere la necesidad imperativa de avanzar hacia modelos macroeconómicos que incorporen agentes heterogéneos y fricciones financieras (ver <a href="#fig-evolucion" class="quarto-xref">Figura&nbsp;1</a>). La realidad económica colombiana dista del agente representativo neoclásico; por el contrario, la existencia de una masa crítica de hogares con restricciones de liquidez sugiere que las políticas públicas deben considerar la vulnerabilidad de estos agentes, cuyo consumo está sujeto a la disponibilidad inmediata de ingresos, anulando su capacidad de suavizamiento intertemporal y amplificando los efectos de los choques económicos sobre la demanda agregada. Es decir, se debe romper con el agente representativo, pero es una discusión que se llevara acabo mas adelante bajo los postulados de los modelos de HANK.</p>
+<p><a href="https://github.com/yuberley20/Modelos-DSGE/blob/main/Correlacion_consumo_ingreso.R" class="btn btn-outline-success" target="_blank">💻 Ver Scripts y Datos del VECM en GitHub</a></p>
+</section>
+</section>
+</section>
+<section id="solución-a-la-rigideces-laborales" class="level1" data-number="6">
+<h1 data-number="6"><span class="header-section-number">6</span> Solución a la Rigideces Laborales</h1>
+<p>Una de las grandes críticas a los modelos RBC radica en su modelación poco realista del mercado laboral, especialmente cuando se aplica a economías en desarrollo como la colombiana. Este debate se aborda formalmente a partir de los elementos conceptuales expuestos en la sección dedicada a los modelos de búsqueda y emparejamiento (ver <a href="Macroeconomia_Dinamica/Proyecto_final_Practicas.qmd"><strong>Fricciones, Informalidad y Dinámica Laboral:La Imperativa Necesidad de los Modelos de Búsqueda y Emparejamiento en el Análisis del Mercado Laboral Colombiano</strong></a>.). Partiendo de la base de que el lector revisará dicha sección para comprender la necesidad de implementar estos modelos en la evaluación de políticas laborales pasadas, presentes y futuras, procedemos a exponer nuestra propia perspectiva sobre esta herramienta.</p>
+<p>Es fundamental señalar que los modelos RBC asumen el vaciado simultáneo del mercado laboral, lo que genera un problema de consistencia teórica, ya que la omisión de fricciones se aleja significativamente de la realidad observada. Asimismo, el enfoque RBC define el desempleo como un fenómeno puramente voluntario —lo cual constituye un sesgo importante—, mientras que el desempleo real debe entenderse como un equilibrio ineficiente donde las vacantes y los desempleados no coinciden de manera inmediata. Más allá de esto, es posible indagar en las razones subyacentes a esta falta de emparejamiento; en este punto cobran relevancia las críticas estructurales que conciben al mercado de trabajo como un reflejo de la demanda efectiva. Bajo esta visión alternativa, el núcleo del análisis consiste en entender cómo las decisiones de inversión de los empresarios, impulsadas por los animal spirits, repercuten en el empleo, demostrando que el mercado laboral se ajusta en función de la demanda agregada y no solo por factores de oferta.</p>
+<p>A partir de lo anterior, es necesario aclarar que, tradicionalmente, estos enfoques teóricos se han construido de manera segregada. El modelo de búsqueda y emparejamiento se ha consolidado como una herramienta especializada en capturar los flujos y las fricciones del mercado laboral, mientras que los modelos basados en rigideces de precios y salarios (de corte neokeynesiano) se han diseñado primordialmente para analizar la transmisión de la política monetaria.</p>
+<p>No obstante, la macroeconomía contemporánea ha avanzado hacia la integración de ambos mundos mediante los modelos Neokeynesianos con Fricciones de Búsqueda (conocidos en la literatura como modelos NK-DMP). Esta fusión resulta fundamental para economías como la colombiana, ya que permite evaluar simultáneamente cómo las rigideces nominales del mercado monetario interactúan con las fallas estructurales del mercado de trabajo, tales como el desempleo friccional, los costos de contratación y los procesos de negociación salarial. Sin esta convergencia metodológica, cualquier análisis de política macroeconómica corre el riesgo de subestimar el impacto que los choques agregados o monetarios tienen sobre el bienestar de los trabajadores y la persistencia de la informalidad laboral.</p>
+</section>
+<section id="representación-matemática-hacia-la-síntesis-neokeynesiana" class="level1" data-number="7">
+<h1 data-number="7"><span class="header-section-number">7</span> Representación Matemática: Hacia la Síntesis Neokeynesiana</h1>
+<p>Dado el fallo empírico del modelo RBC para replicar el mercado laboral y la evidencia de fricciones en el consumo, procedemos a complejizar el marco introduciendo rigideces de precios. En este caso ya hay un sección en donde se desarrolla matematicamente un modelos con Curvas de Phillips Neokeynesianas (ver <a href="Macroeconomia_Dinamica/Modelo Neokeynesiano con rigideces de precios.qmd"><strong>Modelo Neokeynesiano con rigideces de precios</strong></a>.) <span class="citation" data-cites="calvo1983staggered rotemberg1995gali">(<a href="#ref-calvo1983staggered" role="doc-biblioref">Calvo 1983</a>; <a href="#ref-rotemberg1995gali" role="doc-biblioref">Rotemberg and Woodford 1995</a>)</span></p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Característica / Componente</th>
+<th style="text-align: left;">Modelo KPR / RBC Determinístico (Base Proporcionada)</th>
+<th style="text-align: left;">Modelo Neokeynesiano con Rigideces de Precios</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>Estructura de Mercado</strong></td>
+<td style="text-align: left;">Competencia perfecta en todos los mercados (bienes y factores de producción).</td>
+<td style="text-align: left;">Competencia perfecta en bienes finales (agregador) y <strong>competencia monopolística</strong> en bienes intermedios.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Rigideces y Fricciones</strong></td>
+<td style="text-align: left;">Flexible (sin fricciones nominales ni reales; los precios se ajustan instantáneamente).</td>
+<td style="text-align: left;"><strong>Rigideces de precios</strong> mediante costos de ajuste cuadráticos tipo Rotemberg (<span class="math inline">\(\phi_q\)</span>).</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Agentes Económicos</strong></td>
+<td style="text-align: left;">Hogar representativo (consumo, ocio, acumulación de capital) y firmas perfectamente competitivas.</td>
+<td style="text-align: left;">Hogares (consumo, oferta laboral, capital), <strong>Agregador (bienes finales)</strong> y <strong>Firmas intermedias (fijación de precios)</strong>.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Bloque de Precios e Inflación</strong></td>
+<td style="text-align: left;">No existe inflación endógena ni dispersión de precios relativas; <span class="math inline">\(P_t = P\)</span> o normalizado.</td>
+<td style="text-align: left;">Incluye un <strong>Índice de Precios Agregado</strong> (media CES) y la <strong>Curva de Phillips Neokeynesiana (CPNK)</strong>.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Costo Marginal (<span class="math inline">\(\text{MC}\)</span>)</strong></td>
+<td style="text-align: left;">El costo marginal real iguala la relación marginal técnica o se simplifica por los precios de los factores competitivos.</td>
+<td style="text-align: left;">El costo marginal (<span class="math inline">\(\text{MC}_t\)</span>) actúa como un canal dinámico influenciado por los precios de los factores y el poder de mercado (<span class="math inline">\(\theta\)</span>).</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Decisión Dinámica de la Firma</strong></td>
+<td style="text-align: left;">Estática para la elección de factores y maximización de beneficios de corto plazo sin costos de fricción temporal.</td>
+<td style="text-align: left;"><strong>Dinámica compleja</strong> (valor presente de beneficios futuros descontados estocásticamente incorporando costos de ajuste de precios).</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Política Monetaria / Nominal</strong></td>
+<td style="text-align: left;">Ausente (al ser un modelo real puro sin dinero ni fricciones nominales).</td>
+<td style="text-align: left;">Implícita a través de la formación de precios y la rigidez nominal que da holgura a efectos reales de la demanda.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Dinámica de Estado Estacionario</strong></td>
+<td style="text-align: left;">Determinada por la condición de Euler estándar: <span class="math inline">\(r^{ss} = \frac{1}{\beta} - (1-\delta)\)</span> y markups constantes iguales a 1.</td>
+<td style="text-align: left;">Modificada por el poder de monopolio (<span class="math inline">\(\frac{\theta}{\theta-1}\)</span>) y la anulación de los costos de ajuste de precios (<span class="math inline">\(\pi = 1\)</span>).</td>
+</tr>
+</tbody>
+</table>
+<p>El análisis comparativo entre el modelo Neokeynesiano desarrollado en las tandas anteriores y el modelo KPR / RBC determinístico provisto permite evidenciar las diferencias fundamentales en la modelación macroeconómica moderna, especialmente al transitar desde los supuestos de mercados perfectamente competitivos hacia estructuras con fricciones nominales y poder de mercado.</p>
+<p>En primer lugar, el modelo KPR / RBC opera bajo un esquema de competencia perfecta en todos los mercados, donde los precios y salarios son totalmente flexibles y se ajustan de manera instantánea para vaciar los mercados. Su bloque analítico se fundamenta en las elecciones de un hogar representativo que maximiza su utilidad intertemporal sujeta a una restricción presupuestaria y a la ley de acumulación de capital, derivando en la clásica ecuación de Euler y en la condición intratemporal entre consumo y ocio. La solución de este sistema determinístico se aborda típicamente mediante técnicas de log-linealización alrededor de su estado estacionario, permitiendo representar la dinámica endógena a través de matrices de transición y analizar la estabilidad del sistema mediante los valores propios o el método de Blanchard-Kahn.</p>
+<p>Por el contrario, el modelo Neokeynesiano introduce modificaciones estructurales sustanciales al dividir la producción en dos etapas: un sector de bienes finales que opera bajo competencia perfecta (el agregador) y un sector de bienes intermedios bajo competencia monopolística. La diferencia más notable radica en la incorporación de rigideces de precios a través de costos de ajuste cuadráticos (tipo Rotemberg). Esto impide que los precios se ajusten instantáneamente, lo que otorga a las empresas poder de mercado y da origen a un margen de beneficio (markup) variable que depende de la elasticidad de sustitución entre variedades.</p>
+<p>En consecuencia, mientras que el modelo RBC carece de fricciones nominales y de un canal de política monetaria vinculado a la inflación, el modelo Neokeynesiano culmina en una relación clave para la política económica: la Curva de Phillips Neokeynesiana (CPNK). Esta ecuación vincula la inflación actual no solo con las expectativas futuras del costo marginal real (forward-looking), sino también con la inercia inflacionaria heredada del pasado debido a los costos de cambiar precios. De este modo, el análisis neokeynesiano extiende la macroeconomía de los ciclos reales al incorporar dinámicas nominales que explican por qué las fluctuaciones de la demanda agregada pueden tener efectos reales sobre la economía a corto plazo.</p>
+</section>
+<section id="conclusiones-y-próximos-pasos" class="level1" data-number="8">
+<h1 data-number="8"><span class="header-section-number">8</span> Conclusiones y Próximos Pasos</h1>
+<p>El recorrido metodológico y analítico desarrollado a lo largo de este examen permite extraer conclusiones fundamentales sobre el estado y la evolución de la macroeconomía moderna:</p>
+<ol type="1">
+<li><strong>La insuficiencia del paradigma puramente neoclásico (RBC):</strong> Si bien los modelos de Ciclos Económicos Reales (RBC), fundamentados en la optimización intertemporal y los microfundamentos de <span class="citation" data-cites="kydland1982time">Kydland and Prescott (<a href="#ref-kydland1982time" role="doc-biblioref">1830</a>)</span> y <span class="citation" data-cites="king1988production">King, Plosser, and Rebelo (<a href="#ref-king1988production" role="doc-biblioref">1988</a>)</span>, ofrecen un marco analítico elegante para entender el suavizamiento del consumo ante choques tecnológicos de oferta, fallan empíricamente al no poder replicar la alta volatilidad del empleo y al asumir un vaciado de mercado instantáneo y continuo.</li>
+<li><strong>La evidencia de restricciones financieras y de liquidez:</strong> El análisis empírico realizado para el caso colombiano (2016-2026) a través de un enfoque VECM demuestra que el consumo privado presenta una alta sensibilidad al ingreso corriente (<span class="math inline">\(\lambda &gt; 1\)</span>). Esto rechaza la hipótesis neoclásica de suavización del consumo mediante el ingreso permanente, evidenciando que una masa crítica de hogares se encuentra sujeta a restricciones de liquidez.</li>
+<li><strong>La necesidad de fricciones nominales y estructurales:</strong> La incapacidad del agente representativo puro para capturar la realidad de economías emergentes impulsa la adopción de la Síntesis Neokeynesiana. La introducción de la competencia monopolística y las rigideces de precios —modeladas mediante costos de ajuste tipo Rotemberg— da origen a la <strong>Curva de Phillips Neokeynesiana (CPNK)</strong>, conectando de manera efectiva las decisiones de precios con la inercia inflacionaria y las expectativas <em>forward-looking</em>.</li>
+<li><strong>Hacia la integración de mercados laborales heterogéneos:</strong> Las fricciones del mundo real exigen abandonar la visión del desempleo puramente voluntario del enfoque RBC. La integración de los modelos de búsqueda y emparejamiento (<em>Search and Matching</em>) con la macroeconomía de rigideces nominales (modelos NK-DMP) se vuelve imperativa para evaluar adecuadamente el desempleo estructural, la informalidad y los canales de transmisión de la política económica en economías en desarrollo.</li>
+</ol>
+<section id="próximos-pasos-en-la-investigación" class="level2" data-number="8.1">
+<h2 data-number="8.1" class="anchored" data-anchor-id="próximos-pasos-en-la-investigación"><span class="header-section-number">8.1</span> Próximos Pasos en la Investigación</h2>
+<p>Los resultados y limitaciones encontrados abren la puerta a las siguientes extensiones de modelado macroeconómico: - <strong>Incorporación de fricciones financieras y agentes heterogéneos (HANK):</strong> Avanzar más allá del agente representativo para modelar explícitamente a los hogares con restricciones de liquidez frente a aquellos con acceso al crédito. - <strong>Análisis de economía abierta:</strong> Ampliar el marco para evaluar choques de términos de intercambio, volatilidades de la tasa de cambio y regímenes cambiarios en economías pequeñas y abiertas como la colombiana. - <strong>Evaluación crítica con la heterodoxia:</strong> Mantener un puente de diálogo metodológico que incorpore objeciones sobre el rol de la demanda efectiva y los <em>animal spirits</em> en la determinación del ciclo económico.</p>
+
+
+
+
+</section>
+</section>
+
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-calvo1983staggered" class="csl-entry" role="listitem">
+Calvo, Guillermo A. 1983. <span>“Staggered Prices in a Utility-Maximizing Framework.”</span> <em>Journal of Monetary Economics</em> 12 (3): 383–98. <a href="https://doi.org/10.1016/0304-3932(83)90060-0">https://doi.org/10.1016/0304-3932(83)90060-0</a>.
+</div>
+<div id="ref-king1988production" class="csl-entry" role="listitem">
+King, Robert G., Charles I. Plosser, and Sergio T. Rebelo. 1988. <span>“Production, Growth and Business Cycles: I. The Basic Neoclassical Model.”</span> <em>Journal of Monetary Economics</em> 21 (2-3): 195–232. <a href="https://doi.org/10.1016/0304-3932(88)90030-X">https://doi.org/10.1016/0304-3932(88)90030-X</a>.
+</div>
+<div id="ref-kydland1982time" class="csl-entry" role="listitem">
+Kydland, Finn E., and Edward C. Prescott. 1830. <span>“Time to Build and Aggregate Fluctuations.”</span> <em>Econometrica</em> 50 (6): 1345–70. <a href="https://doi.org/10.2307/1913386">https://doi.org/10.2307/1913386</a>.
+</div>
+<div id="ref-lucas1976econometric" class="csl-entry" role="listitem">
+Lucas, Robert E. 1976. <span>“Econometric Policy Evaluation: A Critique.”</span> <em>Carnegie-Rochester Conference Series on Public Policy</em> 1: 19–46. <a href="https://doi.org/10.1016/S0167-2231(76)80003-6">https://doi.org/10.1016/S0167-2231(76)80003-6</a>.
+</div>
+<div id="ref-rotemberg1995gali" class="csl-entry" role="listitem">
+Rotemberg, Julio J., and Michael Woodford. 1995. <span>“Dynamic General Equilibrium Models with Imperfectly Competitive Product Markets.”</span> <em>Frontiers of Business Cycle Research</em> 1: 243–88.
+</div>
+</div></section><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p>El texto describe un enfoque que introduce la optimización intertemporal de los agentes, los choques tecnológicos estocásticos y técnicas de calibración, apartándose de la econometría tradicional.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>En este apartado esta el Scripts y los datos para la replica del modelo y se invita al planteamineto mas microeconomico del mismo, puesto que trabajao desde un punto de vista agregado: <a href="https://github.com/yuberley20/Modelos-DSGE/blob/main/Correlacion_consumo_ingreso.R" class="btn btn-outline-success" target="_blank">💻 Ver Datos Analisis del Consumo en Colombia (2016-2026): <code>RBC_Estocastico.mod</code></a><a href="https://github.com/yuberley20/Modelos-DSGE/blob/main/Correlacion_consumo_ingreso.xlsx" class="btn btn-outline-success" target="_blank">💻 Ver Script Analisis del Consumo en Colombia (2016-2026): <code>RBC_Estocastico.mod</code></a><a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>Se debe entender que en el ingreso disponible ya fue descontado el pago de impuestos y de finaciación de loss hogares, por lo que este hace una referencia mas fiel a lo que las familias utilizan para el consumo.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/yuberley20\.github\.io\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>© 2026, Yuberley Cruz Caycedo | Medellín, Colombia</p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+<p>Construido con <a href="https://quarto.org/">Quarto</a></p>
+</div>
+  </div>
+</footer>
+
+
+
+
+<script src="../site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>

@@ -158,6 +158,10 @@ window.Quarto = {
     <a class="dropdown-item" href="../Macroeconomia_Dinamica/Informe_sobre_MMS_para_un_Modelo_RBC.html">
  <span class="dropdown-text">MMS para un Modelo RBC</span></a>
   </li>  
+        <li>
+    <a class="dropdown-item" href="../Macroeconomia_Dinamica/DSGE_RBC.qmd">
+ <span class="dropdown-text">Modelos de Equilibrio General Estocásticos</span></a>
+  </li>  
     </ul>
   </li>
 </ul>
@@ -188,20 +192,20 @@ window.Quarto = {
     <h2 id="toc-title">En esta página</h2>
    
   <ul>
-  <li><a href="#qué-impulsa-los-ciclos-económicos" id="toc-qué-impulsa-los-ciclos-económicos" class="nav-link active" data-scroll-target="#qué-impulsa-los-ciclos-económicos">¿Qué impulsa los ciclos económicos?</a>
+  <li><a href="#qué-impulsa-los-ciclos-económicos" id="toc-qué-impulsa-los-ciclos-económicos" class="nav-link active" data-scroll-target="#qué-impulsa-los-ciclos-económicos"><span class="header-section-number">1</span> ¿Qué impulsa los ciclos económicos?</a>
   <ul class="collapse">
-  <li><a href="#evolución-del-pensamiento-macroeconómico" id="toc-evolución-del-pensamiento-macroeconómico" class="nav-link" data-scroll-target="#evolución-del-pensamiento-macroeconómico">Evolución del Pensamiento Macroeconómico</a></li>
+  <li><a href="#evolución-del-pensamiento-macroeconómico" id="toc-evolución-del-pensamiento-macroeconómico" class="nav-link" data-scroll-target="#evolución-del-pensamiento-macroeconómico"><span class="header-section-number">1.1</span> Evolución del Pensamiento Macroeconómico</a></li>
   </ul></li>
-  <li><a href="#microfundamentos-y-el-modelo-kpr-determinista" id="toc-microfundamentos-y-el-modelo-kpr-determinista" class="nav-link" data-scroll-target="#microfundamentos-y-el-modelo-kpr-determinista">Microfundamentos y el Modelo KPR Determinista</a>
+  <li><a href="#microfundamentos-y-el-modelo-kpr-determinista" id="toc-microfundamentos-y-el-modelo-kpr-determinista" class="nav-link" data-scroll-target="#microfundamentos-y-el-modelo-kpr-determinista"><span class="header-section-number">2</span> Microfundamentos y el Modelo KPR Determinista</a>
   <ul class="collapse">
-  <li><a href="#ecuaciones-clave-certidumbre-perfecta" id="toc-ecuaciones-clave-certidumbre-perfecta" class="nav-link" data-scroll-target="#ecuaciones-clave-certidumbre-perfecta">Ecuaciones Clave (Certidumbre Perfecta)</a></li>
+  <li><a href="#ecuaciones-clave-certidumbre-perfecta" id="toc-ecuaciones-clave-certidumbre-perfecta" class="nav-link" data-scroll-target="#ecuaciones-clave-certidumbre-perfecta"><span class="header-section-number">2.1</span> Ecuaciones Clave (Certidumbre Perfecta)</a></li>
   </ul></li>
-  <li><a href="#introduciendo-el-ruido-el-modelo-estocástico" id="toc-introduciendo-el-ruido-el-modelo-estocástico" class="nav-link" data-scroll-target="#introduciendo-el-ruido-el-modelo-estocástico">Introduciendo el Ruido: El Modelo Estocástico</a></li>
-  <li><a href="#estimación-empírica-método-de-momentos-simulados-smm" id="toc-estimación-empírica-método-de-momentos-simulados-smm" class="nav-link" data-scroll-target="#estimación-empírica-método-de-momentos-simulados-smm">Estimación Empírica: Método de Momentos Simulados (SMM)</a>
+  <li><a href="#introduciendo-el-ruido-el-modelo-estocástico" id="toc-introduciendo-el-ruido-el-modelo-estocástico" class="nav-link" data-scroll-target="#introduciendo-el-ruido-el-modelo-estocástico"><span class="header-section-number">3</span> Introduciendo el Ruido: El Modelo Estocástico</a></li>
+  <li><a href="#estimación-empírica-método-de-momentos-simulados-smm" id="toc-estimación-empírica-método-de-momentos-simulados-smm" class="nav-link" data-scroll-target="#estimación-empírica-método-de-momentos-simulados-smm"><span class="header-section-number">4</span> Estimación Empírica: Método de Momentos Simulados (SMM)</a>
   <ul class="collapse">
-  <li><a href="#resultados-de-la-estimación" id="toc-resultados-de-la-estimación" class="nav-link" data-scroll-target="#resultados-de-la-estimación">Resultados de la Estimación</a></li>
+  <li><a href="#resultados-de-la-estimación" id="toc-resultados-de-la-estimación" class="nav-link" data-scroll-target="#resultados-de-la-estimación"><span class="header-section-number">4.1</span> Resultados de la Estimación</a></li>
   </ul></li>
-  <li><a href="#conclusiones-y-próximos-pasos" id="toc-conclusiones-y-próximos-pasos" class="nav-link" data-scroll-target="#conclusiones-y-próximos-pasos">Conclusiones y Próximos Pasos</a></li>
+  <li><a href="#conclusiones-y-próximos-pasos" id="toc-conclusiones-y-próximos-pasos" class="nav-link" data-scroll-target="#conclusiones-y-próximos-pasos"><span class="header-section-number">5</span> Conclusiones y Próximos Pasos</a></li>
   </ul>
 </nav>
 </nav>
@@ -246,8 +250,8 @@ window.Quarto = {
 
 <p>En esta parte de las presentaciones sobre el estudio y el desarrollo de modelos macroeconómicos dinámicos, es importante aclarar que la formalización teórica y matemática de los mismos obedece al consenso llevado a cabo por la escuela neokeynesiana, presidida en un principio por los aportes de la metodología neoclásica del ciclo real llevados a cabo por Finn E. Kydland y Edward C. Prescott en su articulo de 1982 <em>“Time to Build and Aggregate Fluctuations”</em><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>.</p>
 <p>Si bien Kydland y Prescott (1982) presentan la formalización matemática que permite entender a los ciclos en la economía como una respuesta a los choques exógenos y no como una representación de un mecanismo del mercado, no es hasta 1988 que se consolida en el paradigma neoclásico con la estandarización y simplificación del modelo que llevan a cabo Robert King, Charles Plosser y Sergio Rebelo, y que se conoce como KPR. Modelo discutido y desarrollado en la anterior ventana <a href="Macroeconomia_Dinamica/Solución análitica.qmd"><strong>KPR (Solución análitica)</strong></a>.</p>
-<section id="qué-impulsa-los-ciclos-económicos" class="level1">
-<h1>¿Qué impulsa los ciclos económicos?</h1>
+<section id="qué-impulsa-los-ciclos-económicos" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> ¿Qué impulsa los ciclos económicos?</h1>
 <p>A diferencia de la visión Keynesiana tradicional, donde los ciclos se entienden como fallas de demanda agregada, la teoría de los Ciclos Económicos Reales (RBC), fundamentada por Kydland &amp; Prescott (1982), propone una perspectiva distinta[cite: 13]. En este marco:</p>
 <ul>
 <li>Los ciclos son la respuesta óptima y eficiente de los agentes racionales ante cambios en el entorno[cite: 13].</li>
@@ -255,18 +259,18 @@ window.Quarto = {
 <li>Los precios y salarios son perfectamente flexibles, asegurando el vaciado continuo de los mercados[cite: 13].</li>
 </ul>
 <p>La intuición económica es directa: si un choque tecnológico nos hace más productivos hoy, es una decisión racional trabajar más, invertir más y consumir más, generando así un “boom” económico[cite: 13].</p>
-<section id="evolución-del-pensamiento-macroeconómico" class="level2">
-<h2 class="anchored" data-anchor-id="evolución-del-pensamiento-macroeconómico">Evolución del Pensamiento Macroeconómico</h2>
+<section id="evolución-del-pensamiento-macroeconómico" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="evolución-del-pensamiento-macroeconómico"><span class="header-section-number">1.1</span> Evolución del Pensamiento Macroeconómico</h2>
 <p>Para entender el lugar del modelo RBC, es fundamental observar sus raíces y ramificaciones. El modelo toma como base la optimización intertemporal de la Teoría del Crecimiento (Ramsey-Cass-Koopmans) y la Revolución de las Expectativas Racionales (Crítica de Lucas)[cite: 16].</p>
 <p>A partir del núcleo RBC, la macroeconomía moderna se ha ramificado hacia la inclusión de fricciones reales y financieras (Search &amp; Matching, Acelerador Financiero), la macroeconomía abierta, y la Síntesis Neo-Keynesiana (RANK), evolucionando hasta los actuales modelos HANK de agentes heterogéneos[cite: 16].</p>
 <p><em>(Inserta aquí la imagen exportada de tu archivo de TikZ)</em> <img src="arbol_macro.png" class="img-fluid" alt="Evolución de los Modelos Macroeconómicos"></p>
 </section>
 </section>
-<section id="microfundamentos-y-el-modelo-kpr-determinista" class="level1">
-<h1>Microfundamentos y el Modelo KPR Determinista</h1>
+<section id="microfundamentos-y-el-modelo-kpr-determinista" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Microfundamentos y el Modelo KPR Determinista</h1>
 <p>Para modelar esta dinámica, nos alejamos de las curvas agregadas y utilizamos un enfoque de equilibrio general estocástico dinámico (DSGE) con agentes representativos[cite: 13]: * <strong>Hogares:</strong> Maximizan su utilidad intertemporal decidiendo cuánto consumir frente a cuánto ahorrar, y cuánto trabajar frente al ocio[cite: 13]. * <strong>Firmas:</strong> Maximizan beneficios contratando trabajo y capital[cite: 13].</p>
-<section id="ecuaciones-clave-certidumbre-perfecta" class="level2">
-<h2 class="anchored" data-anchor-id="ecuaciones-clave-certidumbre-perfecta">Ecuaciones Clave (Certidumbre Perfecta)</h2>
+<section id="ecuaciones-clave-certidumbre-perfecta" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="ecuaciones-clave-certidumbre-perfecta"><span class="header-section-number">2.1</span> Ecuaciones Clave (Certidumbre Perfecta)</h2>
 <p>En el modelo determinista básico (basado en King, Plosser y Rebelo), los agentes conocen el futuro perfectamente y la productividad <span class="math inline">\(A\)</span> es constante (normalizada a 1)[cite: 13].</p>
 <ol type="1">
 <li><strong>Producción:</strong> <span class="math display">\[Y_{t}=AK_{t}^{\alpha}N_{t}^{1-\alpha}\]</span></li>
@@ -277,20 +281,20 @@ window.Quarto = {
 <p><a href="https://github.com/yuberley20/TU_REPOSITORIO/blob/main/Codigos/RBC_det.mod" class="btn btn-outline-primary" target="_blank">💻 Ver Código Fuente en GitHub: <code>RBC_det.mod</code></a></p>
 </section>
 </section>
-<section id="introduciendo-el-ruido-el-modelo-estocástico" class="level1">
-<h1>Introduciendo el Ruido: El Modelo Estocástico</h1>
+<section id="introduciendo-el-ruido-el-modelo-estocástico" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Introduciendo el Ruido: El Modelo Estocástico</h1>
 <p>La realidad económica no es constante. Para analizar verdaderos ciclos económicos, transformamos la productividad <span class="math inline">\(A\)</span> en una variable aleatoria que sigue un proceso autorregresivo de primer orden <span class="math inline">\(AR(1)\)</span>[cite: 13]:</p>
 <p><span class="math display">\[\log(A_{t})=(1-\rho)\log(A_{ss})+\rho\log(A_{t-1})+\epsilon_{t}\]</span></p>
 <p>Donde <span class="math inline">\(\epsilon_{t}\)</span> representa la sorpresa o choque tecnológico[cite: 13]. Como consecuencia, las variables endógenas (<span class="math inline">\(Y, C, N\)</span>) fluctúan alrededor del Estado Estacionario impulsadas por la incertidumbre[cite: 13].</p>
 <p>A través de las <strong>Funciones de Impulso Respuesta (IRF)</strong> generadas en Dynare, evaluamos qué sucede ante un aumento inesperado del 1% en la tecnología[cite: 13]: * <strong>Producto (<span class="math inline">\(Y\)</span>) y Empleo (<span class="math inline">\(N\)</span>):</strong> Aumentan de inmediato[cite: 13]. * <strong>Inversión (<span class="math inline">\(I\)</span>):</strong> Sube agresivamente para aprovechar la alta productividad[cite: 13]. * <strong>Consumo (<span class="math inline">\(C\)</span>):</strong> Aumenta, pero en menor proporción que el producto debido al suavizamiento del consumo (<em>consumption smoothing</em>)[cite: 13].</p>
 <p><a href="Codigos/RBC_Estocastico.mod" class="btn btn-outline-success">💻 Descargar Simulación Estocástica <code>RBC_Estocastico.mod</code></a></p>
 </section>
-<section id="estimación-empírica-método-de-momentos-simulados-smm" class="level1">
-<h1>Estimación Empírica: Método de Momentos Simulados (SMM)</h1>
+<section id="estimación-empírica-método-de-momentos-simulados-smm" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> Estimación Empírica: Método de Momentos Simulados (SMM)</h1>
 <p>Un modelo teórico carece de validez sin respaldo empírico. Para evitar calibraciones arbitrarias de parámetros como <span class="math inline">\(\rho\)</span>, <span class="math inline">\(\sigma_{\epsilon}\)</span> o <span class="math inline">\(\phi\)</span>, empleamos datos reales de la economía mediante el <strong>Método de Momentos Simulados (SMM)</strong>[cite: 13].</p>
 <p>La intuición del SMM es minimizar la distancia formal entre los momentos (varianzas, covarianzas) de los datos reales observados y los momentos generados por las múltiples simulaciones de Dynare[cite: 13]: <span class="math display">\[ J = \min || \text{Momentos Datos} - \text{Momentos Modelo}(\Theta) || \]</span></p>
-<section id="resultados-de-la-estimación" class="level2">
-<h2 class="anchored" data-anchor-id="resultados-de-la-estimación">Resultados de la Estimación</h2>
+<section id="resultados-de-la-estimación" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="resultados-de-la-estimación"><span class="header-section-number">4.1</span> Resultados de la Estimación</h2>
 <p>Tras limpiar y procesar los datos cíclicos (ver script de MATLAB), la estimación arrojó parámetros estructurales como una persistencia del choque (<span class="math inline">\(\rho_A\)</span>) de 0.99 y una volatilidad (<span class="math inline">\(\sigma_{\epsilon}\)</span>) de 0.13% trimestral[cite: 13].</p>
 <p>El ajuste de las varianzas simuladas contra los datos empíricos mostró lo siguiente[cite: 13]:</p>
 <table class="caption-top table">
@@ -328,8 +332,8 @@ window.Quarto = {
 </blockquote>
 </section>
 </section>
-<section id="conclusiones-y-próximos-pasos" class="level1">
-<h1>Conclusiones y Próximos Pasos</h1>
+<section id="conclusiones-y-próximos-pasos" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> Conclusiones y Próximos Pasos</h1>
 <p>La implementación en Dynare/Octave nos permite resolver sistemas dinámicos complejos que no admiten soluciones analíticas cerradas[cite: 13].</p>
 <p>Desde una perspectiva económica, el éxito del modelo RBC radica en explicar por qué el consumo es mucho más suave que el PIB, demostrando cómo los agentes utilizan el ahorro para protegerse frente a los choques[cite: 13]. Sin embargo, la falla evidente del modelo básico al replicar la volatilidad del empleo (un fenómeno conocido empíricamente) resalta su principal limitación: la dependencia de precios y salarios perfectamente flexibles[cite: 13].</p>
 <p>En la vida real, el ajuste del mercado laboral ocurre mediante cantidades (contrataciones y despidos) más que por ajustes instantáneos de precios[cite: 13]. Esto justifica el salto teórico imperativo hacia modelos con <strong>rigideces nominales (Neo-Keynesianos)</strong> o modelos de <strong>Búsqueda y Emparejamiento (<em>Search and Matching</em>)</strong> para modelar adecuadamente las fricciones laborales[cite: 13].</p>
